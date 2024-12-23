@@ -43,7 +43,7 @@ export default function InputDemo() {
           </div>
           <div>
             <label htmlFor="password" className="block mb-2 text-sm">
-              Password
+              Kata Sandi
             </label>
             <Input
               id="password"
