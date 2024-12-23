@@ -21,11 +21,14 @@ export default function OnBoarding() {
           </Button>
           </Link>
 
-          <Button
+          <Link href="/registerStep1Page">
+            <Button
             className="w-[15.5625rem] h-[3.25rem] rounded-[10px] border border-[#248543] text-[#248543] hover:bg-[#248543]/10"
           >
             Register
           </Button>
+          </Link>
+
         </div>
       </div>
     </div>
