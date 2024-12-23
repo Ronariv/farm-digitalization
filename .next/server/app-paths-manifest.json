@@ -1,6 +1,4 @@
 {
   "/loginPage/page": "app/loginPage/page.js",
-  "/registerStep2Page/page": "app/registerStep2Page/page.js",
-  "/registerStep1Page/page": "app/registerStep1Page/page.js",
   "/page": "app/page.js"
 }
