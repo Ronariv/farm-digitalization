@@ -88,35 +88,6 @@ body {
     --input: #248543;
   }
 
-  .tittle-login{
-    text-align: center;
-    /* padding-bottom: 10%; */
-    font-size: 40px;
-    font-weight: 600;
-    line-height: 48px;
-    font-style: normal;
-  }
-
-  .space-y-4{
-    padding-top: 32;
-  }
-  .button-login{
-    display: flex;
-    justify-content: center;
-  }
-
-  .mt-6{
-    text-align: center;
-  }
-
-  .card-login{
-    float: right;
-  }
-
-  .form-password{
-    padding-top: 4%;
-    padding-bottom: 4%;
-  }
 }
 
 @layer base {
