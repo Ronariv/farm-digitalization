@@ -88,6 +88,47 @@ body {
     --input: #248543;
   }
 
+  .tittle-register, .tittle-register2{
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 48px;
+    font-style: normal;
+  }
+
+  .tittle-step, .tittle-step2{
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #808080;
+  }
+
+  .space-y-4{
+    padding-top: 32;
+  }
+
+  .button-register, .button-register2{
+    display: flex;
+    justify-content: center;
+  }
+
+  .mt-6{
+    text-align: center;
+  }
+
+  .card-login{
+    float: right;
+  }
+
+  .form-password{
+    padding-top: 4%;
+    padding-bottom: 3%;
+  }
+
+  .form-email{
+    padding-bottom: 3%;
+  }
+
 }
 
 @layer base {

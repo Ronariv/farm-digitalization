@@ -11,6 +11,16 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
+    "/registerStep1Page/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/registerStep1Page/page.js"
+    ],
+    "/registerStep2Page/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/registerStep2Page/page.js"
+    ],
     "/loginPage/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
