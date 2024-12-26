@@ -6,18 +6,11 @@ import { Button } from "@/components/ui/button";
 import { validateEmailOrPhone, validatePassword } from "@/controllers/validationLoginRegister";
 
 export default function InputDemo() {
-  const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleValidationAndSubmit = () => {
-    // Validasi email atau nomor HP
-    const emailValidation = validateEmailOrPhone(emailOrPhone);
-    if (!emailValidation.valid) {
-      setErrorMessage("Masukkan email atau nomor HP yang valid.");
-      return;
-    }
 
     // Validasi password dan konfirmasi password
     const passwordValidation = validatePassword(password, rePassword);

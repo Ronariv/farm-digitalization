@@ -1,7 +1,4 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/registerStep1Page/page": "app/registerStep1Page/page.js",
-  "/registerStep2Page/page": "app/registerStep2Page/page.js",
-  "/page": "app/page.js"
+  "/registerStep2Page/page": "app/registerStep2Page/page.js"
 }
