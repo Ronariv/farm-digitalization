@@ -11,10 +11,11 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
-    "/loginPage/page": [
+    "/testView/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/loginPage/page.js"
+      "static/css/app/testView/page.css",
+      "static/chunks/app/testView/page.js"
     ]
   }
 }
