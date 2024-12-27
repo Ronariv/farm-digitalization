@@ -9,6 +9,31 @@ body {
 
 @layer base {
   :root {
+    /* --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem; */
     --font-inter: "Inter", sans-serif;
     --background: #248543;
     --foreground: #0a0a0a;
@@ -24,6 +49,30 @@ body {
     --input: #248543;
   }
   .dark {
+    /* --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%; */
     --font-inter: "Inter", sans-serif;
     --background: #248543;
     --foreground: #0a0a0a;
@@ -39,20 +88,26 @@ body {
     --input: #248543;
   }
 
-  .tittle-login{
+  .tittle-register, .tittle-register2{
     text-align: center;
-    /* padding-bottom: 10%; */
     font-size: 40px;
     font-weight: 600;
     line-height: 48px;
     font-style: normal;
   }
 
+  .tittle-step, .tittle-step2{
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #808080;
+  }
+
   .space-y-4{
     padding-top: 32;
   }
 
-  .button-login{
+  .button-register, .button-register2{
     display: flex;
     justify-content: center;
   }
@@ -67,8 +122,13 @@ body {
 
   .form-password{
     padding-top: 4%;
-    padding-bottom: 4%;
+    padding-bottom: 3%;
   }
+
+  .form-email{
+    padding-bottom: 3%;
+  }
+
 }
 
 @layer base {
