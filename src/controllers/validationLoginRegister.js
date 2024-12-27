@@ -5,3 +5,13 @@ export const validateEmailOrPhone = (input) => {
     if (isPhone) return { valid: true, type: "phone" };
     return { valid: false, type: null };
   };
+
+  export const validatePassword = (password, rePassword) => {
+    if (!password) {
+      return { valid: false, message: "Password tidak boleh kosong." };
+    }
+    if (password !== rePassword) {
+      return { valid: false, message: "Password dan konfirmasi password tidak cocok." };
+    }
+    return { valid: true, message: "" };
+  };
