@@ -11,20 +11,11 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
-    "/loginPage/page": [
+    "/testView/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/loginPage/page.js"
-    ],
-    "/ownerView/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/ownerView/page.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/css/app/testView/page.css",
+      "static/chunks/app/testView/page.js"
     ]
   }
 }
