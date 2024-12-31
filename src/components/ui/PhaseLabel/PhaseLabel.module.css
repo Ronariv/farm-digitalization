@@ -10,14 +10,13 @@
   
   .button {
     width: 100px;
-    height: 28px;
-    margin-top: 30px;
+    height: 30px;
     padding: 4px 8px;
-    border: none;
     border-radius: 10px;
     font-size: 16px; 
     font-style: normal; 
-    font-weight: 500; 
+    font-weight: 500;
+     gap: 10px; 
     color: #248543;
 
     gap: 10px;
