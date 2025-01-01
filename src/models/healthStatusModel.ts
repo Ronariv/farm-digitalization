@@ -1,6 +1,6 @@
 import { JSX } from "react";
 
-type StatusType = "sehat" | "tidakSehat";
+export type StatusType = "sehat" | "tidakSehat";
 
 interface StatusModel {
   status: StatusType;

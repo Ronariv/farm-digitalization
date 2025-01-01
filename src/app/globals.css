@@ -221,6 +221,11 @@ body {
     padding-top: 10%;
   }
 
+  .icon-gender{
+    display: flex;
+    align-items: center;
+    padding-top: 10%;
+  }
 }
 
 @layer base {
