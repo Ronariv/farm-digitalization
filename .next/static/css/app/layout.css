@@ -665,7 +665,9 @@ video {
     stroke: green;
   }
 
-  .icon-health{
+  .icon-gender{
+    display: flex;
+    align-items: center;
     padding-top: 10%;
   }
   * {
