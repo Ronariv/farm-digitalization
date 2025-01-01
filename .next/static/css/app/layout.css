@@ -664,6 +664,10 @@ video {
   #icon:hover{
     stroke: green;
   }
+
+  .icon-health{
+    padding-top: 10%;
+  }
   * {
   border-color: hsl(var(--border));
 }
@@ -790,6 +794,9 @@ video {
 }
 .w-4 {
   width: 1rem;
+}
+.w-8 {
+  width: 2rem;
 }
 .w-9 {
   width: 2.25rem;
@@ -1055,6 +1062,10 @@ video {
 .text-\[\#248543\] {
   --tw-text-opacity: 1;
   color: rgb(36 133 67 / var(--tw-text-opacity, 1));
+}
+.text-blue-500 {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity, 1));
 }
 .text-card-foreground {
   color: hsl(var(--card-foreground));

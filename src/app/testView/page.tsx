@@ -1,17 +1,17 @@
 'use client'
 
 import React, { useState } from 'react';
-import PhaseLabelButton from "@/components/ui/PhaseLabel/PhaseLabelButton";
-import { phaseLabels } from "@/data/phaseLabels";
+// import PhaseLabelButton from "@/components/ui/PhaseLabel/PhaseLabelButton";
+// import { phaseLabels } from "@/data/phaseLabels";
+import HealthStatus from "@/components/ui/healthStatus"; // Import komponen
 
 const App: React.FC = () => {
-  const [phases, setPhases] = useState(phaseLabels);
+//   const [phases, setPhases] = useState(phaseLabels);
+//   const kondisi: StatusType = "sehat";
 
   return (
-    <div>
-      <h1>Phase Label: Hamil</h1>
-      {/* Hanya menampilkan label Cempe */}
-      <PhaseLabelButton phases={phases}  filterId="4" />
+    <div className="icon-health">
+      <HealthStatus status="tidakSehat" />
     </div>
   );
 };

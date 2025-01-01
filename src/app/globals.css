@@ -217,6 +217,10 @@ body {
     stroke: green;
   }
 
+  .icon-health{
+    padding-top: 10%;
+  }
+
 }
 
 @layer base {
