@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import EditButton from '@/components/ui/EditButton/editButton';
 import AddButton from '@/components/ui/AddButton/addButton';
 import InviteOperatorButton from '@/components/ui/InviteOperatorButton/inviteOperatorButton';
+import UpdateButton from '@/components/ui/UpdateButton/updateButton';
 
 const App: React.FC = () => {
 //   const [phases, setPhases] = useState(phaseLabels);
@@ -20,7 +21,10 @@ const App: React.FC = () => {
     //     alert("Tombol Hapus Ternak diklik!");
     // };
 
-    const handleInvite = () => {
+    // const handleInvite = () => {
+    //     alert("Tombol Invite Ternak diklik!");
+    // };
+    const handleUpdate = () => {
         alert("Tombol Invite Ternak diklik!");
     };
 
@@ -31,7 +35,8 @@ const App: React.FC = () => {
         // </div>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
         {/* <EditButton onClick={handleClick} /> */}
-        <InviteOperatorButton onClick={handleInvite} />
+        {/* <InviteOperatorButton onClick={handleInvite} /> */}
+        <UpdateButton onClick={handleUpdate} />
         </div>
         
     );
