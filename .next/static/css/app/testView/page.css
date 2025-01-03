@@ -1,20 +1,26 @@
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/ui/UpdateButton/UpdateButton.module.css ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************/
-/* UpdateButton.module.css */
-.UpdateButton_button__eDtCV {
+/*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/ui/PrintButton/PrintButton.module.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************/
+.PrintButton_button__HzcS2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     padding: 10px 20px;
-    border: 2px solid #248543; 
-    border-radius: 10px;
-    background-color: white;
-    color: #248543;
-    font-size: 16px;
-    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    color: #808080; 
+    font-size: 20px;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
+    outline: none;
+    text-transform: none; 
+    text-decoration: underline;
   }
   
-  .UpdateButton_button__eDtCV:hover {
-    background-color: #eaf4ea;
+  .PrintButton_line__WiWpG {
+    height: 2px;
+    width: 100%;
+    background-color: #808080;
+    margin-top: 4px;
   }
   
