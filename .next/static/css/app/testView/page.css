@@ -1,22 +1,38 @@
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/ui/DeleteButtonIcon/DeleteButton.module.css ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************/
-/* DeleteButton.module.css */
-.DeleteButton_button__4RkpN {
+/*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/ui/AddButton/AddButton.module.css ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************/
+.AddButton_button__GkFlR {
+    display: flex;
     padding: 10px 20px;
+    align-items: center;
+    justify-content: center; 
     border: none;
-    border-radius: 8px;
-    background-color: #fdeaea; /* Warna merah muda */
-    color: #d90429; /* Warna merah teks */
+    border-radius: 10px;
+    background-color: #248543; /* Warna merah muda */
+    color: #FFFFFF; /* Warna merah teks */
+    width: 200px;
+    height: 52px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 131px;
-    height: 52px;
+  }
+
+  .AddButton_icon__gYH_E {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    color: #FFFFFF;
+  }
+
+  .AddButton_svgIcon__4EtQU {
+    display: flex;
+    width: 16px;
+    height: 16px;
+    fill: white; /* Warna ikon putih */
   }
   
-  .DeleteButton_button__4RkpN:hover {
-    background-color: #fbd1d1; /* Warna merah muda lebih terang saat hover */
+  .AddButton_label__QiQOp {
+    white-space: nowrap; /* Pastikan teks tidak terputus menjadi dua baris */
   }
-  
