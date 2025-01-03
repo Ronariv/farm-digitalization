@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 // import HealthStatus from "@/components/ui/healthStatus"; 
 // import GenderIcon from '@/components/ui/genderIcon';
 import EditButton from '@/components/ui/EditButton/editButton';
-import DeleteButton from '@/components/ui/DeleteButtonIcon/deleteButton';
+import AddButton from '@/components/ui/AddButton/addButton';
 
 const App: React.FC = () => {
 //   const [phases, setPhases] = useState(phaseLabels);
@@ -15,7 +15,7 @@ const App: React.FC = () => {
     //     alert("Tombol Ubah Data diklik!");
     // };
 
-    const handleDelete = () => {
+    const handleAdd = () => {
         alert("Tombol Hapus Ternak diklik!");
     };
 
@@ -26,7 +26,7 @@ const App: React.FC = () => {
         // </div>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
         {/* <EditButton onClick={handleClick} /> */}
-        <DeleteButton onClick={handleDelete} />
+        <AddButton onClick={handleAdd} />
         </div>
         
     );
