@@ -9,6 +9,7 @@ import EditButton from '@/components/ui/EditButton/editButton';
 import AddButton from '@/components/ui/AddButton/addButton';
 import InviteOperatorButton from '@/components/ui/InviteOperatorButton/inviteOperatorButton';
 import UpdateButton from '@/components/ui/UpdateButton/updateButton';
+import PrintButton from '@/components/ui/PrintButton/printButton';
 
 const App: React.FC = () => {
 //   const [phases, setPhases] = useState(phaseLabels);
@@ -28,6 +29,10 @@ const App: React.FC = () => {
         alert("Tombol Invite Ternak diklik!");
     };
 
+    const handlePrint = () => {
+        alert("Tombol print sudah diklik!");
+    };
+
     return (
         // <div className="icon-gender">
         //   {/* <HealthStatus status="tidakSehat" /> */}
@@ -36,7 +41,8 @@ const App: React.FC = () => {
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
         {/* <EditButton onClick={handleClick} /> */}
         {/* <InviteOperatorButton onClick={handleInvite} /> */}
-        <UpdateButton onClick={handleUpdate} />
+        {/* <UpdateButton onClick={handleUpdate} /> */}
+        <PrintButton onClick={handlePrint}/>
         </div>
         
     );
