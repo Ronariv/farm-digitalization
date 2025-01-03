@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 // import GenderIcon from '@/components/ui/genderIcon';
 import EditButton from '@/components/ui/EditButton/editButton';
 import AddButton from '@/components/ui/AddButton/addButton';
+import InviteOperatorButton from '@/components/ui/InviteOperatorButton/inviteOperatorButton';
 
 const App: React.FC = () => {
 //   const [phases, setPhases] = useState(phaseLabels);
@@ -15,8 +16,12 @@ const App: React.FC = () => {
     //     alert("Tombol Ubah Data diklik!");
     // };
 
-    const handleAdd = () => {
-        alert("Tombol Hapus Ternak diklik!");
+    // const handleAdd = () => {
+    //     alert("Tombol Hapus Ternak diklik!");
+    // };
+
+    const handleInvite = () => {
+        alert("Tombol Invite Ternak diklik!");
     };
 
     return (
@@ -26,7 +31,7 @@ const App: React.FC = () => {
         // </div>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
         {/* <EditButton onClick={handleClick} /> */}
-        <AddButton onClick={handleAdd} />
+        <InviteOperatorButton onClick={handleInvite} />
         </div>
         
     );
