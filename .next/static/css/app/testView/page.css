@@ -1,38 +1,20 @@
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/ui/InviteOperatorButton/InviteOperatorButton.module.css ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************/
-.InviteOperatorButton_button__t723w {
-    display: flex;
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/ui/UpdateButton/UpdateButton.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************/
+/* UpdateButton.module.css */
+.UpdateButton_button__eDtCV {
     padding: 10px 20px;
-    align-items: center;
-    justify-content: center; 
-    border: none;
+    border: 2px solid #248543; 
     border-radius: 10px;
-    background-color: #248543; /* Warna merah muda */
-    color: #FFFFFF; /* Warna merah teks */
-    width: 200px;
-    height: 52px;
+    background-color: white;
+    color: #248543;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
   }
-
-  .InviteOperatorButton_icon__oqrUz {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 8px;
-    color: #FFFFFF;
-  }
-
-  .InviteOperatorButton_svgIcon__TkCBW {
-    display: flex;
-    width: 16px;
-    height: 16px;
-    fill: white; /* Warna ikon putih */
+  
+  .UpdateButton_button__eDtCV:hover {
+    background-color: #eaf4ea;
   }
   
-  .InviteOperatorButton_label__0GnwB {
-    white-space: nowrap; /* Pastikan teks tidak terputus menjadi dua baris */
-  }
