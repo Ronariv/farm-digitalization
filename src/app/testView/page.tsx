@@ -12,6 +12,7 @@ import UpdateButton from '@/components/ui/UpdateButton/updateButton';
 import PrintButton from '@/components/ui/PrintButton/printButton';
 import FilterButton from '@/components/ui/Filter/filterButton';
 import SortByButton from '@/components/ui/SortBy/sortBy';
+import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
 
 const App: React.FC = () => {
 //   const [phases, setPhases] = useState(phaseLabels);
@@ -55,7 +56,8 @@ const App: React.FC = () => {
         {/* <PrintButton onClick={handlePrint}/> */}
         {/* <FilterButton onClick={handleFilter}/> */}
         {/* <SortByButton onClick={handleSortBy}/> */}
-        <SortByButton onClick={handleSortBy}/>
+        {/* <SortByButton onClick={handleSortBy}/> */}
+        <YearAndMonthPicker/>
         </div>
         
     );
