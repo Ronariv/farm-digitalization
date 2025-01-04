@@ -11,16 +11,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
-    "/loginPage/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/loginPage/page.js"
-    ],
-    "/ownerView/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/ownerView/page.js"
-    ],
     "/testView/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",

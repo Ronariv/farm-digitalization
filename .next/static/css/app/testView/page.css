@@ -1,42 +1,26 @@
-/*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/ui/SearchBar/SearchBar.module.css ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************************/
-.SearchBar_searchBar__hwuLr {
-    display: flex;
+/*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/ui/Filter/Filter.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************/
+.Filter_button__M5F5C {
+    padding: 10px 20px;
     align-items: center;
-    background-color: white;
-    padding: 10px 15px;
-    border-radius: 25px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-    gap: 16px;
-  }
-  
-  .SearchBar_icon__4kOwz {
-    width: 20px;
-    height: 20px;
-    color: #808080; /* Warna abu-abu */
-    margin-right: 10px;
-  }
-  
-  .SearchBar_input__fgIoO {
-    border: none;
-    outline: none;
+    display: flex;
     font-size: 16px;
-    flex: 1;
-    color: #333; /* Warna teks */
+    font-style: normal;
+    font-weight: 400;
+    gap: 8px;
+    line-height: 19.2px; /* 120% */
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    color: #000000; 
   }
   
-  .SearchBar_input__fgIoO::placeholder {
-    color: #b0b0b0; /* Warna placeholder */
+  .Filter_line__bJQfs {
+    height: 2px;
+    width: 100%;
+    background-color: #000000;
+    margin-top: 4px;
   }
-  
-  .SearchBar_searchBar__hwuLr:hover {
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
-  }
-  
-  .SearchBar_searchBar__hwuLr:focus-within {
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
-  }
-  
