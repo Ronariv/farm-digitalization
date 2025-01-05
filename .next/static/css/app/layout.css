@@ -650,6 +650,30 @@ video {
   overflow-y: auto; /* Scroll jika konten banyak */
   background-color: #f9f9f9; /* Warna latar belakang konten */
 }
+
+.menuTittle{
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 43px; 
+}
+
+.animalCategoriesCard{
+  display: flex;
+  padding-top: 50px;
+  align-items: flex-start;
+}
+
+.menuHeader {
+  display: flex;
+  /* justify-content: space-between;  */
+  align-items: center; /* Vertikal sejajar di tengah */
+  /* padding: 0 16px;  */
+}
+
+.yearAndMonthPicker {
+  margin-left: 65%; /* Geser ke kiri */
+}
   * {
   border-color: hsl(var(--border));
 }

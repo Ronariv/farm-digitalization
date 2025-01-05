@@ -15,6 +15,8 @@ import SortByButton from '@/components/ui/SortBy/sortBy';
 import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
 import Sidebar from '@/components/ui/Sidebar/sidebar';
 import SearchBar from '@/components/ui/SearchBar/searchBar';
+import animalCategories from '@/models/animalCategories';
+import CategoryAnimalCard from '@/components/ui/CategoryAnimalCard/categoryAnimalCard';
 
 const App: React.FC = () => {
 //   const [phases, setPhases] = useState(phaseLabels);
@@ -47,17 +49,38 @@ const App: React.FC = () => {
     };
 
     return (
-    <div className="layout">
+      <div className="layout">
       <div className="sidebar">
         <Sidebar />
       </div>
+
       <div className="main-content">
         <div className="searchbar">
           <SearchBar />
         </div>
         <div className="content">
-          {/* Konten lainnya, misalnya kartu statistik */}
+        <div className="menuSection">
+          <div className="menuHeader">
+            <h1 className="menuTittle">Statistik</h1>
+            <div className="yearAndMonthPicker">
+              <YearAndMonthPicker/>
+            </div>
+          </div>
+          <div className="animalCategoriesCard">
+            {animalCategories.map((category) => (
+              <CategoryAnimalCard
+                key={category.type}
+                icon={category.icon}
+                title={category.title}
+                total={category.total}
+                maleCount={category.maleCount}
+                femaleCount={category.femaleCount}
+              />
+            ))}
+          </div>
         </div>
+      </div>
+
       </div>
     </div>
     );
