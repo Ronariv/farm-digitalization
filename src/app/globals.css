@@ -139,37 +139,58 @@ body {
     padding-top: 10%;
   }
 
-/* Struktur utama layout */
 .layout {
   display: flex;
-  height: 100vh; /* Tinggi penuh viewport */
+  height: 100vh; 
 }
 
 .sidebar {
-  width: 300px; /* Lebar sidebar */
-  background-color: #f0f0f0; /* Sesuaikan dengan desain */
+  width: 300px;
+  background-color: #f0f0f0; 
   display: flex;
-  flex-direction: column; /* Elemen di sidebar vertikal */
-  /* padding: 16px; */
+  flex-direction: column;
 }
 
 .main-content {
-  flex: 1; /* Sisa ruang diberikan ke konten utama */
+  flex: 1; 
   display: flex;
-  flex-direction: column; /* Elemen vertikal: search bar lalu konten */
+  flex-direction: column; 
 }
 
 .searchbar {
-  background-color: #fff; /* Sesuaikan warna */
+  background-color: #fff; 
   padding: 16px;
-  border-bottom: 1px solid #ddd; /* Garis bawah untuk pemisah */
+  border-bottom: 1px solid #ddd; 
 }
 
 .content {
-  flex: 1; /* Sisa ruang untuk konten utama */
+  display: flex;
+  flex-direction: column;
   padding: 24px;
-  overflow-y: auto; /* Scroll jika konten banyak */
-  background-color: #f9f9f9; /* Warna latar belakang konten */
+}
+
+.menuTittle{
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 43px; 
+}
+
+.animalCategoriesCard{
+  display: flex;
+  padding-top: 50px;
+  align-items: flex-start;
+}
+
+.menuHeader {
+  display: flex;
+  /* justify-content: space-between;  */
+  align-items: center; /* Vertikal sejajar di tengah */
+  /* padding: 0 16px;  */
+}
+
+.yearAndMonthPicker {
+  margin-left: 65%; /* Geser ke kiri */
 }
 
 }
