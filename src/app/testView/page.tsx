@@ -13,6 +13,8 @@ import PrintButton from '@/components/ui/PrintButton/printButton';
 import FilterButton from '@/components/ui/Filter/filterButton';
 import SortByButton from '@/components/ui/SortBy/sortBy';
 import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
+import Sidebar from '@/components/ui/Sidebar/sidebar';
+import SearchBar from '@/components/ui/SearchBar/searchBar';
 
 const App: React.FC = () => {
 //   const [phases, setPhases] = useState(phaseLabels);
@@ -45,21 +47,19 @@ const App: React.FC = () => {
     };
 
     return (
-        // <div className="icon-gender">
-        //   {/* <HealthStatus status="tidakSehat" /> */}
-        //   {/* <GenderIcon gender="betina" /> */}
-        // </div>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        {/* <EditButton onClick={handleClick} /> */}
-        {/* <InviteOperatorButton onClick={handleInvite} /> */}
-        {/* <UpdateButton onClick={handleUpdate} /> */}
-        {/* <PrintButton onClick={handlePrint}/> */}
-        {/* <FilterButton onClick={handleFilter}/> */}
-        {/* <SortByButton onClick={handleSortBy}/> */}
-        {/* <SortByButton onClick={handleSortBy}/> */}
-        <YearAndMonthPicker/>
+    <div className="layout">
+      <div className="sidebar">
+        <Sidebar />
+      </div>
+      <div className="main-content">
+        <div className="searchbar">
+          <SearchBar />
         </div>
-        
+        <div className="content">
+          {/* Konten lainnya, misalnya kartu statistik */}
+        </div>
+      </div>
+    </div>
     );
 };
 
