@@ -638,6 +638,7 @@ video {
 }
 
 .searchbar {
+  align-items: center;
   background-color: #fff; /* Sesuaikan warna */
   padding: 16px;
   border-bottom: 1px solid #ddd; /* Garis bawah untuk pemisah */

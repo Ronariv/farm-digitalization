@@ -72,41 +72,45 @@
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/ui/SearchBar/SearchBar.module.css ***!
   \********************************************************************************************************************************************************************************************************************************************************************************************/
 .SearchBar_searchBar__hwuLr {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    padding: 10px 15px;
-    border-radius: 25px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-    gap: 16px;
-  }
-  
-  .SearchBar_icon__4kOwz {
-    width: 20px;
-    height: 20px;
-    color: #808080; /* Warna abu-abu */
-    margin-right: 10px;
-  }
-  
-  .SearchBar_input__fgIoO {
-    border: none;
-    outline: none;
-    font-size: 16px;
-    flex: 1;
-    color: #333; /* Warna teks */
-  }
-  
-  .SearchBar_input__fgIoO::placeholder {
-    color: #b0b0b0; /* Warna placeholder */
-  }
-  
-  .SearchBar_searchBar__hwuLr:hover {
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
-  }
-  
-  .SearchBar_searchBar__hwuLr:focus-within {
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
-  }
-  
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 10px 15px;
+  border-radius: 25px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 744px;
+  width: 100%;
+}
+
+.SearchBar_inputWrapper__MmCM8{
+  display: flex;
+  align-items: center;
+  width: 5%;
+}
+
+.SearchBar_icon__4kOwz {
+  width: 20px;
+  height: 20px;
+  color: #808080; /* Warna abu-abu */
+  margin-right: 10px;
+}
+
+.SearchBar_input__fgIoO {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  flex: 1;
+  color: #333; /* Warna teks */
+}
+
+.SearchBar_input__fgIoO::placeholder {
+  color: #b0b0b0; /* Warna placeholder */
+}
+
+.SearchBar_searchBar__hwuLr:hover {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.SearchBar_searchBar__hwuLr:focus-within {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+}
