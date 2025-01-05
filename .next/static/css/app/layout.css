@@ -613,63 +613,42 @@ video {
     padding-bottom: 3%;
   }
 
-  .sidebar-container {
-    width: 303px;
-    display: inline-flex;
-    padding: 24px 16px 610px 16px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 31px;
-    background: var(--Base-Surface, #FFF);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);  
-  }
-  
-  .sidebar-profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .profile-picture {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 31px;
-  }
-  
-  .dropdown-button {
-    width: 271px;
-    height: 52px;
-    margin-top: 10px;
-    background-color: #248543;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .dropdown-icon {
-    margin-left: 8px;
-    font-size: 12px;
-  }
-  
-  .menu-items:hover{
-    width: 271px;
-    fill: #248543;
-  }
-  
   #icon:hover{
     stroke: green;
   }
 
-  .icon-gender{
-    display: flex;
-    align-items: center;
-    padding-top: 10%;
-  }
+/* Struktur utama layout */
+.layout {
+  display: flex;
+  height: 100vh; /* Tinggi penuh viewport */
+}
+
+.sidebar {
+  width: 300px; /* Lebar sidebar */
+  background-color: #f0f0f0; /* Sesuaikan dengan desain */
+  display: flex;
+  flex-direction: column; /* Elemen di sidebar vertikal */
+  /* padding: 16px; */
+}
+
+.main-content {
+  flex: 1; /* Sisa ruang diberikan ke konten utama */
+  display: flex;
+  flex-direction: column; /* Elemen vertikal: search bar lalu konten */
+}
+
+.searchbar {
+  background-color: #fff; /* Sesuaikan warna */
+  padding: 16px;
+  border-bottom: 1px solid #ddd; /* Garis bawah untuk pemisah */
+}
+
+.content {
+  flex: 1; /* Sisa ruang untuk konten utama */
+  padding: 24px;
+  overflow-y: auto; /* Scroll jika konten banyak */
+  background-color: #f9f9f9; /* Warna latar belakang konten */
+}
   * {
   border-color: hsl(var(--border));
 }
@@ -941,10 +920,6 @@ video {
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
-}
-.bg-gray-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(209 213 219 / var(--tw-bg-opacity, 1));
 }
 .bg-muted {
   background-color: hsl(var(--muted));
