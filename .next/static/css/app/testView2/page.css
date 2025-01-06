@@ -7,7 +7,7 @@
     padding: 16px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 347px;
+    width: 347px;
     max-height: 303px;
   }
   
@@ -53,11 +53,11 @@
   }
 
   .DetailAnimalFemaleCard_details2__h6svm p {
-    margin-right: 10px ;
+    margin-right: 40px ;
   }
   
   .DetailAnimalFemaleCard_details__7ovkb p {
-    margin-right: 20px;
+    margin-right: 40px;
   }
 
   .DetailAnimalFemaleCard_pedet__KItC1{
