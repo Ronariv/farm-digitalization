@@ -1,17 +1,23 @@
 import React from 'react';
 import DetailAnimalFemaleCard from '@/components/ui/DetailAnimalFemaleCard/detailAnimalFemaleCard';
-import animalCategories from '@/models/detailAnimalFemaleCategories';
+import animalFemaleCategories from '@/models/detailAnimalFemaleCategories';
+import DetailAnimalMaleCard from '@/components/ui/DetailAnimalMaleCard/detailAnimalMaleCard';
+import animalMaleCategories from '@/models/detailAnimalMaleCategories';
 
 const AnimalCategoriesPage = () => {
-    const filteredCategories = animalCategories.filter(
-        (category) => category.type === 'kambing' // Filter berdasarkan type
-      );
+    const filteredAnimalFemaleCategories = animalFemaleCategories.filter(
+        (category) => category.type === 'kambing' 
+    );
+
+    const filteredAnimalMaleCategories = animalMaleCategories.filter(
+        (category) => category.type === 'kambing'
+    )
       
   return (
-    <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-      {filteredCategories.map((category) => (
+    <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center'}}>
+      {filteredAnimalFemaleCategories.map((category) => (
         <DetailAnimalFemaleCard
-          key={category.type} // Gunakan type sebagai key
+          key={category.type} 
           title={category.tittle}
           total={category.total}
           pedet={category.pedet}
@@ -21,6 +27,17 @@ const AnimalCategoriesPage = () => {
           menyusui={category.menyusui}
         />
       ))}
+
+      {filteredAnimalMaleCategories.map((category) => (
+        <DetailAnimalMaleCard
+          key={category.type} 
+          title={category.tittle}
+          total={category.total}
+          pedet={category.pedet}
+          siapKawin={category.siapKawin}
+        />
+      ))}
+
     </div>
   );
 };

@@ -1,4 +1,4 @@
-export const animalCategories = [
+export const animalFemaleCategories = [
     {
         type: 'sapi',
         tittle: 'Sapi Betina',
@@ -41,4 +41,4 @@ export const animalCategories = [
     }
 ];
 
-export default animalCategories;
+export default animalFemaleCategories;
