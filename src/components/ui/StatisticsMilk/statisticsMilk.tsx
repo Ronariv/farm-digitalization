@@ -1,14 +1,48 @@
 import React from 'react';
 import styles from '@/components/ui/StatisticsMilk/StatisticsMilk.module.css';
+import { statisticsMilkData } from '@/models/statisticsMilkModel';
+
+// type StatisticMilkProps = {
+//   statisticsMilkData: { month: string; value: number }[]; 
+//   average: number;
+//   minMonth: string; 
+//   maxMonth: string; 
+// };
 
 type StatisticMilkProps = {
-  average: number;
-  monthsData: { month: string; value: number }[]; 
-  minMonth: string; 
-  maxMonth: string; 
-};
+    filterBy: 'year' | 'month';
+    filterValue: number | string;
+}
 
-const StatisticMilk: React.FC<StatisticMilkProps> = ({ average, monthsData, minMonth, maxMonth }) => {
+const StatisticMilk: React.FC<StatisticMilkProps> = ({ filterBy, filterValue }) => {
+
+    const filteredData = statisticsMilkData.flatMap((item) => {
+        if (filterBy === 'year' && item.year === filterValue) {
+          return item.data;
+        }
+        if (filterBy === 'month') {
+          return item.data.filter((data) => data.month === filterValue);
+        }
+        return [];
+      });
+
+    // Hitung rata-rata
+    const average =
+    filteredData.reduce((acc, cur) => acc + cur.value, 0) / filteredData.length || 0;
+
+    // Bulan dengan nilai minimum dan maksimum
+    const minMonth =
+    filteredData.reduce(
+        (prev, cur) => (cur.value < prev.value ? cur : prev),
+        filteredData[0] || { month: '-', value: Infinity }
+    ).month || '-';
+
+    const maxMonth =
+    filteredData.reduce(
+        (prev, cur) => (cur.value > prev.value ? cur : prev),
+        filteredData[0] || { month: '-', value: -Infinity }
+    ).month || '-';
+
   return (
     <div className={styles.container}>
         <div className={styles.tittle}>
@@ -42,9 +76,10 @@ const StatisticMilk: React.FC<StatisticMilkProps> = ({ average, monthsData, minM
             </p>
             ))}
         </div>
+
         <div className={styles.chart}>
-            {monthsData.map((data) => (
-            <div key={data.month} className={styles.barContainer}>
+            {filteredData.map((data, index) => (
+            <div key={index} className={styles.barContainer}>
                 {/* Bar hijau */}
                 <div
                 className={styles.greenBar}
