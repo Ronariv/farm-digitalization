@@ -16,6 +16,12 @@
       "static/chunks/main-app.js",
       "static/css/app/testView/page.css",
       "static/chunks/app/testView/page.js"
+    ],
+    "/testView2/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/testView2/page.css",
+      "static/chunks/app/testView2/page.js"
     ]
   }
 }
