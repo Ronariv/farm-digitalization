@@ -7,15 +7,11 @@
     padding: 16px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 347px;
+    width: 347px;
     max-height: 303px;
   }
   
   .DetailAnimalFemaleCard_title__oHyxZ {
-    /* color: #4caf50;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px; */
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -27,7 +23,6 @@
   .DetailAnimalFemaleCard_total__sCMYQ {
     font-size: 24px;
     font-weight: bold;
-    /* margin-bottom: 1px; */
   }
   
   .DetailAnimalFemaleCard_ekor___c9WS{
@@ -53,11 +48,11 @@
   }
 
   .DetailAnimalFemaleCard_details2__h6svm p {
-    margin-right: 10px ;
+    margin-right: 40px ;
   }
   
   .DetailAnimalFemaleCard_details__7ovkb p {
-    margin-right: 20px;
+    margin-right: 40px;
   }
 
   .DetailAnimalFemaleCard_pedet__KItC1{

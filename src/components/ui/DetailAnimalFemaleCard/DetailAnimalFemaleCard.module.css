@@ -4,15 +4,11 @@
     padding: 16px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 347px;
+    width: 347px;
     max-height: 303px;
   }
   
   .title {
-    /* color: #4caf50;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px; */
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -24,7 +20,6 @@
   .total {
     font-size: 24px;
     font-weight: bold;
-    /* margin-bottom: 1px; */
   }
   
   .ekor{
@@ -50,11 +45,11 @@
   }
 
   .details2 p {
-    margin-right: 10px ;
+    margin-right: 40px ;
   }
   
   .details p {
-    margin-right: 20px;
+    margin-right: 40px;
   }
 
   .pedet{
