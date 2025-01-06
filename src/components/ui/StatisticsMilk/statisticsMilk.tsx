@@ -83,7 +83,7 @@ const StatisticMilk: React.FC<StatisticMilkProps> = ({ filterBy, filterValue }) 
                 {/* Bar hijau */}
                 <div
                 className={styles.greenBar}
-                style={{ height: '70px', width: '41px' }} // Tinggi tetap, misalnya 10px
+                style={{ height: '70px', width: '41px' }} 
                 ></div>
                 {/* Batang grafik */}
                 <div
