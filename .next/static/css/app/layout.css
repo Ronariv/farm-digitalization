@@ -635,9 +635,10 @@ video {
 }
 
 .searchbar {
+  flex: 1 1 50%;
   background-color: #fff; 
   padding: 16px;
-  border-bottom: 1px solid #ddd; 
+  overflow: hidden;
 }
 
 .content {
@@ -661,16 +662,41 @@ video {
 
 .menuHeader {
   display: flex;
-  /* justify-content: space-between;  */
-  align-items: center; /* Vertikal sejajar di tengah */
-  /* padding: 0 16px;  */
+  align-items: center; 
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ddd; 
 }
 
 .yearAndMonthPicker {
   margin-left: 65%; /* Geser ke kiri */
 }
+
+.operatorProfile{
+  flex: 0 0 20%;
+  flex-shrink: 0;
+  overflow: hidden; 
+  padding: 0;
+  /* min-width: 10px; */
+  min-width: 100px;
+}
+
+/* .operatorProfile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+} */
   * {
   border-color: hsl(var(--border));
+    box-sizing: border-box;
 }
   body {
   background-color: hsl(var(--background));
@@ -1170,6 +1196,7 @@ video {
 body {
   /* font-family: Arial, Helvetica, sans-serif; */
   --font-inter: "Inter", sans-serif;
+  box-sizing: border-box;
 }
 
 .file\:border-0::file-selector-button {
