@@ -5,7 +5,7 @@ import DetailAnimalMaleCard from '@/components/ui/DetailAnimalMaleCard/detailAni
 import animalMaleCategories from '@/models/detailAnimalMaleCategories';
 import animalDiagnosedCategories from '@/models/detailAnimalDiagnosedCategories';
 import StatisticMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
-import { monthsData } from '@/models/statisticsMilkModel';
+import { statisticsMilkData } from "@/models/statisticsMilkModel";
 
 const AnimalCategoriesPage = () => {
     const filteredAnimalFemaleCategories = animalFemaleCategories.filter(
@@ -19,6 +19,8 @@ const AnimalCategoriesPage = () => {
     const filteredAnimalDiagnosedCategories = animalDiagnosedCategories.filter(
       (category) => category.type === 'kambing'
     )
+
+    
       
   return (
     <div>
@@ -59,12 +61,13 @@ const AnimalCategoriesPage = () => {
     </div>
 
     <div className="statistikMilk">
-      <StatisticMilk
+      {/* <StatisticMilk
       average={2000}
       monthsData={monthsData}
       minMonth="Agustus"
       maxMonth="Desember"
-    />
+    /> */}
+    <StatisticMilk filterBy="year" filterValue={2019} />
     </div>
 
     </div>
