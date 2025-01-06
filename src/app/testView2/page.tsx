@@ -4,6 +4,8 @@ import animalFemaleCategories from '@/models/detailAnimalFemaleCategories';
 import DetailAnimalMaleCard from '@/components/ui/DetailAnimalMaleCard/detailAnimalMaleCard';
 import animalMaleCategories from '@/models/detailAnimalMaleCategories';
 import animalDiagnosedCategories from '@/models/detailAnimalDiagnosedCategories';
+import StatisticMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
+import { monthsData } from '@/models/statisticsMilkModel';
 
 const AnimalCategoriesPage = () => {
     const filteredAnimalFemaleCategories = animalFemaleCategories.filter(
@@ -19,7 +21,8 @@ const AnimalCategoriesPage = () => {
     )
       
   return (
-    <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center'}}>
+    <div>
+      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center'}}>
       {filteredAnimalFemaleCategories.map((category) => (
         <DetailAnimalFemaleCard
           key={category.type} 
@@ -54,6 +57,20 @@ const AnimalCategoriesPage = () => {
       ))}
 
     </div>
+
+    <div className="statistikMilk">
+      <StatisticMilk
+      average={2000}
+      monthsData={monthsData}
+      minMonth="Agustus"
+      maxMonth="Desember"
+    />
+    </div>
+
+    </div>
+
+
+    
   );
 };
 
