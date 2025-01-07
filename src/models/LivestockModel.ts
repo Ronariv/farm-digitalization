@@ -7,7 +7,7 @@ export interface Livestock {
     phase?: 'SIAPKAWIN' | 'CEMPE' | "DARA" | "HAMIL";
     photo_url?: string;
     grade?: string;
-    breed_id: string;
+    breed: string;
     type_id: string;
     farm_id: string;
 }

@@ -16,6 +16,7 @@ import AnimalCard from '@/components/ui/AnimalCard/animalCard';
 import Loading from '@/components/ui/loading';
 import SortByButton from '@/components/ui/SortBy/sortBy';
 import FilterButton from '@/components/ui/Filter/filterButton';
+import { livestockData } from '@/data/livestockData';
 
 
 const LivestockPage: React.FC = () => {
@@ -74,7 +75,7 @@ const LivestockPage: React.FC = () => {
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
                         {data != null 
                         ? 
-                        data.map((livestock) => (
+                        livestockData.map((livestock) => (
                             <AnimalCard key={livestock.id} livestock={livestock}/>
                         ))
                         :

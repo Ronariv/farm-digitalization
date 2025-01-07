@@ -36,7 +36,7 @@ const AnimalCard: NextPage<AnimalCardType> = ({ className = "", livestock }) => 
           <div className={styles.breedInfo}>
             <div className={styles.breedName}>
               <div className={styles.shj015}>{livestock.name_id}</div>
-              <div className={styles.brownSwiss}>{livestock.gender}</div>
+              <div className={styles.brownSwiss}>{livestock.breed}</div>
             </div>
             <div className={styles.weight}>
               <div className={styles.weightIcons}>

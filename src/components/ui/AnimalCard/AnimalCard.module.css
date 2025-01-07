@@ -31,6 +31,7 @@
 .shj015 {
   align-self: stretch;
   position: relative;
+  color: #248543;
 }
 .animalDetails {
   height: 197px;
@@ -50,16 +51,19 @@
   font-weight: 600;
 }
 .brownSwiss {
-  font-size: var(--sub-header-1-size);
-  color: var(--text-text-secondary);
+  color: var(--Text-Text-Secondary, #808080);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 121.071%; /* 19.371px */
 }
 .breedName {
-  width: 96px;
   display: flex;
+  width: 96px;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
-  gap: var(--gap-5xs);
+  gap: 8px;
 }
 .starfill1Icon {
   height: 19px;
@@ -69,8 +73,12 @@
   flex-shrink: 0;
 }
 .aa {
-  position: relative;
-  line-height: 121.07%;
+  color: var(--Text-Text-Primary, #000);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 121.071%;
 }
 .weightIcons {
   display: flex;
@@ -99,8 +107,12 @@
   flex-shrink: 0;
 }
 .kg {
-  line-height: 121.07%;
-  display: inline-block;
+  color: var(--Text-Text-Primary, #000);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 121.071%; /* 19.371px */
 }
 .weightIcons1 {
   flex-direction: row;
@@ -122,7 +134,8 @@
   color: var(--text-text-primary);
 }
 .breedInfo {
-  width: 141.9px;
+  display: flex;
+  width: 141.943px;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
@@ -153,9 +166,10 @@
   justify-content: flex-start;
 }
 .characteristics {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
   align-self: stretch;
-  flex-direction: row;
-  gap: var(--gap-5xs);
 }
 .animalCard,
 .details {
