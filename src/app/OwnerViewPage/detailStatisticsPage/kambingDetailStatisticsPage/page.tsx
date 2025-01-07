@@ -16,12 +16,19 @@ import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthP
 import Sidebar from '@/components/ui/Sidebar/sidebar';
 import SearchBar from '@/components/ui/SearchBar/searchBar';
 import CategoryAnimalCard from '@/components/ui/CategoryAnimalCard/categoryAnimalCard';
-import animalCategories from '@/models/animalCategories';
 import OperatorProfile from '@/components/ui/OperatorProfile/operatorProfile';
 import Image from 'next/image';
 import OwnerProfile from '@/components/ui/OwnerProfile/ownerProfile';
 import Breadcrumbs from '@/components/ui/Breadcrumbs/breadcrumbs';
 import { usePathname } from 'next/navigation';
+import DetailAnimalFemaleCard from '@/components/ui/DetailAnimalFemaleCard/detailAnimalFemaleCard';
+import animalCategories from '@/models/detailAnimalFemaleCategories';
+import DetailAnimalMaleCard from '@/components/ui/DetailAnimalMaleCard/detailAnimalMaleCard';
+import detailAnimalMaleCategories from '@/models/detailAnimalMaleCategories';
+import DetailAnimalDiagnosedCard from '@/components/ui/DetailAnimalDiagnosedCard/detailAnimalDiagnosedCard';
+import animalDiagnosedCategories from '@/models/detailAnimalDiagnosedCategories';
+import StatisticsMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
+import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
 
 const App: React.FC = () => {
 
@@ -42,6 +49,18 @@ const App: React.FC = () => {
     const handleSortBy = () => {
       alert("Tombol sort di klik");
     };
+
+    const filteredFemaleCategories = animalCategories.filter(
+        (category) => category.type === 'kambing' 
+    );
+
+    const filteredMaleCategories = detailAnimalMaleCategories.filter(
+        (category) => category.type === 'kambing' 
+    );
+
+    const filteredDiagnosedCategories = animalDiagnosedCategories.filter(
+        (category) => category.type === 'kambing' 
+    );
 
     function getMenuLabel(pathname: string): string {
       switch (pathname) {
@@ -95,32 +114,73 @@ const App: React.FC = () => {
             breadcrumbs={[
               { label: 'Peternakan Widjaya', href: '/OwnerViewPage' },
               { label: 'Statistik', href: '/OwnerViewPage' },
+              { label: 'Kambing', href: '/OwnerViewPage/detailStatisticsPage/kambingDetailStatisticsPage' },
             ]}
           />
           </div>
 
           <div className="menuHeader">
-        
-            <h1 className="menuTittle">Statistik</h1>
+            <div>
+            <img src="/Kambing.svg" alt="Icon Kambing" style={{ width: '81.055px;', height: '72px' }} />
+            </div>
+            <h1 className="menuTittle">Kambing</h1>
             <div className="yearAndMonthPicker">
               <YearAndMonthPicker/>
+            </div>
+          </div>
+
+          <div className="kambingDetailStatisticsCard">
+            <div className="kambingFemaleCardStatisticsCard">
+                {filteredFemaleCategories.map((category) => (
+                <DetailAnimalFemaleCard
+                key={category.type} // Gunakan type sebagai key
+                title={category.tittle}
+                total={category.total}
+                pedet={category.pedet}
+                dara={category.dara}
+                siapKawin={category.siapKawin}
+                hamil={category.hamil}
+                menyusui={category.menyusui}
+                />
+            ))}
+            </div>
+
+            <div className="kambingMaleCardStatisticsCard">
+                {filteredMaleCategories.map((category) => (
+                <DetailAnimalMaleCard 
+                key={category.type}
+                title={category.tittle} 
+                total={category.total} 
+                pedet={category.pedet}
+                siapKawin={category.siapKawin}           
+                />
+            ))} 
+            </div>
+
+            <div className="kambingMaleCardStatisticsCard">
+                {filteredDiagnosedCategories.map((category) => (
+                <DetailAnimalDiagnosedCard
+                key={category.type}
+                title={category.tittle}
+                total={category.total}
+                sakit={category.sakit}
+                hilang={category.hilang}
+                />
+            ))} 
             </div>
 
           </div>
 
-          <div className="animalCategoriesCard">
-            {animalCategories.map((category) => (
-              <CategoryAnimalCard
-                key={category.type}
-                icon={category.icon}
-                title={category.title}
-                total={category.total}
-                maleCount={category.maleCount}
-                femaleCount={category.femaleCount}
-                href={category.href}
-              />
-            ))}
+          <div className="statisticsCard">
+          <StatisticsMilk filterBy="year" filterValue={2019} />
+
+          <StatisticsLactation filterBy="year" filterValue={2019} />
           </div>
+
+          <div className="statisticsLactation">
+           
+          </div>
+
         </div>
       </div>
 
