@@ -114,6 +114,7 @@ const App: React.FC = () => {
                 total={category.total}
                 maleCount={category.maleCount}
                 femaleCount={category.femaleCount}
+                href={category.href}
               />
             ))}
           </div>
