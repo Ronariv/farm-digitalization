@@ -65,7 +65,7 @@
 
   .menuItem:hover {
     background-color: #EBFAF0;
-    color: #248543;
+    /* color: #248543; */
     border-radius: 10px;
   }
 
