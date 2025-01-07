@@ -7,7 +7,7 @@ type StatisticMilkProps = {
     filterValue: number | string;
 }
 
-const StatisticMilk: React.FC<StatisticMilkProps> = ({ filterBy, filterValue }) => {
+const StatisticsLactation: React.FC<StatisticMilkProps> = ({ filterBy, filterValue }) => {
 
     const filteredData = statisticsLactationData.flatMap((item) => {
         if (filterBy === 'year' && item.year === filterValue) {
@@ -32,7 +32,7 @@ const StatisticMilk: React.FC<StatisticMilkProps> = ({ filterBy, filterValue }) 
       <div className={styles.header}>
        
         <div>
-        <h1>{average} liter</h1>
+        <h1>{average} Pedet</h1>
         <p>Rata-rata/bulan</p>
         </div>
 
@@ -74,4 +74,4 @@ const StatisticMilk: React.FC<StatisticMilkProps> = ({ filterBy, filterValue }) 
   );
 };
 
-export default StatisticMilk;
+export default StatisticsLactation;
