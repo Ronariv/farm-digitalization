@@ -6,6 +6,7 @@ body {
   /* font-family: Arial, Helvetica, sans-serif; */
   --font-inter: "Inter", sans-serif;
   box-sizing: border-box;
+  height: 100%;
 }
 
 @layer base {
@@ -142,14 +143,16 @@ body {
 
 .layout {
   display: flex;
-  height: 100vh; 
+  min-height: 100vh;
 }
 
 .sidebar {
+  position: sticky;
+  height: auto;
   width: 300px;
   background-color: #f0f0f0; 
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 .main-content {
@@ -187,9 +190,26 @@ body {
   align-items: flex-start;
 }
 
+
 .genderIcon{
   scale: 1.5;
   margin-left: 12px;
+  
+.sapiDetailStatisticsCard{
+  display: flex;
+  padding-top: 50px;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.statisticsCard{
+  display: flex;
+  width: 1025px;
+  padding-top: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+
 }
 
 .menuHeader {
@@ -200,6 +220,8 @@ body {
 
 .header{
   display: flex;
+  flex-shrink: 0;
+  position: sticky;
   justify-content: space-between;
   align-items: center;
   padding: 8px;
@@ -323,6 +345,7 @@ body {
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-inter);
+    height: 100%;
   }
 }
 
