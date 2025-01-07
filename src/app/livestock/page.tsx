@@ -20,18 +20,18 @@ import { livestockData } from '@/data/livestockData';
 
 
 const LivestockPage: React.FC = () => {
-    const { data, loading, error } = useFetch<Livestock[]>(
-        `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
-        undefined
-    );
+    // const { data, loading, error } = useFetch<Livestock[]>(
+    //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
+    //     undefined
+    // );
 
-    if (loading) {
-        return <Loading></Loading>;
-    }
+    // if (loading) {
+    //     return <Loading></Loading>;
+    // }
 
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
+    // if (error) {
+    //     return <div>Error: {error}</div>;
+    // }
 
     return (
         <div>
@@ -75,13 +75,14 @@ const LivestockPage: React.FC = () => {
                         </div>
                     </div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-                        {data != null 
-                        ? 
+                        {
+                        // data != null 
+                        // ? 
                         livestockData.map((livestock) => (
                             <AnimalCard key={livestock.id} livestock={livestock}/>
                         ))
-                        :
-                        <div></div>
+                        // :
+                        // <div></div>
                         }
                     </div>
                     </div>

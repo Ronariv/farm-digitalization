@@ -194,6 +194,7 @@ body {
 .genderIcon{
   scale: 1.5;
   margin-left: 12px;
+}
   
 .sapiDetailStatisticsCard{
   display: flex;
@@ -335,20 +336,6 @@ body {
   min-width: 100px;
 }
 
-}
-
-@layer base {
-  * {
-    @apply border-border;
-    box-sizing: border-box;
-  }
-  body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-inter);
-    height: 100%;
-  }
-}
-
 .detailInformationLivestock {
   display: flex;
   width: 1025px;
@@ -458,4 +445,17 @@ body {
   flex-shrink: 0;
   align-self: stretch;
   margin-bottom: 56px;
+}
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-inter);
+    height: 100%;
+  }
 }
