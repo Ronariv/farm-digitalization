@@ -187,6 +187,7 @@ body {
 .menuHeader {
   display: flex;
   align-items: center; 
+  margin-bottom: 24px;
 }
 
 .header{
@@ -201,7 +202,13 @@ body {
 }
 
 .yearAndMonthPicker {
-  margin-left: 65%; /* Geser ke kiri */
+  margin-left: auto;
+}
+
+.sortByAndFilter {
+  display: flex; 
+  margin-left: auto;
+  gap: 10px;
 }
 
 .operatorProfile{

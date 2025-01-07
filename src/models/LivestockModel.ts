@@ -4,7 +4,7 @@ export interface Livestock {
     gender: 'MALE' | 'FEMALE';
     dob: string;
     weight?: string;
-    phase?: 'SIAPKAWIN' | 'OTHER_PHASES';
+    phase?: 'SIAPKAWIN' | 'CEMPE' | "DARA" | "HAMIL";
     photo_url?: string;
     grade?: string;
     breed_id: string;
