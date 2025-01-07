@@ -4,5 +4,6 @@ export interface PhaseLabel {
     label: string; // Nama fase (Cempe, Dara, Siap Kawin, Hamil)
     color: string; // Warna background atau teks
     isActive: boolean; // Status apakah fase aktif
+    enum: string;
   }
   
