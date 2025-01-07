@@ -98,12 +98,16 @@ const App: React.FC = () => {
             ]}
           />
           </div>
+
           <div className="menuHeader">
+        
             <h1 className="menuTittle">Statistik</h1>
             <div className="yearAndMonthPicker">
               <YearAndMonthPicker/>
             </div>
+
           </div>
+
           <div className="animalCategoriesCard">
             {animalCategories.map((category) => (
               <CategoryAnimalCard

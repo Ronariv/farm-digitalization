@@ -2,12 +2,14 @@
 
 import React from 'react';
 import styles from './CategoryAnimalCard.module.css';
+import Link from 'next/link';
 interface CategoryAnimalCardProps {
   icon: React.ReactNode; 
   title: string; 
   total: number; 
   maleCount: number;
   femaleCount: number; 
+  href: string;
 }
 
 const CategoryAnimalCard: React.FC<CategoryAnimalCardProps> = ({
@@ -16,9 +18,11 @@ const CategoryAnimalCard: React.FC<CategoryAnimalCardProps> = ({
   total,
   maleCount,
   femaleCount,
+  href,
 }) => {
   return (
-    <div className={styles.card}>
+    <Link href={href}>
+        <div className={styles.card}>
       {/* Header */}
       <div className={styles.header}>
         <div className={styles.icon}>{icon}</div> 
@@ -56,6 +60,8 @@ const CategoryAnimalCard: React.FC<CategoryAnimalCardProps> = ({
         </div>
       </div>
     </div>
+    </Link>
+
   );
 };
 
