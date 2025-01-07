@@ -19,6 +19,7 @@ import CategoryAnimalCard from '@/components/ui/CategoryAnimalCard/categoryAnima
 import animalCategories from '@/models/animalCategories';
 import OperatorProfile from '@/components/ui/OperatorProfile/operatorProfile';
 import Image from 'next/image';
+import OwnerProfile from '@/components/ui/OwnerProfile/ownerProfile';
 
 const App: React.FC = () => {
     const handleUpdate = () => {
@@ -56,6 +57,13 @@ const App: React.FC = () => {
           src="/operator.jpeg" 
           altText=" "
           />
+          </div>
+
+          <div>
+            <OwnerProfile
+            src="/OwnerProfile.jpeg"
+            altText=" "
+            />
           </div>
 
         </div>
