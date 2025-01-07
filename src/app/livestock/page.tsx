@@ -37,7 +37,9 @@ const LivestockPage: React.FC = () => {
         <div>
             <div className="layout">
                 <div className="sidebar">
-                    <Sidebar />
+                    <Sidebar setBreadcrumb={function (label: string): void {
+                        throw new Error('Function not implemented.');
+                    } } />
                 </div>
 
                 <div className="main-content">
