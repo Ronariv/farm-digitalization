@@ -5,6 +5,7 @@
 body {
   /* font-family: Arial, Helvetica, sans-serif; */
   --font-inter: "Inter", sans-serif;
+  box-sizing: border-box;
 }
 
 @layer base {
@@ -63,7 +64,6 @@ body {
     --border: #248543;
     --input: #248543;
   }
-
   .tittle-login{
     text-align: center;
     /* padding-bottom: 10%; */
@@ -140,38 +140,35 @@ body {
     padding-top: 10%;
   }
 
-/* Struktur utama layout */
 .layout {
   display: flex;
-  height: 100vh; /* Tinggi penuh viewport */
+  height: 100vh; 
 }
 
 .sidebar {
-  width: 300px; /* Lebar sidebar */
-  background-color: #f0f0f0; /* Sesuaikan dengan desain */
+  width: 300px;
+  background-color: #f0f0f0; 
   display: flex;
-  flex-direction: column; /* Elemen di sidebar vertikal */
-  /* padding: 16px; */
+  flex-direction: column;
 }
 
 .main-content {
-  flex: 1; /* Sisa ruang diberikan ke konten utama */
+  flex: 1; 
   display: flex;
-  flex-direction: column; /* Elemen vertikal: search bar lalu konten */
+  flex-direction: column; 
 }
 
 .searchbar {
-  align-items: center;
-  background-color: #fff; /* Sesuaikan warna */
+  flex: 1 1 50%;
+  background-color: #fff; 
   padding: 16px;
-  border-bottom: 1px solid #ddd; /* Garis bawah untuk pemisah */
+  overflow: hidden;
 }
 
 .content {
-  flex: 1; /* Sisa ruang untuk konten utama */
+  display: flex;
+  flex-direction: column;
   padding: 24px;
-  overflow-y: auto; /* Scroll jika konten banyak */
-  background-color: #f9f9f9; /* Warna latar belakang konten */
 }
 
 .menuTittle{
@@ -189,20 +186,44 @@ body {
 
 .menuHeader {
   display: flex;
-  /* justify-content: space-between;  */
-  align-items: center; /* Vertikal sejajar di tengah */
-  /* padding: 0 16px;  */
+  align-items: center; 
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ddd; 
 }
 
 .yearAndMonthPicker {
   margin-left: 65%; /* Geser ke kiri */
 }
-  
+
+.operatorProfile{
+  flex: 0 0 20%;
+  flex-shrink: 0;
+  overflow: hidden; 
+  padding: 0;
+  /* min-width: 10px; */
+  min-width: 100px;
+}
+
+/* .operatorProfile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+} */
 }
 
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
   body {
     @apply bg-background text-foreground;

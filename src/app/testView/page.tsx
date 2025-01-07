@@ -15,23 +15,13 @@ import SortByButton from '@/components/ui/SortBy/sortBy';
 import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
 import Sidebar from '@/components/ui/Sidebar/sidebar';
 import SearchBar from '@/components/ui/SearchBar/searchBar';
-import animalCategories from '@/models/animalCategories';
 import CategoryAnimalCard from '@/components/ui/CategoryAnimalCard/categoryAnimalCard';
+import animalCategories from '@/models/animalCategories';
+import OperatorProfile from '@/components/ui/OperatorProfile/operatorProfile';
+import Image from 'next/image';
+import OwnerProfile from '@/components/ui/OwnerProfile/ownerProfile';
 
 const App: React.FC = () => {
-//   const [phases, setPhases] = useState(phaseLabels);
-//   const kondisi: StatusType = "sehat";
-    // const handleClick = () => {
-    //     alert("Tombol Ubah Data diklik!");
-    // };
-
-    // const handleAdd = () => {
-    //     alert("Tombol Hapus Ternak diklik!");
-    // };
-
-    // const handleInvite = () => {
-    //     alert("Tombol Invite Ternak diklik!");
-    // };
     const handleUpdate = () => {
         alert("Tombol Invite Ternak diklik!");
     };
@@ -55,9 +45,29 @@ const App: React.FC = () => {
       </div>
 
       <div className="main-content">
-        <div className="searchbar">
+        
+        <div className="header">
+          
+          <div className="searchbar">
           <SearchBar />
+          </div>
+
+          <div className="operatorProfile">
+          <OperatorProfile
+          src="/operator.jpeg" 
+          altText=" "
+          />
+          </div>
+
+          <div>
+            <OwnerProfile
+            src="/OwnerProfile.jpeg"
+            altText=" "
+            />
+          </div>
+
         </div>
+       
         <div className="content">
         <div className="menuSection">
           <div className="menuHeader">
