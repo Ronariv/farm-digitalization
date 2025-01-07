@@ -7,6 +7,8 @@ import animalDiagnosedCategories from '@/models/detailAnimalDiagnosedCategories'
 import StatisticMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
 import { statisticsMilkData } from "@/models/statisticsMilkModel";
 import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
+import StatisticsBodyMass from '@/components/ui/StatisticsBodyMass/statisticsBodyMass';
+import { statisticsBodyMassModel } from "@/models/statisticsBodyMassModel";
 
 const AnimalCategoriesPage = () => {
     const filteredAnimalFemaleCategories = animalFemaleCategories.filter(
@@ -70,7 +72,12 @@ const AnimalCategoriesPage = () => {
       /> */}
     {/* <StatisticMilk filterBy="year" filterValue={2019} /> */}
 
-    <StatisticsLactation filterBy="year" filterValue={2019}/>
+    {/* <StatisticsLactation filterBy="year" filterValue={2019}/> */}
+
+    <StatisticsBodyMass 
+    filterBy={'year'} 
+    filterValue={2019}    
+    />
     </div>
 
     </div>
