@@ -2,13 +2,6 @@ import React from 'react';
 import styles from '@/components/ui/StatisticsMilk/StatisticsMilk.module.css';
 import { statisticsMilkData } from '@/models/statisticsMilkModel';
 
-// type StatisticMilkProps = {
-//   statisticsMilkData: { month: string; value: number }[]; 
-//   average: number;
-//   minMonth: string; 
-//   maxMonth: string; 
-// };
-
 type StatisticMilkProps = {
     filterBy: 'year' | 'month';
     filterValue: number | string;

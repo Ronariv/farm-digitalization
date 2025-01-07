@@ -6,6 +6,7 @@ import animalMaleCategories from '@/models/detailAnimalMaleCategories';
 import animalDiagnosedCategories from '@/models/detailAnimalDiagnosedCategories';
 import StatisticMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
 import { statisticsMilkData } from "@/models/statisticsMilkModel";
+import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
 
 const AnimalCategoriesPage = () => {
     const filteredAnimalFemaleCategories = animalFemaleCategories.filter(
@@ -61,13 +62,15 @@ const AnimalCategoriesPage = () => {
     </div>
 
     <div className="statistikMilk">
-      {/* <StatisticMilk
-      average={2000}
-      monthsData={monthsData}
-      minMonth="Agustus"
-      maxMonth="Desember"
-    /> */}
-    <StatisticMilk filterBy="year" filterValue={2019} />
+        {/* <StatisticMilk
+        average={2000}
+        monthsData={monthsData}
+        minMonth="Agustus"
+        maxMonth="Desember"
+      /> */}
+    {/* <StatisticMilk filterBy="year" filterValue={2019} /> */}
+
+    <StatisticsLactation filterBy="year" filterValue={2019}/>
     </div>
 
     </div>
