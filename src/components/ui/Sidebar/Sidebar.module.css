@@ -55,10 +55,23 @@
     align-items: flex-start;
     gap: 16px;
     align-self: stretch;
-    align-items: center;
+    align-items: left;
+    padding: 4px 2px;
+    width: 271px;
   }
     .menuItems:hover{
     width: 271px;
   }
+
+  .menuItem:hover {
+    background-color: #EBFAF0;
+    color: #248543;
+    border-radius: 10px;
+  }
+
+  .menuItem svg {
+    flex-shrink: 0;
+  }
+  
 
   

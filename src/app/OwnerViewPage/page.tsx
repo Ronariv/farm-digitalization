@@ -20,8 +20,13 @@ import animalCategories from '@/models/animalCategories';
 import OperatorProfile from '@/components/ui/OperatorProfile/operatorProfile';
 import Image from 'next/image';
 import OwnerProfile from '@/components/ui/OwnerProfile/ownerProfile';
+import Breadcrumbs from '@/components/ui/Breadcrumbs/breadcrumbs';
+import { usePathname } from 'next/navigation';
 
 const App: React.FC = () => {
+
+  const [breadcrumb, setBreadcrumb] = useState('Statistik');
+
     const handleUpdate = () => {
         alert("Tombol Invite Ternak diklik!");
     };
@@ -38,10 +43,25 @@ const App: React.FC = () => {
       alert("Tombol sort di klik");
     };
 
+    function getMenuLabel(pathname: string): string {
+      switch (pathname) {
+        case '/OwnerViewPage':
+          return 'Statistik';
+        case '/livestockOwnerPage':
+          return 'Ternak Anda';
+        case '/activityOwnerPage':
+          return 'Aktivitas';
+        case '/settingsOwnerPage':
+          return 'Pengaturan';
+        default:
+          return 'Halaman Tidak Ditemukan';
+      }
+    }
+
     return (
     <div className="layout">
       <div className="sidebar">
-        <Sidebar />
+      <Sidebar setBreadcrumb={setBreadcrumb} />
       </div>
 
       <div className="main-content">
@@ -70,6 +90,15 @@ const App: React.FC = () => {
        
         <div className="content">
         <div className="menuSection">
+          <div>
+          {/* <Breadcrumbs breadcrumbs={breadcrumbs} /> */}
+          <Breadcrumbs
+            breadcrumbs={[
+              { label: 'Peternakan Widjaya', href: '/OwnerViewPage' },
+              { label: 'Statistik', href: '/OwnerViewPage' },
+            ]}
+          />
+          </div>
           <div className="menuHeader">
             <h1 className="menuTittle">Statistik</h1>
             <div className="yearAndMonthPicker">
