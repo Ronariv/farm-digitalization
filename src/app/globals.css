@@ -171,7 +171,10 @@ body {
 .content {
   display: flex;
   flex-direction: column;
-  padding: 24px;
+  padding-top: 24px;
+  padding-left: 48px;
+  padding-right: 48px;
+  padding-bottom: 48px;
 }
 
 .menuTittle{
@@ -187,6 +190,11 @@ body {
   align-items: flex-start;
 }
 
+
+.genderIcon{
+  scale: 1.5;
+  margin-left: 12px;
+  
 .sapiDetailStatisticsCard{
   display: flex;
   padding-top: 50px;
@@ -201,11 +209,13 @@ body {
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
+
 }
 
 .menuHeader {
   display: flex;
   align-items: center; 
+  margin-bottom: 24px;
 }
 
 .header{
@@ -222,7 +232,99 @@ body {
 }
 
 .yearAndMonthPicker {
-  margin-left: 65%; 
+  margin-left: auto;
+}
+
+.sortByAndFilter {
+  display: flex; 
+  margin-left: auto;
+  gap: 10px;
+}
+
+.showQR {
+  color: var(--Text-Text-Secondary, #808080);
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 100% */
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+.livestock {
+  display: flex;
+  width: 1041px;
+  height: 757px;
+  padding: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.generalInformationLivestock {
+  display: flex;
+  width: 1025px;
+  align-items: center;
+  gap: 39px;
+}
+
+.generalInformationLivestockBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 48px;
+}
+
+.generalInformationLivestockBoxTop {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  align-self: stretch;
+}
+
+.generalInformationLivestockBoxTopData {
+  display: flex;
+  width: 154px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.generalInformationLivestockBoxTopDataTitle {
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 125% */
+}
+
+
+.hyperlinkStyle {
+  color: var(--Brand-Primary, #248543);
+  font-family: Inter, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 20px; /* 100% */
+  text-decoration: underline solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+.generalInformationLivestockBoxTopDataValue {
+  /* color: #000; */
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 100% */
 }
 
 .operatorProfile{
@@ -245,4 +347,115 @@ body {
     font-family: var(--font-inter);
     height: 100%;
   }
+}
+
+.detailInformationLivestock {
+  display: flex;
+  width: 1025px;
+  height: 292px;
+  align-items: flex-start;
+  gap: 32px;
+  flex-shrink: 0;
+}
+
+.detailInformationLivestockCard {
+  display: flex;
+  width: 232.5px;
+  padding: 24px;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+
+  border-radius: 50px;
+  background: var(--Base-Surface, #FFF);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.30);
+}
+
+.detailInformationLivestockCardData {
+  display: flex;
+  width: 184px;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  flex-shrink: 0;
+}
+
+.detailInformationLivestockCardDataCategory {
+  display: flex;
+  width: 184.25px;
+  height: 84px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.detailInformationLivestockCardDataCategoryTitle {
+  color: var(--Brand-Primary, #248543);
+
+  /* Sub Header 1 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 19.2px; /* 120% */
+}
+
+.detailInformationLivestockCardDataCategoryValue {
+  color: var(--Text-Text-Primary, #000);
+
+  /* Header 4 */
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 120% */
+}
+
+.detailInformationLivestockCardDataHistory {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.detailInformationLivestockCardDataHistoryData {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.detailInformationLivestockCardDataHistoryDataTitle {
+  color: var(--Text-Text-Primary, #000);
+
+  /* Sub Header 1 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 19.2px; /* 120% */
+}
+
+.detailInformationLivestockCardDataHistoryDataValue {
+  color: var(--Text-Text-Secondary, #808080);
+
+  /* Body 1 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19.2px; /* 120% */
+}
+
+/* Livestock Statistics */
+
+.statisticsInformationLivestock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 26px;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin-bottom: 56px;
 }
