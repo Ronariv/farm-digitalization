@@ -10,7 +10,7 @@ interface DetailAnimalDiagnosedCardProps {
   hilang: number;
 }
 
-const DetailAnimalMaleCard: React.FC<DetailAnimalDiagnosedCardProps> = ({
+const DetailAnimalDiagnosedCard: React.FC<DetailAnimalDiagnosedCardProps> = ({
   title,
   total,
   sakit,
@@ -26,13 +26,13 @@ const DetailAnimalMaleCard: React.FC<DetailAnimalDiagnosedCardProps> = ({
 
       <div className={styles.details}>
         <p>
-            <span className={styles.pedet}>{sakit}</span>
+            <span className={styles.sakit}>{sakit}</span>
             <br/>
             <span>Sakit</span>
         </p>
 
         <p>
-            <span className={styles.siapKawin}>{hilang}</span>
+            <span className={styles.hilang}>{hilang}</span>
             <br/>
             <span>Hilang</span>
         </p>
@@ -41,4 +41,4 @@ const DetailAnimalMaleCard: React.FC<DetailAnimalDiagnosedCardProps> = ({
   );
 };
 
-export default DetailAnimalMaleCard;
+export default DetailAnimalDiagnosedCard;
