@@ -73,7 +73,7 @@ const menuItems = [
   },
 ]
 
-const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList: FarmModel[] }> = ({ setBreadcrumb, farmList = farmListData }) => {
+const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: FarmModel[], setFarm: (farmName: string) => void}> = ({ setBreadcrumb, farmList = farmListData, setFarm }) => {
   
   const handleMenuClick = (label: string) => {
     setBreadcrumb(label); // Set breadcrumb saat menu diklik
@@ -86,7 +86,8 @@ const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList: Farm
 
   const handleFarmSelect = (farmName: string) => {
     setSelectedFarm(farmName);
-    setIsOpen(false); // Close the dropdown after selection
+    setIsOpen(false);
+    setFarm(farmName);
   };
 
     return (
