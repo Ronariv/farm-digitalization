@@ -19,6 +19,7 @@ import SortByButton from '@/components/ui/SortBy/sortBy';
 import FilterButton from '@/components/ui/Filter/filterButton';
 import { livestockData } from '@/data/livestockData';
 import { farmListData } from '@/data/farmData';
+import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 
 
 const LivestockPage: React.FC = () => {
@@ -70,6 +71,11 @@ const LivestockPage: React.FC = () => {
                     <div className="menuSection">
                     <div className="menuHeader">
                         <h1 className="menuTittle">Peternakan Anda</h1>
+                        <div className="sortByAndFilter">
+                            <PrimaryButton label='+ Tambah Ternak'/>
+                        </div>
+                    </div>
+                    <div className="menuHeader">
                         <div className="sortByAndFilter">
                             <SortByButton></SortByButton>
                             <FilterButton></FilterButton>

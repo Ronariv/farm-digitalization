@@ -259,6 +259,14 @@ body {
 .sortByAndFilter {
   display: flex; 
   margin-left: auto;
+  margin-right: 17vw;
+  gap: 10px;
+}
+
+.deleteIcon {
+  display: flex; 
+  margin-left: auto;
+  margin-right: 17vw;
   gap: 10px;
 }
 
