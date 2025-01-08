@@ -207,4 +207,3 @@ export const statisticsMilkData = [
   ];
   
   export default statisticsMilkData;
-  

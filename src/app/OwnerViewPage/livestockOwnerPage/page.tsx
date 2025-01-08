@@ -1,8 +1,9 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import useFetch from '@/hooks/useFetch';
 import { Livestock } from '@/models/LivestockModel';
+import { useRouter } from 'next/navigation'
 
 import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
 import Sidebar from '@/components/ui/Sidebar/sidebar';
@@ -17,30 +18,29 @@ import Loading from '@/components/ui/loading';
 import SortByButton from '@/components/ui/SortBy/sortBy';
 import FilterButton from '@/components/ui/Filter/filterButton';
 import { livestockData } from '@/data/livestockData';
+import { farmListData } from '@/data/farmData';
 
 
 const LivestockPage: React.FC = () => {
-    // const { data, loading, error } = useFetch<Livestock[]>(
-    //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
-    //     undefined
-    // );
-
-    // if (loading) {
-    //     return <Loading></Loading>;
-    // }
-
-    // if (error) {
-    //     return <div>Error: {error}</div>;
-    // }
-
+    const router = useRouter()
     
+    const [selectedFarm, setSelectedFarm] = useState(farmListData[0].name || '');
+
+    const handleFarmChange = (farmName: string) => {
+        setSelectedFarm(farmName);
+    };
+
     return (
         <div>
             <div className="layout">
                 <div className="sidebar">
-                    <Sidebar setBreadcrumb={function (label: string): void {
-                        throw new Error('Function not implemented.');
-                    } } />
+                    <Sidebar 
+                        setBreadcrumb={function (label: string): void {
+                            throw new Error('Function not implemented.');
+                        }} 
+                        farmList={farmListData}
+                        setFarm={handleFarmChange}
+                    />
                 </div>
 
                 <div className="main-content">
@@ -79,8 +79,12 @@ const LivestockPage: React.FC = () => {
                         {
                         // data != null 
                         // ? 
-                        livestockData.map((livestock) => (
-                            <AnimalCard key={livestock.id} livestock={livestock}/>
+                        livestockData.filter(
+                            (livestock) => livestock.farm_name === selectedFarm 
+                        ).map((livestock) => (
+                            <div key={livestock.id} onClick={() => router.push(`livestockOwnerPage/${livestock.name_id.toLowerCase()}/`)}>
+                                <AnimalCard livestock={livestock} />
+                            </div>
                         ))
                         // :
                         // <div></div>

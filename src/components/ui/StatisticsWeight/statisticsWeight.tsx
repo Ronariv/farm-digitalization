@@ -1,21 +1,17 @@
 import React from 'react';
-import styles from '@/components/ui/StatisticsMilk/StatisticsMilk.module.css';
-import { statisticsMilkData } from '@/models/statisticsMilkModel';
-import { defaultMilkData, MilkData } from '@/models/LivestockModel';
+import styles from '@/components/ui/StatisticsWeight/StatisticsWeight.module.css';
+import { statisticsWeightData } from '@/models/statisticsWeightModel';
+import { defaultWeightData, WeightData } from '@/models/LivestockModel';
 
 type StatisticMilkProps = {
     filterBy: 'year' | 'month';
     filterValue: number | string;
-    milkData?: MilkData;
+    weightData?: WeightData;
 }
 
-const StatisticMilk: React.FC<StatisticMilkProps> = ({ 
-  filterBy, 
-  filterValue, 
-  milkData = defaultMilkData
-}) => {
+const StatisticsWeight: React.FC<StatisticMilkProps> = ({ filterBy, filterValue, weightData = defaultWeightData }) => {
 
-    const filteredData = milkData.yearlyData.flatMap((item) => {
+    const filteredData = weightData.yearlyData.flatMap((item) => {
         if (filterBy === 'year' && item.year === filterValue) {
           return item.data;
         }
@@ -29,40 +25,17 @@ const StatisticMilk: React.FC<StatisticMilkProps> = ({
     const average =
     filteredData.reduce((acc, cur) => acc + cur.value, 0) / filteredData.length || 0;
 
-    // Bulan dengan nilai minimum dan maksimum
-    const minMonth =
-    filteredData.reduce(
-        (prev, cur) => (cur.value < prev.value ? cur : prev),
-        filteredData[0] || { month: '-', value: Infinity }
-    ).month || '-';
-
-    const maxMonth =
-    filteredData.reduce(
-        (prev, cur) => (cur.value > prev.value ? cur : prev),
-        filteredData[0] || { month: '-', value: -Infinity }
-    ).month || '-';
-
   return (
     <div className={styles.container}>
         <div className={styles.tittle}>
-            <h3>Hasil Susu</h3>
+            <h3>Berat Ternak</h3>
         </div>
 
       <div className={styles.header}>
        
         <div>
-        <h1>{average} liter</h1>
+        <h1>{average} Kg</h1>
         <p>Rata-rata/bulan</p>
-        </div>
-      
-
-        <div>
-          <p>Hasil susu paling sedikit</p>
-          <h4 className={styles.minMonth}>{minMonth}</h4>
-        </div>
-        <div>
-          <p>Hasil susu paling banyak</p>
-          <h4 className={styles.maxMonth}>{maxMonth}</h4>
         </div>
 
       </div>
@@ -103,4 +76,4 @@ const StatisticMilk: React.FC<StatisticMilkProps> = ({
   );
 };
 
-export default StatisticMilk;
+export default StatisticsWeight;
