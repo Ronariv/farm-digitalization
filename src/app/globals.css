@@ -479,3 +479,279 @@ body {
     height: 100%;
   }
 }
+
+.activityInformation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 72px;
+  align-self: stretch;
+}
+
+.activityInformationTeams {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.activityInformationTeamsHeading {
+  color: var(--Text-Text-Primary, #000);
+
+  /* Header 4 */
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 120% */
+}
+
+
+.activityInformationTeamsTable {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.activityInformationTeamsTableHeader {
+  display: flex;
+  align-items: center;
+  gap: 570px;
+}
+
+.activityInformationTeamsTableCont {
+  display: flex;
+  align-items: center;
+  gap: 110px;
+}
+
+.activityInformationTeamsTableRows {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.activityTeamHr {
+  border: 0;
+  border-top: 1px solid #B1B1B4;
+}
+
+.activityInformationTeamsTableRowsData {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+  margin-top: 16px;
+  width: 1076px;
+}
+
+.activityInformationTeamsTableRowsDataMember {
+  display: flex;
+  width: 576px;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.activityInformationTeamsTableRowsDataMember img {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  object-fit: cover; 
+}
+
+.activityInformationTeamsTableRowsDataMemberInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.activityInformationTeamsTableRowsDataMemberInfo h1 {
+  color: var(--Text-Text-Primary, #000);
+
+  /* Header 4 */
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 120% */
+}
+
+.activityInformationTeamsTableRowsDataMemberInfo p {
+  color: var(--Text-Text-Primary, #000);
+
+  /* Body 1 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19.2px; /* 120% */
+}
+
+.activityInformationTeamsTableRowsDataInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 0 0;
+}
+
+.activityInformationTeamsTableRowsDataInfoPosition {
+  display: flex;
+  width: 265px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activityInformationTeamsTableRowsDataInfoPositionBox {
+  display: flex;
+  width: 91px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  border-radius: 10px;
+  background: var(--Brand-BG-Primary, #EBFAF0);
+}
+
+.activities {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  align-self: stretch;
+}
+
+.activitiesHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.activitiesHeader h1 {
+  color: var(--Text-Text-Primary, #000);
+
+  /* Header 4 */
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 120% */
+}
+
+.activitiesTimeline {
+  gap: 32px;
+  align-self: stretch;
+}
+
+.activitiesTimelineItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  flex: 1 0 0;
+  width: 1076px;
+}
+
+.activitiesTimelineItemInformation {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  align-self: stretch;
+}
+
+.activitiesTimelineItemInformationIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.activitiesTimelineItemInformationData {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  flex: 1 0 0;
+}
+
+.activitiesTimelineItemInformationDataTime {
+  display: flex;
+  width: px;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.activitiesTimelineItemInformationDataTime h1 {
+  color: #000;
+
+  /* Sub Header 1 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 19.2px; /* 120% */
+}
+
+.activitiesTimelineItemInformationDataTime p {
+  color: var(--Text-Text-Secondary, #808080);
+
+  /* Body 1 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19.2px; /* 120% */
+}
+
+.activitiesTimelineItemInformationDataInformation {
+  display: flex;
+  width: 336px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.activitiesTimelineItemInformationDataInformation h1 {
+  color: #000;
+
+  /* Sub Header 1 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 19.2px; /* 120% */
+}
+
+.activitiesTimelineItemInformationDataInformation p {
+  color: var(--Text-Text-Secondary, #808080);
+
+  /* Body 1 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19.2px; /* 120% */
+}
+
+.activitiesTimelineItemInformationDataInformationMain {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
+}
+
+.divider {
+  width: 2px;
+  height: 80px;
+  background-color: #E6E6E6;
+}
