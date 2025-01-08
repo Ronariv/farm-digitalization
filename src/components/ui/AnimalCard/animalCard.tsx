@@ -7,7 +7,8 @@ import GenderIcon from "../genderIcon";
 import PhaseLabelButton from "../PhaseLabel/PhaseLabelButton";
 import { phaseLabels } from "@/data/phaseLabels";
 import PhaseLabelTag from "../PhaseLabel/PhaseLabelTag";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation"
+import { usePathname } from "next/navigation";; 
 
 export type AnimalCardType = {
   className?: string;
@@ -18,7 +19,16 @@ const AnimalCard: NextPage<AnimalCardType> = ({ className = "", livestock }) => 
   const router = useRouter();
 
   const handleCardClick = () => {
-    router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}`);
+  const path = usePathname(); // Ambil URL saat ini
+  const viewType: 'owner' | 'operator' = path?.includes('OperatorViewPage') ? 'operator' : 'owner';
+
+    // router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}`);
+    const route =
+    viewType === "owner"
+      ? `/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}`
+      : `/OperatorViewPage/livestockOperatorPage/${livestock.name_id.toLowerCase()}`;
+
+  router.push(route); // Redirect ke rute yang sesuai
   };
 
   return (

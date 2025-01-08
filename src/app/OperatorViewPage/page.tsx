@@ -27,7 +27,7 @@ const App: React.FC = () => {
 
   const [breadcrumb, setBreadcrumb] = useState('Statistik');
 
-  const categories = animalCategories('owner');
+  const categories = animalCategories('operator');
 
     const handleUpdate = () => {
         alert("Tombol Invite Ternak diklik!");
@@ -83,12 +83,6 @@ const App: React.FC = () => {
           />
           </div>
 
-          <div>
-            <OwnerProfile
-            src="/OwnerProfile.jpeg"
-            altText=" "
-            />
-          </div>
 
         </div>
        
@@ -111,7 +105,7 @@ const App: React.FC = () => {
           <div className="animalCategoriesCard">
             {categories.map((category) => (
               <CategoryAnimalCard
-                key={category.type} 
+                key={category.type}
                 icon={category.icon}
                 title={category.title}
                 total={category.total}
