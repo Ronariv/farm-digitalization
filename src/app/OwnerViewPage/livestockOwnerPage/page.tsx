@@ -72,7 +72,7 @@ const LivestockPage: React.FC = () => {
                     <div className="menuHeader">
                         <h1 className="menuTittle">Peternakan Anda</h1>
                         <div className="sortByAndFilter">
-                            <PrimaryButton label='+ Tambah Ternak'/>
+                            <PrimaryButton label='+ Tambah Ternak' width={200} onClick={() => router.push(`livestockOwnerPage/create/`)}/>
                         </div>
                     </div>
                     <div className="menuHeader">
