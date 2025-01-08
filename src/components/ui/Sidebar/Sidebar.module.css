@@ -86,8 +86,15 @@
     padding: 4px 2px;
     width: 271px;
   }
-    .menuItems:hover{
+  
+  .menuItems:hover{
     width: 271px;
+  }
+
+  .selectedMenuItems{
+    border-radius: 10px;
+    background: #EBFAF0;
+    color: #248543;
   }
 
   .menuItem:hover {

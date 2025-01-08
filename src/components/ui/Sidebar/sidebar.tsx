@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from "next/link"
 import styles from "@/components/ui/Sidebar/Sidebar.module.css"
 import { farmListData } from '@/data/farmData';
 import { FarmModel } from '@/models/FarmModel';
+import { usePathname } from 'next/navigation';
 
 interface SidebarProps {
   onMenuClick: (menu: string) => void;
@@ -90,6 +91,26 @@ const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: Far
     setFarm(farmName);
   };
 
+  const [selectedIndex, setSelectedIndex] = useState('Statistik');
+  const path = usePathname();
+  console.log(path)
+  useEffect(() => {
+    switch (true) {
+      case path?.includes('/livestockOwnerPage'):
+        setSelectedIndex("Ternak Anda");
+        break;
+      case path?.includes('/activity'):
+        setSelectedIndex("Aktivitas");
+        break;
+      case path?.includes('/settings'):
+        setSelectedIndex("Pengaturan");
+        break;
+      default:
+        setSelectedIndex("Statistik");
+        break;
+    }
+  }, []);
+
     return (
       <div className={styles.sidebarContainer}>
         {/* Profile Section */}
@@ -133,7 +154,7 @@ const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: Far
             {menuItems.map((menuItem) => (
                     <li 
                     key={menuItem.href} 
-                    className={styles.menuItem}
+                    className={`${styles.menuItem} ${selectedIndex === menuItem.label ? styles.selectedMenuItems : ''}`}
                     onClick={() => handleMenuClick(menuItem.label)}
                     >
                       <Link
