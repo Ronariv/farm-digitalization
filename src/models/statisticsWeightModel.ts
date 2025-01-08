@@ -1,4 +1,4 @@
-export const statisticsLactationData = [
+export const statisticsWeightData = [
     {
       year: 2018,
       data: [
@@ -203,6 +203,7 @@ export const statisticsLactationData = [
         { month: 'Dec', value: 9600 },
       ],
     },
+    
 ];
 
-export default statisticsLactationData;
+export default statisticsWeightData;

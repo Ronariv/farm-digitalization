@@ -1,5 +1,5 @@
 import React from 'react';
-import { PhaseLabel } from "@/models/PhaseModel";
+import { PhaseLabel } from '@/models/phaseModel';
 import styles from "@/components/ui/PhaseLabel/PhaseLabel.module.css";
 
 interface PhaseLabelProps {

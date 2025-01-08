@@ -23,9 +23,15 @@ import { livestockData } from '@/data/livestockData';
 import GenderIcon from '@/components/ui/genderIcon';
 import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
 import StatisticMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
+import StatisticWeight from '@/components/ui/StatisticsWeight/statisticsWeight';
 
+interface LivestockDetailPageProps {
+    params: {
+      id: string;
+    };
+  }
 
-const LivestockDetailPage: React.FC = () => {
+const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => {
     // const { data, loading, error } = useFetch<Livestock[]>(
     //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
     //     undefined
@@ -38,15 +44,6 @@ const LivestockDetailPage: React.FC = () => {
     // if (error) {
     //     return <div>Error: {error}</div>;
     // }
-
-    const router = useRouter()
-    useEffect(() => {
-        console.log("Current Path:", window.location.pathname);
-        const id = window.location.pathname.split("/").pop();
-        console.log("Livestock ID:", id);
-    }, []);
-
-    const id = typeof window !== "undefined" ? window.location.pathname.split("/").pop() : null;
 
     return (
         <div>
@@ -81,7 +78,7 @@ const LivestockDetailPage: React.FC = () => {
                     </div>
 
                     {livestockData.map((livestock) => (
-                        livestock.name_id.toLowerCase() == id 
+                        livestock.name_id.toLowerCase() == params.id 
                         ?
                         <div className="content">
                             <div className="menuSection">
@@ -115,54 +112,43 @@ const LivestockDetailPage: React.FC = () => {
                                             <GeneralInfoBox title={'Berat'} value={livestock.weight || "Undefined"} ></GeneralInfoBox>
                                         </div>
                                         <div className='generalInformationLivestockBoxTop'>
-                                            <GeneralInfoBox title={'ID Ayah'} value={livestock.name_id} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Ibu'} value={livestock.name_id} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Kakak'} value={livestock.name_id || "Undefined"} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Nenek'} value={livestock.name_id || "Undefined"} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Ayah'} value={livestock.dad_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Ibu'} value={livestock.mom_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Kakak'} value={livestock.grandpa_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Nenek'} value={livestock.grandma_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
                                         </div>
                                     </div>
                                 </div>
                                 <div className='detailInformationLivestock'>
                                     <DetailInformationCard
                                         conditionTitle="Kondisi"
-                                        conditionValue="Sehat"
+                                        conditionValue={livestock.health.current_condition}
                                         historyTitle="Riwayat Sakit"
-                                        historyItems={[
-                                            { title: "Cacingan", value: "Mei 2024" },
-                                            { title: "Diare", value: "Feb 2024" }
-                                        ]}
+                                        historyItems={livestock.health.history_items.length > 2 ? livestock.health.history_items.slice(0, 2) : livestock.health.history_items}
                                     />
                                     <DetailInformationCard
                                         conditionTitle="Obat"
-                                        conditionValue="Intermectin"
+                                        conditionValue={livestock.medication.current_condition}
                                         historyTitle="Riwayat Obat"
-                                        historyItems={[
-                                            { title: "Kasih Sayang", value: "Mei 2024" },
-                                            { title: "Cintamu", value: "Feb 2024" }
-                                        ]}
+                                        historyItems={livestock.medication.history_items.length > 2 ? livestock.medication.history_items.slice(0, 2) : livestock.medication.history_items}
                                     />
                                     <DetailInformationCard
                                         conditionTitle="Vitamin"
-                                        conditionValue="Vitamin U"
+                                        conditionValue={livestock.vitamin.current_condition}
                                         historyTitle="Riwayat Vitamin"
-                                        historyItems={[
-                                            { title: "Senymanmu", value: "Mei 2024" },
-                                            { title: "Tatapan Matamu", value: "Feb 2024" }
-                                        ]}
+                                        historyItems={livestock.vitamin.history_items.length > 2 ? livestock.vitamin.history_items.slice(0, 2) : livestock.vitamin.history_items}
                                     />
                                     <DetailInformationCard
                                         conditionTitle="Vaksin"
-                                        conditionValue="Penyakit Kuku Mulut"
+                                        conditionValue={livestock.vaccine.current_condition}
                                         historyTitle="Riwayat Vaksin"
-                                        historyItems={[
-                                            { title: "Vaksin Sakit Hati", value: "Mei 2024" },
-                                            { title: "Vaksin Trauma", value: "Feb 2024" }
-                                        ]}
+                                        historyItems={livestock.vaccine.history_items.length > 2 ? livestock.vaccine.history_items.slice(0, 2) : livestock.vaccine.history_items}
                                     />
                                 </div>
                                 <div className='statisticsInformationLivestock'>
-                                    <StatisticMilk filterBy="year" filterValue={2019}/>
-                                    <StatisticsLactation filterBy="year" filterValue={2019}/>
+                                    <StatisticMilk filterBy="year" filterValue={2019} milkData={livestock.milkData}/>
+                                    <StatisticsLactation filterBy="year" filterValue={2019} lactationData={livestock.lactationData}/>
+                                    <StatisticWeight filterBy="year" filterValue={2019} weightData={livestock.weightData}/>
                                 </div>
                             </div>
                         </div>
