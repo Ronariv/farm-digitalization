@@ -51,6 +51,8 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                 <div className="sidebar">
                     <Sidebar setBreadcrumb={function (label: string): void {
                         throw new Error('Function not implemented.');
+                    } } setFarm={function (farmName: string): void {
+                        throw new Error('Function not implemented.');
                     } } />
                 </div>
 
