@@ -355,11 +355,13 @@ body {
 }
 
 .operatorProfile{
-  flex: 0 0 20%;
-  flex-shrink: 0;
   overflow: hidden; 
-  padding: 0;
-  min-width: 100px;
+  margin-right: 1vw;
+}
+
+.profile{
+  overflow: hidden; 
+  margin-right: 8vw;
 }
 
 .detailInformationLivestock {

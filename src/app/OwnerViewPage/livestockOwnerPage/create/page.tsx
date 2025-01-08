@@ -66,7 +66,7 @@ const LivestockPage: React.FC = () => {
                     />
                     </div>
 
-                    <div>
+                    <div className='profile'>
                         <OwnerProfile
                         src="/OwnerProfile.jpeg"
                         altText=" "
