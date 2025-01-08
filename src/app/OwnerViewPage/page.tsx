@@ -61,7 +61,9 @@ const App: React.FC = () => {
     return (
     <div className="layout">
       <div className="sidebar">
-      <Sidebar setBreadcrumb={setBreadcrumb} />
+      <Sidebar setBreadcrumb={setBreadcrumb} setFarm={function (farmName: string): void {
+            throw new Error('Function not implemented.');
+          } } />
       </div>
 
       <div className="main-content">
