@@ -136,7 +136,7 @@ const YearAndMonthPicker: React.FC = () => {
                     <rect
                       width="16"
                       height="16"
-                      fill="#248543"
+                      fill="#FFFFFF"
                       transform="translate(0.5)"
                     />
                   </clipPath>
@@ -168,7 +168,7 @@ const YearAndMonthPicker: React.FC = () => {
         >
           <path
             d="M4.5 6L8.5 10L12.5 6"
-            stroke="#FFFFFF"
+            stroke="#000"
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"

@@ -22,11 +22,11 @@ import OwnerProfile from '@/components/ui/OwnerProfile/ownerProfile';
 import Breadcrumbs from '@/components/ui/Breadcrumbs/breadcrumbs';
 import { usePathname } from 'next/navigation';
 import DetailAnimalFemaleCard from '@/components/ui/DetailAnimalFemaleCard/detailAnimalFemaleCard';
-import animalCategories from '@/models/detailAnimalFemaleCategories';
+import animalCategories from '@/models/DetailAnimalFemaleCategories';
 import DetailAnimalMaleCard from '@/components/ui/DetailAnimalMaleCard/detailAnimalMaleCard';
-import detailAnimalMaleCategories from '@/models/detailAnimalMaleCategories';
+import detailAnimalMaleCategories from '@/models/DetailAnimalMaleCategories';
 import DetailAnimalDiagnosedCard from '@/components/ui/DetailAnimalDiagnosedCard/detailAnimalDiagnosedCard';
-import animalDiagnosedCategories from '@/models/detailAnimalDiagnosedCategories';
+import animalDiagnosedCategories from '@/models/DetailAnimalDiagnosedCategories';
 import StatisticsMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
 import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
 

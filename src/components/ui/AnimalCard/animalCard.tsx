@@ -7,6 +7,7 @@ import GenderIcon from "../genderIcon";
 import PhaseLabelButton from "../PhaseLabel/PhaseLabelButton";
 import { phaseLabels } from "@/data/phaseLabels";
 import PhaseLabelTag from "../PhaseLabel/PhaseLabelTag";
+import { useRouter } from "next/navigation"; 
 
 export type AnimalCardType = {
   className?: string;
@@ -14,8 +15,18 @@ export type AnimalCardType = {
 };
 
 const AnimalCard: NextPage<AnimalCardType> = ({ className = "", livestock }) => {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}`);
+  };
+
   return (
-    <div className={[styles.animalCard, className].join(" ")}>
+    <div 
+    className={[styles.animalCard, className].join(" ")}
+    onClick={handleCardClick} 
+    style={{ cursor: "pointer" }} 
+    >
       <section className={styles.animalDetails}>
         <img
           src={livestock.photo_url}

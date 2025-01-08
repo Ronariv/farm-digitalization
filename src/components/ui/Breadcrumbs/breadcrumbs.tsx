@@ -21,7 +21,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ breadcrumbs }) => {
     return (
       <nav className={styles.breadcrumbs}>
               {breadcrumbs.map((breadcrumb, index) => {
-                const isActive = pathname === breadcrumb.href; // Cek apakah aktif
+                const isActive = pathname === breadcrumb.href;
                 return (
                 <React.Fragment key={breadcrumb.href}>
                     <Link 
