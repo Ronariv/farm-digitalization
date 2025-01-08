@@ -38,7 +38,7 @@ body {
     --radius: 0.5rem; */
     --font-inter: "Inter", sans-serif;
     --background: #248543;
-    --foreground: #0a0a0a;
+    /* --foreground: #0a0a0a; */
     --card: #e3e3e3;
     --card-foreground: #0a0a0a;
     --primary: #248543; /* Warna HEX */

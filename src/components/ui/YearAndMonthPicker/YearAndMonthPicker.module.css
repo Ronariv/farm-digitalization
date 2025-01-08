@@ -93,9 +93,14 @@
     left: 50%; /* Center the line horizontally */
     transform: translateX(-50%);
   }
+
+  .dropdownItem.tab2 {
+    background-color: lightblue; /* Uji warna */
+  }
   
   /* Dropdown item for tab2 */
   .dropdownItem.tab2 + .dropdownItem.tab2::before {
+    color: #248543;
     content: '';
     display: block;
     height: 1px;
