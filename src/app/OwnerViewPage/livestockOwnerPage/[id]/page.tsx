@@ -94,7 +94,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                                         <GenderIcon gender={livestock.gender == "MALE" ? 'jantan' : 'betina'}></GenderIcon>
                                     </div>
                                     <div className="deleteIcon">
-                                        <PrimaryButton label='Ubah Data' />
+                                        <PrimaryButton label='Ubah Data' width={130}/>
                                         <DeleteButton />
                                     </div>
                                 </div>
