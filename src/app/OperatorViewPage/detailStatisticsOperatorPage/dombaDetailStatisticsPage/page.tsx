@@ -16,18 +16,23 @@ import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthP
 import Sidebar from '@/components/ui/Sidebar/sidebar';
 import SearchBar from '@/components/ui/SearchBar/searchBar';
 import CategoryAnimalCard from '@/components/ui/CategoryAnimalCard/categoryAnimalCard';
-import animalCategories from '@/models/animalCategories';
 import OperatorProfile from '@/components/ui/OperatorProfile/operatorProfile';
 import Image from 'next/image';
 import OwnerProfile from '@/components/ui/OwnerProfile/ownerProfile';
 import Breadcrumbs from '@/components/ui/Breadcrumbs/breadcrumbs';
 import { usePathname } from 'next/navigation';
+import DetailAnimalFemaleCard from '@/components/ui/DetailAnimalFemaleCard/detailAnimalFemaleCard';
+import animalCategories from '@/models/DetailAnimalFemaleCategories';
+import DetailAnimalMaleCard from '@/components/ui/DetailAnimalMaleCard/detailAnimalMaleCard';
+import detailAnimalMaleCategories from '@/models/DetailAnimalMaleCategories';
+import DetailAnimalDiagnosedCard from '@/components/ui/DetailAnimalDiagnosedCard/detailAnimalDiagnosedCard';
+import animalDiagnosedCategories from '@/models/DetailAnimalDiagnosedCategories';
+import StatisticsMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
+import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
 
 const App: React.FC = () => {
 
   const [breadcrumb, setBreadcrumb] = useState('Statistik');
-
-  const categories = animalCategories('owner');
 
     const handleUpdate = () => {
         alert("Tombol Invite Ternak diklik!");
@@ -44,6 +49,18 @@ const App: React.FC = () => {
     const handleSortBy = () => {
       alert("Tombol sort di klik");
     };
+
+    const filteredFemaleCategories = animalCategories.filter(
+        (category) => category.type === 'domba' 
+    );
+
+    const filteredMaleCategories = detailAnimalMaleCategories.filter(
+        (category) => category.type === 'domba' 
+    );
+
+    const filteredDiagnosedCategories = animalDiagnosedCategories.filter(
+        (category) => category.type === 'domba' 
+    );
 
     function getMenuLabel(pathname: string): string {
       switch (pathname) {
@@ -63,9 +80,7 @@ const App: React.FC = () => {
     return (
     <div className="layout">
       <div className="sidebar">
-      <Sidebar setBreadcrumb={setBreadcrumb} setFarm={function (farmName: string): void {
-            throw new Error('Function not implemented.');
-          } } />
+      <Sidebar setBreadcrumb={setBreadcrumb} />
       </div>
 
       <div className="main-content">
@@ -98,29 +113,74 @@ const App: React.FC = () => {
           <Breadcrumbs
             breadcrumbs={[
               { label: 'Peternakan Widjaya', href: '/OwnerViewPage' },
-              { label: 'Statistik', href: '' },
+              { label: 'Statistik', href: '/OwnerViewPage' },
+              { label: 'Domba', href: '/OwnerViewPage/detailStatisticsPage/dombaDetailStatisticsPage' },
             ]}
           />
           </div>
+
           <div className="menuHeader">
-            <h1 className="menuTittle">Statistik</h1>
+            <div>
+            <img src="/Domba.svg" alt="Icon Domba" style={{ width: '81.055px;', height: '72px' }} />
+            </div>
+            <h1 className="menuTittle">Domba</h1>
             <div className="yearAndMonthPicker">
               <YearAndMonthPicker/>
             </div>
           </div>
-          <div className="animalCategoriesCard">
-            {categories.map((category) => (
-              <CategoryAnimalCard
-                key={category.type} 
-                icon={category.icon}
-                title={category.title}
+
+          <div className="dombaDetailStatisticsCard">
+            <div className="dombaFemaleCardStatisticsCard">
+                {filteredFemaleCategories.map((category) => (
+                <DetailAnimalFemaleCard
+                key={category.type} // Gunakan type sebagai key
+                title={category.tittle}
                 total={category.total}
-                maleCount={category.maleCount}
-                femaleCount={category.femaleCount}
-                href={category.href}
-              />
+                pedet={category.pedet}
+                dara={category.dara}
+                siapKawin={category.siapKawin}
+                hamil={category.hamil}
+                menyusui={category.menyusui}
+                />
             ))}
+            </div>
+
+            <div className="dombaMaleCardStatisticsCard">
+                {filteredMaleCategories.map((category) => (
+                <DetailAnimalMaleCard 
+                key={category.type}
+                title={category.tittle} 
+                total={category.total} 
+                pedet={category.pedet}
+                siapKawin={category.siapKawin}           
+                />
+            ))} 
+            </div>
+
+            <div className="dombaMaleCardStatisticsCard">
+                {filteredDiagnosedCategories.map((category) => (
+                <DetailAnimalDiagnosedCard
+                key={category.type}
+                title={category.tittle}
+                total={category.total}
+                sakit={category.sakit}
+                hilang={category.hilang}
+                />
+            ))} 
+            </div>
+
           </div>
+
+          <div className="statisticsCard">
+          <StatisticsMilk filterBy="year" filterValue={2019} />
+
+          <StatisticsLactation filterBy="year" filterValue={2019} />
+          </div>
+
+          <div className="statisticsLactation">
+           
+          </div>
+
         </div>
       </div>
 
