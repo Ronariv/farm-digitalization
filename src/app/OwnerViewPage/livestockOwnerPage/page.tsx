@@ -3,6 +3,7 @@
 import React from 'react';
 import useFetch from '@/hooks/useFetch';
 import { Livestock } from '@/models/LivestockModel';
+import { useRouter } from 'next/navigation'
 
 import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
 import Sidebar from '@/components/ui/Sidebar/sidebar';
@@ -20,20 +21,8 @@ import { livestockData } from '@/data/livestockData';
 
 
 const LivestockPage: React.FC = () => {
-    // const { data, loading, error } = useFetch<Livestock[]>(
-    //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
-    //     undefined
-    // );
+    const router = useRouter()
 
-    // if (loading) {
-    //     return <Loading></Loading>;
-    // }
-
-    // if (error) {
-    //     return <div>Error: {error}</div>;
-    // }
-
-    
     return (
         <div>
             <div className="layout">
@@ -80,7 +69,9 @@ const LivestockPage: React.FC = () => {
                         // data != null 
                         // ? 
                         livestockData.map((livestock) => (
-                            <AnimalCard key={livestock.id} livestock={livestock}/>
+                            <div key={livestock.id} onClick={() => router.push(`livestockOwnerPage/${livestock.name_id.toLowerCase()}/`)}>
+                                <AnimalCard livestock={livestock} />
+                            </div>
                         ))
                         // :
                         // <div></div>

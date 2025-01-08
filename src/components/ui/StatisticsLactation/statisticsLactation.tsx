@@ -1,15 +1,17 @@
 import React from 'react';
 import styles from '@/components/ui/StatisticsLactation/StatisticsLactation.module.css';
 import { statisticsLactationData } from '@/models/statisticsLactationModel';
+import { defaultLactationData, LactationData } from '@/models/LivestockModel';
 
 type StatisticMilkProps = {
     filterBy: 'year' | 'month';
     filterValue: number | string;
+    lactationData?: LactationData;
 }
 
-const StatisticsLactation: React.FC<StatisticMilkProps> = ({ filterBy, filterValue }) => {
+const StatisticsLactation: React.FC<StatisticMilkProps> = ({ filterBy, filterValue, lactationData = defaultLactationData }) => {
 
-    const filteredData = statisticsLactationData.flatMap((item) => {
+    const filteredData = lactationData.yearlyData.flatMap((item) => {
         if (filterBy === 'year' && item.year === filterValue) {
           return item.data;
         }

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { StatusType } from '@/models/HealthStatusModel';
+import { StatusType } from '@/models/healthStatusModel';
 
 interface HealthStatusProps {
   status: StatusType;

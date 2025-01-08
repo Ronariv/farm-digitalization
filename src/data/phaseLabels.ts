@@ -1,5 +1,4 @@
-// data/phaseLabels.ts
-import { PhaseLabel } from '@/models/PhaseModel';
+import { PhaseLabel } from "@/models/phaseModel";
 
 export const phaseLabels: PhaseLabel[] = [
   { id: '1', label: 'Cempe', color: '#FFFFFF', isActive: false, enum: "CEMPE"},

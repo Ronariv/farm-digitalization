@@ -1,5 +1,6 @@
 .sidebarContainer {
     width: 303px;
+    height: 100%;
     display: inline-flex;
     padding: 24px 16px 610px 16px;
     flex-direction: column;
