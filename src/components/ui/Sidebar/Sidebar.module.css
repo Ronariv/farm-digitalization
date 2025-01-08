@@ -38,6 +38,32 @@
     align-items: center;
     justify-content: space-between;
   }
+
+  .dropdownList {
+    width: 271px;
+    margin-top: 10px;
+    border-color: #248543;
+    background-color: #fff;
+    color: #248543;
+    border-width: 1px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .dropdownItem {
+    width: 271px;
+    color: #248543;
+    padding: 10px 10px 10px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: top;
+    justify-content: space-between;
+  }
   
   .dropdownIcon {
     margin-left: 8px;
