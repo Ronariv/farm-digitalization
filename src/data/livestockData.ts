@@ -690,19 +690,22 @@ export const livestockData: Livestock[] = [
         medication: {
             current_condition: "No medication required",
             history_items: [
-                { title: "Medication Given", value: "July 2020" }
+                { title: "Medication Given", value: "July 2020" },
+                { title: "Wormextin", value: "Juni 2020" }
             ]
         },
         vitamin: {
             current_condition: "Good Vitamin Level",
             history_items: [
-                { title: "Vitamin Supplementation", value: "August 2020" }
+                { title: "B Complex", value: "August 2020" },
+                { title: "Adeplex Vitamin A", value: "Juni 2020" }
             ]
         },
         vaccine: {
             current_condition: "Fully Vaccinated",
             history_items: [
-                { title: "Vaccination", value: "June 2020" }
+                { title: "Vaccination 1", value: "June 2020" },
+                { title: "Vaccination 2", value: "June 2020" }
             ]
         },
         lactationData: {

@@ -9,7 +9,7 @@ import EditButton from '@/components/ui/EditButton/editButton';
 import AddButton from '@/components/ui/AddButton/addButton';
 import InviteOperatorButton from '@/components/ui/InviteOperatorButton/inviteOperatorButton';
 import UpdateButton from '@/components/ui/UpdateButton/updateButton';
-import PrintButton from '@/components/ui/PrintButton/printButton';
+import PrintButton from '@/components/ui/DownloadQRButton/DownloadQRButton';
 import FilterButton from '@/components/ui/Filter/filterButton';
 import SortByButton from '@/components/ui/SortBy/sortBy';
 import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
@@ -114,9 +114,9 @@ const App: React.FC = () => {
           <div>
           <Breadcrumbs
             breadcrumbs={[
-              { label: 'Peternakan Widjaya', href: '/OwnerViewPage' },
-              { label: 'Statistik', href: '/OwnerViewPage' },
-              { label: 'Domba', href: '/OwnerViewPage/detailStatisticsPage/dombaDetailStatisticsPage' },
+              { label: 'Peternakan Widjaya', href: '/OperatorViewPage' },
+              { label: 'Statistik', href: '/OperatorViewPage' },
+              { label: 'Domba', href: '/OperatorViewPage/detailStatisticsPage/dombaDetailStatisticsPage' },
             ]}
           />
           </div>
