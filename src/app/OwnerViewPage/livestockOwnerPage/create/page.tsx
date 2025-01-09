@@ -22,6 +22,7 @@ import { farmListData } from '@/data/farmData';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField';
 import PrimaryRadioField from '@/components/ui/PrimaryRadioField/primaryRadioField';
+import TopBar from '@/components/ui/TopBar/topBar';
 
 
 const LivestockPage: React.FC = () => {
@@ -53,28 +54,7 @@ const LivestockPage: React.FC = () => {
                 </div>
 
                 <div className="main-content">
-                    <div className="header">
-                    
-                    <div className="searchbar">
-                    <SearchBar />
-                    </div>
-
-                    <div className="operatorProfile">
-                    <OperatorProfile
-                    src="/operator.jpeg" 
-                    altText=" "
-                    />
-                    </div>
-
-                    <div className='profile'>
-                        <OwnerProfile
-                        src="/OwnerProfile.jpeg"
-                        altText=" "
-                        />
-                    </div>
-
-                    </div>
-                
+                <TopBar ></TopBar>
                 <div className='createLivestock'>
                     <div className='createLivestockForm'>
                         <div className='createLivestockFormImage'>
