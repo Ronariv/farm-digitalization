@@ -22,6 +22,7 @@ import Image from 'next/image';
 import OwnerProfile from '@/components/ui/OwnerProfile/ownerProfile';
 import Breadcrumbs from '@/components/ui/Breadcrumbs/breadcrumbs';
 import { usePathname } from 'next/navigation';
+import TopBar from '@/components/ui/TopBar/topBar';
 
 const App: React.FC = () => {
 
@@ -69,28 +70,7 @@ const App: React.FC = () => {
       </div>
 
       <div className="main-content">
-        
-        <div className="header">
-          
-          <div className="searchbar">
-          <SearchBar />
-          </div>
-
-          <div className="operatorProfile">
-          <OperatorProfile
-          src="/operator.jpeg" 
-          altText=" "
-          />
-          </div>
-
-          <div>
-            <OwnerProfile
-            src="/OwnerProfile.jpeg"
-            altText=" "
-            />
-          </div>
-
-        </div>
+        <TopBar ></TopBar>
        
         <div className="content">
         <div className="menuSection">

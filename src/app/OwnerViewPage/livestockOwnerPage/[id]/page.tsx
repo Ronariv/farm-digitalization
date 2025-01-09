@@ -5,6 +5,7 @@ import useFetch from '@/hooks/useFetch';
 import { useRouter } from 'next/navigation'
 import { Livestock } from '@/models/LivestockModel';
 import { useEffect } from "react";
+import { QRCodeSVG } from 'qrcode.react';
 
 
 import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
@@ -24,6 +25,10 @@ import GenderIcon from '@/components/ui/genderIcon';
 import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
 import StatisticMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
 import StatisticWeight from '@/components/ui/StatisticsWeight/statisticsWeight';
+import DeleteButton from '@/components/ui/DeleteButtonIcon/deleteButton';
+import EditButton from '@/components/ui/EditButton/editButton';
+import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
+import TopBar from '@/components/ui/TopBar/topBar';
 
 interface LivestockDetailPageProps {
     params: {
@@ -57,27 +62,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                 </div>
 
                 <div className="main-content">
-                    <div className="header">
-                    
-                    <div className="searchbar">
-                    <SearchBar />
-                    </div>
-
-                    <div className="operatorProfile">
-                    <OperatorProfile
-                    src="/operator.jpeg" 
-                    altText=" "
-                    />
-                    </div>
-
-                    <div>
-                        <OwnerProfile
-                        src="/OwnerProfile.jpeg"
-                        altText=" "
-                        />
-                    </div>
-
-                    </div>
+                    <TopBar ></TopBar>
 
                     {livestockData.map((livestock) => (
                         livestock.name_id.toLowerCase() == params.id 
@@ -89,8 +74,9 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                                     <div className='genderIcon'>
                                         <GenderIcon gender={livestock.gender == "MALE" ? 'jantan' : 'betina'}></GenderIcon>
                                     </div>
-                                    <div className="sortByAndFilter">
-                                        <h1 className="showQR">Show QR</h1>
+                                    <div className="deleteIcon">
+                                        <PrimaryButton label='Ubah Data' width={130}/>
+                                        <DeleteButton />
                                     </div>
                                 </div>
                             </div>
@@ -106,6 +92,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                                         borderRadius: '10px',
                                     }}
                                     />
+                                    <QRCodeSVG value={`${process.env.NEXT_PUBLIC_NEXT_HOST}/OwnerViewPage/livestockOwnerPage/${params.id}`} size={85} />
                                     <div className='generalInformationLivestockBox'>
                                         <div className='generalInformationLivestockBoxTop'>
                                             <GeneralInfoBox title={'Tanggal Lahir'} value={livestock.dob} ></GeneralInfoBox>

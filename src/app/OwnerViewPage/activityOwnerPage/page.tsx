@@ -24,6 +24,7 @@ import { User } from '@/models/UserModel';
 import { usersData } from '@/data/userData';
 import { ActivityModel } from '@/models/ActivityModel';
 import { activities } from '@/data/activitiesData';
+import TopBar from '@/components/ui/TopBar/topBar';
 
 
 const ActivityPage: React.FC = () => {
@@ -49,27 +50,7 @@ const ActivityPage: React.FC = () => {
                 </div>
 
                 <div className="main-content">
-                    <div className="header">
-                    
-                    <div className="searchbar">
-                    <SearchBar />
-                    </div>
-
-                    <div className="operatorProfile">
-                    <OperatorProfile
-                    src="/operator.jpeg" 
-                    altText=" "
-                    />
-                    </div>
-
-                    <div>
-                        <OwnerProfile
-                        src="/OwnerProfile.jpeg"
-                        altText=" "
-                        />
-                    </div>
-
-                    </div>
+                  <TopBar ></TopBar>
                 
                     <div className="content">
                     <div className="menuSection">

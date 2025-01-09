@@ -19,6 +19,8 @@ import SortByButton from '@/components/ui/SortBy/sortBy';
 import FilterButton from '@/components/ui/Filter/filterButton';
 import { livestockData } from '@/data/livestockData';
 import { farmListData } from '@/data/farmData';
+import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
+import TopBar from '@/components/ui/TopBar/topBar';
 
 
 const LivestockPage: React.FC = () => {
@@ -44,32 +46,17 @@ const LivestockPage: React.FC = () => {
                 </div>
 
                 <div className="main-content">
-                    <div className="header">
-                    
-                    <div className="searchbar">
-                    <SearchBar />
-                    </div>
-
-                    <div className="operatorProfile">
-                    <OperatorProfile
-                    src="/operator.jpeg" 
-                    altText=" "
-                    />
-                    </div>
-
-                    <div>
-                        <OwnerProfile
-                        src="/OwnerProfile.jpeg"
-                        altText=" "
-                        />
-                    </div>
-
-                    </div>
+                    <TopBar ></TopBar>
                 
                     <div className="content">
                     <div className="menuSection">
                     <div className="menuHeader">
                         <h1 className="menuTittle">Peternakan Anda</h1>
+                        <div className="sortByAndFilter">
+                            <PrimaryButton label='+ Tambah Ternak' width={200} onClick={() => router.push(`livestockOwnerPage/create/`)}/>
+                        </div>
+                    </div>
+                    <div className="menuHeader">
                         <div className="sortByAndFilter">
                             <SortByButton></SortByButton>
                             <FilterButton></FilterButton>
