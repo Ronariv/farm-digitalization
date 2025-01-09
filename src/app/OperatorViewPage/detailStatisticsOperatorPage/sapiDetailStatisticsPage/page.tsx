@@ -29,6 +29,7 @@ import DetailAnimalDiagnosedCard from '@/components/ui/DetailAnimalDiagnosedCard
 import animalDiagnosedCategories from '@/models/DetailAnimalDiagnosedCategories';
 import StatisticsMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
 import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
+import StatisticsLivestockSold from '@/components/ui/StatisticsLivestockSold/StatisticsLivestockSold';
 
 const App: React.FC = () => {
 
@@ -64,7 +65,7 @@ const App: React.FC = () => {
 
     function getMenuLabel(pathname: string): string {
       switch (pathname) {
-        case '/OwnerViewPage':
+        case '/OperatorViewPage':
           return 'Statistik';
         case '/livestockOwnerPage':
           return 'Ternak Anda';
@@ -177,6 +178,8 @@ const App: React.FC = () => {
           <StatisticsMilk filterBy="year" filterValue={2019} />
 
           <StatisticsLactation filterBy="year" filterValue={2019} />
+
+          <StatisticsLivestockSold filterBy="year" filterValue={2019}/>
           </div>
 
           <div className="statisticsLactation">

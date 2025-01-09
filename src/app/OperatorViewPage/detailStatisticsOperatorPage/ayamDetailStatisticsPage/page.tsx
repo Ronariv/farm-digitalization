@@ -64,7 +64,7 @@ const App: React.FC = () => {
 
     function getMenuLabel(pathname: string): string {
       switch (pathname) {
-        case '/OwnerViewPage':
+        case '/OperatorViewPage':
           return 'Statistik';
         case '/livestockOwnerPage':
           return 'Ternak Anda';
@@ -80,7 +80,9 @@ const App: React.FC = () => {
     return (
     <div className="layout">
       <div className="sidebar">
-      <Sidebar setBreadcrumb={setBreadcrumb} />
+      <Sidebar setBreadcrumb={setBreadcrumb} setFarm={function (farmName: string): void {
+            throw new Error('Function not implemented.');
+          } } />
       </div>
 
       <div className="main-content">
@@ -112,9 +114,9 @@ const App: React.FC = () => {
           <div>
           <Breadcrumbs
             breadcrumbs={[
-              { label: 'Peternakan Widjaya', href: '/OwnerViewPage' },
-              { label: 'Statistik', href: '/OwnerViewPage' },
-              { label: 'Ayam', href: '/OwnerViewPage/detailStatisticsPage/ayamDetailStatisticsPage' },
+              { label: 'Peternakan Widjaya', href: '/OperatorViewPage' },
+              { label: 'Statistik', href: '/OperatorViewPage' },
+              { label: 'Ayam', href: '/OperatorViewPage/detailStatisticsPage/ayamDetailStatisticsPage' },
             ]}
           />
           </div>
