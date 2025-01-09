@@ -47,7 +47,7 @@ const App: React.FC = () => {
 
     function getMenuLabel(pathname: string): string {
       switch (pathname) {
-        case '/OwnerViewPage':
+        case '/OperatorViewPage':
           return 'Statistik';
         case '/livestockOwnerPage':
           return 'Ternak Anda';

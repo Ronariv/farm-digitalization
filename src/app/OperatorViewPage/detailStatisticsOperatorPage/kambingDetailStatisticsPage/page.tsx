@@ -64,7 +64,7 @@ const App: React.FC = () => {
 
     function getMenuLabel(pathname: string): string {
       switch (pathname) {
-        case '/OwnerViewPage':
+        case '/OperatorViewPage':
           return 'Statistik';
         case '/livestockOwnerPage':
           return 'Ternak Anda';
@@ -114,9 +114,9 @@ const App: React.FC = () => {
           <div>
           <Breadcrumbs
             breadcrumbs={[
-              { label: 'Peternakan Widjaya', href: '/OwnerViewPage' },
-              { label: 'Statistik', href: '/OwnerViewPage' },
-              { label: 'Kambing', href: '/OwnerViewPage/detailStatisticsPage/kambingDetailStatisticsPage' },
+              { label: 'Peternakan Widjaya', href: '/OperatorViewPage' },
+              { label: 'Statistik', href: '/OperatorViewPage' },
+              { label: 'Kambing', href: '/OperatorViewPage/detailStatisticsPage/kambingDetailStatisticsPage' },
             ]}
           />
           </div>
