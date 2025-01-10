@@ -25,6 +25,7 @@ import { usersData } from '@/data/userData';
 import { ActivityModel } from '@/models/ActivityModel';
 import { activities } from '@/data/activitiesData';
 import TopBar from '@/components/ui/TopBar/topBar';
+import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 
 
 const ActivityPage: React.FC = () => {
@@ -56,6 +57,9 @@ const ActivityPage: React.FC = () => {
                     <div className="menuSection">
                     <div className="menuHeader">
                         <h1 className="menuTittle">Aktivitas Tim</h1>
+                        <div className="inviteMember">
+                          <PrimaryButton label='+ Undang Anggota' width={200}/>
+                        </div>
                     </div>
                     <div className='activityInformation'>
                       <div className='activityInformationTeams'>
