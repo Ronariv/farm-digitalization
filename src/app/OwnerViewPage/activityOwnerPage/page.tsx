@@ -26,7 +26,9 @@ import { ActivityModel } from '@/models/ActivityModel';
 import { activities } from '@/data/activitiesData';
 import TopBar from '@/components/ui/TopBar/topBar';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
+
 import InviteModal from '@/components/ui/InviteModal/InviteModal';
+
 
 const ActivityPage: React.FC = () => {
     const router = useRouter()
@@ -59,6 +61,7 @@ const ActivityPage: React.FC = () => {
                     <div className="menuSection">
                     
                     <div className="menuHeader">
+
                       <div>
                          <h1 className="menuTittle">Aktivitas Tim</h1>
                       </div>
@@ -78,6 +81,7 @@ const ActivityPage: React.FC = () => {
         />
       )}
                        </div>
+
                     </div>
 
                     <div className='activityInformation'>
