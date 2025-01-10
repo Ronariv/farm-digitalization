@@ -1,6 +1,7 @@
 import statisticsLactationData from "./statisticsLactationModel";
 import statisticsMilkData from "./statisticsMilkModel";
 import statisticsWeightData from "./statisticsWeightModel";
+import statisticsLivestockSold from "./statisticsLivestockSold";
 
 export interface HistoryItem {
     title: string;
@@ -45,6 +46,14 @@ export const defaultMilkData: MilkData = {
     yearlyData: statisticsMilkData,
 };
 
+export interface LivestockSold{
+    yearlyData: YearlyData[];
+}
+
+export const defaultLivestockSold: LivestockSold = {
+    yearlyData: statisticsLivestockSold,
+}
+
 export interface LactationData {
     yearlyData: YearlyData[];
 }
@@ -67,7 +76,7 @@ export interface Livestock {
     gender: 'MALE' | 'FEMALE';
     dob: string;
     weight?: string;
-    phase?: 'SIAPKAWIN' | 'CEMPE' | "DARA" | "HAMIL";
+    phase?: 'SIAPKAWIN' | 'CEMPE' | "DARA" | "HAMIL" | "AFKIR";
     photo_url?: string;
     grade?: string;
     breed: string;
@@ -84,4 +93,5 @@ export interface Livestock {
     milkData: MilkData;
     lactationData: LactationData;
     weightData: WeightData;
+    livestockSold: LivestockSold;
 }

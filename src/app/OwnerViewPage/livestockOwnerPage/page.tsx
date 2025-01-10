@@ -28,6 +28,8 @@ const LivestockPage: React.FC = () => {
     
     const [selectedFarm, setSelectedFarm] = useState(farmListData[0].name || '');
 
+    const [selectedLivestock, setSelectedLivestock] = useState(null);
+
     const handleFarmChange = (farmName: string) => {
         setSelectedFarm(farmName);
     };
@@ -69,12 +71,17 @@ const LivestockPage: React.FC = () => {
                         livestockData.filter(
                             (livestock) => livestock.farm_name === selectedFarm 
                         ).map((livestock) => (
-                            <div key={livestock.id} onClick={() => router.push(`livestockOwnerPage/${livestock.name_id.toLowerCase()}/`)}>
+                            <div 
+                            key={livestock.id} 
+                            onClick={() => 
+                                
+                            router.push(`livestockOwnerPage/${livestock.name_id.toLowerCase()}/`
+                            
+                            )}>
                                 <AnimalCard livestock={livestock} />
                             </div>
                         ))
-                        // :
-                        // <div></div>
+
                         }
                     </div>
                     </div>
