@@ -25,7 +25,8 @@ import { usersData } from '@/data/userData';
 import { ActivityModel } from '@/models/ActivityModel';
 import { activities } from '@/data/activitiesData';
 import TopBar from '@/components/ui/TopBar/topBar';
-
+import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
+import InviteModal from '@/components/ui/InviteModal/InviteModal';
 
 const ActivityPage: React.FC = () => {
     const router = useRouter()
@@ -35,6 +36,8 @@ const ActivityPage: React.FC = () => {
     const handleFarmChange = (farmName: string) => {
         setSelectedFarm(farmName);
     };
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <div>
@@ -54,9 +57,29 @@ const ActivityPage: React.FC = () => {
                 
                     <div className="content">
                     <div className="menuSection">
+                    
                     <div className="menuHeader">
-                        <h1 className="menuTittle">Aktivitas Tim</h1>
+                      <div>
+                         <h1 className="menuTittle">Aktivitas Tim</h1>
+                      </div>
+                       
+                       <div className="primaryButton">
+                         <PrimaryButton
+                        label= "+ Undang Anggota"
+                        width= {194}
+                        onClick={() => setIsModalOpen(true)}
+                        
+                        />
+
+{isModalOpen && (
+        <InviteModal
+          users={usersData} // Gunakan data dari usersData
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
+                       </div>
                     </div>
+
                     <div className='activityInformation'>
                       <div className='activityInformationTeams'>
                         <h1 className='activityInformationTeamsHeading'>Anggota</h1>

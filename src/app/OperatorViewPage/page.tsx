@@ -97,7 +97,7 @@ const App: React.FC = () => {
           />
           </div>
           <div className="menuHeader">
-            <h1 className="menuTittle">Statistik</h1>
+            <h1 className="menuTittle">Pengaturan</h1>
             <div className="yearAndMonthPicker">
               <YearAndMonthPicker/>
             </div>

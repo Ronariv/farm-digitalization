@@ -33,6 +33,7 @@ import DownloadQRButton from '@/components/ui/DownloadQRButton/DownloadQRButton'
 import PerbaruiButton from '@/components/ui/PerbaruiButton/PerbaruiButton';
 import PhaseLabelTag from '@/components/ui/PhaseLabel/PhaseLabelTag';
 import { phaseLabels } from '@/data/phaseLabels';
+import DetailLactationCard from '@/components/ui/DetailLactationCard/DetailLactationCard';
 interface LivestockDetailPageProps {
     params: {
       id: string;
@@ -52,6 +53,14 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
     // if (error) {
     //     return <div>Error: {error}</div>;
     // }
+    const currentLactation = {
+        title: 'Laktasi ke-4',
+        description: '1 Jantan - Des 2024',
+      };
+      const history = [
+        { title: 'Laktasi ke-3', description: '2 Betina - Okt 2024' },
+        { title: 'Laktasi ke-2', description: '1 Jantan - Aug 2024' },
+      ];
 
     return (
         <div>
@@ -77,15 +86,20 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                                     <div className='genderIcon'>
                                         <GenderIcon gender={livestock.gender == "MALE" ? 'jantan' : 'betina'}></GenderIcon>
                                         {/* <PhaseLabelTag phases={phaseLabels} CEMPE={livestock.phase}></PhaseLabelTag> */}
+                                       
+
+                                    </div>
+                                    <div className="phaseLabelTag-livestockOwnerPage">
                                         <PhaseLabelTag 
                                         phases={phaseLabels} 
                                         filterId={livestock.phase}
-                                        width={50}
+                                        width={60}
+                                        textSize={10}
+                                        // padding="30px 20px"
+                                        
                                         >
-                                            
-
                                         </PhaseLabelTag>
-                                    </div>
+                                       </div>
                                     <div className="deleteIcon">
                                         <DownloadQRButton/>
                                         <PrimaryButton label='Ubah Data' width={130}/>
@@ -149,7 +163,11 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                                 </div>
                                 <div className='statisticsInformationLivestock'>
                                     <StatisticMilk filterBy="year" filterValue={2019} milkData={livestock.milkData}/>
-                                    <StatisticsLactation filterBy="year" filterValue={2019} lactationData={livestock.lactationData}/>
+                                    <div className="lactationSection">
+                                        <StatisticsLactation filterBy="year" filterValue={2019} lactationData={livestock.lactationData}/>
+                                        <DetailLactationCard currentLactation={currentLactation} history={history} />;
+                                    </div>
+                                    
                                     <StatisticWeight filterBy="year" filterValue={2019} weightData={livestock.weightData}/>
                                 </div>
                             </div>
@@ -250,7 +268,10 @@ const DetailInformationCard: React.FC<DetailInformationCardProps> = ({
                             </div>
                         ))}
                     </div>
-                    <PerbaruiButton label={'Perbarui'}/>
+                    <div className="perbaruiButtonOwnerPage">
+                          <PerbaruiButton label={'Perbarui'}/>
+                    </div>
+                  
                 </div>
             </div>
         </div>

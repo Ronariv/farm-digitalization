@@ -6,8 +6,10 @@ interface PhaseLabelProps {
   phases: PhaseLabel[]; // Data fase yang diterima
   filterId?: string;
   width?: number;
+  textSize?: number;
+  height?: number;
 }
-const PhaseLabelTag: React.FC<PhaseLabelProps> = ({ phases, filterId, width }) => {
+const PhaseLabelTag: React.FC<PhaseLabelProps> = ({ phases, filterId, width, textSize, height }) => {
     const filteredPhases = filterId ? phases.filter((phase) => phase.enum === filterId) : phases;
 
     // return (
@@ -33,18 +35,22 @@ const PhaseLabelTag: React.FC<PhaseLabelProps> = ({ phases, filterId, width }) =
             className={styles.tag}
             style={{
               backgroundColor: phase.color,
-              width: width ? `${width}px` : "auto", // Atur width jika diberikan, default 'auto'
+             
             }}
           >
-            <span className={styles.label}
-            style={{
-              width: width ? `${width}px` : "auto"
-            }}
-            >
-              
-            </span>
-            {phase.label}
-          </div>
+                <span
+        className={styles.label}
+        style={{
+          fontSize: textSize ? `${textSize}px` : "16px",
+          width: width ? `${width}px` : "auto",
+          height: height ? `${height}px` : "auto", 
+          display: "inline-block",
+          textAlign: "center",
+        }}
+      >
+        {phase.label}
+      </span>
+    </div>
         ))}
       </div>
     );
