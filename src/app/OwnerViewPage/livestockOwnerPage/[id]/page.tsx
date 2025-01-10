@@ -29,7 +29,11 @@ import DeleteButton from '@/components/ui/DeleteButtonIcon/deleteButton';
 import EditButton from '@/components/ui/EditButton/editButton';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TopBar from '@/components/ui/TopBar/topBar';
-
+import DownloadQRButton from '@/components/ui/DownloadQRButton/DownloadQRButton';
+import PerbaruiButton from '@/components/ui/PerbaruiButton/PerbaruiButton';
+import PhaseLabelTag from '@/components/ui/PhaseLabel/PhaseLabelTag';
+import { phaseLabels } from '@/data/phaseLabels';
+import DetailLactationCard from '@/components/ui/DetailLactationCard/DetailLactationCard';
 interface LivestockDetailPageProps {
     params: {
       id: string;
@@ -49,6 +53,14 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
     // if (error) {
     //     return <div>Error: {error}</div>;
     // }
+    const currentLactation = {
+        title: 'Laktasi ke-4',
+        description: '1 Jantan - Des 2024',
+      };
+      const history = [
+        { title: 'Laktasi ke-3', description: '2 Betina - Okt 2024' },
+        { title: 'Laktasi ke-2', description: '1 Jantan - Aug 2024' },
+      ];
 
     return (
         <div>
@@ -73,8 +85,23 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                                     <h1 className="menuTittle">{livestock.name_id}</h1>
                                     <div className='genderIcon'>
                                         <GenderIcon gender={livestock.gender == "MALE" ? 'jantan' : 'betina'}></GenderIcon>
+                                        {/* <PhaseLabelTag phases={phaseLabels} CEMPE={livestock.phase}></PhaseLabelTag> */}
+                                       
+
                                     </div>
+                                    <div className="phaseLabelTag-livestockOwnerPage">
+                                        <PhaseLabelTag 
+                                        phases={phaseLabels} 
+                                        filterId={livestock.phase}
+                                        width={60}
+                                        textSize={10}
+                                        // padding="30px 20px"
+                                        
+                                        >
+                                        </PhaseLabelTag>
+                                       </div>
                                     <div className="deleteIcon">
+                                        <DownloadQRButton/>
                                         <PrimaryButton label='Ubah Data' width={130}/>
                                         <DeleteButton />
                                     </div>
@@ -92,7 +119,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                                         borderRadius: '10px',
                                     }}
                                     />
-                                    <QRCodeSVG value={`${process.env.NEXT_PUBLIC_NEXT_HOST}/OwnerViewPage/livestockOwnerPage/${params.id}`} size={85} />
+                                    {/* <QRCodeSVG value={`${process.env.NEXT_PUBLIC_NEXT_HOST}/OwnerViewPage/livestockOwnerPage/${params.id}`} size={85} /> */}
                                     <div className='generalInformationLivestockBox'>
                                         <div className='generalInformationLivestockBoxTop'>
                                             <GeneralInfoBox title={'Tanggal Lahir'} value={livestock.dob} ></GeneralInfoBox>
@@ -101,42 +128,46 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                                             <GeneralInfoBox title={'Berat'} value={livestock.weight || "Undefined"} ></GeneralInfoBox>
                                         </div>
                                         <div className='generalInformationLivestockBoxTop'>
-                                            <GeneralInfoBox title={'ID Ayah'} value={livestock.dad_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Ibu'} value={livestock.mom_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Kakak'} value={livestock.grandpa_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Nenek'} value={livestock.grandma_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Ayah'} value={livestock.dad_name_id || "N/A"} ras={'Purebred'}  isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Ibu'} value={livestock.mom_name_id || "N/A"} grade={'F1'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Kakak'} value={livestock.grandpa_name_id || "N/A"} ras={'Purebred'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Nenek'} value={livestock.grandma_name_id || "N/A"} grade={'F3'} isLink={true} linkHref='' ></GeneralInfoBox>
                                         </div>
                                     </div>
                                 </div>
                                 <div className='detailInformationLivestock'>
                                     <DetailInformationCard
-                                        conditionTitle="Kondisi"
-                                        conditionValue={livestock.health.current_condition}
+                                        // conditionTitle="Kondisi"
+                                        // conditionValue={livestock.health.current_condition}
                                         historyTitle="Riwayat Sakit"
                                         historyItems={livestock.health.history_items.length > 2 ? livestock.health.history_items.slice(0, 2) : livestock.health.history_items}
                                     />
                                     <DetailInformationCard
-                                        conditionTitle="Obat"
-                                        conditionValue={livestock.medication.current_condition}
+                                        // conditionTitle="Obat"
+                                        // conditionValue={livestock.medication.current_condition}
                                         historyTitle="Riwayat Obat"
                                         historyItems={livestock.medication.history_items.length > 2 ? livestock.medication.history_items.slice(0, 2) : livestock.medication.history_items}
                                     />
                                     <DetailInformationCard
-                                        conditionTitle="Vitamin"
-                                        conditionValue={livestock.vitamin.current_condition}
+                                        // conditionTitle="Vitamin"
+                                        // conditionValue={livestock.vitamin.current_condition}
                                         historyTitle="Riwayat Vitamin"
                                         historyItems={livestock.vitamin.history_items.length > 2 ? livestock.vitamin.history_items.slice(0, 2) : livestock.vitamin.history_items}
                                     />
                                     <DetailInformationCard
-                                        conditionTitle="Vaksin"
-                                        conditionValue={livestock.vaccine.current_condition}
+                                        // conditionTitle="Vaksin"
+                                        // conditionValue={livestock.vaccine.current_condition}
                                         historyTitle="Riwayat Vaksin"
                                         historyItems={livestock.vaccine.history_items.length > 2 ? livestock.vaccine.history_items.slice(0, 2) : livestock.vaccine.history_items}
                                     />
                                 </div>
                                 <div className='statisticsInformationLivestock'>
                                     <StatisticMilk filterBy="year" filterValue={2019} milkData={livestock.milkData}/>
-                                    <StatisticsLactation filterBy="year" filterValue={2019} lactationData={livestock.lactationData}/>
+                                    <div className="lactationSection">
+                                        <StatisticsLactation filterBy="year" filterValue={2019} lactationData={livestock.lactationData}/>
+                                        <DetailLactationCard currentLactation={currentLactation} history={history} />;
+                                    </div>
+                                    
                                     <StatisticWeight filterBy="year" filterValue={2019} weightData={livestock.weightData}/>
                                 </div>
                             </div>
@@ -159,24 +190,37 @@ interface GeneralInfoBoxProps {
     value: string | number | null;
     isLink?: boolean; // Optional parameter to determine if the value is a hyperlink
     linkHref?: string; // URL for the hyperlink
+    ras?: string;
+    grade?: string;
 }
 
-const GeneralInfoBox: React.FC<GeneralInfoBoxProps> = ({ title, value, isLink = false, linkHref = "#" }) => {
+const GeneralInfoBox: React.FC<GeneralInfoBoxProps> = ({ title, value, isLink = false, linkHref = "#", ras, grade }) => {
     return (
         <div className="generalInformationLivestockBoxTopData">
             <h1 className="generalInformationLivestockBoxTopDataTitle">{title}</h1>
             {isLink ? (
-                <a
+                <div>
+                    <a
                     href={linkHref}
                     className="generalInformationLivestockBoxTopDataValue hyperlinkStyle"
                     target="_blank"
                     rel="noopener noreferrer"
+                    
                 >
+              
+  
                     {value ?? "N/A"}
                 </a>
+
+               <p>{ras}</p>
+               <p>{grade}</p>
+                
+             </div>
             ) : (
                 <h1 className="generalInformationLivestockBoxTopDataValue">{value ?? "N/A"}</h1>
+       
             )}
+
         </div>
     );
 };
@@ -187,15 +231,15 @@ interface HistoryItem {
 }
 
 interface DetailInformationCardProps {
-    conditionTitle: string;
-    conditionValue: string;
+    // conditionTitle: string;
+    // conditionValue: string;
     historyTitle: string;
     historyItems: HistoryItem[];
 }
 
 const DetailInformationCard: React.FC<DetailInformationCardProps> = ({
-    conditionTitle,
-    conditionValue,
+    // conditionTitle,
+    // conditionValue,
     historyTitle,
     historyItems,
 }) => {
@@ -203,10 +247,6 @@ const DetailInformationCard: React.FC<DetailInformationCardProps> = ({
         <div className="detailInformationLivestockCard">
             <div className="detailInformationLivestockCardData">
                 {/* Condition Section */}
-                <div className="detailInformationLivestockCardDataCategory">
-                    <h1 className="detailInformationLivestockCardDataCategoryTitle">{conditionTitle}</h1>
-                    <h1 className="detailInformationLivestockCardDataCategoryValue">{conditionValue}</h1>
-                </div>
 
                 {/* History Section */}
                 <div className="detailInformationLivestockCardDataHistory">
@@ -223,9 +263,15 @@ const DetailInformationCard: React.FC<DetailInformationCardProps> = ({
                                 <h1 className="detailInformationLivestockCardDataHistoryDataValue">
                                     {item.value}
                                 </h1>
+                                
+                               
                             </div>
                         ))}
                     </div>
+                    <div className="perbaruiButtonOwnerPage">
+                          <PerbaruiButton label={'Perbarui'}/>
+                    </div>
+                  
                 </div>
             </div>
         </div>

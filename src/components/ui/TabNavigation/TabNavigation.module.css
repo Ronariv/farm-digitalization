@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-left: 80px;
   }
   
   .tabItem {
@@ -23,9 +24,15 @@
   }
   
   .tabItem:hover {
-    background-color: #f4f4f4;
+    background-color: #eaf9eb;
+    color: #248543;
   }
   
+  .tabItem:hover .tabIcon {
+    background-color: #248543; /* Ikon berubah warna menjadi hijau */
+    color: #fff; /* Teks di dalam ikon berubah menjadi putih */
+  }
+
   .tabIcon {
     display: inline-flex;
     align-items: center;
@@ -39,13 +46,21 @@
     border-radius: 50%;
   }
   
-  .activeTab {
+  /* .activeTab {
     background-color: #eaf9eb;
     color: #248543;
-  }
+  } */
   
   .activeTab .tabIcon {
     background-color: #248543;
     color: #fff;
   }
   
+.title{
+font-size: 32px;
+font-style: normal;
+font-weight: 700;
+line-height: 38.4px;
+margin-bottom: 50px;
+margin-top: 161px;
+}

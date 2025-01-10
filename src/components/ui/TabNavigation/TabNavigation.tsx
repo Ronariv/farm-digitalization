@@ -7,11 +7,8 @@ const TabNavigation = () => {
   const router = useRouter();
 
   const tabs = [
-    { id: 1, label: "Data Ternak", path: "/OwnerViewPage/livestockOwnerPage/addTernakPage", active: true },
-    { id: 2, label: "Data Detail Ternak", path: "/OwnerViewPage/livestockOwnerPage/dataDetailTernakPage" },
-    { id: 3, label: "Kesehatan Ternak", path: "/OwnerViewPage/livestockOwnerPage/kesehatanTernakPage" },
-    { id: 4, label: "Laktasi", path: "/OwnerViewPage/livestockOwnerPage/laktasiTernakPage" },
-    { id: 5, label: "Pemerahan", path: "/OwnerViewPage/livestockOwnerPage/pemerahanPage" },
+    { id: 1, label: "Data Ternak", path: "/OwnerViewPage/addTernakPage"},
+    { id: 2, label: "Data Detail Ternak", path: "/OwnerViewPage/addTernakPage/addDataDetailTernakPage" , active: false  },
   ];
 
   const handleTabClick = (path: string) => {
@@ -19,7 +16,16 @@ const TabNavigation = () => {
   };
 
   return (
+
     <div className={styles.tabContainer}>
+
+      <div className={styles.title}>
+      <h1>
+              Tambah Ternak
+      </h1>
+      </div>
+      
+
       {tabs.map((tab, index) => (
         <button
           key={index}
