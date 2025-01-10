@@ -432,7 +432,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 43px;
+  gap: 8px;
   align-self: stretch;
 }
 
@@ -475,17 +475,6 @@ body {
   flex-shrink: 0;
   align-self: stretch;
   margin-bottom: 56px;
-}
-
-.phaseLabelTag-livestockOwnerPage{
-  margin-left: 10px;
-}
-
-.perbaruiButtonOwnerPage{
-  display: flex;
-  justify-content: center; 
-  margin-top: auto; 
-  width: 100%;
 }
 }
 
@@ -1010,11 +999,13 @@ margin-bottom: 60px;
 
 /* Input group for "Berat" */
 .input-group-addTernak {
+
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+<<<<<<<<< Temporary merge branch 1
 .fieldFormVertical {
   display: flex;
   flex-direction: column;
