@@ -11,9 +11,11 @@ interface SidebarProps {
   onMenuClick: (menu: string) => void;
 }
 
-const menuItems = [
+const menuItems = (viewType: 'owner' | 'operator') => [
   {
-    href: "/OwnerViewPage",
+    href: viewType === 'owner'
+    ? "/OwnerViewPage"
+    : "/OperatorViewPage",
     label: "Statistik",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -32,7 +34,9 @@ const menuItems = [
     ),
   },
   {
-    href: "/OwnerViewPage/livestockOwnerPage",
+    href: viewType === 'owner'
+    ? "/OwnerViewPage/livestockOwnerPage"
+    : "/OperatorViewPage/livestockOperatorPage",
     label: "Ternak Anda",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -48,7 +52,9 @@ const menuItems = [
     ),
   },
   {
-    href: "/OwnerViewPage/activityOwnerPage",
+    href: viewType === 'owner'
+    ? "/OwnerViewPage/activityOwnerPage"
+    : "/OperatorViewPage/activityOperatorPage",
     label: "Aktivitas",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -64,7 +70,9 @@ const menuItems = [
     ),
   },
   {
-    href: "/OwnerViewPage/settingsOwnerPage",
+    href: viewType === 'owner'
+    ? "/OwnerViewPage/settingsOwnerPage"
+    : "/OperatorViewPage/settingsOperatorPage",
     label: "Pengaturan",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -74,9 +82,12 @@ const menuItems = [
   },
 ]
 
+
 const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: FarmModel[], setFarm: (farmName: string) => void}> = ({ setBreadcrumb, farmList = farmListData, setFarm }) => {
+
   
   const handleMenuClick = (label: string) => {
+    setSelectedIndex(label);
     setBreadcrumb(label); // Set breadcrumb saat menu diklik
   };
 
@@ -91,8 +102,12 @@ const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: Far
     setFarm(farmName);
   };
 
-  const [selectedIndex, setSelectedIndex] = useState('Statistik');
+  const [selectedIndex, setSelectedIndex] = useState<string | null>(null);
   const path = usePathname();
+
+  const viewType: 'owner' | 'operator' = path?.includes('OperatorViewPage') ? 'operator' : 'owner';
+  const items = menuItems(viewType);
+
   console.log(path)
   useEffect(() => {
     switch (true) {
@@ -109,8 +124,9 @@ const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: Far
         setSelectedIndex("Statistik");
         break;
     }
-  }, []);
+  }, [path]);
 
+  
     return (
       <div className={styles.sidebarContainer}>
         {/* Profile Section */}
@@ -151,7 +167,7 @@ const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: Far
         <div className={styles.menuItems}>
         <ul>
 
-            {menuItems.map((menuItem) => (
+            {items.map((menuItem) => (
                     <li 
                     key={menuItem.href} 
                     className={`${styles.menuItem} ${selectedIndex === menuItem.label ? styles.selectedMenuItems : ''}`}

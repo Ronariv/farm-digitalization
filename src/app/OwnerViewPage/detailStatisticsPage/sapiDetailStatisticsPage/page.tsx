@@ -9,7 +9,7 @@ import EditButton from '@/components/ui/EditButton/editButton';
 import AddButton from '@/components/ui/AddButton/addButton';
 import InviteOperatorButton from '@/components/ui/InviteOperatorButton/inviteOperatorButton';
 import UpdateButton from '@/components/ui/UpdateButton/updateButton';
-import PrintButton from '@/components/ui/PrintButton/printButton';
+import PrintButton from '@/components/ui/DownloadQRButton/DownloadQRButton';
 import FilterButton from '@/components/ui/Filter/filterButton';
 import SortByButton from '@/components/ui/SortBy/sortBy';
 import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
@@ -29,6 +29,8 @@ import DetailAnimalDiagnosedCard from '@/components/ui/DetailAnimalDiagnosedCard
 import animalDiagnosedCategories from '@/models/DetailAnimalDiagnosedCategories';
 import StatisticsMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
 import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
+import StatisticsLivestockSold from '@/components/ui/StatisticsLivestockSold/StatisticsLivestockSold';
+
 import TopBar from '@/components/ui/TopBar/topBar';
 
 const App: React.FC = () => {
@@ -157,7 +159,10 @@ const App: React.FC = () => {
           <StatisticsMilk filterBy="year" filterValue={2019} />
 
           <StatisticsLactation filterBy="year" filterValue={2019} />
+
+          <StatisticsLivestockSold filterBy="year" filterValue={2019}/>
           </div>
+          
 
           <div className="statisticsLactation">
            

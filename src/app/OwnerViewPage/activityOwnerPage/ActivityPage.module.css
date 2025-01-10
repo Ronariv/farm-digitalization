@@ -76,3 +76,20 @@
     align-items: center;
     gap: 8px;
 }
+
+.menuHeader {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 24px;
+    margin-right: 6vw;
+  }
+  .menuTittle{
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 43px; 
+  }
+
+  .primaryButton{
+    margin-left: 50%;
+  }

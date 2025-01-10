@@ -1,0 +1,73 @@
+.card {
+    background-color: white; /* Hijau lembut */
+    display: flex;
+    width: 232px;
+    height: 418px;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.30);
+  }
+  
+  .header h3 {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    color: #4caf50; /* Hijau */
+    margin-top: 10%; 
+  }
+  
+  .header h2 {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    margin: 0 0 8px;
+  }
+  
+  .description {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19.2px;
+    color: #7f7f7f; /* Abu-abu */
+    margin: 0;
+  }
+  
+  .history h3 {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    color: #4caf50; /* Hijau */
+    margin-top: 1px;
+  }
+  
+  .historyItem {
+    margin-bottom: 8px;
+  }
+  
+  .historyItem strong {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 19.2px; 
+    color: #000; /* Hitam */
+    
+  }
+  
+  .action {
+    display: flex;
+    /* width: 184px; */
+    flex-direction: column;
+    align-items: center;
+    margin-top: -10px;
+  }
+
+  .viewMore{
+    display: flex;
+    justify-content: flex-start;
+    margin-top: -25px;
+  }
+  

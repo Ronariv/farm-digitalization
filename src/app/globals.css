@@ -432,7 +432,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 43px;
   align-self: stretch;
 }
 
@@ -475,6 +475,17 @@ body {
   flex-shrink: 0;
   align-self: stretch;
   margin-bottom: 56px;
+}
+
+.phaseLabelTag-livestockOwnerPage{
+  margin-left: 10px;
+}
+
+.perbaruiButtonOwnerPage{
+  display: flex;
+  justify-content: center; 
+  margin-top: auto; 
+  width: 100%;
 }
 }
 
@@ -870,77 +881,183 @@ body {
   font-style: italic;
 }
 
-.createLivestockFormInputRadio {
-
+.lactationSection {
+  display: flex; 
+  gap: 16px; 
+  align-items: flex-start; /* Untuk memastikan elemen sejajar di bagian atas */
 }
 
-.createLivestockFormInputRadioText {
+/* style add ternak page */
 
+/* Container layout */
+.container-addTernak {
+  display: flex;
+  /* flex-direction: row; */
+  /* background-color: #f9f9f9; */
+  padding: 20px;
 }
 
-.livestockHistoryTitle {
-  color: #000;
-  font-family: Inter;
-  font-size: 25px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 19.2px; /* 76.8% */
+/* Sidebar */
+.sidebar-addTernak {
+  flex: 1;
+  /* width: 25%; */
+  height: 100vh;
+  border-right: 1px solid #e0e0e0;
+  /* padding: 20px; */
 }
 
-.livestockHistoryData {
+/* Main content */
+.main-content-addTernak {
+  flex: 3;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 14px;
 }
 
-.livestockHistoryItem {
-  width: 1025px;
-  align-items: flex-start;
-  gap: 32px;
+.content-wrapper-addTernak {
+  width: 60%;
+  display: flex;
+  justify-content: space-between; /* Membuat konten sejajar horizontal */
+  align-items: flex-start; /* Sejajarkan di atas */
+  gap: 0px; /* Jarak antara gambar dan form */
 }
 
-.livestockHistoryItem h2 {
-  color: var(--Text-Text-Primary, #000);
-  font-family: Inter;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 30px; /* 150% */
+/* Section */
+.section-addTernak {
+  margin-bottom: 20px;
+  display: flex;
+width: 235px;
+flex-direction: column;
+align-items: flex-start;
+/* gap: 16px; */
 }
 
-.livestockHistoryItem p {
-  color: var(--Text-Text-Secondary, #808080);
-  font-family: Inter;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 30px;
+.sectionInput-addTernak{
+  display: flex;
+width: 444px;
+align-items: center;
+align-content: center;
+gap: 10px;
+flex-wrap: wrap;
+margin-bottom: 60px;
 }
 
-.addLivestockHistory {
+/* Image */
+.image-addTernak {
+  width: 212px;;
+  height: 212px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.image-description-addTernak {
+  font-size: 14px;
+  color: #777;
+}
+
+/* Label */
+.label-addTernak {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Input group for "Berat" */
+.input-group-addTernak {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.fieldFormVertical {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.input-group-addTernak span {
+  font-size: 14px;
+  color: #555;
 }
 
-.fieldFormHorizontal {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-}
-
-.inviteMember {
+/* Radio group */
+.radio-group-addTernak {
   display: flex; 
-  margin-left: auto;
-  margin-right: 7vw;
+  align-items: center; 
+  gap: 32px; 
+  margin-top: 10%;
+  /* margin-left: -2%; */
+}
+
+.radio-group-addTernakDetail {
+  display: flex; 
+  align-items: center; 
+  gap: 32px; 
+  margin-top: 10%;
+  /* margin-left: -20%; */
+}
+
+.radio-group-addTernak div {
+  display: flex;
+  align-items: center; 
+  gap: 5px; 
+}
+
+.radio-group-addTernakDetail div {
+  display: flex;
+  align-items: center; 
+  gap: 5px; 
+}
+
+.radio-group-addTernak label {
+  font-size: 14px;
+}
+
+.tittle-addTernak{
+  font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: 24px;
+}
+
+.grid-row-addTernak {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 24px; 
+}
+
+
+/* Input Group for "Berat" */
+.input-group-addTernak {
+  display: flex;
+  align-items: center;
   gap: 10px;
 }
 
+.input-group-addTernak span {
+  font-size: 14px;
+  color: #555;
+}
 
+.lanjutButton-addTernak{
+  margin-left: 21%;
+}
+
+.simpanButton-addDetailTernak{
+  display: flex;
+}
+
+/* settings */
+
+.rowContainerSettingsForm{
+  display: flex;
+  align-items: flex-start;
+gap: 141px;
+margin-top: 5%;
+}
+
+.costumIDForm{
+  display: flex;
+  align-items: left;
+  margin-left: -65%;
+}
+
+.primaryButton{
+  margin-left: auto;
+}

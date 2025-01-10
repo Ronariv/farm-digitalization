@@ -1,11 +1,13 @@
-export const animalCategories = [
+export const animalCategories = (viewType: 'owner' | 'operator') => [
     {
       type: 'sapi',
       title: 'Sapi',
       total: 30,
       maleCount: 15,
       femaleCount: 15,
-      href: '/OwnerViewPage/detailStatisticsPage/sapiDetailStatisticsPage',
+      href: viewType === 'owner'
+      ? '/OwnerViewPage/detailStatisticsPage/sapiDetailStatisticsPage'
+      : '/OperatorViewPage/detailStatisticsOperatorPage/sapiDetailStatisticsPage',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="97" height="87" viewBox="0 0 97 87" fill="none">
           <path d="M84.3035 0.773315C86.2063 13.0355 70.1209 14.3393 61.8404 13.4584L59.4619 12.9298L68.1829 19.8009C88.6904 18.321 87.4748 6.49921 84.3035 0.773315Z" fill="#642C07"/>
@@ -28,7 +30,9 @@ export const animalCategories = [
       total: 25,
       maleCount: 12,
       femaleCount: 13,
-      href: '/OwnerViewPage/detailStatisticsPage/kambingDetailStatisticsPage',
+      href: viewType === 'owner'
+      ? '/OwnerViewPage/detailStatisticsPage/kambingDetailStatisticsPage'
+      : '/OperatorViewPage/detailStatisticsOperatorPage/kambingDetailStatisticsPage',
       icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="94" height="86" viewBox="0 0 94 86" fill="none">
         <path d="M78.9343 2.66523C61.941 -0.0855495 59.9865 22.2167 61.1335 33.7117L61.8451 37.016L52.3924 24.8556C54.6314 -3.57959 71.0199 -1.78598 78.9343 2.66523Z" fill="#642C07"/>
@@ -52,7 +56,9 @@ export const animalCategories = [
       total: 20,
       maleCount: 10,
       femaleCount: 10,
-      href: '/OwnerViewPage/detailStatisticsPage/dombaDetailStatisticsPage',
+      href: viewType === 'owner'
+      ? '/OwnerViewPage/detailStatisticsPage/dombaDetailStatisticsPage'
+      : '/OperatorViewPage/detailStatisticsOperatorPage/dombaDetailStatisticsPage',
       icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="130" height="86" viewBox="0 0 130 86" fill="none">
         <path d="M112.413 27.7799C122.696 25.8784 126.183 19.9121 128.81 13.2967C129.976 10.361 126.607 7.27286 123.777 8.67569C123.427 8.8496 123.048 8.96055 122.659 9.00349L103.95 11.0679C102.601 11.2168 101.314 11.7212 100.223 12.5295L97.3924 14.6262C95.8433 15.7737 94.7827 17.4619 94.4212 19.3555L92.96 27.011C92.7821 27.9429 92.4138 28.8434 91.9423 29.6667C87.1992 37.949 98.3471 28.2243 104.209 28.6266C107.18 28.8304 107.574 28.6746 112.413 27.7799Z" fill="#A36627"/>
@@ -64,35 +70,6 @@ export const animalCategories = [
         <path d="M68.2681 74.4054C67.3937 77.4581 63.0678 77.4584 62.193 74.4057L61.1237 70.6743C60.9962 70.2294 60.7725 69.8179 60.4685 69.469L58.2098 66.8767C55.9417 64.2738 58.8946 60.4395 61.9905 61.9675L63.8319 62.8763C64.7134 63.3113 65.7471 63.3113 66.6286 62.8763L68.4706 61.9674C71.5666 60.4395 74.5193 64.274 72.251 66.8769L69.9922 69.4688C69.6881 69.8179 69.4643 70.2295 69.3368 70.6746L68.2681 74.4054Z" fill="white"/>
         <path d="M52.5918 75.5285C57.2585 77.9312 61.0179 78.5318 62.3142 78.5318C70.8699 79.3327 76.2496 76.8633 77.87 75.5285H52.5918Z" fill="white"/>
         <path d="M52.8345 23.8122C50.5768 17.9997 57.4415 12.9286 62.3337 16.7951L62.6496 17.0447C64.781 18.7292 67.8107 18.6534 69.8553 16.8645C74.2075 13.0563 80.787 17.4905 78.8906 22.9539L72.9037 40.202C71.8912 43.1189 69.1424 45.0744 66.0548 45.0744C63.0639 45.0744 60.3799 43.2377 59.297 40.4497L52.8345 23.8122Z" fill="white"/>
-      </svg>
-      ),
-    },
-    {
-      type: 'ayam',
-      title: 'Ayam',
-      total: 50,
-      maleCount: 25,
-      femaleCount: 25,
-      href: '/OwnerViewPage/detailStatisticsPage/ayamDetailStatisticsPage',
-      icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="59" height="86" viewBox="0 0 59 86" fill="none">
-        <path d="M6.39196 38.2222H52.8047L58.265 76.4444H0.931641L6.39196 38.2222Z" fill="#864A14"/>
-        <ellipse cx="29.598" cy="40.2698" rx="23.2064" ry="27.9841" fill="#E0B87D"/>
-        <path d="M10.2559 42.125C9.52103 39.5268 9.70164 37.5488 10.3107 36.1258C11.0232 34.461 12.8433 34.1805 13.742 35.8363C15.7968 39.6224 18.4071 46.5407 12.3972 44.4622C11.3849 44.1121 10.565 43.2179 10.2559 42.125Z" fill="#642C07"/>
-        <path d="M49.0566 42.125C49.7915 39.5268 49.6109 37.5488 49.0018 36.1258C48.2893 34.461 46.4692 34.1805 45.5705 35.8363C43.5157 39.6224 40.9054 46.5407 46.9153 44.4622C47.9276 44.1121 48.7475 43.2179 49.0566 42.125Z" fill="#642C07"/>
-        <path d="M18.6777 55.9683C22.71 53.8923 25.9582 53.3733 27.0782 53.3733C34.4707 52.6813 39.1189 54.815 40.519 55.9683L28.9158 59.381L18.6777 55.9683Z" fill="#C28737"/>
-        <path d="M31.9558 63.9134C31.1515 66.3262 27.7754 66.4254 26.8309 64.064L25.6441 61.097C25.5509 60.8641 25.4261 60.6452 25.2732 60.4464L22.0588 56.2678C20.6778 54.4724 21.9577 51.873 24.2228 51.873H34.633C36.9574 51.873 38.2186 54.5923 36.7172 56.3667L33.3512 60.3447C33.1269 60.6098 32.9552 60.9153 32.8453 61.2448L31.9558 63.9134Z" fill="#C28737"/>
-        <ellipse cx="32.0394" cy="48.3222" rx="1.22695" ry="1.63593" transform="rotate(15.901 32.0394 48.3222)" fill="white"/>
-        <ellipse cx="1.22695" cy="1.63593" rx="1.22695" ry="1.63593" transform="matrix(-0.961736 0.273977 0.273977 0.961736 27.8623 46.4127)" fill="white"/>
-        <ellipse cx="29.598" cy="18.4286" rx="5.46032" ry="18.4286" fill="#864A14"/>
-        <ellipse cx="26.1185" cy="22.7679" rx="5.46032" ry="14.728" transform="rotate(-16.5438 26.1185 22.7679)" fill="#864A14"/>
-        <ellipse cx="5.46032" cy="14.728" rx="5.46032" ry="14.728" transform="matrix(-0.958602 -0.284749 -0.284749 0.958602 42.9951 9.93494)" fill="#864A14"/>
-        <ellipse cx="24.8206" cy="77.8095" rx="6.14286" ry="8.19048" fill="#864A14"/>
-        <ellipse cx="34.3763" cy="77.8095" rx="6.14286" ry="8.19048" fill="#864A14"/>
-        <ellipse cx="45.2972" cy="75.0794" rx="6.14286" ry="8.19048" fill="#864A14"/>
-        <ellipse cx="52.1223" cy="75.0794" rx="6.14286" ry="8.19048" fill="#864A14"/>
-        <ellipse cx="7.07547" cy="75.0794" rx="6.14286" ry="8.19048" fill="#864A14"/>
-        <ellipse cx="13.9007" cy="75.0794" rx="6.14286" ry="8.19048" fill="#864A14"/>
       </svg>
       ),
     },
