@@ -923,3 +923,15 @@ body {
   align-items: center;
   gap: 10px;
 }
+
+.fieldFormVertical {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fieldFormHorizontal {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
