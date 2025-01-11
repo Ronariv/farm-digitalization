@@ -80,10 +80,10 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                                             <GeneralInfoBox title={'Berat'} value={livestock.weight || "Undefined"} ></GeneralInfoBox>
                                         </div>
                                         <div className='generalInformationLivestockBoxTop'>
-                                            <GeneralInfoBox title={'ID Ayah'} value={livestock.dad_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Ibu'} value={livestock.mom_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Kakak'} value={livestock.grandpa_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Nenek'} value={livestock.grandma_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
+                                        <GeneralInfoBox title={'ID Ayah'} value={livestock.dad_name_id || "N/A"} ras={'Purebred'}  isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Ibu'} value={livestock.mom_name_id || "N/A"} grade={'F1'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Kakak'} value={livestock.grandpa_name_id || "N/A"} ras={'Purebred'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Nenek'} value={livestock.grandma_name_id || "N/A"} grade={'F3'} isLink={true} linkHref='' ></GeneralInfoBox>
                                         </div>
                                     </div>
                                 </div>
@@ -114,24 +114,36 @@ interface GeneralInfoBoxProps {
     value: string | number | null;
     isLink?: boolean; // Optional parameter to determine if the value is a hyperlink
     linkHref?: string; // URL for the hyperlink
+    ras?: string;
+    grade?: string;
 }
 
-const GeneralInfoBox: React.FC<GeneralInfoBoxProps> = ({ title, value, isLink = false, linkHref = "#" }) => {
+const GeneralInfoBox: React.FC<GeneralInfoBoxProps> = ({ title, value, isLink = false, linkHref = "#", ras, grade }) => {
     return (
         <div className="generalInformationLivestockBoxTopData">
             <h1 className="generalInformationLivestockBoxTopDataTitle">{title}</h1>
             {isLink ? (
+                <div>
                 <a
-                    href={linkHref}
-                    className="generalInformationLivestockBoxTopDataValue hyperlinkStyle"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    {value ?? "N/A"}
-                </a>
-            ) : (
-                <h1 className="generalInformationLivestockBoxTopDataValue">{value ?? "N/A"}</h1>
-            )}
+                href={linkHref}
+                className="generalInformationLivestockBoxTopDataValue hyperlinkStyle"
+                target="_blank"
+                rel="noopener noreferrer"
+                
+            >
+          
+
+                {value ?? "N/A"}
+            </a>
+
+           <p>{ras}</p>
+           <p>{grade}</p>
+            
+         </div>
+        ) : (
+            <h1 className="generalInformationLivestockBoxTopDataValue">{value ?? "N/A"}</h1>
+   
+        )}
         </div>
     );
 };

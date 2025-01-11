@@ -23,6 +23,10 @@ const app: React.FC = () => {
         console.log('Selected Jenis Kelamin:', value);
       };
 
+      const handleStatusSelect = (option: string) => {
+        setSelectedFase(option);
+      };
+
       const [selectedFase, setSelectedFase] = useState("");
 
     return (
@@ -133,17 +137,20 @@ const app: React.FC = () => {
                 </div>
               </div>
               </div>
-              
-  
-  
-              <Input
-                disabled={false}
-                type="text"
-                placeholder="Masukkan tipe penyakit"
-              />
+            
+
             </div>
           </div>
           
+          <div className="statusPilihan-addTernak">
+              <Label title="Status (Pilihan) *" />
+              <DropdownFase
+                  options={['Tersedia', 'Hilang', 'Mati']}
+                  placeholder="Status"
+                  onSelect={handleStatusSelect}
+                />
+          </div>
+
           <div className="lanjutButton-addTernak">
             <PrimaryButton 
             label="Lanjut" 

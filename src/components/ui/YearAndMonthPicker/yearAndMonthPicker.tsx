@@ -60,7 +60,7 @@ const YearAndMonthPicker: React.FC = () => {
         >
           <path
             d="M4.5 6L8.5 10L12.5 6"
-            stroke="#FFFFFF"
+            stroke="#248543"
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -168,7 +168,7 @@ const YearAndMonthPicker: React.FC = () => {
         >
           <path
             d="M4.5 6L8.5 10L12.5 6"
-            stroke="#FFFFFF"
+            stroke="#248543"
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"

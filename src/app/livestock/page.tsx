@@ -1,6 +1,6 @@
 import Image from "next/image";
 'use client';
-
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { Inter } from "next/font/google";
 import Link from "next/link";
@@ -16,9 +16,15 @@ import DropdownFase from "@/components/ui/DropdownPhase/DropdownPhase";
 import SetUmurTernakForm from "@/components/ui/SetUmurTernakForm/SetUmurTernakForm";
 import SetFasePerkembanganForm from "@/components/ui/SetFasePerkembanganForm/SetFasePerkembanganForm";
 import CustomIDForm from "@/components/ui/CostumIDForm/CostumIDForm"
+import Logo from "@/components/ui/Logo/Logo";
+import MoreCard from "@/components/ui/MoreCard/MoreCard";
+import DropdownInput from "@/components/ui/DropdownInput/DropdownInput";
+import DropdownPhase from "@/components/ui/DropdownPhase/DropdownPhase";
+import SidebarDisabled from "@/components/ui/SidebarDisabled/SidebarDisabled";
+import Breadcrumbs from '@/components/ui/Breadcrumbs/breadcrumbs';
 
 export default function OnBoarding() {
-
+ const [breadcrumb, setBreadcrumb] = useState('Statistik');
     const currentLactation = {
         title: 'Laktasi ke-4',
         description: '1 Jantan - Des 2024',
@@ -28,11 +34,12 @@ export default function OnBoarding() {
         { title: 'Laktasi ke-2', description: '1 Jantan - Aug 2024' },
       ];
 
+      const options = ['Cacingan', 'Diare', 'Demam', 'Flu'];
+
       const handleFaseSelect = (value: string) => {
-        console.log('Selected Fase:', value);
+        console.log('Selected value:', value);
       };
     
-      
   return (
     <div>
         {/* <PerbaruiButton label={"Perbarui"}/>
@@ -57,9 +64,33 @@ export default function OnBoarding() {
 
       {/* <SetUmurTernakForm/>
       <SetFasePerkembanganForm/> */}
-      <CustomIDForm/>
+      {/* <CustomIDForm/> */}
       
+      {/* <MoreCard/> */}
+      {/* <DropdownPhase
+        label="Pilih Kondisi"
+        options={options}
+        placeholder="Pilih atau tambahkan..."
+        onSelect={handleFaseSelect}
+      /> */}
+{/* 
+      <DropdownInput
+              // label="Pilih Kondisi"
+              options={options}
+              placeholder="Riwayat Penyakit"
+              onSelect={handleFaseSelect}
+      /> */}
 
+<SidebarDisabled setBreadcrumb={setBreadcrumb} setFarm={function (farmName: string): void {
+            throw new Error('Function not implemented.');
+          } } />
+
+
+{/* <DropdownPhase
+                  options={['Tersedia', 'Hilang', 'Mati']}
+                  placeholder="Status"
+                  onSelect={handleFaseSelect}
+                /> */}
     </div>
   );
 }

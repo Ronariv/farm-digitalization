@@ -4,11 +4,14 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { validateEmailOrPhone } from "@/controllers/validationLoginRegister";
+import PrimaryButton from "@/components/ui/PrimaryButton/primaryButton";
+import { useRouter } from 'next/navigation'
 
 export default function InputDemo() {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+     const router = useRouter()
 
   const handleValidationAndSubmit = () => {
     const validation = validateEmailOrPhone(emailOrPhone);
@@ -18,13 +21,15 @@ export default function InputDemo() {
     } else if (!password) {
       setErrorMessage("Password tidak boleh kosong.");
     } else {
-      setErrorMessage("");
-      alert("Login berhasil!");
+      // setErrorMessage("");
+      // alert("Login berhasil!");
+      router.push(`OwnerViewPage/defaultOwnerViewPage`);
     }
   };
 
   return (
-    <div className="h-screen bg-gray-100 flex justify-end items-center pr-[148px]">
+    <div className="h-screen bg-cover bg-gray-100 flex justify-end items-center pr-[148px]"
+    >
     {/* Card */}
     <div className="bg-white w-[400px] p-8 rounded-[34px] shadow-md">
       {/* Placeholder for Title */}
@@ -78,13 +83,19 @@ export default function InputDemo() {
   
         {/* Submit Button */}
         <div className="button-login">
-          <Button
+          {/* <Button
             className="w-[13.813rem] h-[3.25rem] rounded-md bg-[#248543] text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-[10px] font-normal"
             onClick={handleValidationAndSubmit}
             disabled={!emailOrPhone && !password}
           >
             Masuk
-          </Button>
+          </Button> */}
+
+        <PrimaryButton
+        label="Masuk"
+        width={221}
+        onClick={() => router.push(`/OwnerViewPage/defaultOwnerViewPage`)}
+        />
         </div>
       </form>
   

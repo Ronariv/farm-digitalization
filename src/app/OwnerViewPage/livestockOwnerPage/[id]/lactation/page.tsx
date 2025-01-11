@@ -8,6 +8,9 @@ import GenderIcon from '@/components/ui/genderIcon';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TopBar from '@/components/ui/TopBar/topBar';
 import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField';
+import { Input } from "@/components/ui/input"
+import DropdownFase from '@/components/ui/DropdownPhase/DropdownPhase';
+import { useRouter } from 'next/navigation'
 
 interface LivestockLactationPageProps {
     params: {
@@ -29,6 +32,13 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
     //     return <div>Error: {error}</div>;
     // }
 
+     const Label: React.FC<{ title: string }> = ({ title }) => (
+        <label className="label-addTernak">{title}</label>
+      );
+      const handleJenisKelaminSelect = (value: string) => {
+        console.log('Selected Jenis Kelamin:', value);
+      };
+ const router = useRouter()
     return (
         <div>
             <div className="layout">
@@ -54,7 +64,11 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                                         <GenderIcon gender={livestock.gender == "MALE" ? 'jantan' : 'betina'}></GenderIcon>
                                     </div>
                                     <div className="deleteIcon">
-                                        <PrimaryButton label='Perbarui' width={130}/>
+                                        <PrimaryButton 
+                                        label='Perbarui' 
+                                        width={130}
+                                        onClick={() => router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}`)}
+                                        />
                                         {/* <DeleteButton /> */}
                                     </div>
                                 </div>
@@ -80,10 +94,10 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                                             <GeneralInfoBox title={'Berat'} value={livestock.weight || "Undefined"} ></GeneralInfoBox>
                                         </div>
                                         <div className='generalInformationLivestockBoxTop'>
-                                            <GeneralInfoBox title={'ID Ayah'} value={livestock.dad_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Ibu'} value={livestock.mom_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Kakak'} value={livestock.grandpa_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Nenek'} value={livestock.grandma_name_id || "N/A"} isLink={true} linkHref='' ></GeneralInfoBox>
+                                        <GeneralInfoBox title={'ID Ayah'} value={livestock.dad_name_id || "N/A"} ras={'Purebred'}  isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Ibu'} value={livestock.mom_name_id || "N/A"} grade={'F1'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Kakak'} value={livestock.grandpa_name_id || "N/A"} ras={'Purebred'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Nenek'} value={livestock.grandma_name_id || "N/A"} grade={'F3'} isLink={true} linkHref='' ></GeneralInfoBox>
                                         </div>
                                     </div>
                                 </div>
@@ -92,10 +106,29 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                                 </h1>
                                 <div className='fieldFormVertical'>
                                     <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Date of Birth *'/>
+                                    {/* <h1>Date of Birth *</h1>
+                                    <Input disabled={false} type="text" placeholder="DD/MM/YYY" className="styledInput" /> */}
+
+                                    {/* <Label title="Laktasi *" />
+                                    <Input disabled={false} type="number" placeholder="Laktasi" className="styledInput" /> */}
+
                                     <PrimaryTextField width={150} placeholder='0'label='Laktasi *'/>
                                     <div className='fieldFormHorizontal'>
-                                        <PrimaryTextField width={250} placeholder='Jenis Kelamin'label='Jenis Kelamin (pilihan) *'/>
-                                        <PrimaryTextField width={100} placeholder='0'label='Jumlah *'/>
+                                        {/* <PrimaryTextField width={250} placeholder='Jenis Kelamin'label='Jenis Kelamin (pilihan) *'/> */}
+                                        <div className="textField">
+                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
+                                            <DropdownFase
+                                                options={['Jantan', 'Betina']}
+                                                placeholder="Jenis Kelamin"
+                                                onSelect={handleJenisKelaminSelect}
+                                            />
+                                        </div>
+                                        <div className="textField">
+                                            <PrimaryTextField width={100} placeholder='0'label='Jumlah *'/>
+                                        </div>
+                                        
+                                        {/* <Label title="Jumlah *" />
+                                        <Input disabled={false} type="number" placeholder="Jumlah" /> */}
                                     </div>
                                 </div>
                             </div>
@@ -118,24 +151,36 @@ interface GeneralInfoBoxProps {
     value: string | number | null;
     isLink?: boolean; // Optional parameter to determine if the value is a hyperlink
     linkHref?: string; // URL for the hyperlink
+    ras?: string;
+    grade?: string;
 }
 
-const GeneralInfoBox: React.FC<GeneralInfoBoxProps> = ({ title, value, isLink = false, linkHref = "#" }) => {
+const GeneralInfoBox: React.FC<GeneralInfoBoxProps> = ({ title, value, isLink = false, linkHref = "#", ras, grade }) => {
     return (
         <div className="generalInformationLivestockBoxTopData">
             <h1 className="generalInformationLivestockBoxTopDataTitle">{title}</h1>
             {isLink ? (
+                <div>
                 <a
-                    href={linkHref}
-                    className="generalInformationLivestockBoxTopDataValue hyperlinkStyle"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    {value ?? "N/A"}
-                </a>
-            ) : (
-                <h1 className="generalInformationLivestockBoxTopDataValue">{value ?? "N/A"}</h1>
-            )}
+                href={linkHref}
+                className="generalInformationLivestockBoxTopDataValue hyperlinkStyle"
+                target="_blank"
+                rel="noopener noreferrer"
+                
+            >
+          
+
+                {value ?? "N/A"}
+            </a>
+
+           <p>{ras}</p>
+           <p>{grade}</p>
+            
+         </div>
+        ) : (
+            <h1 className="generalInformationLivestockBoxTopDataValue">{value ?? "N/A"}</h1>
+   
+        )}
         </div>
     );
 };

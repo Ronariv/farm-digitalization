@@ -21,7 +21,8 @@ import { livestockData } from '@/data/livestockData';
 import { farmListData } from '@/data/farmData';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TopBar from '@/components/ui/TopBar/topBar';
-
+import { defaultFilterCategories } from '@/models/FilterCategory';
+import InviteFarmModal from '@/components/ui/InviteFarmModal/InviteFarmModal';
 
 const LivestockPage: React.FC = () => {
     const router = useRouter()
@@ -29,6 +30,8 @@ const LivestockPage: React.FC = () => {
     const [selectedFarm, setSelectedFarm] = useState(farmListData[0].name || '');
 
     const [selectedLivestock, setSelectedLivestock] = useState(null);
+
+      const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleFarmChange = (farmName: string) => {
         setSelectedFarm(farmName);
@@ -55,13 +58,13 @@ const LivestockPage: React.FC = () => {
                     <div className="menuHeader">
                         <h1 className="menuTittle">Peternakan Anda</h1>
                         <div className="sortByAndFilter">
-                            <PrimaryButton label='+ Tambah Ternak' width={200} onClick={() => router.push(`livestockOwnerPage/create/`)}/>
+                            <PrimaryButton label='+ Tambah Ternak' width={200} onClick={() => router.push(`addTernakPage`)}/>
                         </div>
                     </div>
                     <div className="menuHeader">
                         <div className="sortByAndFilter">
                             <SortByButton></SortByButton>
-                            <FilterButton></FilterButton>
+                            <FilterButton filters={defaultFilterCategories}></FilterButton>
                         </div>
                     </div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
