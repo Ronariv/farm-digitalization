@@ -8,17 +8,16 @@ import GenderIcon from '@/components/ui/genderIcon';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TopBar from '@/components/ui/TopBar/topBar';
 import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField';
-import { Input } from "@/components/ui/input"
-import DropdownFase from '@/components/ui/DropdownPhase/DropdownPhase';
 import { useRouter } from 'next/navigation'
+import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
 
-interface LivestockLactationPageProps {
+interface LivestockMilkProductionPageProps {
     params: {
         id: string;
     };
 }
 
-const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params }) => {
+const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = ({ params }) => {
     // const { data, loading, error } = useFetch<Livestock[]>(
     //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
     //     undefined
@@ -32,18 +31,12 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
     //     return <div>Error: {error}</div>;
     // }
 
-     const Label: React.FC<{ title: string }> = ({ title }) => (
-        <label className="label-addTernak">{title}</label>
-      );
-      const handleJenisKelaminSelect = (value: string) => {
-        console.log('Selected Jenis Kelamin:', value);
-      };
+        const handleUpdateData = () => {
+            console.log("Data hasil susu ternak berhasil diperbarui");
+            alert("Data hasil susu ternak berhasil diperbarui");
+          };
+     const router = useRouter()
 
-      const handleUpdateData = () => {
-        console.log("Data laktasi ternak berhasil diperbarui");
-        alert("Data laktasi ternak berhasil diperbarui");
-      };
- const router = useRouter()
     return (
         <div>
             <div className="layout">
@@ -56,7 +49,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                 </div>
 
                 <div className="main-content">
-                    <TopBar ></TopBar>
+                   <TopBarOpt></TopBarOpt>
 
                     {livestockData.map((livestock) => (
                         livestock.name_id.toLowerCase() == params.id 
@@ -74,7 +67,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                                         width={130}
                                         onClick={() => {
                                             handleUpdateData(); // Memunculkan alert
-                                            router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
+                                            router.push(`/OperatorViewPage/livestockOperatorPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
                                           }}
                                         />
                                         {/* <DeleteButton /> */}
@@ -110,59 +103,11 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                                     </div>
                                 </div>
                                 <h1 className='livestockHistoryTitle'>
-                                    Laktasi
+                                    Hasil Susu
                                 </h1>
                                 <div className='fieldFormVertical'>
-                                    <PrimaryTextField 
-                                    width={350} 
-                                    placeholder="SPW-018" 
-                                    label="ID Pasangan *" 
-                                    disabled={true} 
-                                    />
-
-                                    <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Tanggal Lahir *'/>
-                                    {/* <h1>Date of Birth *</h1>
-                                    <Input disabled={false} type="text" placeholder="DD/MM/YYY" className="styledInput" /> */}
-
-                                    {/* <Label title="Laktasi *" />
-                                    <Input disabled={false} type="number" placeholder="Laktasi" className="styledInput" /> */}
-
-                                    <div className="row-lactation">
-                                    <PrimaryTextField 
-                                    width={76} 
-                                    placeholder="Ke-1" 
-                                    label="Laktasi *" 
-                                    disabled={true} 
-                                    />
-
-                                    <PrimaryTextField 
-                                    width={102} 
-                                    placeholder='2'
-                                    label='Jumlah Anak *'/>    
-                                    </div>
-
-
-                                    <div className='row-lactation'>
-                                        {/* <PrimaryTextField width={250} placeholder='Jenis Kelamin'label='Jenis Kelamin (pilihan) *'/> */}
-                                        <div className="textField">
-                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
-                                            <DropdownFase
-                                                options={['Jantan', 'Betina']}
-                                                placeholder="Jenis Kelamin"
-                                                onSelect={handleJenisKelaminSelect}
-                                            />
-                                        </div>
-
-                                        <div className="textField">
-                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
-                                            <DropdownFase
-                                                options={['Jantan', 'Betina']}
-                                                placeholder="Jenis Kelamin"
-                                                onSelect={handleJenisKelaminSelect}
-                                            />
-                                        </div>
-                                      
-                                    </div>
+                                    <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Date *'/>
+                                    <PrimaryTextField width={250} placeholder='liter'label='Liter *'/>
                                 </div>
                             </div>
                         </div>
@@ -177,7 +122,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
     );
 };
 
-export default LivestockLactationPage
+export default LivestockMilkProductionPage
 
 interface GeneralInfoBoxProps {
     title: string;

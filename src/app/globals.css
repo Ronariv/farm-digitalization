@@ -1185,3 +1185,8 @@ margin-top: 5%;
   padding: 8px; /* Padding */
   min-width: 150px; /* Lebar minimum */
 }
+
+.row-lactation{
+  display: flex;
+  gap: 46px;
+}

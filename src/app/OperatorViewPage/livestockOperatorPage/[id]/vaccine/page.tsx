@@ -8,17 +8,17 @@ import GenderIcon from '@/components/ui/genderIcon';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TopBar from '@/components/ui/TopBar/topBar';
 import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField';
-import { Input } from "@/components/ui/input"
-import DropdownFase from '@/components/ui/DropdownPhase/DropdownPhase';
 import { useRouter } from 'next/navigation'
+import DropdownInput from "@/components/ui/DropdownInput/DropdownInput";
+import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
 
-interface LivestockLactationPageProps {
+interface LivestockVaccinePageProps {
     params: {
         id: string;
     };
 }
 
-const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params }) => {
+const LivestockVaccinePage: React.FC<LivestockVaccinePageProps> = ({ params }) => {
     // const { data, loading, error } = useFetch<Livestock[]>(
     //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
     //     undefined
@@ -32,18 +32,19 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
     //     return <div>Error: {error}</div>;
     // }
 
-     const Label: React.FC<{ title: string }> = ({ title }) => (
-        <label className="label-addTernak">{title}</label>
-      );
-      const handleJenisKelaminSelect = (value: string) => {
-        console.log('Selected Jenis Kelamin:', value);
+    const [textFields, setTextFields] = useState<React.ReactNode[]>([]);
+    const router = useRouter(); 
+    const options = ['Parvovirus', 'Hepatitis', 'Distemper', 'Parainfluenza'];
+
+    const handleFaseSelect = (value: string) => {
+      console.log('Selected value:', value);
+    };
+
+    const handleUpdateData = () => {
+        console.log("Data berat badan ternak berhasil diperbarui");
+        alert("Data berat badan ternak berhasil diperbarui");
       };
 
-      const handleUpdateData = () => {
-        console.log("Data laktasi ternak berhasil diperbarui");
-        alert("Data laktasi ternak berhasil diperbarui");
-      };
- const router = useRouter()
     return (
         <div>
             <div className="layout">
@@ -56,7 +57,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                 </div>
 
                 <div className="main-content">
-                    <TopBar ></TopBar>
+                    <TopBarOpt/>
 
                     {livestockData.map((livestock) => (
                         livestock.name_id.toLowerCase() == params.id 
@@ -72,9 +73,9 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                                         <PrimaryButton 
                                         label='Perbarui' 
                                         width={130}
-                                        onClick={() => {
+                                         onClick={() => {
                                             handleUpdateData(); // Memunculkan alert
-                                            router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
+                                            router.push(`/OperatorViewPage/livestockOperatorPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
                                           }}
                                         />
                                         {/* <DeleteButton /> */}
@@ -110,60 +111,22 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                                     </div>
                                 </div>
                                 <h1 className='livestockHistoryTitle'>
-                                    Laktasi
+                                    Riwayat Vaksin
                                 </h1>
-                                <div className='fieldFormVertical'>
-                                    <PrimaryTextField 
-                                    width={350} 
-                                    placeholder="SPW-018" 
-                                    label="ID Pasangan *" 
-                                    disabled={true} 
-                                    />
-
-                                    <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Tanggal Lahir *'/>
-                                    {/* <h1>Date of Birth *</h1>
-                                    <Input disabled={false} type="text" placeholder="DD/MM/YYY" className="styledInput" /> */}
-
-                                    {/* <Label title="Laktasi *" />
-                                    <Input disabled={false} type="number" placeholder="Laktasi" className="styledInput" /> */}
-
-                                    <div className="row-lactation">
-                                    <PrimaryTextField 
-                                    width={76} 
-                                    placeholder="Ke-1" 
-                                    label="Laktasi *" 
-                                    disabled={true} 
-                                    />
-
-                                    <PrimaryTextField 
-                                    width={102} 
-                                    placeholder='2'
-                                    label='Jumlah Anak *'/>    
-                                    </div>
-
-
-                                    <div className='row-lactation'>
-                                        {/* <PrimaryTextField width={250} placeholder='Jenis Kelamin'label='Jenis Kelamin (pilihan) *'/> */}
-                                        <div className="textField">
-                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
-                                            <DropdownFase
-                                                options={['Jantan', 'Betina']}
-                                                placeholder="Jenis Kelamin"
-                                                onSelect={handleJenisKelaminSelect}
-                                            />
-                                        </div>
-
-                                        <div className="textField">
-                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
-                                            <DropdownFase
-                                                options={['Jantan', 'Betina']}
-                                                placeholder="Jenis Kelamin"
-                                                onSelect={handleJenisKelaminSelect}
-                                            />
-                                        </div>
-                                      
-                                    </div>
+                                {
+                                    textFields.map((field) => (
+                                        field
+                                    ))
+                                }
+                                <div className='addLivestockHistory'>
+                                <DropdownInput
+              // label="Pilih Kondisi"
+              options={options}
+              placeholder="Riwayat Vaksin"
+              onSelect={handleFaseSelect}
+      />
                                 </div>
+                                <DetailHistoryCard historyItems={livestock.vaccine.history_items} />
                             </div>
                         </div>
                         :
@@ -177,7 +140,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
     );
 };
 
-export default LivestockLactationPage
+export default LivestockVaccinePage
 
 interface GeneralInfoBoxProps {
     title: string;

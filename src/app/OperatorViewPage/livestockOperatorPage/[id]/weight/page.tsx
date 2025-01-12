@@ -8,17 +8,15 @@ import GenderIcon from '@/components/ui/genderIcon';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TopBar from '@/components/ui/TopBar/topBar';
 import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField';
-import { Input } from "@/components/ui/input"
-import DropdownFase from '@/components/ui/DropdownPhase/DropdownPhase';
 import { useRouter } from 'next/navigation'
 
-interface LivestockLactationPageProps {
+interface LivestockWeightPageProps {
     params: {
         id: string;
     };
 }
 
-const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params }) => {
+const LivestockWeightPage: React.FC<LivestockWeightPageProps> = ({ params }) => {
     // const { data, loading, error } = useFetch<Livestock[]>(
     //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
     //     undefined
@@ -32,16 +30,9 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
     //     return <div>Error: {error}</div>;
     // }
 
-     const Label: React.FC<{ title: string }> = ({ title }) => (
-        <label className="label-addTernak">{title}</label>
-      );
-      const handleJenisKelaminSelect = (value: string) => {
-        console.log('Selected Jenis Kelamin:', value);
-      };
-
-      const handleUpdateData = () => {
-        console.log("Data laktasi ternak berhasil diperbarui");
-        alert("Data laktasi ternak berhasil diperbarui");
+    const handleUpdateData = () => {
+        console.log("Data berat badan ternak berhasil diperbarui");
+        alert("Data berat badan ternak berhasil diperbarui");
       };
  const router = useRouter()
     return (
@@ -110,59 +101,11 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                                     </div>
                                 </div>
                                 <h1 className='livestockHistoryTitle'>
-                                    Laktasi
+                                    Bobot
                                 </h1>
                                 <div className='fieldFormVertical'>
-                                    <PrimaryTextField 
-                                    width={350} 
-                                    placeholder="SPW-018" 
-                                    label="ID Pasangan *" 
-                                    disabled={true} 
-                                    />
-
-                                    <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Tanggal Lahir *'/>
-                                    {/* <h1>Date of Birth *</h1>
-                                    <Input disabled={false} type="text" placeholder="DD/MM/YYY" className="styledInput" /> */}
-
-                                    {/* <Label title="Laktasi *" />
-                                    <Input disabled={false} type="number" placeholder="Laktasi" className="styledInput" /> */}
-
-                                    <div className="row-lactation">
-                                    <PrimaryTextField 
-                                    width={76} 
-                                    placeholder="Ke-1" 
-                                    label="Laktasi *" 
-                                    disabled={true} 
-                                    />
-
-                                    <PrimaryTextField 
-                                    width={102} 
-                                    placeholder='2'
-                                    label='Jumlah Anak *'/>    
-                                    </div>
-
-
-                                    <div className='row-lactation'>
-                                        {/* <PrimaryTextField width={250} placeholder='Jenis Kelamin'label='Jenis Kelamin (pilihan) *'/> */}
-                                        <div className="textField">
-                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
-                                            <DropdownFase
-                                                options={['Jantan', 'Betina']}
-                                                placeholder="Jenis Kelamin"
-                                                onSelect={handleJenisKelaminSelect}
-                                            />
-                                        </div>
-
-                                        <div className="textField">
-                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
-                                            <DropdownFase
-                                                options={['Jantan', 'Betina']}
-                                                placeholder="Jenis Kelamin"
-                                                onSelect={handleJenisKelaminSelect}
-                                            />
-                                        </div>
-                                      
-                                    </div>
+                                    <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Date *'/>
+                                    <PrimaryTextField width={150} placeholder='0'label='Kg *'/>
                                 </div>
                             </div>
                         </div>
@@ -177,7 +120,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
     );
 };
 
-export default LivestockLactationPage
+export default LivestockWeightPage
 
 interface GeneralInfoBoxProps {
     title: string;

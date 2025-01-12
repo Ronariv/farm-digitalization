@@ -118,23 +118,6 @@ const app: React.FC = () => {
           </div>
           
           <div className="simpanButton-addDetailTernak">
-            {/* {livestockData && selectedFarm && (
-                (() => {
-                const livestock = livestockData.find(
-                    (livestock) => livestock.farm_name === selectedFarm
-                );
-                
-                return livestock ? (
-                    <PrimaryButton
-                    label="Simpan"
-                    width={221}
-                    onClick={() => router.push(`livestockOperatorPage/${livestock.name_id.toLowerCase()}/`)}
-                    />
-                ) : (
-                    <p>Data tidak ditemukan</p>
-                );
-                })()
-            )} */}
             <PrimaryButton
             label="Simpan"
             width={221}
