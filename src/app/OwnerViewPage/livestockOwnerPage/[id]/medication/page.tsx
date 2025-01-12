@@ -38,6 +38,12 @@ const LivestockMedicationPage: React.FC<LivestockMedicationPageProps> = ({ param
      const handleFaseSelect = (value: string) => {
        console.log('Selected value:', value);
      };
+
+     const handleUpdateData = () => {
+        console.log("Data obat ternak berhasil diperbarui");
+        alert("Data obat berhasil diperbarui");
+      };
+
     return (
         <div>
             <div className="layout">
@@ -66,7 +72,10 @@ const LivestockMedicationPage: React.FC<LivestockMedicationPageProps> = ({ param
                                         <PrimaryButton 
                                         label='Perbarui' 
                                         width={130}
-                                        onClick={() => router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`)}
+                                        onClick={() => {
+                                            handleUpdateData(); // Memunculkan alert
+                                            router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
+                                          }}
                                         />
                                         {/* <DeleteButton /> */}
                                     </div>
@@ -119,7 +128,7 @@ const LivestockMedicationPage: React.FC<LivestockMedicationPageProps> = ({ param
                                      <DropdownInput
               // label="Pilih Kondisi"
               options={options}
-              placeholder="Riwayat Penyakit"
+              placeholder="Riwayat Obat"
               onSelect={handleFaseSelect}
       />
                                 </div>

@@ -62,6 +62,12 @@ const LivestockVitaminPage: React.FC<LivestockVitaminPageProps> = ({ params }) =
       console.log('Selected value:', value);
     };
 
+    
+    const handleUpdateData = () => {
+        console.log("Data vitamin ternak berhasil diperbarui");
+        alert("Data vitamin ternak berhasil diperbarui");
+      };
+
     return (
         <div>
             <div className="layout">
@@ -90,7 +96,10 @@ const LivestockVitaminPage: React.FC<LivestockVitaminPageProps> = ({ params }) =
                                         <PrimaryButton 
                                         label='Perbarui' 
                                         width={130}
-                                        onClick={() => router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`)}
+                                        onClick={() => {
+                                            handleUpdateData(); // Memunculkan alert
+                                            router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
+                                          }}
                                         />
                                         {/* <DeleteButton /> */}
                                     </div>
@@ -136,7 +145,7 @@ const LivestockVitaminPage: React.FC<LivestockVitaminPageProps> = ({ params }) =
                                 <DropdownInput
               // label="Pilih Kondisi"
               options={options}
-              placeholder="Riwayat Penyakit"
+              placeholder="Riwayat Vitamin"
               onSelect={handleFaseSelect}
       />
                                 </div>

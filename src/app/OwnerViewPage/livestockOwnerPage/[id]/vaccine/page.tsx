@@ -38,6 +38,12 @@ const LivestockVaccinePage: React.FC<LivestockVaccinePageProps> = ({ params }) =
     const handleFaseSelect = (value: string) => {
       console.log('Selected value:', value);
     };
+
+    const handleUpdateData = () => {
+        console.log("Data berat badan ternak berhasil diperbarui");
+        alert("Data berat badan ternak berhasil diperbarui");
+      };
+
     return (
         <div>
             <div className="layout">
@@ -66,7 +72,10 @@ const LivestockVaccinePage: React.FC<LivestockVaccinePageProps> = ({ params }) =
                                         <PrimaryButton 
                                         label='Perbarui' 
                                         width={130}
-                                        onClick={() => router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`)}
+                                         onClick={() => {
+                                            handleUpdateData(); // Memunculkan alert
+                                            router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
+                                          }}
                                         />
                                         {/* <DeleteButton /> */}
                                     </div>
