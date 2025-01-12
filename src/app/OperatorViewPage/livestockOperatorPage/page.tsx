@@ -19,13 +19,20 @@ import SortByButton from '@/components/ui/SortBy/sortBy';
 import FilterButton from '@/components/ui/Filter/filterButton';
 import { livestockData } from '@/data/livestockData';
 import { farmListData } from '@/data/farmData';
+import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
+import TopBar from '@/components/ui/TopBar/topBar';
 import { defaultFilterCategories } from '@/models/FilterCategory';
-
+import InviteFarmModal from '@/components/ui/InviteFarmModal/InviteFarmModal';
+import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
 
 const LivestockPage: React.FC = () => {
     const router = useRouter()
     
     const [selectedFarm, setSelectedFarm] = useState(farmListData[0].name || '');
+
+    const [selectedLivestock, setSelectedLivestock] = useState(null);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleFarmChange = (farmName: string) => {
         setSelectedFarm(farmName);
@@ -45,25 +52,15 @@ const LivestockPage: React.FC = () => {
                 </div>
 
                 <div className="main-content">
-                    <div className="header">
-                    
-                    <div className="searchbar">
-                    <SearchBar />
-                    </div>
-
-                    <div className="operatorProfile">
-                    <OperatorProfile
-                    src="/operator.jpeg" 
-                    altText=" "
-                    />
-                    </div>
-
-                    </div>
+                    <TopBarOpt/>
                 
                     <div className="content">
                     <div className="menuSection">
                     <div className="menuHeader">
                         <h1 className="menuTittle">Peternakan Anda</h1>
+                        
+                    </div>
+                    <div className="menuHeader">
                         <div className="sortByAndFilter">
                             <SortByButton></SortByButton>
                             <FilterButton filters={defaultFilterCategories}></FilterButton>
@@ -76,12 +73,17 @@ const LivestockPage: React.FC = () => {
                         livestockData.filter(
                             (livestock) => livestock.farm_name === selectedFarm 
                         ).map((livestock) => (
-                            <div key={livestock.id} onClick={() => router.push(`livestockOperatorPage/${livestock.name_id.toLowerCase()}/`)}>
+                            <div 
+                            key={livestock.id} 
+                            onClick={() => 
+                                
+                            router.push(`livestockOperatorPage/${livestock.name_id.toLowerCase()}/`
+                            
+                            )}>
                                 <AnimalCard livestock={livestock} />
                             </div>
                         ))
-                        // :
-                        // <div></div>
+
                         }
                     </div>
                     </div>

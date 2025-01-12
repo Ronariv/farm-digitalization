@@ -20,9 +20,6 @@ const OperatorProfile = ({ src, altText }: OperatorProfileProps) => {
           className={styles.image}
         />
       </div>
-
-      {/* Dropdown Icon */}
-
     </div>
   );
 };

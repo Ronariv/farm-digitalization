@@ -1241,3 +1241,8 @@ margin-top: 5%;
   min-width: 150px; /* Lebar minimum */
 }
 
+.row-lactation{
+  display: flex;
+  gap: 46px;
+}
+

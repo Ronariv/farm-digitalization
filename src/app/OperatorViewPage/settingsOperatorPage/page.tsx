@@ -22,13 +22,19 @@ import Image from 'next/image';
 import OwnerProfile from '@/components/ui/OwnerProfile/ownerProfile';
 import Breadcrumbs from '@/components/ui/Breadcrumbs/breadcrumbs';
 import { usePathname } from 'next/navigation';
+import TopBar from '@/components/ui/TopBar/topBar';
+import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
+import SetUmurTernakForm from '@/components/ui/SetUmurTernakForm/SetUmurTernakForm';
+import SetFasePerkembanganForm from '@/components/ui/SetFasePerkembanganForm/SetFasePerkembanganForm';
+import CustomIDForm from "@/components/ui/CostumIDForm/CostumIDForm"
+import { useRouter } from 'next/navigation'
 import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
 
 const App: React.FC = () => {
 
   const [breadcrumb, setBreadcrumb] = useState('Statistik');
-
-  const categories = animalCategories('operator');
+   const router = useRouter()
+  const categories = animalCategories('owner');
 
     const handleUpdate = () => {
         alert("Tombol Invite Ternak diklik!");
@@ -70,23 +76,7 @@ const App: React.FC = () => {
       </div>
 
       <div className="main-content">
-        
         <TopBarOpt/>
-        {/* <div className="header">
-          
-          <div className="searchbar">
-          <SearchBar />
-          </div>
-
-          <div className="operatorProfile">
-          <OperatorProfile
-          src="/operator.jpeg" 
-          altText=" "
-          />
-          </div>
-
-
-        </div> */}
        
         <div className="content">
         <div className="menuSection">
@@ -94,28 +84,32 @@ const App: React.FC = () => {
           <Breadcrumbs
             breadcrumbs={[
               { label: 'Peternakan Widjaya', href: '/OperatorViewPage' },
-              { label: 'Statistik', href: '' },
+              { label: 'Settings', href: '' },
             ]}
           />
           </div>
           <div className="menuHeader">
             <h1 className="menuTittle">Pengaturan</h1>
             <div className="yearAndMonthPicker">
-              <YearAndMonthPicker/>
+              <PrimaryButton
+              label="Simpan Perubahan" 
+              width={190}
+              onClick={() => router.push(`/OperatorViewPage`)}
+              />
             </div>
           </div>
-          <div className="animalCategoriesCard">
-            {categories.map((category) => (
-              <CategoryAnimalCard
-                key={category.type}
-                icon={category.icon}
-                title={category.title}
-                total={category.total}
-                maleCount={category.maleCount}
-                femaleCount={category.femaleCount}
-                href={category.href}
-              />
-            ))}
+
+          <div className="rowContainerSettingsForm">
+            <div className="umurTernakForm">
+              <SetUmurTernakForm/>
+            </div>
+            <div className="fasePerkembanganForm">
+              <SetFasePerkembanganForm/>
+            </div>
+          </div>
+
+          <div className="costumIDForm">
+          <CustomIDForm/>
           </div>
         </div>
       </div>

@@ -1,24 +1,46 @@
 "use client";
 
 import React, { useState } from 'react';
+import useFetch from '@/hooks/useFetch';
+import { useRouter } from 'next/navigation'
+import { Livestock } from '@/models/LivestockModel';
+import { useEffect } from "react";
+import { QRCodeSVG } from 'qrcode.react';
 
+
+import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
 import Sidebar from '@/components/ui/Sidebar/sidebar';
+import SearchBar from '@/components/ui/SearchBar/searchBar';
+import CategoryAnimalCard from '@/components/ui/CategoryAnimalCard/categoryAnimalCard';
+import animalCategories from '@/models/animalCategories';
+import OperatorProfile from '@/components/ui/OperatorProfile/operatorProfile';
+import Image from 'next/image';
+import OwnerProfile from '@/components/ui/OwnerProfile/ownerProfile';
+import AnimalCard from '@/components/ui/AnimalCard/animalCard';
+import Loading from '@/components/ui/loading';
+import SortByButton from '@/components/ui/SortBy/sortBy';
+import FilterButton from '@/components/ui/Filter/filterButton';
 import { livestockData } from '@/data/livestockData';
 import GenderIcon from '@/components/ui/genderIcon';
+import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
+import StatisticMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
+import StatisticWeight from '@/components/ui/StatisticsWeight/statisticsWeight';
+import DeleteButton from '@/components/ui/DeleteButtonIcon/deleteButton';
+import EditButton from '@/components/ui/EditButton/editButton';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TopBar from '@/components/ui/TopBar/topBar';
 import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField';
-import { Input } from "@/components/ui/input"
-import DropdownFase from '@/components/ui/DropdownPhase/DropdownPhase';
-import { useRouter } from 'next/navigation'
+import { ListEnd } from 'lucide-react';
+import DropdownInput from "@/components/ui/DropdownInput/DropdownInput";
+import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
 
-interface LivestockLactationPageProps {
+interface LivestockVitaminPageProps {
     params: {
-        id: string;
+      id: string;
     };
-}
+  }
 
-const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params }) => {
+const LivestockVitaminPage: React.FC<LivestockVitaminPageProps> = ({ params }) => {
     // const { data, loading, error } = useFetch<Livestock[]>(
     //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
     //     undefined
@@ -31,19 +53,22 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
     // if (error) {
     //     return <div>Error: {error}</div>;
     // }
+    const router = useRouter(); 
 
-     const Label: React.FC<{ title: string }> = ({ title }) => (
-        <label className="label-addTernak">{title}</label>
-      );
-      const handleJenisKelaminSelect = (value: string) => {
-        console.log('Selected Jenis Kelamin:', value);
+    const [textFields, setTextFields] = useState<React.ReactNode[]>([]);
+
+    const options = ['Adeplex', 'Pittol', 'B Complex', 'Wormextin'];
+
+    const handleFaseSelect = (value: string) => {
+      console.log('Selected value:', value);
+    };
+
+    
+    const handleUpdateData = () => {
+        console.log("Data vitamin ternak berhasil diperbarui");
+        alert("Data vitamin ternak berhasil diperbarui");
       };
 
-      const handleUpdateData = () => {
-        console.log("Data laktasi ternak berhasil diperbarui");
-        alert("Data laktasi ternak berhasil diperbarui");
-      };
- const router = useRouter()
     return (
         <div>
             <div className="layout">
@@ -56,7 +81,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                 </div>
 
                 <div className="main-content">
-                    <TopBar ></TopBar>
+                    <TopBarOpt></TopBarOpt>
 
                     {livestockData.map((livestock) => (
                         livestock.name_id.toLowerCase() == params.id 
@@ -74,7 +99,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                                         width={130}
                                         onClick={() => {
                                             handleUpdateData(); // Memunculkan alert
-                                            router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
+                                            router.push(`/OperatorViewPage/livestockOperatorPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
                                           }}
                                         />
                                         {/* <DeleteButton /> */}
@@ -110,60 +135,22 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                                     </div>
                                 </div>
                                 <h1 className='livestockHistoryTitle'>
-                                    Laktasi
+                                    Riwayat Vitamin
                                 </h1>
-                                <div className='fieldFormVertical'>
-                                    <PrimaryTextField 
-                                    width={350} 
-                                    placeholder="SPW-018" 
-                                    label="ID Pasangan *" 
-                                    disabled={true} 
-                                    />
-
-                                    <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Tanggal Lahir *'/>
-                                    {/* <h1>Date of Birth *</h1>
-                                    <Input disabled={false} type="text" placeholder="DD/MM/YYY" className="styledInput" /> */}
-
-                                    {/* <Label title="Laktasi *" />
-                                    <Input disabled={false} type="number" placeholder="Laktasi" className="styledInput" /> */}
-
-                                    <div className="row-lactation">
-                                    <PrimaryTextField 
-                                    width={76} 
-                                    placeholder="Ke-1" 
-                                    label="Laktasi *" 
-                                    disabled={true} 
-                                    />
-
-                                    <PrimaryTextField 
-                                    width={102} 
-                                    placeholder='2'
-                                    label='Jumlah Anak *'/>    
-                                    </div>
-
-
-                                    <div className='row-lactation'>
-                                        {/* <PrimaryTextField width={250} placeholder='Jenis Kelamin'label='Jenis Kelamin (pilihan) *'/> */}
-                                        <div className="textField">
-                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
-                                            <DropdownFase
-                                                options={['Jantan', 'Betina']}
-                                                placeholder="Jenis Kelamin"
-                                                onSelect={handleJenisKelaminSelect}
-                                            />
-                                        </div>
-
-                                        <div className="textField">
-                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
-                                            <DropdownFase
-                                                options={['Jantan', 'Betina']}
-                                                placeholder="Jenis Kelamin"
-                                                onSelect={handleJenisKelaminSelect}
-                                            />
-                                        </div>
-                                      
-                                    </div>
+                                {
+                                    textFields.map((field) => (
+                                        field
+                                    ))
+                                }
+                                <div className='addLivestockHistory'>
+                                <DropdownInput
+              // label="Pilih Kondisi"
+              options={options}
+              placeholder="Riwayat Vitamin"
+              onSelect={handleFaseSelect}
+      />
                                 </div>
+                                <DetailHistoryCard historyItems={livestock.medication.history_items} />
                             </div>
                         </div>
                         :
@@ -177,7 +164,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
     );
 };
 
-export default LivestockLactationPage
+export default LivestockVitaminPage
 
 interface GeneralInfoBoxProps {
     title: string;

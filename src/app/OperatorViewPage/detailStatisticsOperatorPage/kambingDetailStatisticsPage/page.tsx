@@ -29,6 +29,7 @@ import DetailAnimalDiagnosedCard from '@/components/ui/DetailAnimalDiagnosedCard
 import animalDiagnosedCategories from '@/models/DetailAnimalDiagnosedCategories';
 import StatisticsMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
 import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
+import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
 
 const App: React.FC = () => {
 
@@ -86,8 +87,9 @@ const App: React.FC = () => {
       </div>
 
       <div className="main-content">
-        
-        <div className="header">
+      <TopBarOpt></TopBarOpt>
+
+        {/* <div className="header">
           
           <div className="searchbar">
           <SearchBar />
@@ -107,7 +109,7 @@ const App: React.FC = () => {
             />
           </div>
 
-        </div>
+        </div> */}
        
         <div className="content">
         <div className="menuSection">

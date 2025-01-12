@@ -9,6 +9,23 @@ import { useRouter } from 'next/navigation'
 
 const app: React.FC = () => {
      const router = useRouter()
+     const [idPasangan, setIdPasangan] = useState(""); // State untuk menyimpan nilai input
+     const [error, setError] = useState(false); 
+
+    const handleUpdateData = () => {
+      if (idPasangan === "AJW-015") {
+        // Jika ID pasangan sama dengan "AJW-015"
+        setError(true); // Set error menjadi true
+        alert(
+          "ID pasangan satu garis keturunan dengan ternak SPW-015. Masukkan ID lain untuk menghindari perkawinan sedarah."
+        );
+      } else {
+        // Jika ID pasangan valid
+        setError(false); // Reset error
+        alert("Data valid! Melanjutkan ke halaman berikutnya.");
+        router.push(`/OwnerViewPage/addTernakPage/addDataDetailTernakPage`);
+      }
+    };
 
     const handleFieldClick = () => {
         console.log("Field clicked!");
@@ -73,16 +90,7 @@ const app: React.FC = () => {
               <div className="grid-row-addTernak">
                 <div>
                   <Label title="Fase (pilihan) *" />
-                  {/* <Input 
-                  disabled={false} 
-                  type="text" 
-                  placeholder="Fase" 
-                  isDropdownField
-                  dropdownIcon={<DropdownIcon />}
-                  dropupIcon={<DropupIcon />}
-                  readOnly
-                  /> */}
-                                  <DropdownFase
+                  <DropdownFase
           
                   options={['Cempe', 'Dara', 'Hamil', 'Siap Kawin', 'Afkir']}
                   placeholder="Fase"
@@ -92,16 +100,7 @@ const app: React.FC = () => {
   
                 <div>
                   <Label title="Jenis Kelamin (pilihan) *" />
-                  {/* <Input
-                    disabled={false}
-                    type="text"
-                    placeholder="Jenis Kelamin"
-                    isDropdownField
-                    dropdownIcon={<DropdownIcon />}
-                    dropupIcon={<DropupIcon />}
-                    readOnly
-                  /> */}
-                                                    <DropdownFase
+                  <DropdownFase
                   options={['Jantan', 'Betina']}
                   placeholder="Jenis Kelamin"
                   onSelect={handleJenisKelaminSelect}
@@ -110,16 +109,21 @@ const app: React.FC = () => {
 
                 <div>
                 {selectedFase === "Hamil" && (
-                    <div className="extra-input-addTernak">
-                        <Label title="ID Pasangan *" />
-                        <Input
-                        disabled={false}
-                        type="text"
-                        placeholder="ID Pasangan"
-                        />
-                    </div>
-                    )}
-                </div>
+        <div className="extra-input-addTernak">
+        <Label title="ID Pasangan *" />
+        <Input
+          disabled={false}
+          type="text"
+          placeholder="AJW-015"
+          value={idPasangan} // Sambungkan nilai input ke state
+          onChange={(e) => setIdPasangan(e.target.value)} // Update nilai input ke state
+          style={{
+            borderColor: error ? "red" : "black", // Tampilkan border merah jika error
+          }}
+        />
+      </div>
+              )}
+              </div>
                 
               </div>
 
@@ -155,8 +159,8 @@ const app: React.FC = () => {
             <PrimaryButton 
             label="Lanjut" 
             width={221}
-            onClick={() => router.push(`/OwnerViewPage/addTernakPage/addDataDetailTernakPage`)}
-             />
+            onClick={handleUpdateData}
+            />
           </div>
         </div>
       </div>
