@@ -132,7 +132,7 @@ export default function InputDemo() {
            <PrimaryButton
            label="Lanjut"
            width={221}
- onClick={() => router.push(`/registerStep2Page`)}
+           onClick={() => router.push(`/OwnerViewPage/registerStep2Page`)}
            />
 
         </div>

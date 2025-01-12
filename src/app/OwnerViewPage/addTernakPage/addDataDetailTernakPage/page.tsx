@@ -14,9 +14,9 @@ const app: React.FC = () => {
      const [selectedFarm, setSelectedFarm] = useState(farmListData[0].name || '');
     
 
-    const handleFieldClick = () => {
-        console.log("Field clicked!");
-        // Tampilkan dropdown di sini
+    const handleUpdateData = () => {
+        console.log("Data ternak berhasil ditambahkan");
+        alert("Data ternak berhasil ditambahkan");
       };
 
       const handleFaseSelect = (option: string) => {
@@ -138,7 +138,10 @@ const app: React.FC = () => {
             <PrimaryButton
             label="Simpan"
             width={221}
-            onClick={() => router.push('/OwnerViewPage')}
+            onClick={() => {
+              handleUpdateData(); // Memunculkan alert
+              router.push("/OwnerViewPage"); // Melakukan navigasi
+            }}
             />
             </div>
 

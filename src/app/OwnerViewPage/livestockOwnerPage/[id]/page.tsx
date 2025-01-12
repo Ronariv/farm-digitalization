@@ -69,6 +69,18 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
         { title: 'Laktasi ke-2', description: '1 Jantan - Aug 2024', livestock: livestock },
       ];
 
+      const handleDeleteData = () => {
+        const isConfirmed = window.confirm(
+          `Apakah Anda yakin untuk menghapus ternak ID ${livestock.name_id}?`
+        );
+      
+        if (isConfirmed) {
+          router.push(`/OwnerViewPage/livestockOwnerPage`);
+        } else {
+          router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`);
+        }
+      };
+      
    const router = useRouter()
     return (
         <div>
@@ -115,7 +127,12 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                                         width={130}
                                         onClick={() => router.push(`/OwnerViewPage/addTernakPage`)}
                                         />
-                                        <DeleteButton />
+                                        <DeleteButton
+                                         onClick={() => {
+                                            handleDeleteData(); // Memunculkan alert
+                                            
+                                          }}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +159,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                                         <div className='generalInformationLivestockBoxTop'>
                                             <GeneralInfoBox title={'ID Ayah'} value={livestock.dad_name_id || "N/A"} ras={'Purebred'}  isLink={true} linkHref='' ></GeneralInfoBox>
                                             <GeneralInfoBox title={'ID Ibu'} value={livestock.mom_name_id || "N/A"} grade={'F1'} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Kakak'} value={livestock.grandpa_name_id || "N/A"} ras={'Purebred'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Kakek'} value={livestock.grandpa_name_id || "N/A"} ras={'Purebred'} isLink={true} linkHref='' ></GeneralInfoBox>
                                             <GeneralInfoBox title={'ID Nenek'} value={livestock.grandma_name_id || "N/A"} grade={'F3'} isLink={true} linkHref='' ></GeneralInfoBox>
                                         </div>
                                     </div>

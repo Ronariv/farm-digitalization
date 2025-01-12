@@ -8,6 +8,7 @@ import GenderIcon from '@/components/ui/genderIcon';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TopBar from '@/components/ui/TopBar/topBar';
 import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField';
+import { useRouter } from 'next/navigation'
 
 interface LivestockMilkProductionPageProps {
     params: {
@@ -28,6 +29,12 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
     // if (error) {
     //     return <div>Error: {error}</div>;
     // }
+
+        const handleUpdateData = () => {
+            console.log("Data hasil susu ternak berhasil diperbarui");
+            alert("Data hasil susu ternak berhasil diperbarui");
+          };
+     const router = useRouter()
 
     return (
         <div>
@@ -54,7 +61,14 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                                         <GenderIcon gender={livestock.gender == "MALE" ? 'jantan' : 'betina'}></GenderIcon>
                                     </div>
                                     <div className="deleteIcon">
-                                        <PrimaryButton label='Perbarui' width={130}/>
+                                        <PrimaryButton 
+                                        label='Perbarui' 
+                                        width={130}
+                                        onClick={() => {
+                                            handleUpdateData(); // Memunculkan alert
+                                            router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
+                                          }}
+                                        />
                                         {/* <DeleteButton /> */}
                                     </div>
                                 </div>

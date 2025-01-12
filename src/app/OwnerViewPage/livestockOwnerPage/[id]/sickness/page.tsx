@@ -40,6 +40,11 @@ const LivestockSicknessPage: React.FC<LivestockSicknessPageProps> = ({ params })
        console.log('Selected value:', value);
      };
 
+     const handleUpdateData = () => {
+        console.log("Data penyakit ternak berhasil diperbarui");
+        alert("Data berat penyakit ternak berhasil diperbarui");
+      };
+
     return (
         <div>
             <div className="layout">
@@ -68,7 +73,10 @@ const LivestockSicknessPage: React.FC<LivestockSicknessPageProps> = ({ params })
                                         <PrimaryButton 
                                         label='Perbarui' 
                                         width={130}
-                                        onClick={() => router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`)}
+                                        onClick={() => {
+                                            handleUpdateData(); // Memunculkan alert
+                                            router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
+                                          }}
                                         />
                                         {/* <DeleteButton /> */}
                                     </div>

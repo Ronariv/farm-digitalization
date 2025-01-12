@@ -38,6 +38,11 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
       const handleJenisKelaminSelect = (value: string) => {
         console.log('Selected Jenis Kelamin:', value);
       };
+
+      const handleUpdateData = () => {
+        console.log("Data laktasi ternak berhasil diperbarui");
+        alert("Data laktasi ternak berhasil diperbarui");
+      };
  const router = useRouter()
     return (
         <div>
@@ -67,7 +72,10 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                                         <PrimaryButton 
                                         label='Perbarui' 
                                         width={130}
-                                        onClick={() => router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}`)}
+                                        onClick={() => {
+                                            handleUpdateData(); // Memunculkan alert
+                                            router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
+                                          }}
                                         />
                                         {/* <DeleteButton /> */}
                                     </div>

@@ -101,7 +101,7 @@ export default function InputDemo() {
         <PrimaryButton
         label="Masuk"
         width={221}
-        onClick={() => router.push(`/OwnerViewPage/defaultOwnerViewPage`)}
+        onClick={() => router.push(`/OwnerViewPage`)}
         />
         </div>
       </form>
@@ -109,7 +109,12 @@ export default function InputDemo() {
       {/* Placeholder for Footer */}
       <div className="mt-6">
         Baru di Ternakku?{" "}
-        <span className="text-green-600 font-bold">Daftar</span>
+        <span
+        className="text-green-600 font-bold cursor-pointer"
+        onClick={() => router.push(`/OwnerViewPage/registerStep1Page`)}
+      >
+        Daftar
+      </span>
       </div>
     </div>
   </div>  
