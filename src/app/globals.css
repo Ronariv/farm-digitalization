@@ -96,6 +96,7 @@ body {
   .button-register, .button-register2{
     display: flex;
     justify-content: center;
+    padding-top: 18px;
   }
 
   .button-login{
