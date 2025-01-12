@@ -509,6 +509,7 @@ body {
   }
 }
 
+
 .activityInformation {
   display: flex;
   flex-direction: column;
@@ -613,6 +614,38 @@ body {
   line-height: 24px; /* 120% */
 }
 
+.containerLoginRegister{
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-container{
+  display: flex; /* Gunakan flexbox */
+  flex-direction: column; /* Susun elemen secara vertikal */
+  justify-content: center; /* Rata tengah secara vertikal */
+  align-items: center; /* Rata tengah secara horizontal */
+  text-align: center; /* Untuk merapikan teks di tengah */
+  height: 100%; 
+}
+
+.text-5xl{
+  font-size: 64px;
+font-style: normal;
+font-weight: 600;
+line-height: 77px;
+}
+
+.text-ternakku{
+  color: #248543;
+}
+
+.text-desc{
+  font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: 30px
+
+}
 .activityInformationTeamsTableRowsDataMemberInfo p {
   color: var(--Text-Text-Primary, #000);
 
@@ -1141,4 +1174,14 @@ margin-top: 5%;
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh; /* Agar sesuai dengan layar penuh */
+}
+
+.viewMoreContainer {
+  position: absolute; /* Posisi absolut terhadap parent (SVG wrapper) */
+  top: 100%; /* Tampilkan di bawah ikon */
+  right: 0; /* Posisi ke kanan */
+  z-index: 999; /* Pastikan menimpa elemen lain */
+  border-radius: 8px; /* Sudut melengkung */
+  padding: 8px; /* Padding */
+  min-width: 150px; /* Lebar minimum */
 }
