@@ -6,11 +6,14 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox"
 import { validateEmailOrPhone } from "@/controllers/validationLoginRegister";
+import PrimaryButton from "@/components/ui/PrimaryButton/primaryButton";
+import { useRouter } from 'next/navigation'
 
 export default function InputDemo() {
   const [username, setUsername] = useState("");
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter()
 
     const handleValidationAndSubmit = () => {
       // Validasi email atau nomor HP
@@ -25,7 +28,23 @@ export default function InputDemo() {
     };
 
   return (
-    <div className="h-screen bg-gray-100 flex justify-end items-center pr-[148px]">
+    <div className="containerLoginRegister h-screen bg-cover bg-gray-100 flex justify-end items-center pr-[148px]"
+    >
+
+              {/* Bagian Teks */}
+    <div className="text-container pl-[148px] text-white">
+      <h1 className="text-5xl font-bold leading-tight">
+        Selamat Datang 
+        <br />
+        di 
+        <span className="text-ternakku"> Ternakku</span> !
+
+      </h1>
+      <p className="text-desc">
+        Beralih ke cara pintar dalam mengelola  <br /> peternakan Anda!
+      </p>
+    </div>
+
     {/* Card */}
     <div className="bg-white w-[400px] p-8 rounded-[34px] shadow-md">
       {/* Placeholder for Title */}
@@ -99,7 +118,7 @@ export default function InputDemo() {
 
         {/* Submit Button */}
         <div className="button-register">
-          <Link href="/registerStep2Page">
+          {/* <Link href="/registerStep2Page">
             <Button
             className="w-[13.813rem] h-[3.25rem] rounded-md bg-[#248543] text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-[10px] font-normal"
             onClick={handleValidationAndSubmit}
@@ -107,7 +126,15 @@ export default function InputDemo() {
           >
             Lanjut
           </Button>
-          </Link>
+          </Link> */}
+
+
+           <PrimaryButton
+           label="Lanjut"
+           width={221}
+ onClick={() => router.push(`/registerStep2Page`)}
+           />
+
         </div>
 
       </form>

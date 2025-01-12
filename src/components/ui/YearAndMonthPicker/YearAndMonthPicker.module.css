@@ -14,10 +14,12 @@
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
-    background-color: #248543;
-    color: white;
+    background-color: #FFF;
+    color: #248543;
     border: none;
     cursor: pointer;
+    border-radius: 10px 0px 0px 10px;
+border: 1px solid #248543;
   }
 
   .tab svg{
@@ -41,7 +43,7 @@
   }
 
   .dropdownIcon {
-    color: #FFFFFF;
+    color: #248543;
     width: 17.324px;
     height: 10.4px;
   }

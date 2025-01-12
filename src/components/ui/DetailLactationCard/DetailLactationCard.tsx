@@ -4,18 +4,36 @@ import React from "react"
 import styles from '@/components/ui/DetailLactationCard/DetailLactationCard.module.css'
 import ViewMore from "@/components/ui/ViewMore/ViewMore";
 import PerbaruiButton from '@/components/ui/PerbaruiButton/PerbaruiButton';
+import { Livestock } from '@/models/LivestockModel';
+import { livestockData } from '@/data/livestockData';
+import { useRouter } from 'next/navigation'
 
 interface LactationDetail {
     title: string;
     description: string;
+    livestock: Livestock;
   }
   
   interface DetailLactationCardProps {
     currentLactation: LactationDetail;
     history: LactationDetail[];
+    livestock: Livestock;
   }
   
-  const DetailLactationCard: React.FC<DetailLactationCardProps> = ({ currentLactation, history }) => {
+  const DetailLactationCard: React.FC<DetailLactationCardProps> = ({ currentLactation, history, livestock }) => {
+    const router = useRouter();
+
+    const getPageUrl = () => {
+      return "/OwnerViewPage/livestockOwnerPage/[id]/lactation";
+  };
+
+    const handleNavigate = () => {
+       const pageUrl = getPageUrl(); // Panggil fungsi getPageUrl
+        const dynamicUrl = pageUrl.replace("[id]", livestock.name_id.toLowerCase());
+        router.push(dynamicUrl);
+    };
+
+
     return (
       <div className={styles.card}>
         <div className={styles.header}>
@@ -46,7 +64,10 @@ interface LactationDetail {
          <ViewMore />
           </div>
         <div className={styles.action}>
-          <PerbaruiButton label="Perbarui" />
+          <PerbaruiButton 
+          label="Perbarui"
+          onClick={handleNavigate}
+          />
         </div>
       </div>
     );

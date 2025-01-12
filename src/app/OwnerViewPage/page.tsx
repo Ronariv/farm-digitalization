@@ -23,11 +23,15 @@ import OwnerProfile from '@/components/ui/OwnerProfile/ownerProfile';
 import Breadcrumbs from '@/components/ui/Breadcrumbs/breadcrumbs';
 import { usePathname } from 'next/navigation';
 import TopBar from '@/components/ui/TopBar/topBar';
+import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
+import InviteFarmModal from '@/components/ui/InviteFarmModal/InviteFarmModal';
+import { User } from '@/models/UserModel';
+import { usersData } from '@/data/userData';
 
 const App: React.FC = () => {
 
   const [breadcrumb, setBreadcrumb] = useState('Statistik');
-
+ const [isModalOpen, setIsModalOpen] = useState(false);
   const categories = animalCategories('owner');
 
     const handleUpdate = () => {
@@ -74,6 +78,8 @@ const App: React.FC = () => {
        
         <div className="content">
         <div className="menuSection">
+
+          <div className="menuHeader1">
           <div>
           <Breadcrumbs
             breadcrumbs={[
@@ -82,6 +88,22 @@ const App: React.FC = () => {
             ]}
           />
           </div>
+          <div>
+            <PrimaryButton
+          label="+ Tambah Peternakan"
+          width= {210}
+          onClick={() => setIsModalOpen(true)}
+          />
+          {isModalOpen && (
+        <InviteFarmModal
+          users={usersData} // Gunakan data dari usersData
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
+          </div>
+          </div>
+
+
           <div className="menuHeader">
             <h1 className="menuTittle">Statistik</h1>
             <div className="yearAndMonthPicker">

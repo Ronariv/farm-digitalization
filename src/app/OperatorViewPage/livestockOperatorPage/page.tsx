@@ -19,6 +19,7 @@ import SortByButton from '@/components/ui/SortBy/sortBy';
 import FilterButton from '@/components/ui/Filter/filterButton';
 import { livestockData } from '@/data/livestockData';
 import { farmListData } from '@/data/farmData';
+import { defaultFilterCategories } from '@/models/FilterCategory';
 
 
 const LivestockPage: React.FC = () => {
@@ -65,7 +66,7 @@ const LivestockPage: React.FC = () => {
                         <h1 className="menuTittle">Peternakan Anda</h1>
                         <div className="sortByAndFilter">
                             <SortByButton></SortByButton>
-                            <FilterButton></FilterButton>
+                            <FilterButton filters={defaultFilterCategories}></FilterButton>
                         </div>
                     </div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>

@@ -6,6 +6,7 @@ import styles from "@/components/ui/Sidebar/Sidebar.module.css"
 import { farmListData } from '@/data/farmData';
 import { FarmModel } from '@/models/FarmModel';
 import { usePathname } from 'next/navigation';
+import Logo from "@/components/ui/Logo/Logo"
 
 interface SidebarProps {
   onMenuClick: (menu: string) => void;
@@ -131,7 +132,9 @@ const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: Far
       <div className={styles.sidebarContainer}>
         {/* Profile Section */}
         <div className={styles.sidebarProfile}>
-          <div className={styles.profilePicture}></div>
+          <div className={styles.profilePicture}>
+              <Logo/>
+          </div>
           <div className={styles.profileDropdown}>
             <button className={styles.dropdownButton} onClick={toggleDropdown}>
               {selectedFarm}

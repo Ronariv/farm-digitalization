@@ -34,6 +34,9 @@ import PerbaruiButton from '@/components/ui/PerbaruiButton/PerbaruiButton';
 import PhaseLabelTag from '@/components/ui/PhaseLabel/PhaseLabelTag';
 import { phaseLabels } from '@/data/phaseLabels';
 import DetailLactationCard from '@/components/ui/DetailLactationCard/DetailLactationCard';
+import StatisticsMilkUpdate from '@/components/ui/StatisticsMilkUpdate/StatisticsMilkUpdate';
+import StatisticsWeightUpdate from '@/components/ui/StatisticsWeightUpdate/StatisticsWeightUpdate';
+
 interface LivestockDetailPageProps {
     params: {
       id: string;
@@ -53,15 +56,20 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
     // if (error) {
     //     return <div>Error: {error}</div>;
     // }
+
+    const livestock = livestockData[0];
+
     const currentLactation = {
         title: 'Laktasi ke-4',
         description: '1 Jantan - Des 2024',
+        livestock: livestock,
       };
       const history = [
-        { title: 'Laktasi ke-3', description: '2 Betina - Okt 2024' },
-        { title: 'Laktasi ke-2', description: '1 Jantan - Aug 2024' },
+        { title: 'Laktasi ke-3', description: '2 Betina - Okt 2024', livestock: livestock },
+        { title: 'Laktasi ke-2', description: '1 Jantan - Aug 2024', livestock: livestock },
       ];
 
+   const router = useRouter()
     return (
         <div>
             <div className="layout">
@@ -102,7 +110,11 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                                        </div>
                                     <div className="deleteIcon">
                                         <DownloadQRButton/>
-                                        <PrimaryButton label='Ubah Data' width={130}/>
+                                        <PrimaryButton 
+                                        label='Ubah Data' 
+                                        width={130}
+                                        onClick={() => router.push(`/OwnerViewPage/addTernakPage`)}
+                                        />
                                         <DeleteButton />
                                     </div>
                                 </div>
@@ -141,34 +153,40 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                                         // conditionValue={livestock.health.current_condition}
                                         historyTitle="Riwayat Sakit"
                                         historyItems={livestock.health.history_items.length > 2 ? livestock.health.history_items.slice(0, 2) : livestock.health.history_items}
+                                        livestock={livestock}
                                     />
                                     <DetailInformationCard
                                         // conditionTitle="Obat"
                                         // conditionValue={livestock.medication.current_condition}
                                         historyTitle="Riwayat Obat"
                                         historyItems={livestock.medication.history_items.length > 2 ? livestock.medication.history_items.slice(0, 2) : livestock.medication.history_items}
+                                        livestock={livestock}
                                     />
                                     <DetailInformationCard
                                         // conditionTitle="Vitamin"
                                         // conditionValue={livestock.vitamin.current_condition}
                                         historyTitle="Riwayat Vitamin"
                                         historyItems={livestock.vitamin.history_items.length > 2 ? livestock.vitamin.history_items.slice(0, 2) : livestock.vitamin.history_items}
+                                        livestock={livestock}
                                     />
                                     <DetailInformationCard
                                         // conditionTitle="Vaksin"
                                         // conditionValue={livestock.vaccine.current_condition}
                                         historyTitle="Riwayat Vaksin"
                                         historyItems={livestock.vaccine.history_items.length > 2 ? livestock.vaccine.history_items.slice(0, 2) : livestock.vaccine.history_items}
+                                        livestock={livestock}
                                     />
                                 </div>
                                 <div className='statisticsInformationLivestock'>
-                                    <StatisticMilk filterBy="year" filterValue={2019} milkData={livestock.milkData}/>
+                                    {/* <StatisticMilk filterBy="year" filterValue={2019} milkData={livestock.milkData}/> */}
+                                    <StatisticsMilkUpdate filterBy="year" filterValue={2019} milkData={livestock.milkData} livestock={livestock} />
                                     <div className="lactationSection">
                                         <StatisticsLactation filterBy="year" filterValue={2019} lactationData={livestock.lactationData}/>
-                                        <DetailLactationCard currentLactation={currentLactation} history={history} />;
+                                        <DetailLactationCard currentLactation={currentLactation} history={history} livestock={livestock} />;
                                     </div>
                                     
-                                    <StatisticWeight filterBy="year" filterValue={2019} weightData={livestock.weightData}/>
+                                    {/* <StatisticWeight filterBy="year" filterValue={2019} weightData={livestock.weightData}/> */}
+                                    <StatisticsWeightUpdate filterBy="year" filterValue={2019} weightData={livestock.weightData} livestock={livestock}/>
                                 </div>
                             </div>
                         </div>
@@ -235,6 +253,7 @@ interface DetailInformationCardProps {
     // conditionValue: string;
     historyTitle: string;
     historyItems: HistoryItem[];
+    livestock: Livestock;
 }
 
 const DetailInformationCard: React.FC<DetailInformationCardProps> = ({
@@ -242,7 +261,34 @@ const DetailInformationCard: React.FC<DetailInformationCardProps> = ({
     // conditionValue,
     historyTitle,
     historyItems,
+    livestock,
+    
 }) => {
+    const router = useRouter(); // Gunakan useRouter dari Next.js
+
+    const getPageUrl = (title: string) => {
+        switch (title) {
+            case "Riwayat Sakit":
+                return "/OwnerViewPage/livestockOwnerPage/[id]/sickness";
+            case "Riwayat Obat":
+                return "/OwnerViewPage/livestockOwnerPage/[id]/medication";
+            case "Riwayat Vitamin":
+                return "/OwnerViewPage/livestockOwnerPage/[id]/vitamin";
+            case "Riwayat Vaksin":
+                return "/OwnerViewPage/livestockOwnerPage/[id]/vaccine";
+            default:
+                return "/OwnerViewPage/livestockOwnerPage/[id]";
+        }
+    };
+
+    const handleNavigate = () => {
+        // const pageUrl = getPageUrl(historyTitle);
+        // router.push(pageUrl); 
+        const pageUrl = getPageUrl(historyTitle);
+        const dynamicUrl = pageUrl.replace("[id]", livestock.name_id.toLowerCase());
+        router.push(dynamicUrl);
+    };
+
     return (
         <div className="detailInformationLivestockCard">
             <div className="detailInformationLivestockCardData">
@@ -269,7 +315,10 @@ const DetailInformationCard: React.FC<DetailInformationCardProps> = ({
                         ))}
                     </div>
                     <div className="perbaruiButtonOwnerPage">
-                          <PerbaruiButton label={'Perbarui'}/>
+                          <PerbaruiButton 
+                          label={'Perbarui'}
+                          onClick={handleNavigate}
+                          />
                     </div>
                   
                 </div>
