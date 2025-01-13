@@ -11,6 +11,7 @@ import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField'
 import { Input } from "@/components/ui/input"
 import DropdownFase from '@/components/ui/DropdownPhase/DropdownPhase';
 import { useRouter } from 'next/navigation'
+import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
 
 interface LivestockLactationPageProps {
     params: {
@@ -56,7 +57,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                 </div>
 
                 <div className="main-content">
-                    <TopBar ></TopBar>
+                    <TopBarOpt></TopBarOpt>
 
                     {livestockData.map((livestock) => (
                         livestock.name_id.toLowerCase() == params.id 
@@ -74,7 +75,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                                         width={130}
                                         onClick={() => {
                                             handleUpdateData(); // Memunculkan alert
-                                            router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
+                                            router.push(`/OperatorViewPage/livestockOperatorPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
                                           }}
                                         />
                                         {/* <DeleteButton /> */}

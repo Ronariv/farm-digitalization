@@ -7,7 +7,6 @@ import { Livestock } from '@/models/LivestockModel';
 import { useEffect } from "react";
 import { QRCodeSVG } from 'qrcode.react';
 
-
 import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
 import Sidebar from '@/components/ui/Sidebar/sidebar';
 import SearchBar from '@/components/ui/SearchBar/searchBar';

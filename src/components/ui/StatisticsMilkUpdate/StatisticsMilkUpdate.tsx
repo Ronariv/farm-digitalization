@@ -44,8 +44,22 @@ const StatisticsMilkUpdate: React.FC<StatisticsMilkUpdateProps> = ({
 
         const router = useRouter();
     
-        const getPageUrl = () => {
+      //   const getPageUrl = () => {
+      //     return "/OwnerViewPage/livestockOwnerPage/[id]/milkProduction";
+      // };
+
+      const getPageUrl = () => {
+        // Ambil path saat ini menggunakan window.location.pathname
+        const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
+      
+        if (currentPath.includes("/OperatorViewPage")) {
+          return "/OperatorViewPage/livestockOperatorPage/[id]/milkProduction";
+        } else if (currentPath.includes("/OwnerViewPage")) {
           return "/OwnerViewPage/livestockOwnerPage/[id]/milkProduction";
+        }
+      
+        // Default value jika tidak ada match
+        return "/OwnerViewPage/livestockOwnerPage/[id]/milkProduction";
       };
     
         const handleNavigate = () => {
