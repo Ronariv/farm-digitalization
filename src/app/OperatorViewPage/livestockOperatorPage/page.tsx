@@ -56,10 +56,7 @@ const LivestockPage: React.FC = () => {
                 
                     <div className="content">
                     <div className="menuSection">
-                    <div className="menuHeader">
-                        <h1 className="menuTittle">Peternakan Anda</h1>
-                        
-                    </div>
+
                     <div className="menuHeader">
                         <h1 className="menuTittle">Peternakan Anda</h1>
                         <div className="sortByAndFilter">
