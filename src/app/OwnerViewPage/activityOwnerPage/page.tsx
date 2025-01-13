@@ -61,7 +61,6 @@ const ActivityPage: React.FC = () => {
                     <div className="menuSection">
                     
                     <div className="menuHeader">
-
                       <div>
                          <h1 className="menuTittle">Aktivitas Tim</h1>
                       </div>
@@ -81,7 +80,6 @@ const ActivityPage: React.FC = () => {
         />
       )}
                        </div>
-
                     </div>
 
                     <div className='activityInformation'>

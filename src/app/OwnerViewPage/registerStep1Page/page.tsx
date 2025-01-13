@@ -114,30 +114,29 @@ export default function InputDemo() {
             Karyawan
           </label>
         </div>
-         
-</form>
-        {/* Submit Button */}
-        <div className="button-register">
-          {/* <Link href="/registerStep2Page">
-            <Button
-            className="w-[13.813rem] h-[3.25rem] rounded-md bg-[#248543] text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-[10px] font-normal"
-            onClick={handleValidationAndSubmit}
-            disabled={!emailOrPhone && !username}
-          >
-            Lanjut
-          </Button>
-          </Link> */}
+
+      </form>
+
+      {/* Submit Button */}
+      <div className="button-register">
+        {/* <Link href="/registerStep2Page">
+          <Button
+          className="w-[13.813rem] h-[3.25rem] rounded-md bg-[#248543] text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-[10px] font-normal"
+          onClick={handleValidationAndSubmit}
+          disabled={!emailOrPhone && !username}
+        >
+          Lanjut
+        </Button>
+        </Link> */}
 
 
-           <PrimaryButton
-           label="Lanjut"
-           width={221}
-           onClick={() => router.push(`/OwnerViewPage/registerStep2Page`)}
-           />
+          <PrimaryButton
+          label="Lanjut"
+          width={221}
+          onClick={() => router.push(`/OwnerViewPage/registerStep2Page`)}
+          />
 
         </div>
-
-      
   
     </div>
   </div>  

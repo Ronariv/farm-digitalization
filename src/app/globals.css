@@ -96,6 +96,7 @@ body {
   .button-register, .button-register2{
     display: flex;
     justify-content: center;
+    padding-top: 18px;
   }
 
   .button-login{
@@ -440,7 +441,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 43px;
+  gap: 8px;
   align-self: stretch;
 }
 
@@ -483,17 +484,6 @@ body {
   flex-shrink: 0;
   align-self: stretch;
   margin-bottom: 56px;
-}
-
-.phaseLabelTag-livestockOwnerPage{
-  margin-left: 10px;
-}
-
-.perbaruiButtonOwnerPage{
-  display: flex;
-  justify-content: center; 
-  margin-top: auto; 
-  width: 100%;
 }
 }
 
@@ -930,6 +920,50 @@ line-height: 30px
 
 /* style add ternak page */
 
+
+
+.livestockHistoryTitle {
+  color: #000;
+  font-family: Inter;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 19.2px; /* 76.8% */
+}
+
+.livestockHistoryData {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.livestockHistoryItem {
+  width: 1025px;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.livestockHistoryItem h2 {
+  color: var(--Text-Text-Primary, #000);
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px; /* 150% */
+}
+
+.livestockHistoryItem p {
+  color: var(--Text-Text-Secondary, #808080);
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.addLivestockHistory {
+}
 /* Container layout */
 .container-addTernak {
   display: flex;
@@ -1007,10 +1041,31 @@ margin-bottom: 60px;
 
 /* Input group for "Berat" */
 .input-group-addTernak {
+
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
+.fieldFormVertical {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fieldFormHorizontal {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.inviteMember {
+  display: flex; 
+  margin-left: auto;
+  margin-right: 7vw;
+  gap: 10px;
+}
+
 
 .input-group-addTernak span {
   font-size: 14px;

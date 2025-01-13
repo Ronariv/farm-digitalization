@@ -91,8 +91,10 @@ export default function InputDemo() {
             <p className="text-red-500 text-sm mt-1">{errorMessage}</p>
           )}
 
-          {/* Submit Button */}
-          <div className="button-register2">
+  
+
+        {/* Submit Button */}
+        <div className="button-register2">
             {/* <Button
               className="w-[13.813rem] h-[3.25rem] rounded-md bg-[#248543] text-white hover:bg-green-700 focus:outline-none focus:ring-2 rounded-[10px] focus:ring-green-500"
               onClick={handleValidationAndSubmit}

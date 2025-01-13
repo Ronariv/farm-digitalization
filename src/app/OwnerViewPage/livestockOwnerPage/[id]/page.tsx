@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { use } from 'react';
 import useFetch from '@/hooks/useFetch';
 import { useRouter } from 'next/navigation'
 import { Livestock } from '@/models/LivestockModel';
@@ -38,12 +38,12 @@ import StatisticsMilkUpdate from '@/components/ui/StatisticsMilkUpdate/Statistic
 import StatisticsWeightUpdate from '@/components/ui/StatisticsWeightUpdate/StatisticsWeightUpdate';
 
 interface LivestockDetailPageProps {
-    params: {
-      id: string;
-    };
+    params: Promise<{
+        id: string;
+    }>;
   }
 
-const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => {
+const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: paramsPromise }) => {
     // const { data, loading, error } = useFetch<Livestock[]>(
     //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
     //     undefined
@@ -56,6 +56,9 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
     // if (error) {
     //     return <div>Error: {error}</div>;
     // }
+
+    const params = use(paramsPromise);
+    const id = params.id.toLowerCase();
 
     const livestock = livestockData[0];
 
@@ -97,7 +100,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                     <TopBar ></TopBar>
 
                     {livestockData.map((livestock) => (
-                        livestock.name_id.toLowerCase() == params.id 
+                        livestock.name_id.toLowerCase() == id 
                         ?
                         <div className="content">
                             <div className="menuSection">
@@ -148,7 +151,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params }) => 
                                         borderRadius: '10px',
                                     }}
                                     />
-                                    {/* <QRCodeSVG value={`${process.env.NEXT_PUBLIC_NEXT_HOST}/OwnerViewPage/livestockOwnerPage/${params.id}`} size={85} /> */}
+                                    {/* <QRCodeSVG value={`${process.env.NEXT_PUBLIC_NEXT_HOST}/OwnerViewPage/livestockOwnerPage/${id}`} size={85} /> */}
                                     <div className='generalInformationLivestockBox'>
                                         <div className='generalInformationLivestockBoxTop'>
                                             <GeneralInfoBox title={'Tanggal Lahir'} value={livestock.dob} ></GeneralInfoBox>

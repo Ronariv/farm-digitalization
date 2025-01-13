@@ -93,5 +93,5 @@ export interface Livestock {
     milkData: MilkData;
     lactationData: LactationData;
     weightData: WeightData;
-    livestockSold: LivestockSold;
+    livestockSold?: LivestockSold;
 }

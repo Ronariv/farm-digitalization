@@ -2666,6 +2666,7 @@ export const livestockData: Livestock[] = [
         weight: "72.00",
         phase: "SIAPKAWIN",
         photo_url: "https://livestock-images.s3.ap-southeast-2.amazonaws.com/female-grown-boer-goat.jpg",
+        breed: "Brown Swiss",
         type_id: "cca0b428-c46a-11ef-9e1f-06367c8d4ecf",
         farm_name: "Peternakan Ujang",
         mom_name_id: "AUC035",
