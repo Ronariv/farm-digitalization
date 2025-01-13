@@ -39,17 +39,9 @@ const StatisticsMilkUpdate: React.FC<StatisticsMilkUpdateProps> = ({
     const average =
     filteredData.reduce((acc, cur) => acc + cur.value, 0) / filteredData.length || 0;
 
-    // Bulan dengan nilai minimum dan maksimum
-
-
         const router = useRouter();
     
-      //   const getPageUrl = () => {
-      //     return "/OwnerViewPage/livestockOwnerPage/[id]/milkProduction";
-      // };
-
       const getPageUrl = () => {
-        // Ambil path saat ini menggunakan window.location.pathname
         const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
       
         if (currentPath.includes("/OperatorViewPage")) {
@@ -58,7 +50,6 @@ const StatisticsMilkUpdate: React.FC<StatisticsMilkUpdateProps> = ({
           return "/OwnerViewPage/livestockOwnerPage/[id]/milkProduction";
         }
       
-        // Default value jika tidak ada match
         return "/OwnerViewPage/livestockOwnerPage/[id]/milkProduction";
       };
     
