@@ -12,39 +12,32 @@ import { Input } from "@/components/ui/input"
 import DropdownFase from '@/components/ui/DropdownPhase/DropdownPhase';
 import { useRouter } from 'next/navigation'
 import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
+import { use } from "react";
 
 interface LivestockLactationPageProps {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
 }
 
-const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params }) => {
-    // const { data, loading, error } = useFetch<Livestock[]>(
-    //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
-    //     undefined
-    // );
+const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params: paramsPromise }) => {
+    const params = use(paramsPromise);
+    const id = params.id.toLowerCase();
 
-    // if (loading) {
-    //     return <Loading></Loading>;
-    // }
+    const livestock = livestockData.find((item) => item.name_id.toLowerCase() === id);  
 
-    // if (error) {
-    //     return <div>Error: {error}</div>;
-    // }
-
-     const Label: React.FC<{ title: string }> = ({ title }) => (
+    const Label: React.FC<{ title: string }> = ({ title }) => (
         <label className="label-addTernak">{title}</label>
-      );
-      const handleJenisKelaminSelect = (value: string) => {
+    );
+    const handleJenisKelaminSelect = (value: string) => {
         console.log('Selected Jenis Kelamin:', value);
-      };
+    };
 
-      const handleUpdateData = () => {
+    const handleUpdateData = () => {
         console.log("Data laktasi ternak berhasil diperbarui");
         alert("Data laktasi ternak berhasil diperbarui");
-      };
- const router = useRouter()
+    };
+    const router = useRouter()
     return (
         <div>
             <div className="layout">
@@ -60,7 +53,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                     <TopBarOpt></TopBarOpt>
 
                     {livestockData.map((livestock) => (
-                        livestock.name_id.toLowerCase() == params.id 
+                        livestock.name_id.toLowerCase() == id
                         ?
                         <div className="content">
                             <div className="menuSection">
@@ -94,7 +87,6 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params 
                                         borderRadius: '10px',
                                     }}
                                     />
-                                    {/* <QRCodeSVG value={`${process.env.NEXT_PUBLIC_NEXT_HOST}/OwnerViewPage/livestockOwnerPage/${params.id}`} size={85} /> */}
                                     <div className='generalInformationLivestockBox'>
                                         <div className='generalInformationLivestockBoxTop'>
                                             <GeneralInfoBox title={'Tanggal Lahir'} value={livestock.dob} ></GeneralInfoBox>

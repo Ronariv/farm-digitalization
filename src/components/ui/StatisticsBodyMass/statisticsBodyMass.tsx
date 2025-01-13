@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '@/components/ui/StatisticsBodyMass/StatisticsBodyMass.module.css';
-import { statisticsBodyMassModel } from '@/models/StatisticsBodyMassModel';
+import statisticsBodyMassModel from '@/models/statisticsBodyMassModel';
 
 type StatisticsBodyMassProps = {
     filterBy: 'year' | 'month';
