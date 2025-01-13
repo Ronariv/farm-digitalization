@@ -23,7 +23,7 @@ export default function InputDemo() {
     } else {
       // setErrorMessage("");
       // alert("Login berhasil!");
-      router.push(`/OwnerViewPage/defaultOwnerViewPage`);
+      router.push(`/OperatorViewPage`);
     }
   };
 
@@ -95,6 +95,7 @@ export default function InputDemo() {
           <p className="text-red-500 text-sm mt-1">{errorMessage}</p>
         )}
    </form>
+
         {/* Submit Button */}
         <div className="button-login">
 
@@ -104,6 +105,7 @@ export default function InputDemo() {
         onClick={handleValidationAndSubmit}
         />
         </div>
+        
      
   
       {/* Placeholder for Footer */}
@@ -111,7 +113,7 @@ export default function InputDemo() {
         Baru di Ternakku?{" "}
         <span
         className="text-green-600 font-bold cursor-pointer"
-        onClick={() => router.push(`/OwnerViewPage/registerStep1Page`)}
+        onClick={() => router.push(`/OperatorViewPage/registerStep1Page`)}
       >
         Daftar
       </span>

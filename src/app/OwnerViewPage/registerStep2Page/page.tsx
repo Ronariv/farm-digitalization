@@ -19,12 +19,10 @@ export default function InputDemo() {
     const passwordValidation = validatePassword(password, rePassword);
     if (!passwordValidation.valid) {
       setErrorMessage(passwordValidation.message);
-      return;
+      
+    } else{
+      router.push(`/OwnerViewPage/defaultOwnerViewPage`);
     }
-
-    // Jika semua validasi lolos
-    setErrorMessage("");
-    alert("Registrasi berhasil!");
   };
 
   return (
@@ -87,7 +85,7 @@ export default function InputDemo() {
               placeholder="Konfirmasi Kata Sandi"
             />
           </div>
-
+    </form>
           {/* Error Message */}
           {errorMessage && (
             <p className="text-red-500 text-sm mt-1">{errorMessage}</p>
@@ -105,10 +103,10 @@ export default function InputDemo() {
             <PrimaryButton
             label="Register"
             width= {221}
-            onClick={() => router.push(`/OwnerViewPage/defaultOwnerViewPage`)}
+            onClick={handleValidationAndSubmit}
             />
           </div>
-        </form>
+    
       </div>
     </div>
   );

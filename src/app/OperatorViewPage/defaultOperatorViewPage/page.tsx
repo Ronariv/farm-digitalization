@@ -28,7 +28,7 @@ import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import InviteFarmModal from '@/components/ui/InviteFarmModal/InviteFarmModal';
 import { User } from '@/models/UserModel';
 import { usersData } from '@/data/userData';
-import styles from "@/app/OwnerViewPage/defaultOwnerViewPage/defaultOwnerViewPage.module.css"
+import styles from "@/app/OperatorViewPage/defaultOperatorViewPage/defaultOperatorViewPage.module.css"
 import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
 
 const App: React.FC = () => {
@@ -57,13 +57,13 @@ const App: React.FC = () => {
 
     function getMenuLabel(pathname: string): string {
       switch (pathname) {
-        case '/OwnerViewPage/defaultOwnerViewPage':
+        case '/OperatorViewPage/defaultOperatorViewPage':
           return 'Statistik';
-        case '/OwnerViewPage/defaultOwnerViewPage':
+        case '/OperatorViewPage/defaultOperatorViewPage':
           return 'Ternak Anda';
-        case '/OwnerViewPage/defaultOwnerViewPage':
+        case '/OperatorViewPage/defaultOperatorViewPage':
           return 'Aktivitas';
-        case '/OwnerViewPage/defaultOwnerViewPage':
+        case '/OperatorViewPage/defaultOperatorViewPage':
           return 'Pengaturan';
         default:
           return 'Halaman Tidak Ditemukan';

@@ -115,7 +115,7 @@ export default function InputDemo() {
           </label>
         </div>
          
-
+</form>
         {/* Submit Button */}
         <div className="button-register">
           {/* <Link href="/registerStep2Page">
@@ -137,7 +137,7 @@ export default function InputDemo() {
 
         </div>
 
-      </form>
+      
   
     </div>
   </div>  
