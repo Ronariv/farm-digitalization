@@ -60,7 +60,7 @@ const LivestockPage: React.FC = () => {
                         <div className='createLivestockFormImage'>
                             <h1>Masukkan Gambar</h1>
                             <img src="https://media.licdn.com/dms/image/v2/D5603AQG3XbeGSuDSUQ/profile-displayphoto-shrink_200_200/B56ZQvQS4UGQAY-/0/1735959589073?e=2147483647&v=beta&t=3xCF33te1yZCEaG-pxBxwL9fotWv1K8AG-hsQcSQEp8" alt="" />
-                            <p>Lorem Ipsum</p>
+                         
                         </div>
                         <div className='createLivestockFormInput'>
                             <PrimaryTextField label='ID Ternak *' placeholder='ID Ternak'/>

@@ -60,10 +60,7 @@ const app: React.FC = () => {
                 alt="ternak"
                 className="image-addTernak"
               />
-              <p className="image-description-addTernak">
-                Lorem ipsum dolor sit amet <br />
-                Lorem ipsum dolor sit amet
-              </p>
+             
             </div>
   
             <div className="sectionInput-addTernak">

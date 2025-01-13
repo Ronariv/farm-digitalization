@@ -61,6 +61,12 @@ const LivestockPage: React.FC = () => {
                         
                     </div>
                     <div className="menuHeader">
+                        <h1 className="menuTittle">Peternakan Anda</h1>
+                        <div className="sortByAndFilter">
+                            <PrimaryButton label='+ Tambah Ternak' width={200} onClick={() => router.push(`addTernakPage`)}/>
+                        </div>
+                    </div>
+                    <div className="menuHeader">
                         <div className="sortByAndFilter">
                             <SortByButton></SortByButton>
                             <FilterButton filters={defaultFilterCategories}></FilterButton>

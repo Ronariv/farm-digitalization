@@ -128,12 +128,6 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
                                         width={130}
                                         onClick={() => router.push(`/OperatorViewPage/addTernakPage`)}
                                         />
-                                        <DeleteButton
-                                         onClick={() => {
-                                            handleDeleteData(); // Memunculkan alert
-                                            
-                                          }}
-                                        />
                                     </div>
                                 </div>
                             </div>
