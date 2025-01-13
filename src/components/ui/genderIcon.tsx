@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { AnimalGender } from '@/models/GenderModel';
+import { AnimalGender } from '@/models/genderModel';
 
 interface GenderIconProps {
   gender: AnimalGender;

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 
 import Sidebar from '@/components/ui/Sidebar/sidebar';
 import { livestockData } from '@/data/livestockData';
@@ -11,12 +11,12 @@ import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField'
 import { useRouter } from 'next/navigation'
 
 interface LivestockWeightPageProps {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
 }
 
-const LivestockWeightPage: React.FC<LivestockWeightPageProps> = ({ params }) => {
+const LivestockWeightPage: React.FC<LivestockWeightPageProps> = ({ params: paramsPromise }) => {
     // const { data, loading, error } = useFetch<Livestock[]>(
     //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
     //     undefined
@@ -29,6 +29,9 @@ const LivestockWeightPage: React.FC<LivestockWeightPageProps> = ({ params }) => 
     // if (error) {
     //     return <div>Error: {error}</div>;
     // }
+
+    const params = use(paramsPromise);
+    const id = params.id.toLowerCase();
 
     const handleUpdateData = () => {
         console.log("Data berat badan ternak berhasil diperbarui");
@@ -50,7 +53,7 @@ const LivestockWeightPage: React.FC<LivestockWeightPageProps> = ({ params }) => 
                     <TopBar ></TopBar>
 
                     {livestockData.map((livestock) => (
-                        livestock.name_id.toLowerCase() == params.id 
+                        livestock.name_id.toLowerCase() == id 
                         ?
                         <div className="content">
                             <div className="menuSection">
@@ -84,7 +87,7 @@ const LivestockWeightPage: React.FC<LivestockWeightPageProps> = ({ params }) => 
                                         borderRadius: '10px',
                                     }}
                                     />
-                                    {/* <QRCodeSVG value={`${process.env.NEXT_PUBLIC_NEXT_HOST}/OwnerViewPage/livestockOwnerPage/${params.id}`} size={85} /> */}
+                                    {/* <QRCodeSVG value={`${process.env.NEXT_PUBLIC_NEXT_HOST}/OwnerViewPage/livestockOwnerPage/${id}`} size={85} /> */}
                                     <div className='generalInformationLivestockBox'>
                                         <div className='generalInformationLivestockBoxTop'>
                                             <GeneralInfoBox title={'Tanggal Lahir'} value={livestock.dob} ></GeneralInfoBox>
