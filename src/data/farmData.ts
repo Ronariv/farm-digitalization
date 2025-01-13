@@ -3,7 +3,7 @@ import { FarmModel } from "@/models/FarmModel";
 export const farmListData: FarmModel[] = [
     {
         id: "1",
-        name: "Peternakan Nuel dan Caca",
+        name: "Peternakan Jatidiri",
         owner_id: "1"
     },
     {
