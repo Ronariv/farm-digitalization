@@ -64,7 +64,9 @@ const LivestockPage: React.FC = () => {
                     <div className="menuHeader">
                         <div className="sortByAndFilter">
                             <SortByButton></SortByButton>
+
                             <FilterButton filters={defaultFilterCategories}></FilterButton>
+                          
                         </div>
                     </div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>

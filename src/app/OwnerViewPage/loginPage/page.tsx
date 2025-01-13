@@ -94,17 +94,18 @@ export default function InputDemo() {
         {errorMessage && (
           <p className="text-red-500 text-sm mt-1">{errorMessage}</p>
         )}
-  
-        {/* Submit Button */}
-        <div className="button-login">
+      </form>
+
+      {/* Submit Button */}
+      <div className="button-login">
 
         <PrimaryButton
         label="Masuk"
         width={221}
         onClick={() => router.push(`/OwnerViewPage`)}
         />
-        </div>
-      </form>
+        
+      </div>
   
       {/* Placeholder for Footer */}
       <div className="mt-6">
