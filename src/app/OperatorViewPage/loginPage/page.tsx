@@ -11,7 +11,11 @@ export default function InputDemo() {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+<<<<<<< Updated upstream:src/app/OperatorViewPage/loginPage/page.tsx
      const router = useRouter()
+=======
+  const router = useRouter()
+>>>>>>> Stashed changes:src/app/loginPage/page.tsx
 
   const handleValidationAndSubmit = () => {
     const validation = validateEmailOrPhone(emailOrPhone);
@@ -98,12 +102,29 @@ export default function InputDemo() {
 
         {/* Submit Button */}
         <div className="button-login">
+<<<<<<< Updated upstream:src/app/OperatorViewPage/loginPage/page.tsx
 
         <PrimaryButton
         label="Masuk"
         width={221}
         onClick={handleValidationAndSubmit}
         />
+=======
+          {/* <Button
+            className="w-[13.813rem] h-[3.25rem] rounded-md bg-[#248543] text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-[10px] font-normal"
+            onClick={handleValidationAndSubmit}
+            disabled={!emailOrPhone && !password}
+          >
+            Masuk
+          </Button> */}
+
+          <PrimaryButton
+          label="Masuk"
+          width={221}
+          onClick={() => router.push(`/livestock`)}
+          />
+
+>>>>>>> Stashed changes:src/app/loginPage/page.tsx
         </div>
         
      
