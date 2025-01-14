@@ -77,8 +77,8 @@ const TopBar: React.FC = () => {
 
     {index === 0 && ( // Tombol hanya untuk notifikasi pertama
       <div className={styles.notificationActionsWrapper}>
-        <AcceptButton label={"Terima"} />
         <RejectButton label={"Tolak"} />
+        <AcceptButton label={"Terima"} />
       </div>
     )}
   </div>
