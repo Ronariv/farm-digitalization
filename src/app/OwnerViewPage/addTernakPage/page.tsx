@@ -56,7 +56,7 @@ const app: React.FC = () => {
             <div className="section-addTernak">
               <h3 className="tittle-addTernak">Masukkan Gambar</h3>
               <img
-                src="/SapiImage.jpeg"
+                src="https://firebasestorage.googleapis.com/v0/b/manta-dive-75b30.firebasestorage.app/o/WhatsApp%20Image%202025-01-14%20at%2014.52.38.jpeg?alt=media&token=25b56c44-86c4-4484-b3ea-241fc7a16d83"
                 alt="ternak"
                 className="image-addTernak"
               />

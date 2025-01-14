@@ -27,7 +27,7 @@ export const activities: ActivityModel[] = [
                 to: "Divaksin"
             }
         ],
-        farm: "Peternakan Nuel dan Caca"
+        farm: "Peternakan Jatidiri"
     },
     {
         id: "3",
@@ -38,7 +38,7 @@ export const activities: ActivityModel[] = [
             {
                 what: "Lokasi",
                 from: "Peternakan Ujang",
-                to: "Peternakan Nuel dan Caca"
+                to: "Peternakan Jatidiri"
             }
         ],
         farm: "Peternakan Ujang"
@@ -55,7 +55,7 @@ export const activities: ActivityModel[] = [
                 to: "12 kg"
             }
         ],
-        farm: "Peternakan Nuel dan Caca"
+        farm: "Peternakan Jatidiri"
     },
     {
         id: "5",
