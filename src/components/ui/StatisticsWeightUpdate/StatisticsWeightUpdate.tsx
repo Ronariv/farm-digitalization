@@ -44,7 +44,7 @@ const StatisticsWeightUpdate: React.FC<StatisticsWeightUpdateProps> = ({ filterB
               return "/OwnerViewPage/livestockOwnerPage/[id]/milkProduction";
             }
           
-            return "/OwnerViewPage/livestockOwnerPage/[id]/milkProduction";
+            return "/OwnerViewPage/livestockOwnerPage/[id]/weight";
           };
         
             const handleNavigate = () => {
