@@ -4,6 +4,8 @@ import styles from '@/components/ui/TopBar/TopBar.module.css';
 import SearchBar from '../SearchBar/searchBar';
 import OwnerProfile from '../OwnerProfile/ownerProfile';
 import { notificationListData } from '@/data/notificationData';
+import AcceptButton from '../AcceptButton/AcceptButton';
+import RejectButton from '../RejectButton/RejectButton';
 
 const TopBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,14 +60,32 @@ const TopBar: React.FC = () => {
         ReactDOM.createPortal(
           <div id="dropdown-container" className={styles.dropdown}>
             <h1>Notifikasi</h1>
-            {notificationListData.map((notification) => (
+            {/* {notificationListData.map((notification) => (
               <div className={styles.notificationRow}>
                 <img src={notification.profile_url} alt="" />
               <p><b>{notification.user_name}</b> {notification.action}</p>
-            </div>
-            ))}
+              </div>
+            ))} */}
+{notificationListData.map((notification, index) => (
+  <div key={notification.user_name + notification.action}>
+    <div className={styles.notificationRow}>
+      <img src={notification.profile_url} alt="" />
+      <div className={styles.notificationText}>
+        <p><b>{notification.user_name}</b> {notification.action}</p>
+      </div>
+    </div>
+
+    {index === 0 && ( // Tombol hanya untuk notifikasi pertama
+      <div className={styles.notificationActionsWrapper}>
+        <AcceptButton label={"Terima"} />
+        <RejectButton label={"Tolak"} />
+      </div>
+    )}
+  </div>
+))}
+
           </div>,
-          document.body // Render into the body element
+          document.body 
         )}
     </>
   );

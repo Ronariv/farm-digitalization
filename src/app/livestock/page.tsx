@@ -22,6 +22,9 @@ import DropdownInput from "@/components/ui/DropdownInput/DropdownInput";
 import DropdownPhase from "@/components/ui/DropdownPhase/DropdownPhase";
 import SidebarDisabled from "@/components/ui/SidebarDisabled/SidebarDisabled";
 import Breadcrumbs from '@/components/ui/Breadcrumbs/breadcrumbs';
+import TopBar from "@/components/ui/TopBar/topBar";
+import AcceptButton from "@/components/ui/AcceptButton/AcceptButton";
+import RejectButton from "@/components/ui/RejectButton/RejectButton";
 
 export default function OnBoarding() {
  const [breadcrumb, setBreadcrumb] = useState('Statistik');
@@ -81,11 +84,14 @@ export default function OnBoarding() {
               onSelect={handleFaseSelect}
       /> */}
 
-<SidebarDisabled setBreadcrumb={setBreadcrumb} setFarm={function (farmName: string): void {
+{/* <SidebarDisabled setBreadcrumb={setBreadcrumb} setFarm={function (farmName: string): void {
             throw new Error('Function not implemented.');
-          } } />
+          } } /> */}
 
 
+<TopBar></TopBar>
+<AcceptButton label={"Terima"}/>
+<RejectButton label={"Tolak"}/>
 {/* <DropdownPhase
                   options={['Tersedia', 'Hilang', 'Mati']}
                   placeholder="Status"

@@ -69,4 +69,25 @@
     font-weight: 400;
     line-height: 20px; /* 142.857% */
   }
-
+  
+  .notificationRow {
+    display: flex;
+    align-items: center;
+    gap: 12px; 
+    margin-bottom: 8px; 
+  }
+  
+  .notificationText {
+    text-align: left;
+    flex: 1;
+  }
+  
+  .notificationActionsWrapper {
+    margin-top: 8px;
+    margin-left: 15%;
+    width: 100%; 
+    display: flex;
+    justify-content: flex-start; 
+    gap: 12px; 
+  }
+  
