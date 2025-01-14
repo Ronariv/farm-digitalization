@@ -1224,7 +1224,7 @@ margin-top: 5%;
 }
 
 .bg-cover {
-  background-image: url('/Onboarding.jpg');
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/manta-dive-75b30.firebasestorage.app/o/Onboarding.jpg?alt=media&token=1986df5c-ccdb-4535-8b5b-21d5e0167611');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
