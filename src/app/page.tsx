@@ -8,7 +8,7 @@ export default function OnBoarding() {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/ownerViewPage/loginPage");
+    router.push("/OwnerViewPage/loginPage");
   }, [router]);
 
   return (
