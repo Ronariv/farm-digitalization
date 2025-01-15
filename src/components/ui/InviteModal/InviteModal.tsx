@@ -2,7 +2,7 @@ import { User } from '@/models/UserModel';
 import React, { useState } from 'react';
 import styles from "@/components/ui/InviteModal/InviteModal.module.css";
 import PrimaryButton from '../PrimaryButton/primaryButton';
-
+import DropdownPhase from '../DropdownPhase/DropdownPhase';
 interface InviteModalProps {
   users: User[];
   onClose: () => void;
@@ -10,7 +10,8 @@ interface InviteModalProps {
 
 const InviteModal: React.FC<InviteModalProps> = ({ users, onClose }) => {
   const [email, setEmail] = useState('');
-
+  
+  
   return (
     <div className={styles.modalBackdrop}>
       <div className={styles.modalContent}>
@@ -31,7 +32,12 @@ const InviteModal: React.FC<InviteModalProps> = ({ users, onClose }) => {
 </button>
 
         {/* Header modal */}
+        <div className={styles.headerModal}>
         <h1 className={styles.modalTitle}>Undang Anggota</h1>
+        <h2 className={styles.userListTitle}>Masukkan email dan undang anggota untuk <br>
+        </br>menambah operator peternakan Anda!</h2>
+        </div>
+
 
         {/* Form undangan */}
         <div className={styles.inviteForm}>
@@ -43,13 +49,14 @@ const InviteModal: React.FC<InviteModalProps> = ({ users, onClose }) => {
             className={styles.emailInput}
          
           />
+
           <PrimaryButton
           label= "Undang"
           width= {109}
           onClick={()=> {
             if (email.trim()) {
               alert(`Undangan telah dikirim ke ${email}`);
-              setEmail(''); // Reset email setelah undangan terkirim
+              setEmail('');
             } else {
               alert('Masukkan email yang valid.');
             }
@@ -58,16 +65,10 @@ const InviteModal: React.FC<InviteModalProps> = ({ users, onClose }) => {
 
         </div>
 
-        {/* Daftar pengguna */}
         <div className={styles.userList}>
-          <h2 className={styles.userListTitle}>Anggota yang Tergabung</h2>
+       
           {users.map((user) => (
             <div key={user.email} className={styles.userItem}>
-              <img
-                src={user.profile_url}
-                alt={user.name}
-                className={styles.userAvatar}
-              />
               <div className={styles.userDetails}>
                 <h3 className={styles.userName}>{user.name}</h3>
                 <p className={styles.userEmail}>{user.email}</p>

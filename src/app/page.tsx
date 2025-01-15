@@ -2,13 +2,29 @@
 
 import { useEffect } from "react";
 import { useRouter } from 'next/navigation'
-import './globals.css'
+import './globals.css';
+import Cookies from "js-cookie";
 
 export default function OnBoarding() {
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   router.push("/OwnerViewPage/loginPage");
+  // }, [router]);
+
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/OwnerViewPage/loginPage");
+    // Ambil role dari cookie
+    const userRole = Cookies.get("userRole");
+
+    if (userRole === "owner") {
+      router.replace("/owner"); // Arahkan ke halaman owner
+    } else if (userRole === "operator") {
+      router.replace("/operator"); // Arahkan ke halaman operator
+    } else {
+      router.replace("/auth/register1StepPage"); // Jika role tidak ada, arahkan ke langkah pertama
+    }
   }, [router]);
 
   return (

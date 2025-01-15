@@ -5,24 +5,41 @@ import styles from './DetailAnimalDiagnosedCard.module.css';
 
 interface DetailAnimalDiagnosedCardProps {
   title: string;
-  total: number;
+  sehat: number;
+  tersedia: number;
   sakit: number;
   hilang: number;
+  mati: number;
 }
 
 const DetailAnimalDiagnosedCard: React.FC<DetailAnimalDiagnosedCardProps> = ({
   title,
-  total,
+  sehat,
+  tersedia,
   sakit,
-  hilang
+  hilang,
+  mati
+  
 }) => {
   return (
     <div className={styles.card}>
       <h3 className={styles.title}>{title}</h3>
-      <p  className={styles.total}>
-        <span className={styles.totalNumber}>{total}</span>
+     
+     <div className={styles.details}>
+      <p>
+            <span className={styles.sehat}>{sehat}</span>
+            <br/>
+            <span>Sehat</span>
       </p>
-      <p className={styles.ekor}>Ekor</p>
+
+      <p>
+            <span className={styles.tersedia}>{tersedia}</span>
+            <br/>
+            <span>Tersedia</span>
+      </p>
+
+     </div>
+
 
       <div className={styles.details}>
         <p>
@@ -36,6 +53,13 @@ const DetailAnimalDiagnosedCard: React.FC<DetailAnimalDiagnosedCardProps> = ({
             <br/>
             <span>Hilang</span>
         </p>
+
+        <p>
+            <span className={styles.mati}>{mati}</span>
+            <br/>
+            <span>Mati</span>
+        </p>
+
       </div>
     </div>
   );

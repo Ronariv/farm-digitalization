@@ -1122,6 +1122,7 @@ line-height: 24px;
   margin-top: -2%;
   margin-bottom: 5%;
   margin-left: 23%;
+  gap: 10px;
 }
 
 /* Input Group for "Berat" */
@@ -1252,4 +1253,8 @@ margin-top: 5%;
 
 .button-register2{
   padding-top: 10px;
+}
+
+.choice-StatusCategory{
+  padding: 10px;
 }

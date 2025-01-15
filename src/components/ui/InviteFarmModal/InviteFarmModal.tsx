@@ -3,15 +3,26 @@ import React, { useState } from 'react';
 import styles from "@/components/ui/InviteFarmModal/InviteFarmModal.module.css";
 import PrimaryButton from '../PrimaryButton/primaryButton';
 import { useRouter } from 'next/navigation'
+import DropdownPhase from '../DropdownPhase/DropdownPhase';
+import { farmListData } from '@/data/farmData';
+import { FarmModel } from '@/models/FarmModel';
 
 interface InviteFarmModalProps {
+  farmList: FarmModel[];
   users: User[];
   onClose: () => void;
 }
 
-const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ users, onClose }) => {
+const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ farmList, users, onClose }) => {
   const [email, setEmail] = useState('');
     const router = useRouter()
+
+    const handleFaseSelect = (option: string) => {
+      setSelectedFase(option);
+    };
+  
+    const [selectedFase, setSelectedFase] = useState("");
+  
   return (
     <div className={styles.modalBackdrop}>
       <div className={styles.modalContent}>
@@ -35,40 +46,41 @@ const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ users, onClose }) => 
         <h1 className={styles.modalTitle}>Tambah Peternakan</h1>
 
         {/* Form undangan */}
-        <div className={styles.inviteForm}>
+        <div className={styles.inviteRow}>
+          <div className={styles.inviteForm}>
           <input
             type="email"
             placeholder="Masukkan Nama Peternakan"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={styles.emailInput}
-         
-          />
-          <PrimaryButton
-          label= "Tambahkan"
-          width= {139}
-          onClick={() => router.push('/OwnerViewPage')}
           />
 
+          <PrimaryButton
+            label="Tambahkan"
+            width={139}
+            onClick={() => router.push('/OwnerViewPage')}
+          />
+
+        </div>
+        <div className={styles.dropdown}>
+            <DropdownPhase
+            options={['Sapi', 'Kambing', 'Domba']}
+            placeholder="Kategori Peternakan"
+            onSelect={handleFaseSelect}
+          />
+        </div>
         </div>
 
         {/* Daftar pengguna */}
         <div className={styles.userList}>
-          <h2 className={styles.userListTitle}>Peternakan yang Terdaftar</h2>
-          {users.map((user) => (
-            <div key={user.email} className={styles.userItem}>
-              <img
-                src={user.profile_url}
-                alt={user.name}
-                className={styles.userAvatar}
-              />
-              <div className={styles.userDetails}>
-                <h3 className={styles.userName}>{user.name}</h3>
-                <p className={styles.userEmail}>{user.email}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+  <h2 className={styles.userListTitle}>Peternakan yang Terdaftar</h2>
+  {farmList.map((farm, index) => (
+    <div key={index} className={styles.farmContainer}>
+      <h3 className={styles.farmName}>{farm.name}</h3>
+    </div>
+  ))}
+</div>
       </div>
     </div>
   );

@@ -4,6 +4,8 @@ import styles from '@/components/ui/TopBarOpt/TopBarOpt.module.css';
 import SearchBar from '../SearchBar/searchBar';
 import { notificationListData } from '@/data/notificationData';
 import OperatorProfile from '../OperatorProfile/operatorProfile';
+import RejectButton from '../RejectButton/RejectButton';
+import AcceptButton from '../AcceptButton/AcceptButton';
 
 const TopBarOpt: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,21 +49,27 @@ const TopBarOpt: React.FC = () => {
           </svg>
         </div>
 
-        <div className={styles.profile}>
-          {/* <OwnerProfile src="/OwnerProfile.jpeg" altText=" " /> */}
-          <OperatorProfile src="/operator.jpeg" altText=" " />
-        </div>
       </div>
 
       {isOpen &&
         ReactDOM.createPortal(
           <div id="dropdown-container" className={styles.dropdown}>
             <h1>Notifikasi</h1>
-            {notificationListData.map((notification) => (
-              <div className={styles.notificationRow}>
-                <img src={notification.profile_url} alt="" />
-              <p><b>{notification.user_name}</b> {notification.action}</p>
-            </div>
+            {notificationListData.slice(0, 1).map((notification, index) => (
+              <div key={notification.user_name + notification.action}>
+                <div className={styles.notificationRow}>
+                  <div className={styles.notificationText}>
+                    <p><b>{notification.user_name}</b> {notification.action}</p>
+                  </div>
+                </div>
+
+                {index === 0 && ( 
+                  <div className={styles.notificationActionsWrapper}>
+                    <RejectButton label={"Tolak"} onClick={closeDropdown} />
+                    <AcceptButton label={"Terima"} onClick={closeDropdown} />
+                  </div>
+                )}
+              </div>
             ))}
           </div>,
           document.body // Render into the body element

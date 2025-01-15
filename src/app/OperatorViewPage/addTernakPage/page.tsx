@@ -89,7 +89,7 @@ const app: React.FC = () => {
                   <Label title="Fase (pilihan) *" />
                   <DropdownFase
           
-                  options={['Cempe', 'Dara', 'Hamil', 'Siap Kawin', 'Afkir']}
+                  options={['Cempe', 'Dara', 'Hamil', 'Siap Kawin', 'Lepas Sapih' , 'Afkir']}
                   placeholder="Fase"
                   onSelect={handleFaseSelect}
                 />
@@ -146,7 +146,7 @@ const app: React.FC = () => {
           <div className="statusPilihan-addTernak">
               <Label title="Status (Pilihan) *" />
               <DropdownFase
-                  options={['Tersedia', 'Hilang', 'Mati']}
+                  options={['Tersedia', 'Hilang', 'Mati', "Terjual"]}
                   placeholder="Status"
                   onSelect={handleStatusSelect}
                 />

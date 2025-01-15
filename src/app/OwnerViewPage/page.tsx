@@ -10,6 +10,7 @@ import TopBar from '@/components/ui/TopBar/topBar';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import InviteFarmModal from '@/components/ui/InviteFarmModal/InviteFarmModal';
 import { usersData } from '@/data/userData';
+import { farmListData } from '@/data/farmData';
 
 export default function OwnerViewPage() {
 
@@ -48,9 +49,10 @@ export default function OwnerViewPage() {
           />
           {isModalOpen && (
         <InviteFarmModal
-          users={usersData} // Gunakan data dari usersData
-          onClose={() => setIsModalOpen(false)}
-        />
+                      users={usersData} // Gunakan data dari usersData
+                      onClose={() => setIsModalOpen(false)} 
+                      farmList={farmListData}        
+                      />
       )}
           </div>
           </div>

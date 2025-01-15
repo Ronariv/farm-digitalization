@@ -6,7 +6,8 @@ import styles from './DetailAnimalFemaleCard.module.css';
 interface DetailAnimalFemaleCardProps {
   title: string;
   total: number;
-  pedet: number;
+  pedet?: number;
+  cempe?: number;
   dara: number;
   siapKawin: number;
   hamil: number;
@@ -17,6 +18,7 @@ const DetailAnimalFemaleCard: React.FC<DetailAnimalFemaleCardProps> = ({
   title,
   total,
   pedet,
+  cempe,
   dara,
   siapKawin,
   hamil,
@@ -31,11 +33,22 @@ const DetailAnimalFemaleCard: React.FC<DetailAnimalFemaleCardProps> = ({
       <p className={styles.ekor}>Ekor</p>
 
       <div className={styles.details}>
-        <p>
+                {cempe !== undefined && ( // Tampilkan cempe jika diberikan
+          <p>
+            <span className={styles.cempe}>{cempe}</span>
+            <br />
+            <span>Cempe</span>
+          </p>
+        )}
+      {pedet !== undefined && ( // Tampilkan pedet jika diberikan
+          <p>
             <span className={styles.pedet}>{pedet}</span>
-            <br/>
+            <br />
             <span>Pedet</span>
-        </p>
+          </p>
+        )}
+
+
 
         <p>
             <span className={styles.dara}>{dara}</span>

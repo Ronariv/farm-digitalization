@@ -154,7 +154,9 @@ const App: React.FC = () => {
                 <DetailAnimalDiagnosedCard
                 key={category.type}
                 title={category.tittle}
-                total={category.total}
+                tersedia={category.tersedia}
+                sehat={category.sehat}
+                mati={category.mati}
                 sakit={category.sakit}
                 hilang={category.hilang}
                 />

@@ -51,9 +51,9 @@ const TopBar: React.FC = () => {
           </svg>
         </div>
 
-        <div className={styles.profile}>
+        {/* <div className={styles.profile}>
           <OwnerProfile src="/OwnerProfile.jpeg" altText=" " />
-        </div>
+        </div> */}
       </div>
 
       {isOpen &&
@@ -66,23 +66,16 @@ const TopBar: React.FC = () => {
               <p><b>{notification.user_name}</b> {notification.action}</p>
               </div>
             ))} */}
-{notificationListData.map((notification, index) => (
-  <div key={notification.user_name + notification.action}>
-    <div className={styles.notificationRow}>
-      <img src={notification.profile_url} alt="" />
-      <div className={styles.notificationText}>
-        <p><b>{notification.user_name}</b> {notification.action}</p>
-      </div>
-    </div>
-
-    {index === 0 && ( // Tombol hanya untuk notifikasi pertama
-      <div className={styles.notificationActionsWrapper}>
-        <RejectButton label={"Tolak"} />
-        <AcceptButton label={"Terima"} />
-      </div>
-    )}
-  </div>
-))}
+            {notificationListData.slice(1, 3).map((notification, index) => (
+              <div key={notification.user_name + notification.action}>
+                <div className={styles.notificationRow}>
+                  {/* <img src={notification.profile_url} alt="" /> */}
+                  <div className={styles.notificationText}>
+                    <p><b>{notification.user_name}</b> {notification.action}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
 
           </div>,
           document.body 

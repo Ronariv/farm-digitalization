@@ -17,10 +17,6 @@
     margin-bottom: 16px;
   }
   
-  .total {
-    font-size: 24px;
-    font-weight: bold;
-  }
   
   .ekor{
     font-size: 14px;
@@ -50,6 +46,14 @@
     color: #000;
   }
 
+  .sehat{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    color: #000;
+  }
+
   .hilang{
     font-size: 20px;
     font-style: normal;
@@ -58,3 +62,18 @@
     color: #000;
   }
   
+  .tersedia{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    color: #000;
+  }
+
+  .mati{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    color: #000;
+  }

@@ -1,32 +1,9 @@
 'use client'
 
 import React, { useState } from 'react';
-// import PhaseLabelButton from "@/components/ui/PhaseLabel/PhaseLabelButton";
-// import { phaseLabels } from "@/data/phaseLabels";
-// import HealthStatus from "@/components/ui/healthStatus"; 
-// import GenderIcon from '@/components/ui/genderIcon';
-import EditButton from '@/components/ui/EditButton/editButton';
-import AddButton from '@/components/ui/AddButton/addButton';
-import InviteOperatorButton from '@/components/ui/InviteOperatorButton/inviteOperatorButton';
-import UpdateButton from '@/components/ui/UpdateButton/updateButton';
-import PrintButton from '@/components/ui/DownloadQRButton/DownloadQRButton';
-import FilterButton from '@/components/ui/Filter/filterButton';
-import SortByButton from '@/components/ui/SortBy/sortBy';
-import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
-import Sidebar from '@/components/ui/Sidebar/sidebar';
-import SearchBar from '@/components/ui/SearchBar/searchBar';
-import CategoryAnimalCard from '@/components/ui/CategoryAnimalCard/categoryAnimalCard';
 import animalCategories from '@/models/animalCategories';
-import OperatorProfile from '@/components/ui/OperatorProfile/operatorProfile';
-import Image from 'next/image';
-import OwnerProfile from '@/components/ui/OwnerProfile/ownerProfile';
-import Breadcrumbs from '@/components/ui/Breadcrumbs/breadcrumbs';
-import { usePathname } from 'next/navigation';
-import TopBar from '@/components/ui/TopBar/topBar';
 import SidebarDisabled from '@/components/ui/SidebarDisabled/SidebarDisabled';
-import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import InviteFarmModal from '@/components/ui/InviteFarmModal/InviteFarmModal';
-import { User } from '@/models/UserModel';
 import { usersData } from '@/data/userData';
 import styles from "@/app/OperatorViewPage/defaultOperatorViewPage/defaultOperatorViewPage.module.css"
 import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
@@ -36,22 +13,6 @@ const App: React.FC = () => {
   const [breadcrumb, setBreadcrumb] = useState('Statistik');
 
   const categories = animalCategories('owner');
-
-    const handleUpdate = () => {
-        alert("Tombol Invite Ternak diklik!");
-    };
-
-    const handlePrint = () => {
-        alert("Tombol print sudah diklik!");
-    };
-
-    const handleFilter = () => {
-      alert("Tombol filter di klik");
-    };
-
-    const handleSortBy = () => {
-      alert("Tombol sort di klik");
-    };
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -85,12 +46,6 @@ const App: React.FC = () => {
         <div className="content">
         <div className="menuSection">
           <div>
-          {/* <Breadcrumbs
-            breadcrumbs={[
-              { label: 'Peternakan Widjaya', href: '/OwnerViewPage' },
-              { label: 'Statistik', href: '' },
-            ]}
-          /> */}
           </div>
           <div className="menuHeader">
             {/* <h1 className="menuTittle">Statistik</h1> */}
@@ -99,9 +54,8 @@ const App: React.FC = () => {
 
               {isModalOpen && (
                       <InviteFarmModal
-                        users={usersData} // Gunakan data dari usersData
-                        onClose={() => setIsModalOpen(false)}
-                      />
+                      users={usersData} // Gunakan data dari usersData
+                      onClose={() => setIsModalOpen(false)} farmList={[]}                      />
               )}
             </div>
           </div>

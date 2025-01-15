@@ -21,6 +21,7 @@ export const defaultFilterCategories: FilterCategory[] = [
             "Siap Kawin",
             "Hamil",
             "Menyusui",
+            "Afkir"
         ]
     },
     {
@@ -35,6 +36,10 @@ export const defaultFilterCategories: FilterCategory[] = [
         items: [
             "Sakit",
             "Sehat",
+            "Tersedia",
+            "Hilang",
+            "Mati",
+            "Terjual"
         ]
     },
 ]

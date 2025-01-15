@@ -153,7 +153,7 @@ const App: React.FC = () => {
                 key={category.type} // Gunakan type sebagai key
                 title={category.tittle}
                 total={category.total}
-                pedet={category.pedet}
+                cempe={category.cempe}
                 dara={category.dara}
                 siapKawin={category.siapKawin}
                 hamil={category.hamil}
@@ -179,9 +179,11 @@ const App: React.FC = () => {
                 <DetailAnimalDiagnosedCard
                 key={category.type}
                 title={category.tittle}
-                total={category.total}
+                tersedia={category.tersedia}
                 sakit={category.sakit}
                 hilang={category.hilang}
+                mati={category.mati}
+                sehat={category.sehat}
                 />
             ))} 
             </div>

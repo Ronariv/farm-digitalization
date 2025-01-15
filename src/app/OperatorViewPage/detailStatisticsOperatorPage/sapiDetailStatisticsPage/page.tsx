@@ -177,12 +177,13 @@ const App: React.FC = () => {
             <div className="sapiMaleCardStatisticsCard">
                 {filteredDiagnosedCategories.map((category) => (
                 <DetailAnimalDiagnosedCard
-                key={category.type}
-                title={category.tittle}
-                total={category.total}
-                sakit={category.sakit}
-                hilang={category.hilang}
-                />
+                    key={category.type}
+                    title={category.tittle}
+                    sehat={category.sehat}
+                    tersedia={category.tersedia}
+                    sakit={category.sakit}
+                    hilang={category.hilang}
+                    mati={category.mati}             />
             ))} 
             </div>
 
