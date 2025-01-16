@@ -17,6 +17,8 @@ import SettingsOperatorPage from "@/app/OperatorViewPage/settingsOperatorPage/pa
 import SapiDetailStatisticsPage from "@/app/OwnerViewPage/detailStatisticsPage/sapiDetailStatisticsPage/page"
 import KambingDetailStaticsPage from "@/app/OwnerViewPage/detailStatisticsPage/kambingDetailStatisticsPage/page"
 import DombaDetailStaticsPage from "@/app/OwnerViewPage/detailStatisticsPage/dombaDetailStatisticsPage/page"
+import useFetch from "@/hooks/useFetch";
+import { User } from "@/models/UserModel";
 
 
 const DefaultViewPage: React.FC = () => {
@@ -26,27 +28,17 @@ const DefaultViewPage: React.FC = () => {
   const [isFarmInvited, setIsFarmInvited] = useState(false);
   const searchParams = useSearchParams();
 
+  const { data, loading, error } = useFetch<User>(
+      `${process.env.NEXT_PUBLIC_API_HOST}/auth/self`,
+      undefined,
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJtaWthc3VyeW9mQGdtYWlsLmNvbSIsImlhdCI6MTczNzAyNzg0MSwiZXhwIjoxNzM3MDMxNDQxfQ.TyDyAVy7sI4740MxySV0ETHX-YfSEL3CShXUOeNc1sw"
+  );
+
   useEffect(() => {
     const fetchedRole = getCookie("role");
     console.log("Role fetched from cookie:", fetchedRole);
     setRole(fetchedRole);
   }, []);
-
-//   if (role === "owner") {
-//     return <OwnerViewPage />;
-//   }
-
-//   if (role === "operator") {
-//     return <OperatorViewPage />;
-//   }
-
-//   return (
-//     <div style={{ textAlign: "center", marginTop: "50px" }}>
-//       <h1>Role tidak valid</h1>
-//       <p>Silakan login kembali untuk mendapatkan akses yang sesuai.</p>
-//     </div>
-//   );
-// };
 
 const view = searchParams.get("view");
 

@@ -57,6 +57,10 @@ export default function InputDemo() {
         const data = await response.json();
         setApiData(data);
 
+        setCookie("role", data.user.role, { path: "/", maxAge: 7 * 24 * 60 * 60 });
+        setCookie("token", data.token, { path: "/", maxAge: 7 * 24 * 60 * 60 });
+        setCookie("id", data.user.id, { path: "/", maxAge: 7 * 24 * 60 * 60 });
+
         if (storedUsername && storedRole && response.ok) {
           console.log(`Login berhasil untuk ${storedUsername} dengan role ${storedRole}`);
           router.push("/defaultView"); 

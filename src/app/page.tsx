@@ -23,7 +23,7 @@ export default function OnBoarding() {
     } else if (userRole === "operator") {
       router.replace("/defaultView"); // Arahkan ke halaman operator
     } else {
-      router.replace("/auth/registerStep1Page"); // Jika role tidak ada, arahkan ke langkah pertama
+      router.replace("/auth/loginPage"); // Jika role tidak ada, arahkan ke langkah pertama
     }
   }, [router]);
 
