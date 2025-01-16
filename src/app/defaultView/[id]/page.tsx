@@ -234,14 +234,14 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
                             </div>
                             <div className='statisticsInformationLivestock'>
                                 {/* <StatisticMilk filterBy="year" filterValue={2019} milkData={livestock == null ? "" : livestock.milkData}/> */}
-                                <StatisticsMilkUpdate filterBy="year" filterValue={livestock == null ? "" : livestock.milkData.yearlyDatas[0].year} milkData={livestock == null ? undefined : livestock.milkData} livestock={livestock == null ? undefined : livestock} />
+                                <StatisticsMilkUpdate filterBy="year" filterValue={livestock == null ? "" : livestock.milkData == null ? "" : livestock.milkData.yearlyDatas[0].year} milkData={livestock == null ? undefined : livestock.milkData} livestock={livestock == null ? undefined : livestock} />
                                 <div className="lactationSection">
-                                    <StatisticsLactation filterBy="year" filterValue={2019} lactationData={livestock == null ? undefined : livestock.lactationData}/>
-                                    <DetailLactationCard currentLactation={currentLactation} history={history} livestock={livestock == null ? undefined : livestock} />;
+                                    <StatisticsLactation filterBy="year" filterValue={livestock == null ? "" : livestock.lactationData == null ? "" : livestock.lactationData.yearlyDatas[0].year} lactationData={livestock == null ? undefined : livestock.lactationData}/>
+                                    <DetailLactationCard livestock={livestock == null ? undefined : livestock} />;
                                 </div>
                                 
                                 {/* <StatisticWeight filterBy="year" filterValue={2019} weightData={livestock == null ? "" : livestock.weightData}/> */}
-                                <StatisticsWeightUpdate filterBy="year" filterValue={2019} weightData={livestock == null ? undefined : livestock.weightData} livestock={livestock == null ? undefined : livestock}/>
+                                <StatisticsWeightUpdate filterBy="year" filterValue={livestock == null ? "" : livestock.weightData == null ? "" : livestock.weightData.yearlyDatas[0].year} weightData={livestock == null ? undefined : livestock.weightData} livestock={livestock == null ? undefined : livestock}/>
                             </div>
                         </div>
                     </div>

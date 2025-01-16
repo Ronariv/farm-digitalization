@@ -101,7 +101,11 @@ export interface MilkData {
 // };
 
 export interface WeightData {
-    yearlyData: YearlyData[];
+    id: number;
+    animalId: number;
+    createdAt: string;
+    updatedAt: string;
+    yearlyDatas: YearlyData[];
 }
 
 // export const defaultWeightData: WeightData = {

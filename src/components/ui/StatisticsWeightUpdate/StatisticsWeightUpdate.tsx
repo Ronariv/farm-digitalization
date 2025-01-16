@@ -20,7 +20,7 @@ const StatisticsWeightUpdate: React.FC<StatisticsWeightUpdateProps> = ({
 }) => {
   // Ensure weightData exists before accessing its properties
   const filteredData =
-    weightData?.yearlyData?.flatMap((item) => {
+    weightData?.yearlyDatas?.flatMap((item) => {
       if (filterBy === 'year' && item.year === filterValue) {
         return item.monthlyDatas;
       }
