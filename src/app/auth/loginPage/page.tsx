@@ -61,7 +61,7 @@ export default function InputDemo() {
         setCookie("token", data.token, { path: "/", maxAge: 7 * 24 * 60 * 60 });
         setCookie("id", data.user.id, { path: "/", maxAge: 7 * 24 * 60 * 60 });
 
-        if (storedUsername && storedRole && response.ok) {
+        if (response.ok) {
           console.log(`Login berhasil untuk ${storedUsername} dengan role ${storedRole}`);
           router.push("/defaultView"); 
         } else {

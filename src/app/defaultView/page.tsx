@@ -4,19 +4,19 @@ import React, { useEffect, useState } from "react";
 import { getCookie } from "@/lib/cookies";
 import { useRouter, useSearchParams } from 'next/navigation'
 import OperatorViewPage from "@/app/OperatorViewPage/page";
-import OwnerViewPage from "@/app/OwnerViewPage/page";
-import DefaultOwnerViewPage from "@/app/OwnerViewPage/defaultOwnerViewPage/page"
+import OwnerViewPage from "../usedComponents/ownerViewPage/page";
+import DefaultOwnerViewPage from "@/app/usedComponents/defaultOwnerViewPage/page"
 import DefaultOperatorViewpage from "@/app/OperatorViewPage/defaultOperatorViewPage/page"
 import CombinedViewPage from "@/app/combinedViewPage/page";
-import LivestockOwnerPage from "@/app/OwnerViewPage/livestockOwnerPage/page";
+import LivestockOwnerPage from "@/app/usedComponents/livestockOwnerPage/page";
 import LivestockOperatorPage from "@/app/OperatorViewPage/livestockOperatorPage/page";
-import ActivityOwnerPage from "@/app/OwnerViewPage/activityOwnerPage/page"
-import SettingOwnerPage from "@/app/OwnerViewPage/settingsOwnerPage/page"
+import ActivityOwnerPage from "@/app/usedComponents/activityOwnerPage/page"
+import SettingOwnerPage from "@/app/usedComponents/settingsOwnerPage/page"
 import ActivityOperatorPage from "@/app/OperatorViewPage/activityOperatorPage/page"
 import SettingsOperatorPage from "@/app/OperatorViewPage/settingsOperatorPage/page"
-import SapiDetailStatisticsPage from "@/app/OwnerViewPage/detailStatisticsPage/sapiDetailStatisticsPage/page"
-import KambingDetailStaticsPage from "@/app/OwnerViewPage/detailStatisticsPage/kambingDetailStatisticsPage/page"
-import DombaDetailStaticsPage from "@/app/OwnerViewPage/detailStatisticsPage/dombaDetailStatisticsPage/page"
+import SapiDetailStatisticsPage from "@/app/usedComponents/sapiDetailStatisticsPage/page"
+import KambingDetailStaticsPage from "@/app/usedComponents/kambingDetailStatisticsPage/page"
+import DombaDetailStaticsPage from "@/app/usedComponents/dombaDetailStatisticsPage/page"
 import useFetch from "@/hooks/useFetch";
 import { User } from "@/models/UserModel";
 import { FarmModel } from "@/models/FarmModel";
@@ -48,7 +48,6 @@ const renderViewBasedOnRole = () => {
     if (data == null) {
       return <DefaultOwnerViewPage setIsFarmInvited={setIsFarmInvited} />;
     }
-    // return <OwnerViewPage breadcrumb={breadcrumb} setBreadcrumb={setBreadcrumb} />;
     switch (view) {
       case "livestock":
         return <LivestockOwnerPage />;

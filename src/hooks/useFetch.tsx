@@ -44,10 +44,6 @@ export default function useFetch<T>(
 
                 const result: FetchResponse<T> = await response.json();
 
-                console.log("//////")
-                console.log(result.data)
-                console.log("//////")
-
                 if (result.success) {
                     setData(result.data);
                 } else {

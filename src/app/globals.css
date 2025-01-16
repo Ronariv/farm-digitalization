@@ -1000,6 +1000,7 @@ line-height: 30px
 /* Section */
 .section-addTernak {
   margin-bottom: 20px;
+  /* margin-right: 200px; */
   display: flex;
 width: 235px;
 flex-direction: column;
@@ -1322,4 +1323,26 @@ line-height: 20px;
   height: 466.01px; /* Tinggi garis */
   background-color: #ccc; /* Warna garis, ubah sesuai kebutuhan */
   margin: 0 16px; 
+}
+
+.image-addTernak {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.image-placeholder-addTernak {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ccc;
+  color: #aaa;
+  cursor: pointer;
+  text-align: center;
+}
+
+.uploadButton-addTernak {
+  margin-top: 20px;
 }

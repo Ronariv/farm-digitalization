@@ -13,6 +13,7 @@ interface SidebarProps {
   onMenuClick: (menu: string) => void;
   farmList?: FarmModel[];
   setFarm: (farmName: string) => void;
+  selectedFarm: string | null;
 }
 interface MenuItem {
   href: string;
@@ -98,21 +99,17 @@ const menuItems : MenuItem[] = [
 ]
 
 
-const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: FarmModel[], setFarm: (farmName: string) => void}> = ({ setBreadcrumb, farmList = [], setFarm }) => {
-
-  
+const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: FarmModel[], setFarm: (farmName: string) => void, selectedFarm: string | null}> = ({ setBreadcrumb, farmList = [], setFarm, selectedFarm }) => {  
   const handleMenuClick = (label: string) => {
     setSelectedIndex(label);
-    setBreadcrumb(label); // Set breadcrumb saat menu diklik
+    setBreadcrumb(label);
   };
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedFarm, setSelectedFarm] = useState(farmList.length == 0 ? "Choose Farm" : farmList[0].name);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleFarmSelect = (farmName: string) => {
-    setSelectedFarm(farmName);
     setIsOpen(false);
     setFarm(farmName);
   };
