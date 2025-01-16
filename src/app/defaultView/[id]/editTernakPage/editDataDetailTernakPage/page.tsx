@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TabNavigation from "@/components/ui/TabNavigation/TabNavigation";
 import { Input } from "@/components/ui/input"
@@ -9,9 +9,16 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { getCookie } from '@/lib/cookies';
 import useFetch from '@/hooks/useFetch';
 import { FarmModel } from '@/models/FarmModel';
+import { Livestock } from '@/models/LivestockModel';
 // import { farmListData } from '@/data/farmData';
 
-const app: React.FC = () => {
+interface EditLivestockPageProps {
+  params: Promise<{
+      id: number;
+  }>;
+}
+
+const app: React.FC<EditLivestockPageProps> = ({ params: paramsPromise }) => {
     const router = useRouter()
 
     const searchParams = useSearchParams();
@@ -51,6 +58,30 @@ const app: React.FC = () => {
       console.log('Selected Jenis Kelamin:', value);
     };
 
+    const params = use(paramsPromise);
+    const id = params.id;
+
+    const { data: livestock, loading: loadingLivestock, error: errorLivestock } = useFetch<Livestock>(
+      `${process.env.NEXT_PUBLIC_API_HOST}/animals/${id}`,
+    );
+    useEffect(() => {
+        if (livestock) {
+            console.log(livestock)
+        }
+    }, [livestock]);
+
+    useEffect(() => {
+      if (livestock) {
+        const formattedDob = new Date(livestock.dob).toISOString().split('T')[0];
+
+        setDob(formattedDob);
+        setIdAyah(livestock.dad_name_id);
+        setIdIbu(livestock.mom_name_id);
+        setIdKakek(livestock.grandpa_name_id);
+        setIdNenek(livestock.grandma_name_id);
+      }
+    }, [livestock]);
+
     const handleValidationAndSubmit = async () => {
       try {
         const payload = {
@@ -61,10 +92,6 @@ const app: React.FC = () => {
           phase: fase,
           photo_url: imageUrl,
           breed: rasTernak,
-          category: kategoriHewan,
-          condition: kondisiTernak,
-          status: status,
-          grade: grade,
           type_id: kategoriHewan,
           farm_name: selectedFarm,
           farmId: farmId,
@@ -73,8 +100,8 @@ const app: React.FC = () => {
           grandpa_name_id: idKakek,
           grandma_name_id: idNenek,
       };
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/animals`, {
-          method: "POST",
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/animals/${id}`, {
+          method: "PUT",
           body: JSON.stringify(payload),
           headers: {
             "Content-Type": "application/json",
@@ -128,25 +155,25 @@ const app: React.FC = () => {
               <div className="grid-row-addTernak">
                 <div>
                   <Label title="ID Ayah *" />
-                  <Input disabled={false} type="text" placeholder="ID Ayah" onChange={(e) => setIdAyah(e.target.value)}/>
+                  <Input disabled={false} type="text" placeholder="ID Ayah" value={idAyah} onChange={(e) => setIdAyah(e.target.value)}/>
                 </div>
   
                 <div>
                   <Label title="ID Ibu *" />
                   <div className="input-group-addTernak">
-                    <Input disabled={false} type="text" placeholder="ID Ibu" onChange={(e) => setIdIbu(e.target.value)}/>
+                    <Input disabled={false} type="text" placeholder="ID Ibu" value={idIbu} onChange={(e) => setIdIbu(e.target.value)}/>
                   </div>
                 </div>
 
                 <div>
                   <Label title="ID Kakek *" />
-                  <Input disabled={false} type="text" placeholder="ID Kakek" onChange={(e) => setIdKakek(e.target.value)}/>
+                  <Input disabled={false} type="text" placeholder="ID Kakek" value={idKakek} onChange={(e) => setIdKakek(e.target.value)}/>
                 </div>
   
                 <div>
                   <Label title="ID Nenek *" />
                   <div className="input-group-addTernak">
-                    <Input disabled={false} type="text" placeholder="ID Nenek" onChange={(e) => setIdNenek(e.target.value)}/>
+                    <Input disabled={false} type="text" placeholder="ID Nenek" value={idNenek} onChange={(e) => setIdNenek(e.target.value)}/>
                   </div>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import React, { use, useEffect, useState } from 'react';
 import useFetch from '@/hooks/useFetch';
 import { useRouter } from 'next/navigation'
 import { Livestock } from '@/models/LivestockModel';
+import QRCode from 'qrcode';
 
 import Sidebar from '@/components/ui/Sidebar/sidebar';
 import GenderIcon from '@/components/ui/genderIcon';
@@ -37,14 +38,17 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
         `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
     );
     const [selectedFarm, setSelectedFarm] = useState<string | null>(null);
+    const [selectedFarmId, setSelectedFarmId] = useState<number | null>(null);
     useEffect(() => {
         if (farmData && farmData.length > 0) {
             setSelectedFarm(farmData[0].name);
+            setSelectedFarmId(farmData[0].id);
         }
     }, [farmData]);
 
-    const handleFarmChange = (farmName: string) => {
+    const handleFarmChange = (farmName: string, farmId: number) => {
         setSelectedFarm(farmName);
+        setSelectedFarmId(farmId);
         console.log(farmName)
     };
 
@@ -68,17 +72,48 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
         { title: 'Laktasi ke-2', description: '1 Jantan - Aug 2024', livestock: livestock == null ? undefined : livestock },
     ];
 
-    // const handleDeleteData = () => {
-    // const isConfirmed = window.confirm(
-    //     `Apakah Anda yakin untuk menghapus ternak ID ${livestock == null ? "" : livestock.name_id}?`
-    // );
-    
-    // if (isConfirmed) {
-    //     router.push(`/defaultView`);
-    // } else {
-    //     router.push(`/defaultView/${livestock == null ? "" : livestock.name_id.toLowerCase()}/`);
-    // }
-    // };
+    const handleDownloadQR = async () => {
+        try {
+            console.log("testing")
+            const qrCodeDataUrl = await QRCode.toDataURL(process.env.NEXT_PUBLIC_NEXT_HOST + "/OwnerViewPage/livestockOwnerPage/" + id); // Make sure "value" is valid
+            const link = document.createElement('a');
+            link.href = qrCodeDataUrl;
+            link.download = 'qrcode.png';
+            link.click();
+        } catch (err) {
+            console.error('Error generating QR code:', err);
+        }
+    };
+
+    const [apiError, setApiError] = useState(null);
+    const [apiData, setApiData] = useState(null);
+    const handleDeleteData = async () => {
+        const isConfirmed = await window.confirm(
+            `Apakah Anda yakin untuk menghapus ternak ID ${livestock == null ? "" : livestock.name_id}?`
+        );
+        
+        if (isConfirmed) {
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/animals/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                  });
+                
+                const data = await response.json();
+                if (response.ok) {
+                    router.push("/defaultView?view=livestock");
+                } else {
+                    setApiError(data.error || "Something went wrong");
+                }
+            } catch {
+
+            }
+        } else {
+            router.push(`/defaultView/${livestock == null ? "" : livestock.id}/`);
+        }
+    };
     
    const router = useRouter()
     return (
@@ -120,15 +155,15 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
                                     </PhaseLabelTag>
                                     </div>
                                 <div className="deleteIcon">
-                                    <DownloadQRButton/>
+                                    <DownloadQRButton onClick={handleDownloadQR}/>
                                     <PrimaryButton 
                                     label='Ubah Data' 
                                     width={130}
-                                    onClick={() => router.push(`/defaultView/addTernakPage`)}
+                                    onClick={() => router.push(`/defaultView/${id}/editTernakPage?selectedFarm=${selectedFarm}&farmId=${selectedFarmId}`)}
                                     />
                                     <DeleteButton
                                         onClick={() => {
-                                        // handleDeleteData(); // Memunculkan alert
+                                            handleDeleteData();
                                         
                                         }}
                                     />
@@ -156,7 +191,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
                                             day: 'numeric'
                                         })}></GeneralInfoBox>
                                         <GeneralInfoBox title={'Ras'} value={livestock == null ? "" : livestock.breed} ></GeneralInfoBox>
-                                        <GeneralInfoBox title={'Grade'} value={livestock == null ? "" : livestock.weight || "Undefined"} ></GeneralInfoBox>
+                                        <GeneralInfoBox title={'Grade'} value={livestock == null ? "" : livestock.grade || "Undefined"} ></GeneralInfoBox>
                                         <GeneralInfoBox title={'Berat'} value={livestock == null ? "" : livestock.weight || "Undefined"} ></GeneralInfoBox>
                                     </div>
                                     <div className='generalInformationLivestockBoxTop'>
@@ -302,7 +337,7 @@ const DetailInformationCard: React.FC<DetailInformationCardProps> = ({
         // const pageUrl = getPageUrl(historyTitle);
         // router.push(pageUrl); 
         const pageUrl = getPageUrl(historyTitle);
-        const dynamicUrl = pageUrl.replace("[id]", livestock != null ? livestock.name_id.toLowerCase(): "");
+        const dynamicUrl = pageUrl.replace("[id]", livestock == null ? "" : `${livestock.id}`);
         router.push(dynamicUrl);
     };
 

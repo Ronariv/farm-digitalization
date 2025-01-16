@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import PhaseLabelButton from "@/components/ui/PhaseLabel/PhaseLabelButton";
 // import { phaseLabels } from "@/data/phaseLabels";
 // import HealthStatus from "@/components/ui/healthStatus"; 
@@ -30,8 +30,31 @@ import animalDiagnosedCategories from '@/models/DetailAnimalDiagnosedCategories'
 import StatisticsMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
 import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
 import TopBar from '@/components/ui/TopBar/topBar';
+import { getCookie } from '@/lib/cookies';
+import useFetch from '@/hooks/useFetch';
+import { FarmModel } from '@/models/FarmModel';
 
 const App: React.FC = () => {
+
+  const storedId = getCookie("id"); 
+
+  const { data: farmData, loading: loadingFarms, error: errorFarms } = useFetch<FarmModel[]>(
+      `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
+  );
+  const [selectedFarm, setSelectedFarm] = useState<string | null>(null);
+  const [selectedFarmId, setSelectedFarmId] = useState<number | null>(null);
+  useEffect(() => {
+      if (farmData && farmData.length > 0) {
+          setSelectedFarm(farmData[0].name);
+          setSelectedFarmId(farmData[0].id);
+      }
+  }, [farmData]);
+
+  const handleFarmChange = (farmName: string, farmId: number) => {
+    setSelectedFarm(farmName);
+    setSelectedFarmId(farmId);
+    console.log(farmName)
+};
 
   const [breadcrumb, setBreadcrumb] = useState('Statistik');
 
@@ -81,9 +104,14 @@ const App: React.FC = () => {
     return (
     <div className="layout">
       <div className="sidebar">
-      <Sidebar setBreadcrumb={setBreadcrumb} setFarm={function (farmName: string): void {
-            throw new Error('Function not implemented.');
-          } } />
+        <Sidebar 
+          setBreadcrumb={function (label: string): void {
+              throw new Error('Function not implemented.');
+          }} 
+          farmList={farmData == null ? [] : farmData}
+          setFarm={handleFarmChange}
+          selectedFarm={selectedFarm}
+      />
       </div>
 
       <div className="main-content">

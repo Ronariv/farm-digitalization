@@ -39,8 +39,8 @@ const AnimalCard: NextPage<AnimalCardType> = ({ className = "", livestock }) => 
     >
       <section className={styles.animalDetails}>
         <img
-          src={livestock.photo_url}
-          alt={livestock.name_id}
+          src={livestock == null ? "" : livestock.photo_url}
+          alt={livestock == null ? "" : livestock.name_id}
           style={{
               width: '100%',
               height: '200px',

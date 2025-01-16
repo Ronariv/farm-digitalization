@@ -40,6 +40,8 @@ const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ farmList, users, onCl
             "Content-Type": "application/json",
           },
         });
+
+        router.push(`/defaultView`);
         onClose();
       } else {
         alert('Harap isi semua bidang!');

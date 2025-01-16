@@ -125,6 +125,10 @@ export interface Livestock {
     phase: string;
     photo_url: string;
     breed: string;
+    category: string;
+    condition: string;
+    status: string;
+    grade: string;
     type_id: string;
     farm_name: string;
     dad_name_id: string;

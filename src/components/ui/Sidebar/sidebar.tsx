@@ -12,7 +12,7 @@ import { getCookie } from '@/lib/cookies';
 interface SidebarProps {
   onMenuClick: (menu: string) => void;
   farmList?: FarmModel[];
-  setFarm: (farmName: string) => void;
+  setFarm: (farmName: string, farmId: number) => void;
   selectedFarm: string | null;
 }
 interface MenuItem {
@@ -99,7 +99,7 @@ const menuItems : MenuItem[] = [
 ]
 
 
-const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: FarmModel[], setFarm: (farmName: string) => void, selectedFarm: string | null}> = ({ setBreadcrumb, farmList = [], setFarm, selectedFarm }) => {  
+const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: FarmModel[], setFarm: (farmName: string, farmId: number) => void, selectedFarm: string | null}> = ({ setBreadcrumb, farmList = [], setFarm, selectedFarm }) => {  
   const handleMenuClick = (label: string) => {
     setSelectedIndex(label);
     setBreadcrumb(label);
@@ -109,9 +109,9 @@ const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: Far
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const handleFarmSelect = (farmName: string) => {
+  const handleFarmSelect = (farmName: string, farmId: number) => {
     setIsOpen(false);
-    setFarm(farmName);
+    setFarm(farmName, farmId);
   };
 
   const [selectedIndex, setSelectedIndex] = useState<string | null>(null);
@@ -160,14 +160,14 @@ const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: Far
                   index == 0 
                   ? 
                   <div>
-                    <button key={index} className={styles.dropdownItem} onClick={() => handleFarmSelect(farm.name)}>
+                    <button key={index} className={styles.dropdownItem} onClick={() => handleFarmSelect(farm.name, farm.id)}>
                       {farm.name}
                     </button>
                   </div>
                   : 
                   <div>
                     <hr />
-                    <button key={index} className={styles.dropdownItem} onClick={() => handleFarmSelect(farm.name)}>
+                    <button key={index} className={styles.dropdownItem} onClick={() => handleFarmSelect(farm.name, farm.id)}>
                       {farm.name}
                     </button>
                   </div>

@@ -5,33 +5,14 @@ import useFetch from '@/hooks/useFetch';
 import { useRouter } from 'next/navigation'
 import { Livestock } from '@/models/LivestockModel';
 import { useEffect } from "react";
-import { QRCodeSVG } from 'qrcode.react';
 
-
-import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
 import Sidebar from '@/components/ui/Sidebar/sidebar';
-import SearchBar from '@/components/ui/SearchBar/searchBar';
-import CategoryAnimalCard from '@/components/ui/CategoryAnimalCard/categoryAnimalCard';
-import animalCategories from '@/models/animalCategories';
-import OperatorProfile from '@/components/ui/OperatorProfile/operatorProfile';
-import Image from 'next/image';
-import OwnerProfile from '@/components/ui/OwnerProfile/ownerProfile';
-import AnimalCard from '@/components/ui/AnimalCard/animalCard';
-import Loading from '@/components/ui/loading';
-import SortByButton from '@/components/ui/SortBy/sortBy';
-import FilterButton from '@/components/ui/Filter/filterButton';
-import { livestockData } from '@/data/livestockData';
 import GenderIcon from '@/components/ui/genderIcon';
-import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
-import StatisticMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
-import StatisticWeight from '@/components/ui/StatisticsWeight/statisticsWeight';
-import DeleteButton from '@/components/ui/DeleteButtonIcon/deleteButton';
-import EditButton from '@/components/ui/EditButton/editButton';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TopBar from '@/components/ui/TopBar/topBar';
-import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField';
-import { ListEnd } from 'lucide-react';
 import DropdownInput from "@/components/ui/DropdownInput/DropdownInput";
+import { getCookie } from '@/lib/cookies';
+import { FarmModel } from '@/models/FarmModel';
 
 interface LivestockVitaminPageProps {
     params: Promise<{
@@ -40,68 +21,156 @@ interface LivestockVitaminPageProps {
   }
 
 const LivestockVitaminPage: React.FC<LivestockVitaminPageProps> = ({ params: paramsPromise }) => {
-    // const { data, loading, error } = useFetch<Livestock[]>(
-    //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
-    //     undefined
-    // );
-
-    // if (loading) {
-    //     return <Loading></Loading>;
-    // }
-
-    // if (error) {
-    //     return <div>Error: {error}</div>;
-    // }
     const params = use(paramsPromise);
-    const id = params.id.toLowerCase();
+    const id = params.id;
+    
+    const storedId = getCookie("id"); 
 
-    const router = useRouter(); 
+    const { data: farmData, loading: loadingFarms, error: errorFarms } = useFetch<FarmModel[]>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
+    );
+    const [selectedFarm, setSelectedFarm] = useState<string | null>(null);
+    const [selectedFarmId, setSelectedFarmId] = useState<number | null>(null);
+    useEffect(() => {
+        if (farmData && farmData.length > 0) {
+            setSelectedFarm(farmData[0].name);
+            setSelectedFarmId(farmData[0].id);
+        }
+    }, [farmData]);
+
+    const handleFarmChange = (farmName: string, farmId: number) => {
+        setSelectedFarm(farmName);
+        setSelectedFarmId(farmId);
+        console.log(farmName)
+    };
 
     const [textFields, setTextFields] = useState<React.ReactNode[]>([]);
 
     const options = ['Adeplex', 'Pittol', 'B Complex', 'Wormextin'];
 
-    const handleFaseSelect = (value: string) => {
-      console.log('Selected value:', value);
+    const { data: livestock, loading: loadingLivestock, error: errorLivestock } = useFetch<Livestock>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/animals/${id}`,
+    );
+    useEffect(() => {
+        if (livestock) {
+            console.log(livestock)
+        }
+    }, [livestock]);
+
+    const router = useRouter()
+
+    const [apiError, setApiError] = useState(null);
+    const [apiData, setApiData] = useState(null);
+
+    const [dropdownData, setDropdownData] = useState<
+        { id: number; value: string | null }[]
+    >([]);
+
+    const handleDropdownSelect = (value: string, dropdownId: number) => {
+        setDropdownData((prev) => {
+            const existingDropdown = prev.find((d) => d.id === dropdownId);
+    
+            if (existingDropdown) {
+            return prev.map((d) =>
+                d.id === dropdownId ? { ...d, value } : d
+            );
+            } else {
+            return [...prev, { id: dropdownId, value }];
+            }
+        });
     };
 
-    
-    const handleUpdateData = () => {
-        console.log("Data vitamin ternak berhasil diperbarui");
-        alert("Data vitamin ternak berhasil diperbarui");
-      };
+    const handleSubmit = async () => {
+        try {
+            if (livestock?.vitamin == null) {
+                const payload = {
+                    current_condition: dropdownData[0].value, 
+                    animalId: id,
+                    history_items: dropdownData.map((dropdownData) => ({
+                        title: dropdownData.value,
+                        value: new Date().toLocaleString("en-US", { year: "numeric", month: "short" }) // Format like "May 2019"
+                    }))
+                };
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/animals/${id}/vitamin`, {
+                    method: "POST",
+                    body: JSON.stringify(payload),
+                    headers: {
+                    "Content-Type": "application/json",
+                    },
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    router.replace(`/defaultView/${id}`);
+                } else {
+                    setApiError(data.error || "Something went wrong");
+                }
+            } else {
+                const payload = {
+                    current_condition: dropdownData[0].value, 
+                    animalId: id,
+                    history_items: [
+                        ...livestock.vitamin.historyItems.map((item) => ({
+                            title: item.title,
+                            value: item.value,
+                        })),
+                        ...dropdownData.map((dropdownData) => ({
+                            title: dropdownData.value,
+                            value: new Date().toLocaleString("en-US", { year: "numeric", month: "short" }) // Format like "May 2019"
+                        })),
+                    ],
+                };
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/vitamin/${livestock?.vitamin.id}`, {
+                    method: "PUT",
+                    body: JSON.stringify(payload),
+                    headers: {
+                    "Content-Type": "application/json",
+                    },
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    router.replace(`/defaultView/${id}`);
+                } else {
+                    setApiError(data.error || "Something went wrong");
+                }
+            }
+        } catch (error) {
+        } finally {
+            // setLoading(false);
+        }
+    };
 
     return (
         <div>
             <div className="layout">
                 <div className="sidebar">
-                    <Sidebar setBreadcrumb={function (label: string): void {
-                        throw new Error('Function not implemented.');
-                    } } setFarm={function (farmName: string): void {
-                        throw new Error('Function not implemented.');
-                    } } />
+                    <Sidebar 
+                        setBreadcrumb={function (label: string): void {
+                            throw new Error('Function not implemented.');
+                        }} 
+                        farmList={farmData == null ? [] : farmData}
+                        setFarm={handleFarmChange}
+                        selectedFarm={selectedFarm}
+                />
                 </div>
 
                 <div className="main-content">
                     <TopBar ></TopBar>
 
-                    {livestockData.map((livestock) => (
-                        livestock.name_id.toLowerCase() == id 
-                        ?
                         <div className="content">
                             <div className="menuSection">
                                 <div className="menuHeader">
-                                    <h1 className="menuTittle">{livestock.name_id}</h1>
+                                    <h1 className="menuTittle">{livestock == null ? "" : livestock.name_id}</h1>
                                     <div className='genderIcon'>
-                                        <GenderIcon gender={livestock.gender == "MALE" ? 'jantan' : 'betina'}></GenderIcon>
+                                        <GenderIcon gender={livestock == null ? "jantan" : livestock.gender == "MALE" ? 'jantan' : 'betina'}></GenderIcon>
                                     </div>
                                     <div className="deleteIcon">
                                         <PrimaryButton 
                                         label='Perbarui' 
                                         width={130}
                                         onClick={() => {
-                                            handleUpdateData(); // Memunculkan alert
-                                            router.push(`/defaultView/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
+                                            handleSubmit();
                                           }}
                                         />
                                         {/* <DeleteButton /> */}
@@ -111,8 +180,8 @@ const LivestockVitaminPage: React.FC<LivestockVitaminPageProps> = ({ params: par
                             <div className='livestock'>
                                 <div className='generalInformationLivestock'>
                                     <img
-                                    src={livestock.photo_url}
-                                    alt={livestock.name_id}
+                                    src={livestock == null ? "" : livestock.photo_url}
+                                    alt={livestock == null ? "" : livestock.name_id}
                                     style={{
                                         width: '232px',
                                         height: '214px',
@@ -123,16 +192,20 @@ const LivestockVitaminPage: React.FC<LivestockVitaminPageProps> = ({ params: par
                                     {/* <QRCodeSVG value={`${process.env.NEXT_PUBLIC_NEXT_HOST}/OwnerViewPage/livestockOwnerPage/${id}`} size={85} /> */}
                                     <div className='generalInformationLivestockBox'>
                                         <div className='generalInformationLivestockBoxTop'>
-                                            <GeneralInfoBox title={'Tanggal Lahir'} value={livestock.dob} ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'Ras'} value={livestock.breed} ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'Grade'} value={livestock.grade || "Undefined"} ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'Berat'} value={livestock.weight || "Undefined"} ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'Tanggal Lahir'} value={livestock == null ? "" : new Date(livestock.dob).toLocaleDateString('id-ID', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric'
+                                        })} ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'Ras'} value={livestock == null ? "" : livestock.breed} ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'Grade'} value={livestock == null ? "" : livestock.grade || "Undefined"} ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'Berat'} value={livestock == null ? "" : livestock.weight || "Undefined"} ></GeneralInfoBox>
                                         </div>
                                         <div className='generalInformationLivestockBoxTop'>
-                                        <GeneralInfoBox title={'ID Ayah'} value={livestock.dad_name_id || "N/A"} ras={'Purebred'}  isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Ibu'} value={livestock.mom_name_id || "N/A"} grade={'F1'} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Kakak'} value={livestock.grandpa_name_id || "N/A"} ras={'Purebred'} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Nenek'} value={livestock.grandma_name_id || "N/A"} grade={'F3'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                        <GeneralInfoBox title={'ID Ayah'} value={livestock == null ? "" : livestock.dad_name_id || "N/A"} ras={'Purebred'}  isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Ibu'} value={livestock == null ? "" : livestock.mom_name_id || "N/A"} grade={'F1'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Kakak'} value={livestock == null ? "" : livestock.grandpa_name_id || "N/A"} ras={'Purebred'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Nenek'} value={livestock == null ? "" : livestock.grandma_name_id || "N/A"} grade={'F3'} isLink={true} linkHref='' ></GeneralInfoBox>
                                         </div>
                                     </div>
                                 </div>
@@ -146,19 +219,15 @@ const LivestockVitaminPage: React.FC<LivestockVitaminPageProps> = ({ params: par
                                 }
                                 <div className='addLivestockHistory'>
                                 <DropdownInput
-              // label="Pilih Kondisi"
-              options={options}
-              placeholder="Riwayat Vitamin"
-              onSelect={handleFaseSelect}
-      />
+                                        // label="Pilih Kondisi"
+                                        options={options}
+                                        placeholder="Riwayat Vitamin"
+                                        onSelect={handleDropdownSelect}
+                                />
                                 </div>
-                                <DetailHistoryCard historyItems={livestock.medication.history_items} />
+                                <DetailHistoryCard historyItems={livestock == null ? [] : livestock.vitamin == null ? [] : livestock.vitamin.historyItems} />
                             </div>
                         </div>
-                        :
-                        <div></div>
-                    ))}
-
                 </div>
 
             </div>

@@ -64,9 +64,9 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
       {dropdowns.map((dropdown) => (
         <div key={dropdown.id} className={styles.dropdownfase}>
           {/* Label untuk dropdown pertama */}
-          {label && dropdown.id === 1 && (
+          {/* {label && dropdown.id === 1 && (
             <label className={styles.dropdownfieldLabel}>{label}</label>
-          )}
+          )} */}
 
           {/* Header Dropdown */}
           <div

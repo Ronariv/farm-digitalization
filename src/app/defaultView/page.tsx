@@ -45,7 +45,7 @@ const view = searchParams.get("view");
 
 const renderViewBasedOnRole = () => {
   if (role === "owner") {
-    if (data == null) {
+    if (data?.length == 0) {
       return <DefaultOwnerViewPage setIsFarmInvited={setIsFarmInvited} />;
     }
     switch (view) {
