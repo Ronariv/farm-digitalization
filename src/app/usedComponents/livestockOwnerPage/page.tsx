@@ -35,9 +35,11 @@ const LivestockPage: React.FC = () => {
         `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
     );
     const [selectedFarm, setSelectedFarm] = useState<string | null>(null);
+    const [selectedFarmId, setSelectedFarmId] = useState<number | null>(null);
     useEffect(() => {
         if (farmData && farmData.length > 0) {
             setSelectedFarm(farmData[0].name);
+            setSelectedFarmId(farmData[0].id)
         }
     }, [farmData]);
 
@@ -49,10 +51,8 @@ const LivestockPage: React.FC = () => {
     const { data: livestockData, loading: loadingLivestock, error: errorLivestock } = useFetch<Livestock[]>(
         `${process.env.NEXT_PUBLIC_API_HOST}/animals`,
     );
-    // const [selectedFarm, setSelectedFarm] = useState<string | null>(null);
     useEffect(() => {
         if (livestockData && livestockData.length > 0) {
-            console.log("MMASOOKOKK DATANYAA COOKKK")
             console.log(livestockData)
         }
     }, [livestockData]);
@@ -79,7 +79,7 @@ const LivestockPage: React.FC = () => {
                     <div className="menuHeader">
                         <h1 className="menuTittle">Peternakan Anda</h1>
                         <div className="sortByAndFilter">
-                            <PrimaryButton label='+ Tambah Ternak' width={200} onClick={() => router.push(`/defaultView/addTernakPage`)}/>
+                            <PrimaryButton label='+ Tambah Ternak' width={200} onClick={() => router.push(`/defaultView/addTernakPage?selectedFarm=${selectedFarm}&farmId=${selectedFarmId}`)}/>
                         </div>
                     </div>
                     <div className="menuHeader">
@@ -99,7 +99,7 @@ const LivestockPage: React.FC = () => {
                             .map((livestock) => (
                                 <div 
                                     key={livestock.id} 
-                                    onClick={() => router.push(`defaultView/${livestock.name_id.toLowerCase()}/`)}
+                                    onClick={() => router.push(`defaultView/${livestock.id}/`)}
                                 >
                                     <AnimalCard livestock={livestock} />
                                 </div>

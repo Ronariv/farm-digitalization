@@ -5,7 +5,7 @@ import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TabNavigation from "@/components/ui/TabNavigation/TabNavigation";
 import { Input } from "@/components/ui/input"
 import DropdownFase from '@/components/ui/DropdownPhase/DropdownPhase';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import firebaseApp from '@/lib/firebase'
 
@@ -26,6 +26,10 @@ const app: React.FC = () => {
   const [kategoriHewan, setKategoriHewan] = useState("");
   const [error, setError] = useState(false);
 
+  const searchParams = useSearchParams();
+  const selectedFarm = searchParams.get('selectedFarm');
+  const farmId = searchParams.get('farmId');
+
   const handleUpdateData = () => {
     if (idPasangan === "AJW-015") {
       setError(true);
@@ -35,9 +39,27 @@ const app: React.FC = () => {
     } else {
       setError(false);
       alert("Data valid! Melanjutkan ke halaman berikutnya.");
-      router.push(`/OwnerViewPage/addTernakPage/addDataDetailTernakPage`);
+  
+      // Prepare query parameters
+      const queryParams = new URLSearchParams({
+        idPasangan,
+        idTernak,
+        rasTernak,
+        grade,
+        berat,
+        fase: selectedFase,
+        jenisKelamin,
+        kondisiTernak,
+        status,
+        kategoriHewan,
+        imageUrl: imageUrl || "",
+      }).toString();
+  
+      // Pass data to the next page via query parameters
+      router.push(`/defaultView/addTernakPage/addDataDetailTernakPage?selectedFarm=${selectedFarm}&farmId=${farmId}&${queryParams}`);
     }
   };
+  
 
   const handleFaseSelect = (option: string) => {
     setSelectedFase(option);

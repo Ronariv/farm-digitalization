@@ -5,35 +5,91 @@ import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TabNavigation from "@/components/ui/TabNavigation/TabNavigation";
 import { Input } from "@/components/ui/input"
 import DropdownFase from '@/components/ui/DropdownPhase/DropdownPhase';
-import { useRouter } from 'next/navigation'
-import { livestockData } from '@/data/livestockData';
+import { useRouter, useSearchParams } from 'next/navigation'
+import { getCookie } from '@/lib/cookies';
+import useFetch from '@/hooks/useFetch';
+import { FarmModel } from '@/models/FarmModel';
 // import { farmListData } from '@/data/farmData';
 
 const app: React.FC = () => {
     const router = useRouter()
-     const storedId = getCookie("id"); 
 
-    const { data, loading, error } = useFetch<FarmModel[]>(
-        `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
-    );
-    
-    const [selectedFarm, setSelectedFarm] = useState(data == null ? "Choose Farm" : data[0].name);
-    
+    const searchParams = useSearchParams();
+
+    const idPasangan = searchParams.get('idPasangan');
+    const idTernak = searchParams.get('idTernak');
+    const rasTernak = searchParams.get('rasTernak');
+    const grade = searchParams.get('grade');
+    const berat = searchParams.get('berat');
+    const fase = searchParams.get('fase');
+    const jenisKelamin = searchParams.get('jenisKelamin');
+    const kondisiTernak = searchParams.get('kondisiTernak');
+    const status = searchParams.get('status');
+    const kategoriHewan = searchParams.get('kategoriHewan');
+    const imageUrl = searchParams.get('imageUrl');
+    const selectedFarm = searchParams.get('selectedFarm');
+    const farmId = searchParams.get('farmId');
+
+    const [apiError, setApiError] = useState(null);
+    const [apiData, setApiData] = useState(null);
+    const [dob, setDob] = useState("2025-01-16");
+    const [idAyah, setIdAyah] = useState("");
+    const [idIbu, setIdIbu] = useState("");
+    const [idKakek, setIdKakek] = useState("");
+    const [idNenek, setIdNenek] = useState("");
 
     const handleUpdateData = () => {
         console.log("Data ternak berhasil ditambahkan");
         alert("Data ternak berhasil ditambahkan");
-      };
+    };
 
-      const handleFaseSelect = (option: string) => {
-        setSelectedFase(option);
-      };
-    
-      const handleJenisKelaminSelect = (value: string) => {
-        console.log('Selected Jenis Kelamin:', value);
-      };
+    const handleFaseSelect = (option: string) => {
+      setSelectedFase(option);
+    };
+  
+    const handleJenisKelaminSelect = (value: string) => {
+      console.log('Selected Jenis Kelamin:', value);
+    };
 
-      const [selectedFase, setSelectedFase] = useState("");
+    const handleValidationAndSubmit = async () => {
+      try {
+        const payload = {
+          name_id: idTernak, 
+          gender: jenisKelamin,
+          dob: dob,
+          weight: berat,
+          phase: fase,
+          photo_url: imageUrl,
+          breed: rasTernak,
+          type_id: kategoriHewan,
+          farm_name: selectedFarm,
+          farmId: farmId,
+          dad_name_id: idAyah,
+          mom_name_id: idIbu,
+          grandpa_name_id: idKakek,
+          grandma_name_id: idNenek,
+      };
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/animals`, {
+          method: "POST",
+          body: JSON.stringify(payload),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+  
+        const data = await response.json();
+        if (response.ok) {
+          router.push("/defaultView?view=livestock");
+        } else {
+          setApiError(data.error || "Something went wrong");
+        }
+      } catch (error) {
+      } finally {
+        // setLoading(false);
+      }
+    };
+
+    const [selectedFase, setSelectedFase] = useState("");
 
     return (
       <div className="container-addTernak">
@@ -57,31 +113,36 @@ const app: React.FC = () => {
   
             <div className="sectionInput-addTernak">
               <Label title="Date of Birth *" />
-              <Input disabled={false} type="text" placeholder="DD/MM/YYY" />
+              <Input
+                disabled={false}
+                type="date"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+              />
 
   
               <div className="grid-row-addTernak">
                 <div>
                   <Label title="ID Ayah *" />
-                  <Input disabled={false} type="text" placeholder="ID Ayah" />
+                  <Input disabled={false} type="text" placeholder="ID Ayah" onChange={(e) => setIdAyah(e.target.value)}/>
                 </div>
   
                 <div>
                   <Label title="ID Ibu *" />
                   <div className="input-group-addTernak">
-                    <Input disabled={false} type="number" placeholder="ID Ibu" />
+                    <Input disabled={false} type="text" placeholder="ID Ibu" onChange={(e) => setIdIbu(e.target.value)}/>
                   </div>
                 </div>
 
                 <div>
                   <Label title="ID Kakek *" />
-                  <Input disabled={false} type="text" placeholder="ID Kakek" />
+                  <Input disabled={false} type="text" placeholder="ID Kakek" onChange={(e) => setIdKakek(e.target.value)}/>
                 </div>
   
                 <div>
                   <Label title="ID Nenek *" />
                   <div className="input-group-addTernak">
-                    <Input disabled={false} type="number" placeholder="ID Nenek" />
+                    <Input disabled={false} type="text" placeholder="ID Nenek" onChange={(e) => setIdNenek(e.target.value)}/>
                   </div>
                 </div>
               </div>
@@ -128,8 +189,7 @@ const app: React.FC = () => {
             label="Simpan"
             width={221}
             onClick={() => {
-              handleUpdateData(); // Memunculkan alert
-              router.push("/OwnerViewPage"); // Melakukan navigasi
+              handleValidationAndSubmit();
             }}
             />
             </div>

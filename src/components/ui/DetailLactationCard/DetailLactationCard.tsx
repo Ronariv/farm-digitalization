@@ -5,19 +5,18 @@ import styles from '@/components/ui/DetailLactationCard/DetailLactationCard.modu
 import ViewMore from "@/components/ui/ViewMore/ViewMore";
 import PerbaruiButton from '@/components/ui/PerbaruiButton/PerbaruiButton';
 import { Livestock } from '@/models/LivestockModel';
-import { livestockData } from '@/data/livestockData';
 import { useRouter } from 'next/navigation'
 
 interface LactationDetail {
     title: string;
     description: string;
-    livestock: Livestock;
+    livestock?: Livestock;
   }
   
   interface DetailLactationCardProps {
     currentLactation: LactationDetail;
     history: LactationDetail[];
-    livestock: Livestock;
+    livestock?: Livestock;
   }
   
   const DetailLactationCard: React.FC<DetailLactationCardProps> = ({ currentLactation, history, livestock }) => {
@@ -32,7 +31,7 @@ interface LactationDetail {
 
     const handleNavigate = () => {
        const pageUrl = getPageUrl(); // Panggil fungsi getPageUrl
-        const dynamicUrl = pageUrl.replace("[id]", livestock.name_id.toLowerCase());
+        const dynamicUrl = pageUrl.replace("[id]", livestock != null ? livestock.name_id.toLowerCase() : "");
         router.push(dynamicUrl);
     };
 
