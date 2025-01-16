@@ -8,32 +8,67 @@ import PrimaryButton from "@/components/ui/PrimaryButton/primaryButton";
 import { useRouter } from 'next/navigation'
 import { getCookie, setCookie } from "@/lib/cookies";
 
+interface LoginData {
+  email: string;
+  password: string;
+}
+
 export default function InputDemo() {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter()
 
+  const [loginData, setloginData] = useState<LoginData | null>(null); // Type the state
 
-     const handleValidationAndSubmit = () => {
-       const validation = validateEmailOrPhone(emailOrPhone);
-     
-       if (!validation.valid) {
-         setErrorMessage("Masukkan email atau nomor HP yang valid.");
-       } else if (!password) {
-         setErrorMessage("Password tidak boleh kosong.");
-       } else {
-         const storedUsername = getCookie("username"); 
-         const storedRole = getCookie("role"); 
-     
-         if (storedUsername && storedRole) {
-           console.log(`Login berhasil untuk ${storedUsername} dengan role ${storedRole}`);
-           router.push("/defaultView"); 
-         } else {
-           setErrorMessage("Data login tidak ditemukan. Silakan register ulang.");
-         }
-       }
-     };
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState(null);
+  const [apiData, setApiData] = useState(null);
+
+
+  const handleValidationAndSubmit = async () => {
+    const validation = validateEmailOrPhone(emailOrPhone);
+  
+    if (!validation.valid) {
+      setErrorMessage("Masukkan email atau nomor HP yang valid.");
+    } else if (!password) {
+      setErrorMessage("Password tidak boleh kosong.");
+    } else {
+      const storedUsername = getCookie("username"); 
+      const storedRole = getCookie("role"); 
+
+      setLoading(true);
+      try {
+        const loginData = {
+          email: emailOrPhone,
+          password: password,
+        };
+
+        setloginData(loginData)
+
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/auth/login/`, {
+          method: "POST",
+          body: JSON.stringify(loginData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const data = await response.json();
+        setApiData(data);
+
+        if (storedUsername && storedRole && response.ok) {
+          console.log(`Login berhasil untuk ${storedUsername} dengan role ${storedRole}`);
+          router.push("/defaultView"); 
+        } else {
+          setErrorMessage("Data login tidak ditemukan. Silakan register ulang.");
+        }
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
 
   return (
     <div className="containerLoginRegister h-screen bg-cover bg-gray-100 flex justify-end items-center pr-[148px]"

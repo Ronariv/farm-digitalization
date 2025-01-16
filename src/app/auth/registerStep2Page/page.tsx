@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { validateEmailOrPhone, validatePassword } from "@/controllers/validationLoginRegister";
@@ -8,6 +8,12 @@ import { useRouter } from 'next/navigation'
 import PrimaryButton from "@/components/ui/PrimaryButton/primaryButton";
 import { setCookie } from "@/lib/cookies"; // Import setCookie
 import { useSearchParams } from "next/navigation";
+import useFetch from "@/hooks/useFetch";
+
+interface RegistrationData {
+  email: string;
+  password: string;
+}
 
 export default function InputDemo() {
   const [password, setPassword] = useState("");
@@ -18,18 +24,56 @@ export default function InputDemo() {
   const roleFromQuery = searchParams.get("role");
   const [role, setRole] = useState(roleFromQuery || "owner"); 
 
-  const handleValidationAndSubmit = () => {
+  const usernameFromQuery = searchParams.get("username");
+  const emailOrPhoneFromQuery = searchParams.get("emailOrPhone");
+  const [username, setUsername] = useState(usernameFromQuery || "");
+  const [emailOrPhone, setEmailOrPhone] = useState(emailOrPhoneFromQuery || "");
 
+  const [registrationData, setRegistrationData] = useState<RegistrationData | null>(null); // Type the state
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState(null);
+  const [apiData, setApiData] = useState(null);
+
+  const handleValidationAndSubmit = async () => {
     const passwordValidation = validatePassword(password, rePassword);
     if (!passwordValidation.valid) {
-        setErrorMessage(passwordValidation.message);
-        return;
-      }
-  
-      setCookie("role", role, { path: "/", maxAge: 7 * 24 * 60 * 60 });
-  
-      router.push("/defaultView");
+      setErrorMessage(passwordValidation.message);
+      return;
+    }
+
+    setCookie("role", role, { path: "/", maxAge: 7 * 24 * 60 * 60 });
+
+    const newRegistrationData = {
+      name: username,
+      email: emailOrPhone,
+      password: password,
+      role: role,
     };
+
+    setRegistrationData(newRegistrationData);
+
+    setLoading(true);
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/auth/register/`, {
+        method: "POST",
+        body: JSON.stringify(registrationData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+      setApiData(data);
+      if (response.ok) {
+        router.push("/auth/loginPage");
+      } else {
+        setApiError(data.error || "Something went wrong");
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="containerLoginRegister h-screen bg-cover bg-gray-100 flex justify-end items-center pr-[148px]"

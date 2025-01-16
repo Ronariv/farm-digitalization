@@ -39,7 +39,7 @@ export default function InputDemo() {
         });
 
         // Arahkan ke langkah berikutnya
-        router.push(`/auth/registerStep2Page?role=${role}`);
+        router.push(`/auth/registerStep2Page?role=${role}&username=${username}&emailOrPhone=${emailOrPhone}`);
       }
     };
 
