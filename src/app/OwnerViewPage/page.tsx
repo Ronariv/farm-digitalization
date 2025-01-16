@@ -10,7 +10,10 @@ import TopBar from '@/components/ui/TopBar/topBar';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import InviteFarmModal from '@/components/ui/InviteFarmModal/InviteFarmModal';
 import { usersData } from '@/data/userData';
-import { farmListData } from '@/data/farmData';
+// // import { farmListData } from '@/data/farmData';
+import useFetch from '@/hooks/useFetch';
+import { FarmModel } from '@/models/FarmModel';
+import { getCookie } from '@/lib/cookies';
 
 interface OwnerViewPageProps {
   breadcrumb: string;
@@ -21,15 +24,19 @@ const OwnerViewPage: React.FC<OwnerViewPageProps> = ({
   breadcrumb,
   setBreadcrumb,
 }) => {
+  const storedId = getCookie("id"); 
 
-    // const [breadcrumb, setBreadcrumb] = useState('Statistik');
+  const { data, loading, error } = useFetch<FarmModel[]>(
+      `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
+  );
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const categories = animalCategories('owner');
 
     return (
     <div className="layout">
       <div className="sidebar">
-      <Sidebar setBreadcrumb={setBreadcrumb} setFarm={function (farmName: string): void {
+      <Sidebar setBreadcrumb={setBreadcrumb} farmList={data == null ? [] : data} setFarm={function (farmName: string): void {
             throw new Error('Function not implemented.');
           } } />
       </div>
@@ -56,11 +63,13 @@ const OwnerViewPage: React.FC<OwnerViewPageProps> = ({
           onClick={() => setIsModalOpen(true)}
           />
           {isModalOpen && (
-        <InviteFarmModal
-                      users={usersData} // Gunakan data dari usersData
-                      onClose={() => setIsModalOpen(false)} 
-                      farmList={farmListData}        
-                      />
+            <InviteFarmModal
+              users={usersData} // Gunakan data dari usersData
+              onClose={() => setIsModalOpen(false)}
+              farmList={data == null ? [] : data } setIsFarmInvited={function (value: boolean): void {
+                throw new Error('Function not implemented.');
+              } }                      
+            />
       )}
           </div>
           </div>

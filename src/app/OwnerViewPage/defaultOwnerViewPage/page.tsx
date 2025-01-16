@@ -8,11 +8,20 @@ import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import InviteFarmModal from '@/components/ui/InviteFarmModal/InviteFarmModal';
 import { usersData } from '@/data/userData';
 import styles from "@/app/OwnerViewPage/defaultOwnerViewPage/defaultOwnerViewPage.module.css"
-import { farmListData } from '@/data/farmData';
+// // import { farmListData } from '@/data/farmData';
+import useFetch from '@/hooks/useFetch';
+import { FarmModel } from '@/models/FarmModel';
+import { getCookie } from '@/lib/cookies';
 
 const DefaultOwnerViewPage: React.FC<{ setIsFarmInvited: (value: boolean) => void }> = ({
   setIsFarmInvited,
 }) => {
+  const storedId = getCookie("id"); 
+  
+  const { data, loading, error } = useFetch<FarmModel[]>(
+      `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
+      
+  );
 
   const [breadcrumb, setBreadcrumb] = useState('Statistik');
 
@@ -61,12 +70,13 @@ const DefaultOwnerViewPage: React.FC<{ setIsFarmInvited: (value: boolean) => voi
               onClick={() => setIsModalOpen(true)}
               />
 
-{isModalOpen && (
-        <InviteFarmModal
+                {isModalOpen && (
+                <InviteFarmModal
                       users={usersData} // Gunakan data dari usersData
                       onClose={() => setIsModalOpen(false)}
                       setIsFarmInvited={setIsFarmInvited} // Kirimkan prop ini  
-                      farmList={farmListData}                      />
+                      farmList={data == null ? [] : data}
+                      />
       )}
             </div>
           </div>

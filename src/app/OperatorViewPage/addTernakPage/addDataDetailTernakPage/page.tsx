@@ -7,11 +7,17 @@ import { Input } from "@/components/ui/input"
 import DropdownFase from '@/components/ui/DropdownPhase/DropdownPhase';
 import { useRouter } from 'next/navigation'
 import { livestockData } from '@/data/livestockData';
-import { farmListData } from '@/data/farmData';
+// import { farmListData } from '@/data/farmData';
 
 const app: React.FC = () => {
     const router = useRouter()
-     const [selectedFarm, setSelectedFarm] = useState(farmListData[0].name || '');
+     const storedId = getCookie("id"); 
+
+    const { data, loading, error } = useFetch<FarmModel[]>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
+    );
+    
+    const [selectedFarm, setSelectedFarm] = useState(data == null ? "Choose Farm" : data[0].name);
     
 
     const handleUpdateData = () => {

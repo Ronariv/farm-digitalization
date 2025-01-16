@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from "next/link"
 import styles from "@/components/ui/Sidebar/Sidebar.module.css"
-import { farmListData } from '@/data/farmData';
+// import { farmListData } from '@/data/farmData';
 import { FarmModel } from '@/models/FarmModel';
 import { usePathname } from 'next/navigation';
 import Logo from "@/components/ui/Logo/Logo"
@@ -98,7 +98,7 @@ const menuItems : MenuItem[] = [
 ]
 
 
-const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: FarmModel[], setFarm: (farmName: string) => void}> = ({ setBreadcrumb, farmList = farmListData, setFarm }) => {
+const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: FarmModel[], setFarm: (farmName: string) => void}> = ({ setBreadcrumb, farmList = [], setFarm }) => {
 
   
   const handleMenuClick = (label: string) => {
@@ -107,7 +107,7 @@ const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: Far
   };
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedFarm, setSelectedFarm] = useState(farmList[0].name || '');
+  const [selectedFarm, setSelectedFarm] = useState(farmList.length == 0 ? "Choose Farm" : farmList[0].name);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 

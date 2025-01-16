@@ -1,6 +1,10 @@
 export interface FarmModel {
-    id: string;
+    id: number;
     name: string;
-    owner_id: string;
+    category: string;
+    ownerId: number;
+    createdAt: string;
+    updatedAt: string;
+    operators: any[];
 }
   

@@ -4,8 +4,9 @@ import styles from "@/components/ui/InviteFarmModal/InviteFarmModal.module.css";
 import PrimaryButton from '../PrimaryButton/primaryButton';
 import { useRouter } from 'next/navigation'
 import DropdownPhase from '../DropdownPhase/DropdownPhase';
-import { farmListData } from '@/data/farmData';
+// import { farmListData } from '@/data/farmData';
 import { FarmModel } from '@/models/FarmModel';
+import { getCookie } from '@/lib/cookies';
 
 interface InviteFarmModalProps {
   farmList: FarmModel[];
@@ -15,26 +16,36 @@ interface InviteFarmModalProps {
 }
 
 const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ farmList, users, onClose, setIsFarmInvited  }) => {
-  const [email, setEmail] = useState('');
+  const storedId = getCookie("id"); 
+  const [farm, setFarm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("");
     const router = useRouter()
 
-    const handleFaseSelect = (option: string) => {
-      setSelectedFase(option);
+    const handleCategorySelect = (option: string) => {
+      setSelectedCategory(option);
     };
 
-    const handleAddFarm = () => {
-      // Logika untuk menambahkan peternakan
-      if (email && selectedFase) {
-        setIsFarmInvited(true); // Perbarui status
-        // router.push('OwnerViewPage');
-        onClose(); // Tutup modal
+    const handleAddFarm = async () => {
+      if (farm && selectedCategory) {
+        setIsFarmInvited(true);
+        const farmsData = {
+          name: farm,
+          category: selectedCategory == "Sapi" ? "CowFarm" : selectedCategory == "Kambing" ? "GoatFarm" : selectedCategory == "Domba" ? "SheepFarm" : "",
+          ownerId: storedId,
+        };
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/farms/`, {
+          method: "POST",
+          body: JSON.stringify(farmsData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        onClose();
       } else {
         alert('Harap isi semua bidang!');
       }
     };
-  
-    const [selectedFase, setSelectedFase] = useState("");
-  
+    
   return (
     <div className={styles.modalBackdrop}>
       <div className={styles.modalContent}>
@@ -61,10 +72,10 @@ const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ farmList, users, onCl
         <div className={styles.inviteRow}>
           <div className={styles.inviteForm}>
           <input
-            type="email"
+            type=""
             placeholder="Masukkan Nama Peternakan"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={farm}
+            onChange={(e) => setFarm(e.target.value)}
             className={styles.emailInput}
           />
 
@@ -79,20 +90,20 @@ const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ farmList, users, onCl
             <DropdownPhase
             options={['Sapi', 'Kambing', 'Domba']}
             placeholder="Kategori Peternakan"
-            onSelect={handleFaseSelect}
+            onSelect={handleCategorySelect}
           />
         </div>
         </div>
 
         {/* Daftar pengguna */}
         <div className={styles.userList}>
-  <h2 className={styles.userListTitle}>Peternakan yang Terdaftar</h2>
-  {farmList.map((farm, index) => (
-    <div key={index} className={styles.farmContainer}>
-      <h3 className={styles.farmName}>{farm.name}</h3>
-    </div>
-  ))}
-</div>
+          <h2 className={styles.userListTitle}>Peternakan yang Terdaftar</h2>
+          {farmList.map((farm, index) => (
+            <div key={index} className={styles.farmContainer}>
+              <h3 className={styles.farmName}>{farm.name}</h3>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

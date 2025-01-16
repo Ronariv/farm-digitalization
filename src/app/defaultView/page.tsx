@@ -19,6 +19,7 @@ import KambingDetailStaticsPage from "@/app/OwnerViewPage/detailStatisticsPage/k
 import DombaDetailStaticsPage from "@/app/OwnerViewPage/detailStatisticsPage/dombaDetailStatisticsPage/page"
 import useFetch from "@/hooks/useFetch";
 import { User } from "@/models/UserModel";
+import { FarmModel } from "@/models/FarmModel";
 
 
 const DefaultViewPage: React.FC = () => {
@@ -28,10 +29,10 @@ const DefaultViewPage: React.FC = () => {
   const [isFarmInvited, setIsFarmInvited] = useState(false);
   const searchParams = useSearchParams();
 
-  const { data, loading, error } = useFetch<User>(
-      `${process.env.NEXT_PUBLIC_API_HOST}/auth/self`,
-      undefined,
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJtaWthc3VyeW9mQGdtYWlsLmNvbSIsImlhdCI6MTczNzAyNzg0MSwiZXhwIjoxNzM3MDMxNDQxfQ.TyDyAVy7sI4740MxySV0ETHX-YfSEL3CShXUOeNc1sw"
+  const storedId = getCookie("id"); 
+
+  const { data, loading, error } = useFetch<FarmModel[]>(
+      `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
   );
 
   useEffect(() => {
@@ -44,7 +45,7 @@ const view = searchParams.get("view");
 
 const renderViewBasedOnRole = () => {
   if (role === "owner") {
-    if (!isFarmInvited) {
+    if (data == null) {
       return <DefaultOwnerViewPage setIsFarmInvited={setIsFarmInvited} />;
     }
     // return <OwnerViewPage breadcrumb={breadcrumb} setBreadcrumb={setBreadcrumb} />;
@@ -68,7 +69,7 @@ const renderViewBasedOnRole = () => {
   }
 
   if (role === "operator") {
-    if (!isFarmInvited) {
+    if (data == null) {
       return <DefaultOperatorViewpage />;
     }
     switch (view){

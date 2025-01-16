@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from "next/link"
 import styles from "@/components/ui/SidebarDisabled/SidebarDisabled.module.css"
-import { farmListData } from '@/data/farmData';
+// import { farmListData } from '@/data/farmData';
 import { FarmModel } from '@/models/FarmModel';
 import { usePathname } from 'next/navigation';
 import Logo from "@/components/ui/Logo/Logo"
@@ -84,7 +84,7 @@ const menuItems = (viewType: 'owner' | 'operator') => [
 ]
 
 
-const SidebarDisabled: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: FarmModel[], setFarm: (farmName: string) => void}> = ({ setBreadcrumb, farmList = farmListData, setFarm }) => {
+const SidebarDisabled: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: FarmModel[], setFarm: (farmName: string) => void}> = ({ setBreadcrumb, farmList = [], setFarm }) => {
 
   
   const handleMenuClick = (label: string) => {
@@ -93,7 +93,7 @@ const SidebarDisabled: React.FC<{ setBreadcrumb: (label: string) => void, farmLi
   };
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedFarm, setSelectedFarm] = useState(farmList[0].name || '');
+  const [selectedFarm, setSelectedFarm] = useState(farmList.length == 0 ? "" : farmList[0].name);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 

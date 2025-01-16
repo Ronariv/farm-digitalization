@@ -18,7 +18,7 @@ import Loading from '@/components/ui/loading';
 import SortByButton from '@/components/ui/SortBy/sortBy';
 import FilterButton from '@/components/ui/Filter/filterButton';
 import { livestockData } from '@/data/livestockData';
-import { farmListData } from '@/data/farmData';
+// import { farmListData } from '@/data/farmData';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField';
 import PrimaryRadioField from '@/components/ui/PrimaryRadioField/primaryRadioField';
@@ -28,7 +28,13 @@ import TopBar from '@/components/ui/TopBar/topBar';
 const LivestockPage: React.FC = () => {
     const router = useRouter()
     
-    const [selectedFarm, setSelectedFarm] = useState(farmListData[0].name || '');
+    const storedId = getCookie("id"); 
+
+    const { data, loading, error } = useFetch<FarmModel[]>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
+    );
+    
+    const [selectedFarm, setSelectedFarm] = useState(data == null ? "Choose Farm" : data[0].name);
 
     const handleFarmChange = (farmName: string) => {
         setSelectedFarm(farmName);
@@ -48,7 +54,7 @@ const LivestockPage: React.FC = () => {
                         setBreadcrumb={function (label: string): void {
                             throw new Error('Function not implemented.');
                         }} 
-                        farmList={farmListData}
+                        farmList={data == null ? [] : data}
                         setFarm={handleFarmChange}
                     />
                 </div>
