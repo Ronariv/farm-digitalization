@@ -24,12 +24,12 @@ const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ farmList, users, onCl
 
     const handleAddFarm = () => {
       // Logika untuk menambahkan peternakan
-      if (email && selectedFase) {
+      if (email) {
         setIsFarmInvited(true); // Perbarui status
         router.push('OwnerViewPage');
         onClose(); // Tutup modal
       } else {
-        alert('Harap isi semua bidang!');
+        alert('Masukkan Nama Peternakan!');
       }
     };
   
