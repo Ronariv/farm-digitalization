@@ -7,16 +7,27 @@ import { farmListData } from '@/data/farmData';
 import { FarmModel } from '@/models/FarmModel';
 import { usePathname } from 'next/navigation';
 import Logo from "@/components/ui/Logo/Logo"
+import { getCookie } from '@/lib/cookies';
 
 interface SidebarProps {
   onMenuClick: (menu: string) => void;
+  farmList?: FarmModel[];
+  setFarm: (farmName: string) => void;
 }
+interface MenuItem {
+  href: string;
+  label: string;
+  icon: React.JSX.Element;
+}
+const roleFromCookie = getCookie("role"); // Ambil role dari cookie
+const viewType: 'owner' | 'operator' = roleFromCookie === "operator" ? 'operator' : 'owner'; // Default ke 'owner' jika tidak ada role
 
-const menuItems = (viewType: 'owner' | 'operator') => [
+const menuItems : MenuItem[] = [
   {
-    href: viewType === 'owner'
-    ? "/OwnerViewPage"
-    : "/OperatorViewPage",
+    // href: viewType === 'owner'
+    // ? "/OwnerViewPage"
+    // : "/OperatorViewPage",
+    href: "/defaultView?view=statistik",
     label: "Statistik",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -35,9 +46,10 @@ const menuItems = (viewType: 'owner' | 'operator') => [
     ),
   },
   {
-    href: viewType === 'owner'
-    ? "/OwnerViewPage/livestockOwnerPage"
-    : "/OperatorViewPage/livestockOperatorPage",
+    // href: viewType === 'owner'
+    // ? "/OwnerViewPage/livestockOwnerPage"
+    // : "/OperatorViewPage/livestockOperatorPage",
+    href: "/defaultView?view=livestock",
     label: "Ternak Anda",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -53,9 +65,10 @@ const menuItems = (viewType: 'owner' | 'operator') => [
     ),
   },
   {
-    href: viewType === 'owner'
-    ? "/OwnerViewPage/activityOwnerPage"
-    : "/OperatorViewPage/activityOperatorPage",
+    // href: viewType === 'owner'
+    // ? "/OwnerViewPage/activityOwnerPage"
+    // : "/OperatorViewPage/activityOperatorPage",
+    href: "/defaultView?view=activity",
     label: "Aktivitas",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -71,9 +84,10 @@ const menuItems = (viewType: 'owner' | 'operator') => [
     ),
   },
   {
-    href: viewType === 'owner'
-    ? "/OwnerViewPage/settingsOwnerPage"
-    : "/OperatorViewPage/settingsOperatorPage",
+    // href: viewType === 'owner'
+    // ? "/OwnerViewPage/settingsOwnerPage"
+    // : "/OperatorViewPage/settingsOperatorPage",
+    href: "/defaultView?view=settings",
     label: "Pengaturan",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -107,7 +121,7 @@ const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: Far
   const path = usePathname();
 
   const viewType: 'owner' | 'operator' = path?.includes('OperatorViewPage') ? 'operator' : 'owner';
-  const items = menuItems(viewType);
+  const items = menuItems;
 
   console.log(path)
   useEffect(() => {
@@ -170,7 +184,8 @@ const Sidebar: React.FC<{ setBreadcrumb: (label: string) => void, farmList?: Far
         <div className={styles.menuItems}>
         <ul>
 
-            {items.map((menuItem) => (
+        {items.map((menuItem: { href: string; label: string; icon: React.JSX.Element }) => (
+  
                     <li 
                     key={menuItem.href} 
                     className={`${styles.menuItem} ${selectedIndex === menuItem.label ? styles.selectedMenuItems : ''}`}

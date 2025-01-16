@@ -25,14 +25,9 @@ interface LactationDetail {
 
     const getPageUrl = () => {
       const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
+
     
-      if (currentPath.includes("/OperatorViewPage")) {
-        return "/OperatorViewPage/livestockOperatorPage/[id]/lactation";
-      } else if (currentPath.includes("/OwnerViewPage")) {
-        return "/OwnerViewPage/livestockOwnerPage/[id]/lactation";
-      }
-    
-      return "/OwnerViewPage/livestockOwnerPage/[id]/lactation";
+      return "/defaultView/[id]/lactation";
     };
 
     const handleNavigate = () => {

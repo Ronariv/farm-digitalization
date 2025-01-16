@@ -3,6 +3,8 @@
 import React from 'react';
 import styles from './CategoryAnimalCard.module.css';
 import Link from 'next/link';
+import { useRouter } from "next/navigation";
+
 interface CategoryAnimalCardProps {
   icon: React.ReactNode; 
   title: string; 
@@ -12,6 +14,7 @@ interface CategoryAnimalCardProps {
   href: string;
 }
 
+
 const CategoryAnimalCard: React.FC<CategoryAnimalCardProps> = ({
   icon,
   title,
@@ -20,9 +23,16 @@ const CategoryAnimalCard: React.FC<CategoryAnimalCardProps> = ({
   femaleCount,
   href,
 }) => {
+
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(href); // Arahkan ke query parameter kategori
+  };
+
   return (
-    <Link href={href}>
-        <div className={styles.card}>
+    // <Link href={href}>
+      <div onClick={handleClick} className={styles.card}>
       {/* Header */}
       <div className={styles.header}>
         <div className={styles.icon}>{icon}</div> 
@@ -60,7 +70,7 @@ const CategoryAnimalCard: React.FC<CategoryAnimalCardProps> = ({
         </div>
       </div>
     </div>
-    </Link>
+    // </Link>
 
   );
 };

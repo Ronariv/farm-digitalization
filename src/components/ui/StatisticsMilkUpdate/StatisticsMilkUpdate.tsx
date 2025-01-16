@@ -44,13 +44,8 @@ const StatisticsMilkUpdate: React.FC<StatisticsMilkUpdateProps> = ({
       const getPageUrl = () => {
         const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
       
-        if (currentPath.includes("/OperatorViewPage")) {
-          return "/OperatorViewPage/livestockOperatorPage/[id]/milkProduction";
-        } else if (currentPath.includes("/OwnerViewPage")) {
-          return "/OwnerViewPage/livestockOwnerPage/[id]/milkProduction";
-        }
       
-        return "/OwnerViewPage/livestockOwnerPage/[id]/milkProduction";
+        return "/defaultView/[id]/milkProduction";
       };
     
         const handleNavigate = () => {

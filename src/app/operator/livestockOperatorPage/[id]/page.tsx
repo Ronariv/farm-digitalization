@@ -44,18 +44,18 @@ interface LivestockDetailPageProps {
   }
 
 const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: paramsPromise }) => {
-    // const { data, loading, error } = useFetch<Livestock[]>(
-    //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
-    //     undefined
-    // );
+    const { data, loading, error } = useFetch<Livestock[]>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/api/animals`,
+        undefined
+    );
 
-    // if (loading) {
-    //     return <Loading></Loading>;
-    // }
+    if (loading) {
+        return <Loading></Loading>;
+    }
 
-    // if (error) {
-    //     return <div>Error: {error}</div>;
-    // }
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     const params = use(paramsPromise);
     const id = params.id.toLowerCase();

@@ -11,14 +11,26 @@ interface InviteFarmModalProps {
   farmList: FarmModel[];
   users: User[];
   onClose: () => void;
+  setIsFarmInvited: (value: boolean) => void;
 }
 
-const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ farmList, users, onClose }) => {
+const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ farmList, users, onClose, setIsFarmInvited  }) => {
   const [email, setEmail] = useState('');
     const router = useRouter()
 
     const handleFaseSelect = (option: string) => {
       setSelectedFase(option);
+    };
+
+    const handleAddFarm = () => {
+      // Logika untuk menambahkan peternakan
+      if (email && selectedFase) {
+        setIsFarmInvited(true); // Perbarui status
+        // router.push('OwnerViewPage');
+        onClose(); // Tutup modal
+      } else {
+        alert('Harap isi semua bidang!');
+      }
     };
   
     const [selectedFase, setSelectedFase] = useState("");
@@ -59,7 +71,7 @@ const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ farmList, users, onCl
           <PrimaryButton
             label="Tambahkan"
             width={139}
-            onClick={() => router.push('/OwnerViewPage')}
+            onClick={handleAddFarm}
           />
 
         </div>

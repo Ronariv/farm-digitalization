@@ -37,6 +37,18 @@ const LivestockPage: React.FC = () => {
         setSelectedFarm(farmName);
     };
 
+        const { data, loading, error } = useFetch<Livestock[]>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-farm-livestocks/cd30446b-c46a-11ef-9e1f-06367c8d4ecf`,
+        undefined
+    );
+
+    if (loading) {
+        return <Loading></Loading>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
     return (
         <div>
             <div className="layout">
@@ -80,7 +92,7 @@ const LivestockPage: React.FC = () => {
                             key={livestock.id} 
                             onClick={() => 
                                 
-                            router.push(`livestockOwnerPage/${livestock.name_id.toLowerCase()}/`
+                            router.push(`defaultView/${livestock.name_id.toLowerCase()}/`
                             
                             )}>
                                 <AnimalCard livestock={livestock} />

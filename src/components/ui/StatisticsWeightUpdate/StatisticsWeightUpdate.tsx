@@ -38,13 +38,7 @@ const StatisticsWeightUpdate: React.FC<StatisticsWeightUpdateProps> = ({ filterB
           const getPageUrl = () => {
             const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
           
-            if (currentPath.includes("/OperatorViewPage")) {
-              return "/OperatorViewPage/livestockOperatorPage/[id]/milkProduction";
-            } else if (currentPath.includes("/OwnerViewPage")) {
-              return "/OwnerViewPage/livestockOwnerPage/[id]/milkProduction";
-            }
-          
-            return "/OwnerViewPage/livestockOwnerPage/[id]/weight";
+            return "/defaultView/[id]/weight";
           };
         
             const handleNavigate = () => {

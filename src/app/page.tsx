@@ -19,11 +19,11 @@ export default function OnBoarding() {
     const userRole = Cookies.get("userRole");
 
     if (userRole === "owner") {
-      router.replace("/owner"); // Arahkan ke halaman owner
+      router.replace("/defaultView"); // Arahkan ke halaman owner
     } else if (userRole === "operator") {
-      router.replace("/operator"); // Arahkan ke halaman operator
+      router.replace("/defaultView"); // Arahkan ke halaman operator
     } else {
-      router.replace("/auth/register1StepPage"); // Jika role tidak ada, arahkan ke langkah pertama
+      router.replace("/auth/registerStep1Page"); // Jika role tidak ada, arahkan ke langkah pertama
     }
   }, [router]);
 

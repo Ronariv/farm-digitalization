@@ -71,7 +71,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
                                             router.push(`/OperatorViewPage/livestockOperatorPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
                                           }}
                                         />
-                                        {/* <DeleteButton /> */}
+                         
                                     </div>
                                 </div>
                             </div>
@@ -102,61 +102,102 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
                                         </div>
                                     </div>
                                 </div>
-                                <h1 className='livestockHistoryTitle'>
-                                    Laktasi
-                                </h1>
-                                <div className='fieldFormVertical'>
-                                    <PrimaryTextField 
-                                    width={350} 
-                                    placeholder="SPW-018" 
-                                    label="ID Pasangan *" 
-                                    disabled={true} 
-                                    />
 
-                                    <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Tanggal Lahir *'/>
-                                    {/* <h1>Date of Birth *</h1>
-                                    <Input disabled={false} type="text" placeholder="DD/MM/YYY" className="styledInput" /> */}
+                                <div className="rowContent-lactation">
 
-                                    {/* <Label title="Laktasi *" />
-                                    <Input disabled={false} type="number" placeholder="Laktasi" className="styledInput" /> */}
 
-                                    <div className="row-lactation">
-                                    <PrimaryTextField 
-                                    width={76} 
-                                    placeholder="Ke-1" 
-                                    label="Laktasi *" 
-                                    disabled={true} 
-                                    />
+                                    <div className="lactation-field">
+                                    <h1 className='livestockHistoryTitle'>
+                                        Laktasi
+                                    </h1>
+                                    <div className='fieldFormVertical'>
+                                        <PrimaryTextField 
+                                        width={350} 
+                                        placeholder="SPW-018" 
+                                        label="ID Pasangan *" 
+                                        disabled={true} 
+                                        />
 
-                                    <PrimaryTextField 
-                                    width={102} 
-                                    placeholder='2'
-                                    label='Jumlah Anak *'/>    
+                                        <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Tanggal Lahir *'/>
+                                        {/* <h1>Date of Birth *</h1>
+                                        <Input disabled={false} type="text" placeholder="DD/MM/YYY" className="styledInput" /> */}
+
+                                        {/* <Label title="Laktasi *" />
+                                        <Input disabled={false} type="number" placeholder="Laktasi" className="styledInput" /> */}
+
+                                        <div className="row-lactation">
+                                        <PrimaryTextField 
+                                        width={76} 
+                                        placeholder="Ke-1" 
+                                        label="Laktasi *" 
+                                        disabled={true} 
+                                        />
+
+                                        <PrimaryTextField 
+                                        width={102} 
+                                        placeholder='2'
+                                        label='Jumlah Anak *'/>    
+                                        </div>
+
+
+                                        <div className='row-lactation'>
+                                            {/* <PrimaryTextField width={250} placeholder='Jenis Kelamin'label='Jenis Kelamin (pilihan) *'/> */}
+                                            <div className="textField">
+                                                <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
+                                                <DropdownFase
+                                                    options={['Jantan', 'Betina']}
+                                                    placeholder="Jenis Kelamin"
+                                                    onSelect={handleJenisKelaminSelect}
+                                                />
+                                            </div>
+
+                                            <div className="textField">
+                                                <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
+                                                <DropdownFase
+                                                    options={['Jantan', 'Betina']}
+                                                    placeholder="Jenis Kelamin"
+                                                    onSelect={handleJenisKelaminSelect}
+                                                />
+                                                </div>
+                                            
+                                            </div>
+                                        </div>    
+                                    </div>
+                                    
+                                    <div className="separator-lactation">
+
+                                    </div>
+                                    <div className="lactation-list">
+                                        <h1 className='livestockHistoryTitle'>
+                                            Riwayat Laktasi
+                                        </h1>
+
+                                        <div className="lactation-detailList">
+                                        <h2>Laktasi ke-1</h2>
+                                        <span>ID Pasangan: SPW-018</span>
+                                        <span>Tanggal Lahir: 12 September 2024</span>
+                                        <span>1 Betina, 1 Jantan</span> 
+                                        </div>
+                                        
+                                        <div className="lactation-detailList">
+                                        <h2>Laktasi ke-2</h2>
+                                        <span>ID Pasangan: SPW-018</span>
+                                        <span>Tanggal Lahir: 12 September 2024</span>
+                                        <span>1 Betina, 1 Jantan</span> 
+                                        </div>
+
+                                        <div className="lactation-detailList">
+                                        <h2>Laktasi ke-2</h2>
+                                        <span>ID Pasangan: SPW-018</span>
+                                        <span>Tanggal Lahir: 12 September 2024</span>
+                                        <span>1 Betina, 1 Jantan</span> 
+                                        </div>
                                     </div>
 
 
-                                    <div className='row-lactation'>
-                                        {/* <PrimaryTextField width={250} placeholder='Jenis Kelamin'label='Jenis Kelamin (pilihan) *'/> */}
-                                        <div className="textField">
-                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
-                                            <DropdownFase
-                                                options={['Jantan', 'Betina']}
-                                                placeholder="Jenis Kelamin"
-                                                onSelect={handleJenisKelaminSelect}
-                                            />
-                                        </div>
 
-                                        <div className="textField">
-                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
-                                            <DropdownFase
-                                                options={['Jantan', 'Betina']}
-                                                placeholder="Jenis Kelamin"
-                                                onSelect={handleJenisKelaminSelect}
-                                            />
-                                        </div>
-                                      
-                                    </div>
                                 </div>
+
                             </div>
                         </div>
                         :

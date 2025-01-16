@@ -37,6 +37,7 @@ export default function useFetch<T>(
 
                 const response = await fetch(url, requestOptions);
 
+                console.log(response)
                 if (!response.ok) {
                     throw new Error(`Failed to fetch: ${response.statusText}`);
                 }
@@ -46,6 +47,7 @@ export default function useFetch<T>(
                 if (result.success) {
                     setData(result.data);
                 } else {
+                    console.log(result)
                     throw new Error('API response indicates failure.');
                 }
             } catch (error: any) {

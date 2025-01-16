@@ -150,7 +150,7 @@ const MemberRow: React.FC<MemberRowProps> = ({ user, role }) => {
         <hr className='activityTeamHr'/>
         <div className='activityInformationTeamsTableRowsData'>
           <div className='activityInformationTeamsTableRowsDataMember'>
-            <img src={user.profile_url} alt="" />
+
             <div className='activityInformationTeamsTableRowsDataMemberInfo'>
               <h1>{user.name}</h1>
               <p>{user.email}</p>

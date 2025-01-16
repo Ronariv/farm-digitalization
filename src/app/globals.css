@@ -1171,6 +1171,7 @@ margin-top: 5%;
   font-style: normal;
   font-weight: 500;
   line-height: 19.2px; /* 76.8% */
+  padding-bottom: 5%;
 }
 .livestockHistoryData {
   display: flex;
@@ -1257,4 +1258,68 @@ margin-top: 5%;
 
 .choice-StatusCategory{
   padding: 10px;
+}
+
+.rowContent-lactation{
+  display: flex;
+}
+
+.lactation-list{
+  margin-right: -40%;
+}
+
+.lactation-detailList{
+  display: flex; /* Aktifkan Flexbox */
+  flex-direction: column; /* Elemen akan sejajar secara vertikal */
+  gap: 8px; /* Jarak antara elemen (opsional) */
+  padding: 12px; /* Padding di dalam container (opsional) */
+ 
+}
+
+.lactation-detailList span{
+  color: var(--Text-Text-Secondary, #808080);
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px;
+}
+
+.separator-lactation {
+  width: 1px; /* Lebar garis */
+  height: 466.01px; /* Tinggi garis */
+  background-color: #ccc; /* Warna garis, ubah sesuai kebutuhan */
+  margin: 0 16px; 
+}
+
+.rowContent-milk{
+  display: flex;
+}
+
+.milk-list{
+  margin-right: -40%;
+}
+
+.milk-detailList{
+  display: flex; /* Aktifkan Flexbox */
+  flex-direction: column; /* Elemen akan sejajar secara vertikal */
+  gap: 8px; /* Jarak antara elemen (opsional) */
+  padding: 12px; /* Padding di dalam container (opsional) */
+ 
+}
+
+.milk-detailList span{
+  color: var(--Text-Text-Secondary, #808080);
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px;
+}
+
+.separator-milk {
+  width: 1px; /* Lebar garis */
+  height: 466.01px; /* Tinggi garis */
+  background-color: #ccc; /* Warna garis, ubah sesuai kebutuhan */
+  margin: 0 16px; 
 }

@@ -12,9 +12,17 @@ import InviteFarmModal from '@/components/ui/InviteFarmModal/InviteFarmModal';
 import { usersData } from '@/data/userData';
 import { farmListData } from '@/data/farmData';
 
-export default function OwnerViewPage() {
+interface OwnerViewPageProps {
+  breadcrumb: string;
+  setBreadcrumb: (value: string) => void;
+}
 
-    const [breadcrumb, setBreadcrumb] = useState('Statistik');
+const OwnerViewPage: React.FC<OwnerViewPageProps> = ({
+  breadcrumb,
+  setBreadcrumb,
+}) => {
+
+    // const [breadcrumb, setBreadcrumb] = useState('Statistik');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const categories = animalCategories('owner');
 
@@ -84,3 +92,5 @@ export default function OwnerViewPage() {
     </div>
     );
 };
+
+export default OwnerViewPage;

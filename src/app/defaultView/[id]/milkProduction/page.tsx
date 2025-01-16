@@ -9,7 +9,6 @@ import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TopBar from '@/components/ui/TopBar/topBar';
 import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField';
 import { useRouter } from 'next/navigation'
-import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
 
 interface LivestockMilkProductionPageProps {
     params: Promise<{
@@ -18,13 +17,26 @@ interface LivestockMilkProductionPageProps {
 }
 
 const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = ({ params: paramsPromise }) => {
+    // const { data, loading, error } = useFetch<Livestock[]>(
+    //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
+    //     undefined
+    // );
+
+    // if (loading) {
+    //     return <Loading></Loading>;
+    // }
+
+    // if (error) {
+    //     return <div>Error: {error}</div>;
+    // }
+
     const params = use(paramsPromise);
     const id = params.id.toLowerCase();
 
-        const handleUpdateData = () => {
-            console.log("Data hasil susu ternak berhasil diperbarui");
-            alert("Data hasil susu ternak berhasil diperbarui");
-          };
+    const handleUpdateData = () => {
+        console.log("Data hasil susu ternak berhasil diperbarui");
+        alert("Data hasil susu ternak berhasil diperbarui");
+        };
      const router = useRouter()
 
     return (
@@ -39,7 +51,7 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                 </div>
 
                 <div className="main-content">
-                   <TopBarOpt></TopBarOpt>
+                    <TopBar ></TopBar>
 
                     {livestockData.map((livestock) => (
                         livestock.name_id.toLowerCase() == id 
@@ -57,7 +69,7 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                                         width={130}
                                         onClick={() => {
                                             handleUpdateData(); // Memunculkan alert
-                                            router.push(`/OperatorViewPage/livestockOperatorPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
+                                            router.push(`/defaultView/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
                                           }}
                                         />
                                         {/* <DeleteButton /> */}
@@ -92,52 +104,13 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className="rowContent-milk">
-                                <div>
                                 <h1 className='livestockHistoryTitle'>
                                     Hasil Susu
                                 </h1>
                                 <div className='fieldFormVertical'>
                                     <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Date *'/>
                                     <PrimaryTextField width={250} placeholder='liter'label='Liter *'/>
-                                </div>   
                                 </div>
-
-                                <div className="separator-milk">
-
-                                </div>
-
-                                <div className="milk-list">
-
-                                <h1 className='livestockHistoryTitle'>
-                                            Riwayat Susu
-                                </h1>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 Juni 2024</h1>
-                                    <span>12 Liter</span> 
-                                    </div>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 Juli 2024</h1>
-                                    <span>12 Liter</span> 
-                                    </div>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 Agustus 2024</h1>
-                                    <span>12 Liter</span> 
-                                    </div>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 September 2024</h1>
-                                    <span>12 Liter</span> 
-                                    </div>
-
-                                </div>
-
-                                </div>
-
                             </div>
                         </div>
                         :

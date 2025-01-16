@@ -159,7 +159,7 @@ const App: React.FC = () => {
             ))} 
             </div>
 
-            <div className="ayamMaleCardStatisticsCard">
+            {/* <div className="ayamMaleCardStatisticsCard">
                 {filteredDiagnosedCategories.map((category) => (
                 <DetailAnimalDiagnosedCard
                 key={category.type}
@@ -169,7 +169,7 @@ const App: React.FC = () => {
                 hilang={category.hilang}
                 />
             ))} 
-            </div>
+            </div> */}
 
           </div>
 

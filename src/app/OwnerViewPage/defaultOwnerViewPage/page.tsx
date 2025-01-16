@@ -8,8 +8,11 @@ import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import InviteFarmModal from '@/components/ui/InviteFarmModal/InviteFarmModal';
 import { usersData } from '@/data/userData';
 import styles from "@/app/OwnerViewPage/defaultOwnerViewPage/defaultOwnerViewPage.module.css"
+import { farmListData } from '@/data/farmData';
 
-const App: React.FC = () => {
+const DefaultOwnerViewPage: React.FC<{ setIsFarmInvited: (value: boolean) => void }> = ({
+  setIsFarmInvited,
+}) => {
 
   const [breadcrumb, setBreadcrumb] = useState('Statistik');
 
@@ -61,7 +64,9 @@ const App: React.FC = () => {
 {isModalOpen && (
         <InviteFarmModal
                       users={usersData} // Gunakan data dari usersData
-                      onClose={() => setIsModalOpen(false)} farmList={[]}        />
+                      onClose={() => setIsModalOpen(false)}
+                      setIsFarmInvited={setIsFarmInvited} // Kirimkan prop ini  
+                      farmList={farmListData}                      />
       )}
             </div>
           </div>
@@ -99,4 +104,4 @@ const App: React.FC = () => {
     );
 };
 
-export default App;
+export default DefaultOwnerViewPage;

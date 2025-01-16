@@ -7,6 +7,7 @@ import { Livestock } from '@/models/LivestockModel';
 import { useEffect } from "react";
 import { QRCodeSVG } from 'qrcode.react';
 
+
 import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
 import Sidebar from '@/components/ui/Sidebar/sidebar';
 import SearchBar from '@/components/ui/SearchBar/searchBar';
@@ -35,7 +36,6 @@ import { phaseLabels } from '@/data/phaseLabels';
 import DetailLactationCard from '@/components/ui/DetailLactationCard/DetailLactationCard';
 import StatisticsMilkUpdate from '@/components/ui/StatisticsMilkUpdate/StatisticsMilkUpdate';
 import StatisticsWeightUpdate from '@/components/ui/StatisticsWeightUpdate/StatisticsWeightUpdate';
-import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
 
 interface LivestockDetailPageProps {
     params: Promise<{
@@ -44,18 +44,18 @@ interface LivestockDetailPageProps {
   }
 
 const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: paramsPromise }) => {
-    const { data, loading, error } = useFetch<Livestock[]>(
-        `${process.env.NEXT_PUBLIC_API_HOST}/api/animals`,
-        undefined
-    );
+    // const { data, loading, error } = useFetch<Livestock[]>(
+    //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
+    //     undefined
+    // );
 
-    if (loading) {
-        return <Loading></Loading>;
-    }
+    // if (loading) {
+    //     return <Loading></Loading>;
+    // }
 
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
+    // if (error) {
+    //     return <div>Error: {error}</div>;
+    // }
 
     const params = use(paramsPromise);
     const id = params.id.toLowerCase();
@@ -78,9 +78,9 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
         );
       
         if (isConfirmed) {
-          router.push(`/OwnerViewPage/livestockOwnerPage`);
+          router.push(`/defaultView`);
         } else {
-          router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}/`);
+          router.push(`/defaultView/${livestock.name_id.toLowerCase()}/`);
         }
       };
       
@@ -97,7 +97,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
                 </div>
 
                 <div className="main-content">
-                    <TopBarOpt/>
+                    <TopBar ></TopBar>
 
                     {livestockData.map((livestock) => (
                         livestock.name_id.toLowerCase() == id 
@@ -118,6 +118,8 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
                                         filterId={livestock.phase}
                                         width={60}
                                         textSize={10}
+                                        // padding="30px 20px"
+                                        
                                         >
                                         </PhaseLabelTag>
                                        </div>
@@ -126,7 +128,13 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
                                         <PrimaryButton 
                                         label='Ubah Data' 
                                         width={130}
-                                        onClick={() => router.push(`/OperatorViewPage/addTernakPage`)}
+                                        onClick={() => router.push(`/defaultView/addTernakPage`)}
+                                        />
+                                        <DeleteButton
+                                         onClick={() => {
+                                            handleDeleteData(); // Memunculkan alert
+                                            
+                                          }}
                                         />
                                     </div>
                                 </div>
@@ -143,7 +151,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
                                         borderRadius: '10px',
                                     }}
                                     />
-                                    {/* <QRCodeSVG value={`${process.env.NEXT_PUBLIC_NEXT_HOST}/OwnerViewPage/livestockOwnerPage/${params.id}`} size={85} /> */}
+                                    {/* <QRCodeSVG value={`${process.env.NEXT_PUBLIC_NEXT_HOST}/OwnerViewPage/livestockOwnerPage/${id}`} size={85} /> */}
                                     <div className='generalInformationLivestockBox'>
                                         <div className='generalInformationLivestockBoxTop'>
                                             <GeneralInfoBox title={'Tanggal Lahir'} value={livestock.dob} ></GeneralInfoBox>
@@ -281,15 +289,15 @@ const DetailInformationCard: React.FC<DetailInformationCardProps> = ({
     const getPageUrl = (title: string) => {
         switch (title) {
             case "Riwayat Sakit":
-                return "/OperatorViewPage/livestockOperatorPage/[id]/sickness";
+                return "/defaultView/[id]/sickness";
             case "Riwayat Obat":
-                return "/OperatorViewPage/livestockOperatorPage/[id]/medication";
+                return "/defaultView/[id]/medication";
             case "Riwayat Vitamin":
-                return "/OperatorViewPage/livestockOperatorPage/[id]/vitamin";
+                return "/defaultView/[id]/vitamin";
             case "Riwayat Vaksin":
-                return "/OperatorViewPage/livestockOperatorPage/[id]/vaccine";
+                return "/defaultView/[id]/vaccine";
             default:
-                return "/OperatorViewPage/livestockOperatorPage/[id]";
+                return "/defaultView/[id]";
         }
     };
 

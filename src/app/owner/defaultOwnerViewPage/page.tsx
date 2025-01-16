@@ -58,11 +58,11 @@ const App: React.FC = () => {
               onClick={() => setIsModalOpen(true)}
               />
 
-{isModalOpen && (
+{/* {isModalOpen && (
         <InviteFarmModal
                       users={usersData} // Gunakan data dari usersData
                       onClose={() => setIsModalOpen(false)} farmList={[]}        />
-      )}
+      )} */}
             </div>
           </div>
           <div className={styles.content}>

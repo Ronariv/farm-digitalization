@@ -54,9 +54,8 @@ const App: React.FC = () => {
 
               {isModalOpen && (
                       <InviteFarmModal
-                        users={usersData} // Gunakan data dari usersData
-                        onClose={() => setIsModalOpen(false)}
-                      />
+                      users={usersData} // Gunakan data dari usersData
+                      onClose={() => setIsModalOpen(false)} farmList={[]}                      />
               )}
             </div>
           </div>

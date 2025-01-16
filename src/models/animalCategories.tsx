@@ -5,9 +5,10 @@ export const animalCategories = (viewType: 'owner' | 'operator') => [
       total: 30,
       maleCount: 15,
       femaleCount: 15,
-      href: viewType === 'owner'
-      ? '/OwnerViewPage/detailStatisticsPage/sapiDetailStatisticsPage'
-      : '/OperatorViewPage/detailStatisticsOperatorPage/sapiDetailStatisticsPage',
+      // href: viewType === 'owner'
+      // ? '/OwnerViewPage/detailStatisticsPage/sapiDetailStatisticsPage'
+      // : '/OperatorViewPage/detailStatisticsOperatorPage/sapiDetailStatisticsPage',
+      href: '/defaultView?view=sapi',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="97" height="87" viewBox="0 0 97 87" fill="none">
           <path d="M84.3035 0.773315C86.2063 13.0355 70.1209 14.3393 61.8404 13.4584L59.4619 12.9298L68.1829 19.8009C88.6904 18.321 87.4748 6.49921 84.3035 0.773315Z" fill="#642C07"/>
@@ -30,9 +31,10 @@ export const animalCategories = (viewType: 'owner' | 'operator') => [
       total: 25,
       maleCount: 12,
       femaleCount: 13,
-      href: viewType === 'owner'
-      ? '/OwnerViewPage/detailStatisticsPage/kambingDetailStatisticsPage'
-      : '/OperatorViewPage/detailStatisticsOperatorPage/kambingDetailStatisticsPage',
+      // href: viewType === 'owner'
+      // ? '/OwnerViewPage/detailStatisticsPage/kambingDetailStatisticsPage'
+      // : '/OperatorViewPage/detailStatisticsOperatorPage/kambingDetailStatisticsPage',
+      href: '/defaultView?view=kambing',
       icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="94" height="86" viewBox="0 0 94 86" fill="none">
         <path d="M78.9343 2.66523C61.941 -0.0855495 59.9865 22.2167 61.1335 33.7117L61.8451 37.016L52.3924 24.8556C54.6314 -3.57959 71.0199 -1.78598 78.9343 2.66523Z" fill="#642C07"/>
@@ -56,9 +58,10 @@ export const animalCategories = (viewType: 'owner' | 'operator') => [
       total: 20,
       maleCount: 10,
       femaleCount: 10,
-      href: viewType === 'owner'
-      ? '/OwnerViewPage/detailStatisticsPage/dombaDetailStatisticsPage'
-      : '/OperatorViewPage/detailStatisticsOperatorPage/dombaDetailStatisticsPage',
+      // href: viewType === 'owner'
+      // ? '/OwnerViewPage/detailStatisticsPage/dombaDetailStatisticsPage'
+      // : '/OperatorViewPage/detailStatisticsOperatorPage/dombaDetailStatisticsPage',
+      href: '/defaultView?view=domba',
       icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="130" height="86" viewBox="0 0 130 86" fill="none">
         <path d="M112.413 27.7799C122.696 25.8784 126.183 19.9121 128.81 13.2967C129.976 10.361 126.607 7.27286 123.777 8.67569C123.427 8.8496 123.048 8.96055 122.659 9.00349L103.95 11.0679C102.601 11.2168 101.314 11.7212 100.223 12.5295L97.3924 14.6262C95.8433 15.7737 94.7827 17.4619 94.4212 19.3555L92.96 27.011C92.7821 27.9429 92.4138 28.8434 91.9423 29.6667C87.1992 37.949 98.3471 28.2243 104.209 28.6266C107.18 28.8304 107.574 28.6746 112.413 27.7799Z" fill="#A36627"/>

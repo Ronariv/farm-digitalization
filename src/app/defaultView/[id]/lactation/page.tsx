@@ -8,25 +8,45 @@ import GenderIcon from '@/components/ui/genderIcon';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TopBar from '@/components/ui/TopBar/topBar';
 import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField';
+import { Input } from "@/components/ui/input"
+import DropdownFase from '@/components/ui/DropdownPhase/DropdownPhase';
 import { useRouter } from 'next/navigation'
-import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
 
-interface LivestockMilkProductionPageProps {
+interface LivestockLactationPageProps {
     params: Promise<{
         id: string;
     }>;
 }
 
-const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = ({ params: paramsPromise }) => {
+const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params: paramsPromise }) => {
+    // const { data, loading, error } = useFetch<Livestock[]>(
+    //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
+    //     undefined
+    // );
+
+    // if (loading) {
+    //     return <Loading></Loading>;
+    // }
+
+    // if (error) {
+    //     return <div>Error: {error}</div>;
+    // }
+
     const params = use(paramsPromise);
     const id = params.id.toLowerCase();
 
-        const handleUpdateData = () => {
-            console.log("Data hasil susu ternak berhasil diperbarui");
-            alert("Data hasil susu ternak berhasil diperbarui");
-          };
-     const router = useRouter()
+     const Label: React.FC<{ title: string }> = ({ title }) => (
+        <label className="label-addTernak">{title}</label>
+      );
+      const handleJenisKelaminSelect = (value: string) => {
+        console.log('Selected Jenis Kelamin:', value);
+      };
 
+      const handleUpdateData = () => {
+        console.log("Data laktasi ternak berhasil diperbarui");
+        alert("Data laktasi ternak berhasil diperbarui");
+      };
+ const router = useRouter()
     return (
         <div>
             <div className="layout">
@@ -39,7 +59,7 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                 </div>
 
                 <div className="main-content">
-                   <TopBarOpt></TopBarOpt>
+                    <TopBar ></TopBar>
 
                     {livestockData.map((livestock) => (
                         livestock.name_id.toLowerCase() == id 
@@ -57,7 +77,7 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                                         width={130}
                                         onClick={() => {
                                             handleUpdateData(); // Memunculkan alert
-                                            router.push(`/OperatorViewPage/livestockOperatorPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
+                                            router.push(`/defaultView/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
                                           }}
                                         />
                                         {/* <DeleteButton /> */}
@@ -92,52 +112,61 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className="rowContent-milk">
-                                <div>
                                 <h1 className='livestockHistoryTitle'>
-                                    Hasil Susu
+                                    Laktasi
                                 </h1>
                                 <div className='fieldFormVertical'>
-                                    <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Date *'/>
-                                    <PrimaryTextField width={250} placeholder='liter'label='Liter *'/>
-                                </div>   
-                                </div>
+                                    <PrimaryTextField 
+                                    width={350} 
+                                    placeholder="SPW-018" 
+                                    label="ID Pasangan *" 
+                                    disabled={true} 
+                                    />
 
-                                <div className="separator-milk">
+                                    <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Tanggal Lahir *'/>
+                                    {/* <h1>Date of Birth *</h1>
+                                    <Input disabled={false} type="text" placeholder="DD/MM/YYY" className="styledInput" /> */}
 
-                                </div>
+                                    {/* <Label title="Laktasi *" />
+                                    <Input disabled={false} type="number" placeholder="Laktasi" className="styledInput" /> */}
 
-                                <div className="milk-list">
+                                    <div className="row-lactation">
+                                    <PrimaryTextField 
+                                    width={76} 
+                                    placeholder="Ke-1" 
+                                    label="Laktasi *" 
+                                    disabled={true} 
+                                    />
 
-                                <h1 className='livestockHistoryTitle'>
-                                            Riwayat Susu
-                                </h1>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 Juni 2024</h1>
-                                    <span>12 Liter</span> 
+                                    <PrimaryTextField 
+                                    width={102} 
+                                    placeholder='2'
+                                    label='Jumlah Anak *'/>    
                                     </div>
 
-                                    <div className="milk-detailList">
-                                    <h1>12 Juli 2024</h1>
-                                    <span>12 Liter</span> 
-                                    </div>
 
-                                    <div className="milk-detailList">
-                                    <h1>12 Agustus 2024</h1>
-                                    <span>12 Liter</span> 
-                                    </div>
+                                    <div className='row-lactation'>
+                                        {/* <PrimaryTextField width={250} placeholder='Jenis Kelamin'label='Jenis Kelamin (pilihan) *'/> */}
+                                        <div className="textField">
+                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
+                                            <DropdownFase
+                                                options={['Jantan', 'Betina']}
+                                                placeholder="Jenis Kelamin"
+                                                onSelect={handleJenisKelaminSelect}
+                                            />
+                                        </div>
 
-                                    <div className="milk-detailList">
-                                    <h1>12 September 2024</h1>
-                                    <span>12 Liter</span> 
+                                        <div className="textField">
+                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
+                                            <DropdownFase
+                                                options={['Jantan', 'Betina']}
+                                                placeholder="Jenis Kelamin"
+                                                onSelect={handleJenisKelaminSelect}
+                                            />
+                                        </div>
+                                      
                                     </div>
-
                                 </div>
-
-                                </div>
-
                             </div>
                         </div>
                         :
@@ -151,7 +180,7 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
     );
 };
 
-export default LivestockMilkProductionPage
+export default LivestockLactationPage
 
 interface GeneralInfoBoxProps {
     title: string;

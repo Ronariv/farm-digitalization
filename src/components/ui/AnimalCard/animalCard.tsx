@@ -19,16 +19,16 @@ const AnimalCard: NextPage<AnimalCardType> = ({ className = "", livestock }) => 
   const router = useRouter();
 
   const handleCardClick = () => {
-  const path = usePathname(); // Ambil URL saat ini
-  const viewType: 'owner' | 'operator' = path?.includes('OperatorViewPage') ? 'operator' : 'owner';
+  // const path = usePathname(); 
+  // const viewType: 'owner' | 'operator' = path?.includes('OperatorViewPage') ? 'operator' : 'owner';
 
-    // router.push(`/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}`);
-    const route =
-    viewType === "owner"
-      ? `/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}`
-      : `/OperatorViewPage/livestockOperatorPage/${livestock.name_id.toLowerCase()}`;
+  //   const route =
+  //   viewType === "owner"
+  //     ? `/OwnerViewPage/livestockOwnerPage/${livestock.name_id.toLowerCase()}`
+  //     : `/OperatorViewPage/livestockOperatorPage/${livestock.name_id.toLowerCase()}`;
 
-  router.push(route); // Redirect ke rute yang sesuai
+  // router.push(route);
+  router.push(`/defaultView?view=livestock&category=${livestock.name_id.toLowerCase()}`);
   };
 
   return (

@@ -94,7 +94,7 @@ const App: React.FC = () => {
               <PrimaryButton
               label="Simpan Perubahan" 
               width={190}
-              onClick={() => router.push(`/OperatorViewPage`)}
+              onClick={() => router.push(`/defaultView`)}
               />
             </div>
           </div>

@@ -14,7 +14,7 @@
     }
   
     document.cookie = cookieString;
-  };
+    };
   
   export const getCookie = (name) => {
     const cookies = document.cookie.split('; ').reduce((acc, cookie) => {

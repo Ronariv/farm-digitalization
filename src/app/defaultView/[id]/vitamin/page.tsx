@@ -1,31 +1,75 @@
 "use client";
 
 import React, { use, useState } from 'react';
+import useFetch from '@/hooks/useFetch';
+import { useRouter } from 'next/navigation'
+import { Livestock } from '@/models/LivestockModel';
+import { useEffect } from "react";
+import { QRCodeSVG } from 'qrcode.react';
 
+
+import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
 import Sidebar from '@/components/ui/Sidebar/sidebar';
+import SearchBar from '@/components/ui/SearchBar/searchBar';
+import CategoryAnimalCard from '@/components/ui/CategoryAnimalCard/categoryAnimalCard';
+import animalCategories from '@/models/animalCategories';
+import OperatorProfile from '@/components/ui/OperatorProfile/operatorProfile';
+import Image from 'next/image';
+import OwnerProfile from '@/components/ui/OwnerProfile/ownerProfile';
+import AnimalCard from '@/components/ui/AnimalCard/animalCard';
+import Loading from '@/components/ui/loading';
+import SortByButton from '@/components/ui/SortBy/sortBy';
+import FilterButton from '@/components/ui/Filter/filterButton';
 import { livestockData } from '@/data/livestockData';
 import GenderIcon from '@/components/ui/genderIcon';
+import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
+import StatisticMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
+import StatisticWeight from '@/components/ui/StatisticsWeight/statisticsWeight';
+import DeleteButton from '@/components/ui/DeleteButtonIcon/deleteButton';
+import EditButton from '@/components/ui/EditButton/editButton';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TopBar from '@/components/ui/TopBar/topBar';
 import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField';
-import { useRouter } from 'next/navigation'
-import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
+import { ListEnd } from 'lucide-react';
+import DropdownInput from "@/components/ui/DropdownInput/DropdownInput";
 
-interface LivestockMilkProductionPageProps {
+interface LivestockVitaminPageProps {
     params: Promise<{
         id: string;
     }>;
-}
+  }
 
-const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = ({ params: paramsPromise }) => {
+const LivestockVitaminPage: React.FC<LivestockVitaminPageProps> = ({ params: paramsPromise }) => {
+    // const { data, loading, error } = useFetch<Livestock[]>(
+    //     `${process.env.NEXT_PUBLIC_API_HOST}/livestock/get-all-livestocks/`,
+    //     undefined
+    // );
+
+    // if (loading) {
+    //     return <Loading></Loading>;
+    // }
+
+    // if (error) {
+    //     return <div>Error: {error}</div>;
+    // }
     const params = use(paramsPromise);
     const id = params.id.toLowerCase();
 
-        const handleUpdateData = () => {
-            console.log("Data hasil susu ternak berhasil diperbarui");
-            alert("Data hasil susu ternak berhasil diperbarui");
-          };
-     const router = useRouter()
+    const router = useRouter(); 
+
+    const [textFields, setTextFields] = useState<React.ReactNode[]>([]);
+
+    const options = ['Adeplex', 'Pittol', 'B Complex', 'Wormextin'];
+
+    const handleFaseSelect = (value: string) => {
+      console.log('Selected value:', value);
+    };
+
+    
+    const handleUpdateData = () => {
+        console.log("Data vitamin ternak berhasil diperbarui");
+        alert("Data vitamin ternak berhasil diperbarui");
+      };
 
     return (
         <div>
@@ -39,7 +83,7 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                 </div>
 
                 <div className="main-content">
-                   <TopBarOpt></TopBarOpt>
+                    <TopBar ></TopBar>
 
                     {livestockData.map((livestock) => (
                         livestock.name_id.toLowerCase() == id 
@@ -57,7 +101,7 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                                         width={130}
                                         onClick={() => {
                                             handleUpdateData(); // Memunculkan alert
-                                            router.push(`/OperatorViewPage/livestockOperatorPage/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
+                                            router.push(`/defaultView/${livestock.name_id.toLowerCase()}/`); // Melakukan navigasi
                                           }}
                                         />
                                         {/* <DeleteButton /> */}
@@ -92,52 +136,23 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className="rowContent-milk">
-                                <div>
                                 <h1 className='livestockHistoryTitle'>
-                                    Hasil Susu
+                                    Riwayat Vitamin
                                 </h1>
-                                <div className='fieldFormVertical'>
-                                    <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Date *'/>
-                                    <PrimaryTextField width={250} placeholder='liter'label='Liter *'/>
-                                </div>   
+                                {
+                                    textFields.map((field) => (
+                                        field
+                                    ))
+                                }
+                                <div className='addLivestockHistory'>
+                                <DropdownInput
+              // label="Pilih Kondisi"
+              options={options}
+              placeholder="Riwayat Vitamin"
+              onSelect={handleFaseSelect}
+      />
                                 </div>
-
-                                <div className="separator-milk">
-
-                                </div>
-
-                                <div className="milk-list">
-
-                                <h1 className='livestockHistoryTitle'>
-                                            Riwayat Susu
-                                </h1>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 Juni 2024</h1>
-                                    <span>12 Liter</span> 
-                                    </div>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 Juli 2024</h1>
-                                    <span>12 Liter</span> 
-                                    </div>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 Agustus 2024</h1>
-                                    <span>12 Liter</span> 
-                                    </div>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 September 2024</h1>
-                                    <span>12 Liter</span> 
-                                    </div>
-
-                                </div>
-
-                                </div>
-
+                                <DetailHistoryCard historyItems={livestock.medication.history_items} />
                             </div>
                         </div>
                         :
@@ -151,7 +166,7 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
     );
 };
 
-export default LivestockMilkProductionPage
+export default LivestockVitaminPage
 
 interface GeneralInfoBoxProps {
     title: string;
