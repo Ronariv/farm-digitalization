@@ -31,7 +31,7 @@ interface LactationDetail {
 
     const handleNavigate = () => {
        const pageUrl = getPageUrl(); // Panggil fungsi getPageUrl
-        const dynamicUrl = pageUrl.replace("[id]", livestock != null ? livestock.name_id.toLowerCase() : "");
+        const dynamicUrl = pageUrl.replace("[id]", livestock != null ? `${livestock.id}` : "");
         router.push(dynamicUrl);
     };
 

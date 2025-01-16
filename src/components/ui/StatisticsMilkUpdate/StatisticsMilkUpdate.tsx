@@ -46,7 +46,7 @@ const StatisticsMilkUpdate: React.FC<StatisticsMilkUpdateProps> = ({
     // Check if livestock and its name_id are defined
     if (livestock?.name_id) {
       const pageUrl = getPageUrl(); // Call getPageUrl
-      const dynamicUrl = pageUrl.replace('[id]', livestock.name_id.toLowerCase());
+      const dynamicUrl = pageUrl.replace('[id]', `${livestock.id}`);
       router.push(dynamicUrl);
     }
   };

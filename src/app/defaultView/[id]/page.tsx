@@ -234,7 +234,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
                             </div>
                             <div className='statisticsInformationLivestock'>
                                 {/* <StatisticMilk filterBy="year" filterValue={2019} milkData={livestock == null ? "" : livestock.milkData}/> */}
-                                <StatisticsMilkUpdate filterBy="year" filterValue={2019} milkData={livestock == null ? undefined : livestock.milkData} livestock={livestock == null ? undefined : livestock} />
+                                <StatisticsMilkUpdate filterBy="year" filterValue={livestock == null ? "" : livestock.milkData.yearlyDatas[0].year} milkData={livestock == null ? undefined : livestock.milkData} livestock={livestock == null ? undefined : livestock} />
                                 <div className="lactationSection">
                                     <StatisticsLactation filterBy="year" filterValue={2019} lactationData={livestock == null ? undefined : livestock.lactationData}/>
                                     <DetailLactationCard currentLactation={currentLactation} history={history} livestock={livestock == null ? undefined : livestock} />;

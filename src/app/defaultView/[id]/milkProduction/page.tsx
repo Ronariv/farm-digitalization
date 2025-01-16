@@ -11,12 +11,28 @@ import { useRouter } from 'next/navigation'
 import { getCookie } from '@/lib/cookies';
 import useFetch from '@/hooks/useFetch';
 import { FarmModel } from '@/models/FarmModel';
-import { Livestock } from '@/models/LivestockModel';
+import { Livestock, MonthlyData, YearlyData } from '@/models/LivestockModel';
+import { Input } from '@/components/ui/input';
 
 interface LivestockMilkProductionPageProps {
     params: Promise<{
         id: string;
     }>;
+}
+
+interface MilkDataPayload {
+    animalId: string;
+    yearlyData: YearlyDataPayload[];
+}
+
+interface YearlyDataPayload {
+    year: number;
+    data: MonthlyDataPayload[];
+}
+
+interface MonthlyDataPayload {
+    month: string;
+    value: number;
 }
 
 const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = ({ params: paramsPromise }) => {
@@ -43,11 +59,6 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
         console.log(farmName)
     };
 
-    const handleUpdateData = () => {
-        console.log("Data hasil susu ternak berhasil diperbarui");
-        alert("Data hasil susu ternak berhasil diperbarui");
-        };
-    
     const { data: livestock, loading: loadingLivestock, error: errorLivestock } = useFetch<Livestock>(
         `${process.env.NEXT_PUBLIC_API_HOST}/animals/${id}`,
     );
@@ -58,6 +69,107 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
     }, [livestock]);
 
     const router = useRouter()
+
+    const [apiError, setApiError] = useState(null);
+    const [apiData, setApiData] = useState(null);
+
+    const [date, setDate] = useState("2025-01-16");
+    const [value, setValue] = useState(0);
+
+    const handleSubmit = async () => {
+        const year = new Date(date).getFullYear();
+        const month = new Date(date).toLocaleString('default', { month: 'short' });
+
+        try {
+            if (livestock?.milkData == null) {
+                const payload = {
+                    animalId: id,
+                    yearlyData: [
+                        {
+                            year:  year,
+                            data: [
+                                {
+                                    month: month,
+                                    value: value
+                                }
+                            ]
+                        }
+                    ]
+                };
+
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/milkData`, {
+                    method: "POST",
+                    body: JSON.stringify(payload),
+                    headers: {
+                    "Content-Type": "application/json",
+                    },
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    router.replace(`/defaultView/${id}`);
+                } else {
+                    setApiError(data.error || "Something went wrong");
+                }
+            } else {
+                let payload: MilkDataPayload = {
+                    animalId: id,
+                    yearlyData: []
+                };
+
+                livestock.milkData.yearlyDatas.forEach((milkEntry: YearlyData) => {
+                    let yearData = payload.yearlyData.find((item) => item.year === milkEntry.year);
+              
+                    if (!yearData) {
+                      // If the year doesn't exist, create new yearly data
+                      yearData = { year: milkEntry.year, data: [] };
+                      payload.yearlyData.push(yearData);
+                    }
+              
+                    // Now populate month data
+                    milkEntry.monthlyDatas.forEach((milkMonthData: MonthlyData) => {
+                      let monthData = yearData.data.find((item) => item.month === milkMonthData.month);
+                      if (monthData) {
+                        monthData.value += milkMonthData.value;
+                      } else {
+                        yearData.data.push({ month: milkMonthData.month, value: milkMonthData.value });
+                      }
+                    });
+                });
+
+                let yearData = payload.yearlyData.find((item) => item.year === year);
+                if (!yearData) {
+                    yearData = { year, data: [] };
+                    payload.yearlyData.push(yearData);
+                }
+
+                let monthData = yearData.data.find((item) => item.month === month);
+                if (monthData) {
+                    monthData.value += value;
+                } else {
+                    yearData.data.push({ month, value });
+                }
+
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/milkData/${livestock?.milkData.id}`, {
+                    method: "PUT",
+                    body: JSON.stringify(payload),
+                    headers: {
+                    "Content-Type": "application/json",
+                    },
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    router.replace(`/defaultView/${id}`);
+                } else {
+                    setApiError(data.error || "Something went wrong");
+                }
+            }
+        } catch (error) {
+        } finally {
+            // setLoading(false);
+        }
+    };
 
     return (
         <div>
@@ -88,8 +200,7 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                                         label='Perbarui' 
                                         width={130}
                                         onClick={() => {
-                                            handleUpdateData(); // Memunculkan alert
-                                            router.push(`/defaultView/${livestock == null ? "" : livestock.id}/`); // Melakukan navigasi
+                                            handleSubmit();
                                           }}
                                         />
                                         {/* <DeleteButton /> */}
@@ -132,8 +243,19 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                                     Hasil Susu
                                 </h1>
                                 <div className='fieldFormVertical'>
-                                    <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Date *'/>
-                                    <PrimaryTextField width={250} placeholder='liter'label='Liter *'/>
+                                    <Label title="Tanggal *" />
+                                    <Input
+                                        disabled={false}
+                                        type="date"
+                                        value={date}
+                                        onChange={(e) => setDate(e.target.value)}
+                                    />
+                                    <div>
+                                        <Label title="Produksi" />
+                                        <div className="input-group-addTernak">
+                                            <Input disabled={false} type="number" placeholder="liter" value={value}   onChange={(e) => setValue(Number(e.target.value))}/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -210,3 +332,7 @@ const DetailHistoryCard: React.FC<DetailHistoryCardProps> = ({
         </div>
     );
 };
+
+const Label: React.FC<{ title: string }> = ({ title }) => (
+    <label className="label-addTernak">{title}</label>
+);
