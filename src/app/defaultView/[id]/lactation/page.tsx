@@ -11,6 +11,7 @@ import PrimaryTextField from '@/components/ui/PrimaryTextField/primaryTextField'
 import { Input } from "@/components/ui/input"
 import DropdownFase from '@/components/ui/DropdownPhase/DropdownPhase';
 import { useRouter } from 'next/navigation'
+import { QRCodeSVG } from 'qrcode.react';
 
 interface LivestockLactationPageProps {
     params: Promise<{
@@ -96,7 +97,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
                                         borderRadius: '10px',
                                     }}
                                     />
-                                    {/* <QRCodeSVG value={`${process.env.NEXT_PUBLIC_NEXT_HOST}/OwnerViewPage/livestockOwnerPage/${id}`} size={85} /> */}
+                                    <QRCodeSVG value={`${process.env.NEXT_PUBLIC_NEXT_HOST}/defaultView/${id}`} size={85} />
                                     <div className='generalInformationLivestockBox'>
                                         <div className='generalInformationLivestockBoxTop'>
                                             <GeneralInfoBox title={'Tanggal Lahir'} value={livestock.dob} ></GeneralInfoBox>

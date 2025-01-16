@@ -26,7 +26,7 @@ const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ farmList, users, onCl
       // Logika untuk menambahkan peternakan
       if (email && selectedFase) {
         setIsFarmInvited(true); // Perbarui status
-        // router.push('OwnerViewPage');
+        router.push('OwnerViewPage');
         onClose(); // Tutup modal
       } else {
         alert('Harap isi semua bidang!');
@@ -75,13 +75,13 @@ const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ farmList, users, onCl
           />
 
         </div>
-        <div className={styles.dropdown}>
+        {/* <div className={styles.dropdown}>
             <DropdownPhase
             options={['Sapi', 'Kambing', 'Domba']}
             placeholder="Kategori Peternakan"
             onSelect={handleFaseSelect}
           />
-        </div>
+        </div> */}
         </div>
 
         {/* Daftar pengguna */}

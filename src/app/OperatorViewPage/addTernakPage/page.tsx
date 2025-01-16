@@ -6,6 +6,7 @@ import TabNavigation from "@/components/ui/TabNavigation/TabNavigation";
 import { Input } from "@/components/ui/input"
 import DropdownFase from '@/components/ui/DropdownPhase/DropdownPhase';
 import { useRouter } from 'next/navigation'
+import AddGambarTernak from '@/components/ui/AddGambarTernak/AddGambarTernak';
 
 const app: React.FC = () => {
      const router = useRouter()
@@ -54,12 +55,14 @@ const app: React.FC = () => {
         <div className="main-content-addTernak">
           <div className="content-wrapper-addTernak"> {/* Wrapper untuk align */}
             <div className="section-addTernak">
-              <h3 className="tittle-addTernak">Masukkan Gambar</h3>
-              <img
+              {/* <h3 className="tittle-addTernak">Masukkan Gambar</h3> */}
+              {/* <img
                 src="https://firebasestorage.googleapis.com/v0/b/manta-dive-75b30.firebasestorage.app/o/WhatsApp%20Image%202025-01-14%20at%2014.52.38.jpeg?alt=media&token=25b56c44-86c4-4484-b3ea-241fc7a16d83"
                 alt="ternak"
                 className="image-addTernak"
-              />
+              /> */}
+             
+             <AddGambarTernak/>
              
             </div>
   

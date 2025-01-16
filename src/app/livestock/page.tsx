@@ -25,6 +25,7 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs/breadcrumbs';
 import TopBar from "@/components/ui/TopBar/topBar";
 import AcceptButton from "@/components/ui/AcceptButton/AcceptButton";
 import RejectButton from "@/components/ui/RejectButton/RejectButton";
+import AddGambarTernak from "@/components/ui/AddGambarTernak/AddGambarTernak";
 
 export default function OnBoarding() {
  const [breadcrumb, setBreadcrumb] = useState('Statistik');
@@ -89,14 +90,16 @@ export default function OnBoarding() {
           } } /> */}
 
 
-<TopBar></TopBar>
+{/* <TopBar></TopBar>
 <AcceptButton label={"Terima"}/>
-<RejectButton label={"Tolak"}/>
+<RejectButton label={"Tolak"}/> */}
 {/* <DropdownPhase
                   options={['Tersedia', 'Hilang', 'Mati']}
                   placeholder="Status"
                   onSelect={handleFaseSelect}
                 /> */}
+    <AddGambarTernak/>
+
     </div>
   );
 }
