@@ -179,7 +179,7 @@ const app: React.FC<EditLivestockPageProps> = ({ params: paramsPromise }) => {
             <div className="sectionInput-addTernak">
               <Label title="ID Ternak *" />
               <Input
-                disabled={false}
+                disabled={true}
                 type="text"
                 placeholder="ID Ternak"
                 value={idTernak}
@@ -248,7 +248,22 @@ const app: React.FC<EditLivestockPageProps> = ({ params: paramsPromise }) => {
                       type="text"
                       placeholder="AJW-015"
                       value={idPasangan}
-                      onChange={(e) => setIdPasangan(e.target.value)}
+                      onChange={(e) => {
+                        const inputIdPasangan = e.target.value;
+                        setIdPasangan(inputIdPasangan);
+  
+                        if (livestock && Array.isArray(livestock)) {
+                          const isRasTernakValid = !livestock.some(
+                            (livestock) => livestock.name_id === inputIdPasangan && livestock.breed === rasTernak
+                          );
+  
+                          if (!isRasTernakValid) {
+                            setError(true);
+                          } else {
+                            setError(false);
+                          }
+                        }
+                      }}
                       style={{
                         borderColor: error ? "red" : "black",
                       }}
@@ -311,6 +326,19 @@ const app: React.FC<EditLivestockPageProps> = ({ params: paramsPromise }) => {
                 label="Lanjut"
                 width={221}
                 onClick={handleUpdateData}
+                disabled={
+                  idTernak === "" || idTernak === null ||
+                  rasTernak === "" || rasTernak === null ||
+                  grade === "" || grade === null ||
+                  berat === "" || berat === null ||
+                  selectedFase === "" || selectedFase === null ||
+                  jenisKelamin === "" || jenisKelamin === null ||
+                  kondisiTernak === "" || kondisiTernak === null ||
+                  status === "" || status === null ||
+                  kategoriHewan === "" || kategoriHewan === null ||
+                  imageUrl === "" || imageUrl === null || 
+                  error
+                }
               />
             </div>
           </div>
