@@ -33,6 +33,7 @@ import TopBar from '@/components/ui/TopBar/topBar';
 import { getCookie } from '@/lib/cookies';
 import useFetch from '@/hooks/useFetch';
 import { FarmModel } from '@/models/FarmModel';
+import { StatisticsModel } from '@/models/FarmStatsModel';
 
 const App: React.FC = () => {
 
@@ -101,6 +102,10 @@ const App: React.FC = () => {
       }
     }
 
+    const { data: goatStatistics, loading: loadingGoatStatistics, error: errorGoatStatistics } = useFetch<StatisticsModel>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/statistics/goat-statistics?farmId=${selectedFarmId}`
+    );
+
     return (
     <div className="layout">
       <div className="sidebar">
@@ -154,52 +159,43 @@ const App: React.FC = () => {
 
           <div className="kambingDetailStatisticsCard">
             <div className="kambingFemaleCardStatisticsCard">
-                {filteredFemaleCategories.map((category) => (
-                <DetailAnimalFemaleCard
-                key={category.type} // Gunakan type sebagai key
-                title={category.tittle}
-                total={category.total}
-                cempe={category.cempe}
-                dara={category.dara}
-                siapKawin={category.siapKawin}
-                hamil={category.hamil}
-                menyusui={category.menyusui}
-                />
-            ))}
+                  <DetailAnimalFemaleCard
+                  title="Sapi Betina"
+                  total={goatStatistics?.totalFemale ?? 0}
+                  pedet={goatStatistics?.femalePhaseStats?.["Pedet"] ?? 0}
+                  dara={goatStatistics?.femalePhaseStats?.["Dara"] ?? 0}
+                  siapKawin={goatStatistics?.femalePhaseStats?.["Siap Kawin"] ?? 0}
+                  hamil={goatStatistics?.femalePhaseStats?.["Hamil"] ?? 0}
+                  menyusui={goatStatistics?.femalePhaseStats?.["Menyusui"] ?? 0}
+                  />
             </div>
 
             <div className="kambingMaleCardStatisticsCard">
-                {filteredMaleCategories.map((category) => (
-                <DetailAnimalMaleCard 
-                key={category.type}
-                title={category.tittle} 
-                total={category.total} 
-                pedet={category.pedet}
-                siapKawin={category.siapKawin}           
-                />
-            ))} 
+                  <DetailAnimalMaleCard 
+                  title="Sapi Jantan" 
+                  total={goatStatistics?.totalMale ?? 0}
+                  pedet={goatStatistics?.malePhaseStats?.["Pedet"] ?? 0}
+                  siapKawin={goatStatistics?.femalePhaseStats?.["Siap Kawin"] ?? 0}           
+                  />
             </div>
 
             <div className="kambingMaleCardStatisticsCard">
-                {filteredDiagnosedCategories.map((category) => (
                 <DetailAnimalDiagnosedCard
-                key={category.type}
-                title={category.tittle}
-                sehat={category.sehat}
-                tersedia={category.tersedia}
-                sakit={category.sakit}
-                hilang={category.hilang}
-                mati={category.mati}
+                title="Status dan Kondisi Ternak"
+                sehat={goatStatistics?.livestockConditionStats?.["Sehat"] ?? 0}
+                tersedia={goatStatistics?.livestockConditionStats?.["Tersedia"] ?? 0}
+                sakit={goatStatistics?.livestockConditionStats?.["Sakit"] ?? 0}
+                hilang={goatStatistics?.livestockConditionStats?.["Hilang"] ?? 0}
+                mati={goatStatistics?.livestockConditionStats?.["Mati"] ?? 0}
                 />
-            ))} 
             </div>
 
           </div>
 
           <div className="statisticsCard">
-          <StatisticsMilk filterBy="year" filterValue={2019} />
+          {/* <StatisticsMilk filterBy="year" filterValue={2019} />
 
-          <StatisticsLactation filterBy="year" filterValue={2019} />
+          <StatisticsLactation filterBy="year" filterValue={2019} /> */}
           </div>
 
           <div className="statisticsLactation">

@@ -35,6 +35,7 @@ import TopBar from '@/components/ui/TopBar/topBar';
 import useFetch from '@/hooks/useFetch';
 import { FarmModel } from '@/models/FarmModel';
 import { getCookie } from '@/lib/cookies';
+import { StatisticsModel } from '@/models/FarmStatsModel';
 
 const App: React.FC = () => {
 
@@ -46,14 +47,17 @@ const App: React.FC = () => {
       `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
   );
   const [selectedFarm, setSelectedFarm] = useState<string | null>(null);
+  const [selectedFarmId, setSelectedFarmId] = useState<number | null>(null);
   useEffect(() => {
       if (farmData && farmData.length > 0) {
           setSelectedFarm(farmData[0].name);
+          setSelectedFarmId(farmData[0].id);
       }
   }, [farmData]);
 
-  const handleFarmChange = (farmName: string) => {
+  const handleFarmChange = (farmName: string, farmId: number) => {
       setSelectedFarm(farmName);
+      setSelectedFarmId(farmId);
       console.log(farmName)
   };
 
@@ -99,6 +103,10 @@ const App: React.FC = () => {
           return 'Halaman Tidak Ditemukan';
       }
     }
+
+    const { data: cowStatistics, loading: loadingCowStatistics, error: errorCowStatistics } = useFetch<StatisticsModel>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/statistics/cow-statistics?farmId=${selectedFarmId}`
+    );
 
     return (
     <div className="layout">
@@ -152,54 +160,45 @@ const App: React.FC = () => {
 
           <div className="sapiDetailStatisticsCard">
             <div className="sapiFemaleCardStatisticsCard">
-                {filteredFemaleCategories.map((category) => (
-                <DetailAnimalFemaleCard
-                key={category.type} // Gunakan type sebagai key
-                title={category.tittle}
-                total={category.total}
-                pedet={category.pedet}
-                dara={category.dara}
-                siapKawin={category.siapKawin}
-                hamil={category.hamil}
-                menyusui={category.menyusui}
-                />
-            ))}
+                  <DetailAnimalFemaleCard
+                  title="Sapi Betina"
+                  total={cowStatistics?.totalFemale ?? 0}
+                  pedet={cowStatistics?.femalePhaseStats?.["Pedet"] ?? 0}
+                  dara={cowStatistics?.femalePhaseStats?.["Dara"] ?? 0}
+                  siapKawin={cowStatistics?.femalePhaseStats?.["Siap Kawin"] ?? 0}
+                  hamil={cowStatistics?.femalePhaseStats?.["Hamil"] ?? 0}
+                  menyusui={cowStatistics?.femalePhaseStats?.["Menyusui"] ?? 0}
+                  />
             </div>
 
             <div className="sapiMaleCardStatisticsCard">
-                {filteredMaleCategories.map((category) => (
-                <DetailAnimalMaleCard 
-                key={category.type}
-                title={category.tittle} 
-                total={category.total} 
-                pedet={category.pedet}
-                siapKawin={category.siapKawin}           
-                />
-            ))} 
+                  <DetailAnimalMaleCard 
+                  title="Sapi Jantan" 
+                  total={cowStatistics?.totalMale ?? 0}
+                  pedet={cowStatistics?.malePhaseStats?.["Pedet"] ?? 0}
+                  siapKawin={cowStatistics?.femalePhaseStats?.["Siap Kawin"] ?? 0}           
+                  />
             </div>
 
             <div className="sapiMaleCardStatisticsCard">
-                {filteredDiagnosedCategories.map((category) => (
                 <DetailAnimalDiagnosedCard
-                key={category.type}
-                title={category.tittle}
-                sehat={category.sehat}
-                tersedia={category.tersedia}
-                sakit={category.sakit}
-                hilang={category.hilang}
-                mati={category.mati}
+                title="Status dan Kondisi Ternak"
+                sehat={cowStatistics?.livestockConditionStats?.["Sehat"] ?? 0}
+                tersedia={cowStatistics?.livestockConditionStats?.["Tersedia"] ?? 0}
+                sakit={cowStatistics?.livestockConditionStats?.["Sakit"] ?? 0}
+                hilang={cowStatistics?.livestockConditionStats?.["Hilang"] ?? 0}
+                mati={cowStatistics?.livestockConditionStats?.["Mati"] ?? 0}
                 />
-            ))} 
             </div>
 
           </div>
 
           <div className="statisticsCard">
-          <StatisticsMilk filterBy="year" filterValue={2019} />
+          {/* <StatisticsMilk filterBy="year" filterValue={2019} />
 
           <StatisticsLactation filterBy="year" filterValue={2019} />
 
-          <StatisticsLivestockSold filterBy="year" filterValue={2019}/>
+          <StatisticsLivestockSold filterBy="year" filterValue={2019}/> */}
           </div>
           
 

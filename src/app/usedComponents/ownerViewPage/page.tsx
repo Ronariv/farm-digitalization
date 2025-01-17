@@ -14,6 +14,7 @@ import { usersData } from '@/data/userData';
 import useFetch from '@/hooks/useFetch';
 import { FarmModel } from '@/models/FarmModel';
 import { getCookie } from '@/lib/cookies';
+import { StatisticsModel } from '@/models/FarmStatsModel';
 
 interface OwnerViewPageProps {
   breadcrumb: string;
@@ -31,18 +32,33 @@ const OwnerViewPage: React.FC<OwnerViewPageProps> = ({
         role == "owner" ? `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}` : `${process.env.NEXT_PUBLIC_API_HOST}/farms/operator/${storedId}`,
     );
     const [selectedFarm, setSelectedFarm] = useState<string | null>(null);
+    const [selectedFarmId, setSelectedFarmId] = useState<number | null>(null);
     useEffect(() => {
         if (farmData && farmData.length > 0) {
             setSelectedFarm(farmData[0].name);
+            setSelectedFarmId(farmData[0].id);
         }
     }, [farmData]);
 
-    const handleFarmChange = (farmName: string) => {
+    const handleFarmChange = (farmName: string, farmId: number) => {
         setSelectedFarm(farmName);
+        setSelectedFarmId(farmId);
         console.log(farmName)
     };
     const [isModalOpen, setIsModalOpen] = useState(false);
     const categories = animalCategories('owner');
+
+    const { data: cowStatistics, loading: loadingCowStatistics, error: errorCowStatistics } = useFetch<StatisticsModel>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/statistics/cow-statistics?farmId=${selectedFarmId}`
+    );
+
+    const { data: sheepStatistics, loading: loadingSheepStatistics, error: errorSheepStatistics } = useFetch<StatisticsModel>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/statistics/sheep-statistics?farmId=${selectedFarmId}`
+    );
+
+    const { data: goatStatistics, loading: loadingGoatStatistics, error: errorGoatStatistics } = useFetch<StatisticsModel>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/statistics/goat-statistics?farmId=${selectedFarmId}`
+    );
 
     return (
     <div className="layout">
@@ -103,17 +119,30 @@ const OwnerViewPage: React.FC<OwnerViewPageProps> = ({
             </div>
           </div>
           <div className="animalCategoriesCard">
-            {categories.map((category) => (
-              <CategoryAnimalCard
-                key={category.type} 
-                icon={category.icon}
-                title={category.title}
-                total={category.total}
-                maleCount={category.maleCount}
-                femaleCount={category.femaleCount}
-                href={category.href}
-              />
-            ))}
+          {categories.map((category) => {
+                let statistics;
+
+                if (category.title === "Kambing") {
+                    statistics = goatStatistics; 
+                } else if (category.title === "Sapi") {
+                    statistics = cowStatistics; 
+                } else {
+                    statistics = sheepStatistics;
+                }
+
+                return (
+                    <CategoryAnimalCard
+                    key={category.type}
+                    icon={category.icon}
+                    title={category.title}
+                    total={statistics == null ? 0 : statistics.total}
+                    maleCount={statistics == null ? 0 : statistics.totalMale}
+                    femaleCount={statistics == null ? 0 : statistics.totalFemale}
+                    href={category.href}
+                    />
+                );
+            })}
+
           </div>
         </div>
       </div>

@@ -1,38 +1,23 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
-// import PhaseLabelButton from "@/components/ui/PhaseLabel/PhaseLabelButton";
-// import { phaseLabels } from "@/data/phaseLabels";
-// import HealthStatus from "@/components/ui/healthStatus"; 
-// import GenderIcon from '@/components/ui/genderIcon';
-import EditButton from '@/components/ui/EditButton/editButton';
-import AddButton from '@/components/ui/AddButton/addButton';
-import InviteOperatorButton from '@/components/ui/InviteOperatorButton/inviteOperatorButton';
-import UpdateButton from '@/components/ui/UpdateButton/updateButton';
-import PrintButton from '@/components/ui/DownloadQRButton/DownloadQRButton';
-import FilterButton from '@/components/ui/Filter/filterButton';
-import SortByButton from '@/components/ui/SortBy/sortBy';
+
 import YearAndMonthPicker from '@/components/ui/YearAndMonthPicker/yearAndMonthPicker';
 import Sidebar from '@/components/ui/Sidebar/sidebar';
-import SearchBar from '@/components/ui/SearchBar/searchBar';
-import CategoryAnimalCard from '@/components/ui/CategoryAnimalCard/categoryAnimalCard';
-import OperatorProfile from '@/components/ui/OperatorProfile/operatorProfile';
-import Image from 'next/image';
-import OwnerProfile from '@/components/ui/OwnerProfile/ownerProfile';
 import Breadcrumbs from '@/components/ui/Breadcrumbs/breadcrumbs';
-import { usePathname } from 'next/navigation';
 import DetailAnimalFemaleCard from '@/components/ui/DetailAnimalFemaleCard/detailAnimalFemaleCard';
 import animalCategories from '@/models/DetailAnimalFemaleCategories';
 import DetailAnimalMaleCard from '@/components/ui/DetailAnimalMaleCard/detailAnimalMaleCard';
 import detailAnimalMaleCategories from '@/models/DetailAnimalMaleCategories';
 import DetailAnimalDiagnosedCard from '@/components/ui/DetailAnimalDiagnosedCard/detailAnimalDiagnosedCard';
 import animalDiagnosedCategories from '@/models/DetailAnimalDiagnosedCategories';
-import StatisticsMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
-import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
+// import StatisticsMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
+// import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
 import TopBar from '@/components/ui/TopBar/topBar';
 import { getCookie } from '@/lib/cookies';
 import useFetch from '@/hooks/useFetch';
 import { FarmModel } from '@/models/FarmModel';
+import { StatisticsModel } from '@/models/FarmStatsModel';
 
 const App: React.FC = () => {
 
@@ -54,7 +39,7 @@ const App: React.FC = () => {
     setSelectedFarm(farmName);
     setSelectedFarmId(farmId);
     console.log(farmName)
-};
+  };
 
   const [breadcrumb, setBreadcrumb] = useState('Statistik');
 
@@ -100,6 +85,10 @@ const App: React.FC = () => {
           return 'Halaman Tidak Ditemukan';
       }
     }
+
+    const { data: sheepStatistics, loading: loadingSheepStatistics, error: errorSheepStatistics } = useFetch<StatisticsModel>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/statistics/sheep-statistics?farmId=${selectedFarmId}`
+    );
 
     return (
     <div className="layout">
@@ -151,52 +140,43 @@ const App: React.FC = () => {
 
           <div className="dombaDetailStatisticsCard">
             <div className="dombaFemaleCardStatisticsCard">
-                {filteredFemaleCategories.map((category) => (
-                <DetailAnimalFemaleCard
-                key={category.type} // Gunakan type sebagai key
-                title={category.tittle}
-                total={category.total}
-                pedet={category.pedet}
-                dara={category.dara}
-                siapKawin={category.siapKawin}
-                hamil={category.hamil}
-                menyusui={category.menyusui}
-                />
-            ))}
+                  <DetailAnimalFemaleCard
+                  title="Sapi Betina"
+                  total={sheepStatistics?.totalFemale ?? 0}
+                  pedet={sheepStatistics?.femalePhaseStats?.["Pedet"] ?? 0}
+                  dara={sheepStatistics?.femalePhaseStats?.["Dara"] ?? 0}
+                  siapKawin={sheepStatistics?.femalePhaseStats?.["Siap Kawin"] ?? 0}
+                  hamil={sheepStatistics?.femalePhaseStats?.["Hamil"] ?? 0}
+                  menyusui={sheepStatistics?.femalePhaseStats?.["Menyusui"] ?? 0}
+                  />
             </div>
 
             <div className="dombaMaleCardStatisticsCard">
-                {filteredMaleCategories.map((category) => (
-                <DetailAnimalMaleCard 
-                key={category.type}
-                title={category.tittle} 
-                total={category.total} 
-                pedet={category.pedet}
-                siapKawin={category.siapKawin}           
-                />
-            ))} 
+                  <DetailAnimalMaleCard 
+                  title="Sapi Jantan" 
+                  total={sheepStatistics?.totalMale ?? 0}
+                  pedet={sheepStatistics?.malePhaseStats?.["Pedet"] ?? 0}
+                  siapKawin={sheepStatistics?.femalePhaseStats?.["Siap Kawin"] ?? 0}           
+                  />
             </div>
 
             <div className="dombaMaleCardStatisticsCard">
-                {filteredDiagnosedCategories.map((category) => (
                 <DetailAnimalDiagnosedCard
-                key={category.type}
-                title={category.tittle}
-                tersedia={category.tersedia}
-                sehat={category.sehat}
-                mati={category.mati}
-                sakit={category.sakit}
-                hilang={category.hilang}
+                title="Status dan Kondisi Ternak"
+                sehat={sheepStatistics?.livestockConditionStats?.["Sehat"] ?? 0}
+                tersedia={sheepStatistics?.livestockConditionStats?.["Tersedia"] ?? 0}
+                sakit={sheepStatistics?.livestockConditionStats?.["Sakit"] ?? 0}
+                hilang={sheepStatistics?.livestockConditionStats?.["Hilang"] ?? 0}
+                mati={sheepStatistics?.livestockConditionStats?.["Mati"] ?? 0}
                 />
-            ))} 
             </div>
 
           </div>
 
           <div className="statisticsCard">
-          <StatisticsMilk filterBy="year" filterValue={2019} />
+          {/* <StatisticsMilk filterBy="year" filterValue={2019} />
 
-          <StatisticsLactation filterBy="year" filterValue={2019} />
+          <StatisticsLactation filterBy="year" filterValue={2019} /> */}
           </div>
 
           <div className="statisticsLactation">
