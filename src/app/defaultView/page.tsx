@@ -32,7 +32,7 @@ const DefaultViewPage: React.FC = () => {
   const storedId = getCookie("id"); 
 
   const { data, loading, error } = useFetch<FarmModel[]>(
-      `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
+      role == "owner" ? `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}` : `${process.env.NEXT_PUBLIC_API_HOST}/farms/operator/${storedId}`,
   );
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const DefaultViewPage: React.FC = () => {
 const view = searchParams.get("view");
 
 const renderViewBasedOnRole = () => {
-  if (role === "owner") {
+  if (role === "owner" || data == null) {
     if (data?.length == 0) {
       return <DefaultOwnerViewPage setIsFarmInvited={setIsFarmInvited} />;
     }
@@ -68,18 +68,18 @@ const renderViewBasedOnRole = () => {
   }
 
   if (role === "operator") {
-    if (data == null) {
-      return <DefaultOperatorViewpage />;
+    if (data?.length == 0 || data == null) {
+      return <DefaultOwnerViewPage setIsFarmInvited={setIsFarmInvited} />;
     }
     switch (view){
       case "livestock":
-        return <LivestockOperatorPage />;
+        return <LivestockOwnerPage />;
       case "activity":
-        return <ActivityOperatorPage />;
+        return <ActivityOwnerPage />;
       case "settings":
-          return <SettingsOperatorPage />;
+          return <SettingOwnerPage />;
       default:
-      return <OperatorViewPage breadcrumb={breadcrumb} setBreadcrumb={setBreadcrumb} />;
+        return <OwnerViewPage breadcrumb={breadcrumb} setBreadcrumb={setBreadcrumb} />;
     }
     
   }

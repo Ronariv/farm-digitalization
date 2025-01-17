@@ -19,34 +19,34 @@ const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ farmList, users, onCl
   const storedId = getCookie("id"); 
   const [farm, setFarm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState("");
-    const router = useRouter()
+  const router = useRouter()
 
-    const handleCategorySelect = (option: string) => {
-      setSelectedCategory(option);
-    };
+  const handleCategorySelect = (option: string) => {
+    setSelectedCategory(option);
+  };
 
-    const handleAddFarm = async () => {
-      if (farm && selectedCategory) {
-        setIsFarmInvited(true);
-        const farmsData = {
-          name: farm,
-          category: selectedCategory == "Sapi" ? "CowFarm" : selectedCategory == "Kambing" ? "GoatFarm" : selectedCategory == "Domba" ? "SheepFarm" : "",
-          ownerId: storedId,
-        };
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/farms/`, {
-          method: "POST",
-          body: JSON.stringify(farmsData),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+  const handleAddFarm = async () => {
+    if (farm && selectedCategory) {
+      setIsFarmInvited(true);
+      const farmsData = {
+        name: farm,
+        category: selectedCategory == "Sapi" ? "CowFarm" : selectedCategory == "Kambing" ? "GoatFarm" : selectedCategory == "Domba" ? "SheepFarm" : "",
+        ownerId: storedId,
+      };
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/farms/`, {
+        method: "POST",
+        body: JSON.stringify(farmsData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-        router.push(`/defaultView`);
-        onClose();
-      } else {
-        alert('Harap isi semua bidang!');
-      }
-    };
+      router.push(`/defaultView`);
+      onClose();
+    } else {
+      alert('Harap isi semua bidang!');
+    }
+  };
     
   return (
     <div className={styles.modalBackdrop}>

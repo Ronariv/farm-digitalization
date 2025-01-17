@@ -2,12 +2,23 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import styles from '@/components/ui/TopBarOpt/TopBarOpt.module.css';
 import SearchBar from '../SearchBar/searchBar';
-import { notificationListData } from '@/data/notificationData';
+// import { notificationListData } from '@/data/notificationData';
 import OperatorProfile from '../OperatorProfile/operatorProfile';
 import RejectButton from '../RejectButton/RejectButton';
 import AcceptButton from '../AcceptButton/AcceptButton';
+import { FarmRequestModel } from '@/models/FarmRequestModel';
+import useFetch from '@/hooks/useFetch';
+import { getCookie } from '@/lib/cookies';
+import { User } from '@/models/UserModel';
+import { useRouter } from 'next/navigation';
 
 const TopBarOpt: React.FC = () => {
+  const storedId = getCookie("id"); 
+  const router = useRouter()
+
+  const { data: farmRequestModel, loading: loadingFarms, error: errorFarms } = useFetch<FarmRequestModel[]>(
+      `${process.env.NEXT_PUBLIC_API_HOST}/farm-requests/pending?operatorId=${storedId}`,
+  );
   const [isOpen, setIsOpen] = useState(false);
 
   const closeDropdown = () => setIsOpen(false);
@@ -29,6 +40,23 @@ const TopBarOpt: React.FC = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen]);
+
+  const handleSubmit = async (farmRequestId: number, isAccepted: boolean) => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/farm-requests/${farmRequestId}${isAccepted ? "/accept" : "/reject"}`, {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        },
+      });
+      closeDropdown();
+      router.push("/defaultView"); 
+    } catch (error) {
+    } finally {
+        
+    }
+};
+
 
   return (
     <>
@@ -55,18 +83,18 @@ const TopBarOpt: React.FC = () => {
         ReactDOM.createPortal(
           <div id="dropdown-container" className={styles.dropdown}>
             <h1>Notifikasi</h1>
-            {notificationListData.slice(0, 1).map((notification, index) => (
-              <div key={notification.user_name + notification.action}>
+            {farmRequestModel?.map((farmRequest, index) => (
+                <div key={index}>
                 <div className={styles.notificationRow}>
                   <div className={styles.notificationText}>
-                    <p><b>{notification.user_name}</b> {notification.action}</p>
+                    <p><b>{farmRequest.operator?.name}</b> {`Anda telah diundang untuk bergabung ke peternakan ${farmRequest.farm.name}`}</p>
                   </div>
                 </div>
 
                 {index === 0 && ( 
                   <div className={styles.notificationActionsWrapper}>
-                    <RejectButton label={"Tolak"} onClick={closeDropdown} />
-                    <AcceptButton label={"Terima"} onClick={closeDropdown} />
+                    <RejectButton label={"Tolak"} onClick={() => handleSubmit(farmRequest.id, false)} />
+                    <AcceptButton label={"Terima"} onClick={() => handleSubmit(farmRequest.id, true)} />
                   </div>
                 )}
               </div>

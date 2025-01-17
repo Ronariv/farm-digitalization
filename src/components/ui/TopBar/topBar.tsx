@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styles from '@/components/ui/TopBar/TopBar.module.css';
 import SearchBar from '../SearchBar/searchBar';
@@ -6,8 +6,17 @@ import OwnerProfile from '../OwnerProfile/ownerProfile';
 import { notificationListData } from '@/data/notificationData';
 import AcceptButton from '../AcceptButton/AcceptButton';
 import RejectButton from '../RejectButton/RejectButton';
+import { getCookie } from '@/lib/cookies';
+import useFetch from '@/hooks/useFetch';
+import { FarmRequestModel } from '@/models/FarmRequestModel';
 
 const TopBar: React.FC = () => {
+    const storedId = getCookie("id"); 
+
+    const { data: farmRequestData, loading: loadingFarms, error: errorFarms } = useFetch<FarmRequestModel[]>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/farm-requests/pending?operatorId=${storedId}`,
+    );
+
   const [isOpen, setIsOpen] = useState(false);
 
   // Function to close the dropdown when clicking outside

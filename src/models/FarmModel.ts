@@ -1,3 +1,5 @@
+import { User } from "./UserModel";
+
 export interface FarmModel {
     id: number;
     name: string;
@@ -5,6 +7,7 @@ export interface FarmModel {
     ownerId: number;
     createdAt: string;
     updatedAt: string;
-    operators: any[];
+    operators: User[];
+    owner: User;
 }
   

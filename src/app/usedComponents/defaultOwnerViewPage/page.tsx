@@ -11,11 +11,13 @@ import styles from "@/app/usedComponents/defaultOwnerViewPage/defaultOwnerViewPa
 import useFetch from '@/hooks/useFetch';
 import { FarmModel } from '@/models/FarmModel';
 import { getCookie } from '@/lib/cookies';
+import TopBarOpt from '@/components/ui/TopBarOpt/TopBarOpt';
 
 const DefaultOwnerViewPage: React.FC<{ setIsFarmInvited: (value: boolean) => void }> = ({
   setIsFarmInvited,
 }) => {
   const storedId = getCookie("id"); 
+  const role = getCookie("role"); 
   
   const { data, loading, error } = useFetch<FarmModel[]>(
       `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
@@ -53,7 +55,13 @@ const DefaultOwnerViewPage: React.FC<{ setIsFarmInvited: (value: boolean) => voi
       </div>
 
       <div className="main-content">
+        {role == "owner" 
+        ? 
         <TopBar ></TopBar>
+        :
+        <TopBarOpt></TopBarOpt>
+        }
+        
        
         <div className="content">
         <div className="menuSection">
@@ -63,20 +71,22 @@ const DefaultOwnerViewPage: React.FC<{ setIsFarmInvited: (value: boolean) => voi
             {/* <h1 className="menuTittle">Statistik</h1> */}
             <div className="yearAndMonthPicker">
               {/* <YearAndMonthPicker/> */}
-              <PrimaryButton
-              label= "+ Tambah Peternakan"
-              width= {210}
-              onClick={() => setIsModalOpen(true)}
-              />
+              {role == "owner"  && (
+                <PrimaryButton
+                label= "+ Tambah Peternakan"
+                width= {210}
+                onClick={() => setIsModalOpen(true)}
+                />
+              )}
 
-                {isModalOpen && (
-                <InviteFarmModal
-                      users={usersData} // Gunakan data dari usersData
-                      onClose={() => setIsModalOpen(false)}
-                      setIsFarmInvited={setIsFarmInvited} // Kirimkan prop ini  
-                      farmList={data == null ? [] : data}
-                      />
-      )}
+              {isModalOpen && (
+              <InviteFarmModal
+                    users={usersData} // Gunakan data dari usersData
+                    onClose={() => setIsModalOpen(false)}
+                    setIsFarmInvited={setIsFarmInvited} // Kirimkan prop ini  
+                    farmList={data == null ? [] : data}
+                    />
+              )}
             </div>
           </div>
           <div className={styles.content}>
@@ -99,9 +109,9 @@ const DefaultOwnerViewPage: React.FC<{ setIsFarmInvited: (value: boolean) => voi
 
 
             <div>
-                <h1>Anda belum menambah peternakan
+                <h1>{role == "owner" ? "Anda belum menambah peternakan" : "Anda belum miliki peternakan saat ini"}
                 <br>
-                </br>Tambah peternakan Anda sekarang!</h1>
+                </br>{role == "owner" ? "Tambah peternakan Anda sekarang!" : "Minta pemilik peternakan untuk mengundang anda"}</h1>
             </div>
 
           </div>

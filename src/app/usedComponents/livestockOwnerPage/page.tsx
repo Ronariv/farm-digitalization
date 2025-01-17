@@ -30,9 +30,10 @@ const LivestockPage: React.FC = () => {
     const router = useRouter()
 
     const storedId = getCookie("id"); 
+    const role = getCookie("role"); 
 
     const { data: farmData, loading: loadingFarms, error: errorFarms } = useFetch<FarmModel[]>(
-        `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
+        role == "owner" ? `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}` : `${process.env.NEXT_PUBLIC_API_HOST}/farms/operator/${storedId}`,
     );
     const [selectedFarm, setSelectedFarm] = useState<string | null>(null);
     const [selectedFarmId, setSelectedFarmId] = useState<number | null>(null);

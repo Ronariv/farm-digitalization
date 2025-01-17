@@ -3,13 +3,37 @@ import React, { useState } from 'react';
 import styles from "@/components/ui/InviteModal/InviteModal.module.css";
 import PrimaryButton from '../PrimaryButton/primaryButton';
 import DropdownPhase from '../DropdownPhase/DropdownPhase';
+import { useRouter } from 'next/navigation';
 interface InviteModalProps {
   users: User[];
   onClose: () => void;
+  farmId: string;
 }
 
-const InviteModal: React.FC<InviteModalProps> = ({ users, onClose }) => {
+const InviteModal: React.FC<InviteModalProps> = ({ users, onClose, farmId }) => {
   const [email, setEmail] = useState('');
+  const router = useRouter()
+
+  const handleAddOperator = async () => {
+    if (email != "") {
+      const requestPayload = {
+        farmId: farmId,
+        email: email
+      };
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/farm-requests/`, {
+        method: "POST",
+        body: JSON.stringify(requestPayload),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      router.push(`/defaultView?view=activity`);
+      onClose();
+    } else {
+      alert('Harap isi semua bidang!');
+    }
+  };
   
   
   return (
@@ -55,6 +79,7 @@ const InviteModal: React.FC<InviteModalProps> = ({ users, onClose }) => {
           width= {109}
           onClick={()=> {
             if (email.trim()) {
+              handleAddOperator();
               alert(`Undangan telah dikirim ke ${email}`);
               setEmail('');
             } else {
