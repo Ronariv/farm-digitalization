@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TabNavigation from "@/components/ui/TabNavigation/TabNavigation";
 import { Input } from "@/components/ui/input"
@@ -8,6 +8,8 @@ import DropdownFase from '@/components/ui/DropdownPhase/DropdownPhase';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import firebaseApp from '@/lib/firebase'
+import useFetch from '@/hooks/useFetch';
+import { Livestock } from '@/models/LivestockModel';
 
 
 const app: React.FC = () => {
@@ -117,6 +119,46 @@ const app: React.FC = () => {
     );
   };
 
+  const { data: customIdSapi, loading: loadingCustomIdSapi, error: errorCustomIdSapi } = useFetch<CustomId>(
+    `${process.env.NEXT_PUBLIC_API_HOST}/livestock-custom-ids/${farmId}/Sapi`
+  );
+  
+  const { data: customIdKambing, loading: loadingCustomIdKambing, error: errorCustomIdKambing } = useFetch<CustomId>(
+    `${process.env.NEXT_PUBLIC_API_HOST}/livestock-custom-ids/${farmId}/Kambing`
+  );
+  
+  const { data: customIdDomba, loading: loadingCustomIdDomba, error: errorCustomIdDomba } = useFetch<CustomId>(
+    `${process.env.NEXT_PUBLIC_API_HOST}/livestock-custom-ids/${farmId}/Domba`
+  );
+
+  const { data: livestockData, loading: loadingLivestock, error: errorLivestock } = useFetch<Livestock[]>(
+      `${process.env.NEXT_PUBLIC_API_HOST}/animals`,
+  );
+
+  const generateIdTernak = () => {
+    if (kategoriHewan === "Kambing") {
+      return customIdKambing
+        ? `${customIdKambing.custom_prefix}${(customIdKambing.last_number + 1).toString().padStart(4, "0")}`
+        : `${((livestockData?.filter((livestock) => livestock.farm_name === selectedFarm).length ?? 0) + 1).toString().padStart(4, "0")}`;
+    }
+    if (kategoriHewan === "Sapi") {
+      return customIdSapi
+        ? `${customIdSapi.custom_prefix}${(customIdSapi.last_number + 1).toString().padStart(4, "0")}`
+        : `${((livestockData?.filter((livestock) => livestock.farm_name === selectedFarm).length ?? 0) + 1).toString().padStart(4, "0")}`;
+    }
+    if (kategoriHewan === "Domba") {
+      return customIdDomba
+        ? `${customIdDomba.custom_prefix}${(customIdDomba.last_number + 1).toString().padStart(4, "0")}`
+        : `${((livestockData?.filter((livestock) => livestock.farm_name === selectedFarm).length ?? 0) + 1).toString().padStart(4, "0")}`;
+    }
+    return "Pilih kategori hewan terlebih dahulu";
+  };
+
+  useEffect(() => {
+    setIdTernak(generateIdTernak());
+  }, [kategoriHewan, customIdKambing, customIdSapi, customIdDomba, selectedFarm, livestockData]);
+
+
   return (
     <div className="container-addTernak">
       <div className="sidebar-addTernak">
@@ -146,12 +188,13 @@ const app: React.FC = () => {
             <div className="sectionInput-addTernak">
               <Label title="ID Ternak *" />
               <Input
-                disabled={false}
+                disabled={true}
                 type="text"
-                placeholder="ID Ternak"
+                placeholder="Pilih hewan ternak dahulu"
                 value={idTernak}
                 onChange={(e) => setIdTernak(e.target.value)}
               />
+
 
               <Label title="Ras Ternak *" />
               <Input
@@ -209,17 +252,33 @@ const app: React.FC = () => {
 
                 {selectedFase === "Hamil" && (
                   <div className="extra-input-addTernak">
-                    <Label title="ID Pasangan *" />
-                    <Input
-                      disabled={false}
-                      type="text"
-                      placeholder="AJW-015"
-                      value={idPasangan}
-                      onChange={(e) => setIdPasangan(e.target.value)}
-                      style={{
-                        borderColor: error ? "red" : "black",
-                      }}
-                    />
+                  <Label title="ID Pasangan *" />
+                  <Input
+                    disabled={false}
+                    type="text"
+                    placeholder="AJW-015"
+                    value={idPasangan}
+                    onChange={(e) => {
+                      const inputIdPasangan = e.target.value;
+                      setIdPasangan(inputIdPasangan);
+
+                      if (livestockData && Array.isArray(livestockData)) {
+                        const isRasTernakValid = !livestockData.some(
+                          (livestock) => livestock.name_id === inputIdPasangan && livestock.breed === rasTernak
+                        );
+
+                        if (!isRasTernakValid) {
+                          setError(true);
+                        } else {
+                          setError(false);
+                        }
+                      }
+                    }}
+                    style={{
+                      borderColor: error ? "red" : "black",
+                    }}
+                  />
+
                   </div>
                 )}
               </div>
@@ -274,11 +333,24 @@ const app: React.FC = () => {
             </div>
 
             <div className="lanjutButton-addTernak">
-              <PrimaryButton
-                label="Lanjut"
-                width={221}
-                onClick={handleUpdateData}
-              />
+            <PrimaryButton
+              label="Lanjut"
+              width={221}
+              onClick={handleUpdateData}
+              disabled={
+                idTernak === "" || idTernak === null ||
+                rasTernak === "" || rasTernak === null ||
+                grade === "" || grade === null ||
+                berat === "" || berat === null ||
+                selectedFase === "" || selectedFase === null ||
+                jenisKelamin === "" || jenisKelamin === null ||
+                kondisiTernak === "" || kondisiTernak === null ||
+                status === "" || status === null ||
+                kategoriHewan === "" || kategoriHewan === null ||
+                imageUrl === "" || imageUrl === null || 
+                error
+              }
+            />
             </div>
           </div>
         </div>

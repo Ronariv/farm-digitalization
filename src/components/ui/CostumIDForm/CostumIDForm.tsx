@@ -1,9 +1,51 @@
 'use client'
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "@/components/ui/CostumIDForm/CostumIDForm.module.css";
 
-const CustomIDForm: React.FC = () => {
+interface CustomIDFormProps {
+  onPrefixChange: (sapiPrefix: string, kambingPrefix: string, dombaPrefix: string) => void;
+  sapiPrefix: string;
+  kambingPrefix: string;
+  dombaPrefix: string;
+}
+
+const CustomIDForm: React.FC<CustomIDFormProps> = ({ onPrefixChange, sapiPrefix, kambingPrefix, dombaPrefix }) => {
+
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState(null);
+  const [apiData, setApiData] = useState(null);
+
+  const [localSapiPrefix, setLocalSapiPrefix] = useState(sapiPrefix);
+  const [localKambingPrefix, setLocalKambingPrefix] = useState(kambingPrefix);
+  const [localDombaPrefix, setLocalDombaPrefix] = useState(dombaPrefix);
+
+  useEffect(() => {
+    setLocalSapiPrefix(sapiPrefix);
+  }, [sapiPrefix]);
+
+  useEffect(() => {
+    setLocalKambingPrefix(kambingPrefix);
+  }, [kambingPrefix]);
+
+  useEffect(() => {
+    setLocalDombaPrefix(dombaPrefix);
+  }, [dombaPrefix]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    if (name === 'sapi') {
+      setLocalSapiPrefix(value);
+      onPrefixChange(value, localKambingPrefix, localDombaPrefix);
+    } else if (name === 'kambing') {
+      setLocalKambingPrefix(value);
+      onPrefixChange(localSapiPrefix, value, localDombaPrefix);
+    } else if (name === 'domba') {
+      setLocalDombaPrefix(value);
+      onPrefixChange(localSapiPrefix, localKambingPrefix, value);
+    }
+  };
   return (
     <div className={styles.customidForm}>
       <h1 className={styles.formTitle}>Kustomisasi Format ID Ternak</h1>
@@ -24,7 +66,14 @@ const CustomIDForm: React.FC = () => {
             <path d="M38.9353 24.5747C37.2253 20.1724 42.4245 16.3317 46.1297 19.26L46.3689 19.4491C47.9832 20.7249 50.2779 20.6675 51.8263 19.3126C55.1226 16.4283 60.1058 19.7867 58.6695 23.9245L54.1351 36.9878C53.3683 39.197 51.2864 40.6781 48.948 40.6781C46.6827 40.6781 44.65 39.287 43.8298 37.1754L38.9353 24.5747Z" fill="white"/>
           </svg>
         <span className={styles.animalName}>Sapi</span>
-        <input type="text" className={styles.prefixInput} placeholder="Contoh: SP" />
+        <input
+          name='sapi'
+          type="text"
+          className={styles.prefixInput}
+          placeholder="Contoh: SP"
+          value={localSapiPrefix}
+          onChange={handleInputChange}
+          />
         <input type="text" className={styles.idInput} value="0001" disabled />
       </div>
 
@@ -45,8 +94,15 @@ const CustomIDForm: React.FC = () => {
           <path d="M29.2757 38.3539C27.8409 36.1591 28.9836 34.2791 30.4116 33.0736C31.5816 32.0859 33.1413 32.9001 33.5018 34.4804C34.6362 39.4535 34.3329 44.8704 29.2757 38.3539Z" fill="#642C07"/>
         </svg>
         <span className={styles.animalName}>Kambing</span>
-        <input type="text" className={styles.prefixInput} placeholder="Contoh: KB" />
-        <input type="text" className={styles.idInput} value="0001" disabled />
+        <input
+          name='kambing'
+          type="text"
+          className={styles.prefixInput}
+          placeholder="Contoh: KB"
+          value={localKambingPrefix}
+          onChange={handleInputChange}
+          />
+        <input type="text" className={styles.idInput} value="0002" disabled />
       </div>
 
       {/* Domba */}
@@ -63,8 +119,15 @@ const CustomIDForm: React.FC = () => {
           <path d="M52.8335 23.8119C50.5758 17.9993 57.4405 12.9283 62.3327 16.7947L62.6486 17.0443C64.78 18.7288 67.8098 18.653 69.8543 16.8641C74.2065 13.0559 80.786 17.4902 78.8897 22.9535L72.9027 40.2017C71.8902 43.1185 69.1414 45.0741 66.0538 45.0741C63.0629 45.0741 60.379 43.2373 59.296 40.4493L52.8335 23.8119Z" fill="white"/>
         </svg>
         <span className={styles.animalName}>Domba</span>
-        <input type="text" className={styles.prefixInput} placeholder="Contoh: DBA" />
-        <input type="text" className={styles.idInput} value="0001" disabled />
+        <input
+          name='domba'
+          type="text"
+          className={styles.prefixInput}
+          placeholder="Contoh: KB"
+          value={localDombaPrefix}
+          onChange={handleInputChange}
+          />
+        <input type="text" className={styles.idInput} value="0002" disabled />
       </div>
     </div>
   );

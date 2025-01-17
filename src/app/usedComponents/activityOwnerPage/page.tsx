@@ -68,11 +68,16 @@ const ActivityPage: React.FC = () => {
                                     <h1 className="menuTittle">Aktivitas Tim</h1>
                                 </div>
                                 <div className="primaryButton">
+                                  {role == "owner" 
+                                  ? 
                                     <PrimaryButton
                                         label="+ Undang Anggota"
                                         width={194}
                                         onClick={() => setIsModalOpen(true)}
                                     />
+                                  :
+                                    <div></div>
+                                  }
                                     {isModalOpen && (
                                         <InviteModal
                                             users={selectedFarmModel?.operators || []}

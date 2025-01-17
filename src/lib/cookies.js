@@ -23,9 +23,6 @@
       return acc;
     }, {});
   
-    console.log("Cookies:", cookies); // Log semua cookies
-    console.log(`Cookie "${name}":`, cookies[name]); 
-
     return cookies[name];
   };
   

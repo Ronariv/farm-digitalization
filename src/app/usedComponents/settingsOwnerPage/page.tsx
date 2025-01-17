@@ -32,6 +32,13 @@ import { getCookie } from '@/lib/cookies';
 import useFetch from '@/hooks/useFetch';
 import { FarmModel } from '@/models/FarmModel';
 
+interface Payload {
+  farmId?: number;
+  typeId: string;
+  newPrefix?: string;
+  customPrefix?: string;
+}
+
 const App: React.FC = () => {
 
   const [breadcrumb, setBreadcrumb] = useState('Statistik');
@@ -44,33 +51,20 @@ const App: React.FC = () => {
       `${process.env.NEXT_PUBLIC_API_HOST}/farms?ownerId=${storedId}`,
   );
   const [selectedFarm, setSelectedFarm] = useState<string | null>(null);
+  const [selectedFarmModel, setSelectedFarmModel] = useState<FarmModel | null>(null);
 
   useEffect(() => {
       if (farmData && farmData.length > 0) {
-          setSelectedFarm(farmData[0].name);
+          setSelectedFarm(farmData[0]?.name || null);
+          setSelectedFarmModel(farmData[0] || null);
       }
   }, [farmData]);
 
   const handleFarmChange = (farmName: string) => {
+      const farmModel = farmData?.find((farm) => farm.name === farmName) || null;
+      setSelectedFarmModel(farmModel);
       setSelectedFarm(farmName);
-      console.log(farmName)
   };
-
-    const handleUpdate = () => {
-        alert("Tombol Invite Ternak diklik!");
-    };
-
-    const handlePrint = () => {
-        alert("Tombol print sudah diklik!");
-    };
-
-    const handleFilter = () => {
-      alert("Tombol filter di klik");
-    };
-
-    const handleSortBy = () => {
-      alert("Tombol sort di klik");
-    };
 
     function getMenuLabel(pathname: string): string {
       switch (pathname) {
@@ -86,6 +80,109 @@ const App: React.FC = () => {
           return 'Halaman Tidak Ditemukan';
       }
     }
+
+    const [sapiPrefix, setSapiPrefix] = useState("");
+    const [kambingPrefix, setKambingPrefix] = useState("");
+    const [dombaPrefix, setDombaPrefix] = useState("");
+
+    const { data: customIdSapi, loading: loadingCustomIdSapi, error: errorCustomIdSapi } = useFetch<CustomId>(
+      `${process.env.NEXT_PUBLIC_API_HOST}/livestock-custom-ids/${selectedFarmModel?.id}/Sapi`
+    );
+    
+    const { data: customIdKambing, loading: loadingCustomIdKambing, error: errorCustomIdKambing } = useFetch<CustomId>(
+      `${process.env.NEXT_PUBLIC_API_HOST}/livestock-custom-ids/${selectedFarmModel?.id}/Kambing`
+    );
+    
+    const { data: customIdDomba, loading: loadingCustomIdDomba, error: errorCustomIdDomba } = useFetch<CustomId>(
+      `${process.env.NEXT_PUBLIC_API_HOST}/livestock-custom-ids/${selectedFarmModel?.id}/Domba`
+    );
+    
+    useEffect(() => {
+      if (customIdSapi) {
+        setSapiPrefix(customIdSapi.custom_prefix); 
+      }
+    }, [customIdSapi]);
+
+    useEffect(() => {
+      console.log("//////////");
+      console.log(sapiPrefix); // This will log the updated value
+      console.log("//////////");
+    }, [sapiPrefix]);
+    
+    useEffect(() => {
+      if (customIdKambing) {
+        setKambingPrefix(customIdKambing.custom_prefix); 
+      }
+    }, [customIdKambing]);
+    
+    useEffect(() => {
+      if (customIdDomba) {
+        setDombaPrefix(customIdDomba.custom_prefix); 
+      }
+    }, [customIdDomba]);
+
+    const handlePrefixChange = (newSapiPrefix: string, newKambingPrefix: string, newDombaPrefix: string) => {
+      setSapiPrefix(newSapiPrefix);
+      setKambingPrefix(newKambingPrefix);
+      setDombaPrefix(newDombaPrefix);
+    };
+
+    const handleSubmit = async () => {
+      for (let i = 0; i < 3; i++) {
+        const payload: Payload = {
+          farmId: selectedFarmModel?.id,
+          typeId: i === 0 ? "Sapi" : i === 1 ? "Kambing" : "Domba",
+        };
+    
+        if (
+          (i === 0 && (sapiPrefix === "" || sapiPrefix === customIdSapi?.custom_prefix)) ||
+          (i === 1 && (kambingPrefix === "" || kambingPrefix === customIdKambing?.custom_prefix)) ||
+          (i === 2 && (dombaPrefix === "" || dombaPrefix === customIdDomba?.custom_prefix))
+        ) {
+          console.log(`Skipping iteration ${i + 1}`);
+          continue;
+        }
+    
+        try {
+          let endpoint = "";
+          let method = "";
+    
+          if (
+            (i === 0 && customIdSapi === null) ||
+            (i === 1 && customIdKambing === null) ||
+            (i === 2 && customIdDomba === null)
+          ) {
+            payload.customPrefix = i === 0 ? sapiPrefix : i === 1 ? kambingPrefix : dombaPrefix
+            endpoint = "create";
+            method = "POST";
+          } else {
+            payload.newPrefix = i === 0 ? sapiPrefix : i === 1 ? kambingPrefix : dombaPrefix
+            endpoint = "change-prefix";
+            method = "PUT";
+          }
+    
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/livestock-custom-ids/${endpoint}`, {
+            method: method,
+            body: JSON.stringify(payload),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+    
+          if (!response.ok) {
+            console.error(`Error in request ${i + 1}:`, response.statusText);
+          } else {
+            const result = await response.json();
+            console.log(`Response ${i + 1}:`, result);
+            router.push("defaultView?view=settings");
+          }
+        } catch (error) {
+          console.error(`Error in request ${i + 1}:`, error);
+        }
+      }
+    };
+    
+  
 
     return (
     <div className="layout">
@@ -120,7 +217,7 @@ const App: React.FC = () => {
               <PrimaryButton
               label="Simpan Perubahan" 
               width={190}
-              onClick={() => router.push(`/defaultView`)}
+              onClick={() => handleSubmit()}
               />
             </div>
           </div>
@@ -135,7 +232,12 @@ const App: React.FC = () => {
           </div>
 
           <div className="costumIDForm">
-          <CustomIDForm/>
+          <CustomIDForm
+            onPrefixChange={handlePrefixChange}
+            sapiPrefix={sapiPrefix}
+            kambingPrefix={kambingPrefix}
+            dombaPrefix={dombaPrefix}
+          />
           </div>
         </div>
       </div>
