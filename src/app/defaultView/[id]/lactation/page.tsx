@@ -13,12 +13,27 @@ import { useRouter } from 'next/navigation'
 import { getCookie } from '@/lib/cookies';
 import useFetch from '@/hooks/useFetch';
 import { FarmModel } from '@/models/FarmModel';
-import { Livestock } from '@/models/LivestockModel';
+import { Livestock, MonthlyData, YearlyData } from '@/models/LivestockModel';
 
 interface LivestockLactationPageProps {
     params: Promise<{
         id: string;
     }>;
+}
+
+interface LactationDataPayload {
+    animalId: string;
+    yearlyData: YearlyDataPayload[];
+}
+
+interface YearlyDataPayload {
+    year: number;
+    data: MonthlyDataPayload[];
+}
+
+interface MonthlyDataPayload {
+    month: string;
+    value: number;
 }
 
 const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params: paramsPromise }) => {
@@ -65,6 +80,9 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
 
     const [dropdownData, setDropdownData] = useState<string[]>([]);
 
+    const [date, setDate] = useState("2025-01-16");
+    const [value, setValue] = useState(0);
+
     const handleDropdownSelect = (value: string) => {
         setDropdownData((prev) => {
             return [...prev, value ];
@@ -72,17 +90,27 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
     };
 
     const handleSubmit = async () => {
+        const year = new Date(date).getFullYear();
+        const month = new Date(date).toLocaleString('default', { month: 'short' });
+
         try {
-            if (livestock?.health == null) {
+            if (livestock?.lactationData == null) {
                 const payload = {
-                    current_condition: dropdownData[0], 
                     animalId: id,
-                    history_items: dropdownData.map((dropdownData) => ({
-                        title: dropdownData,
-                        value: new Date().toLocaleString("en-US", { year: "numeric", month: "short" }) // Format like "May 2019"
-                    }))
+                    yearlyData: [
+                        {
+                            year:  year,
+                            data: [
+                                {
+                                    month: month,
+                                    value: value
+                                }
+                            ]
+                        }
+                    ]
                 };
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/animals/${id}/health`, {
+
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/lactationData`, {
                     method: "POST",
                     body: JSON.stringify(payload),
                     headers: {
@@ -97,21 +125,45 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
                     setApiError(data.error || "Something went wrong");
                 }
             } else {
-                const payload = {
-                    current_condition: dropdownData[0], 
+                let payload: LactationDataPayload = {
                     animalId: id,
-                    history_items: [
-                        ...livestock.health.historyItems.map((item) => ({
-                            title: item.title,
-                            value: item.value,
-                        })),
-                        ...dropdownData.map((dropdownData) => ({
-                            title: dropdownData,
-                            value: new Date().toLocaleString("en-US", { year: "numeric", month: "short" }) // Format like "May 2019"
-                        })),
-                    ],
+                    yearlyData: []
                 };
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/health/${livestock?.health.id}`, {
+
+                livestock.lactationData.yearlyDatas.forEach((lactationEntry: YearlyData) => {
+                    let yearData = payload.yearlyData.find((item) => item.year === lactationEntry.year);
+              
+                    if (!yearData) {
+                      // If the year doesn't exist, create new yearly data
+                      yearData = { year: lactationEntry.year, data: [] };
+                      payload.yearlyData.push(yearData);
+                    }
+              
+                    // Now populate month data
+                    lactationEntry.monthlyDatas.forEach((lactationMonthData: MonthlyData) => {
+                      let monthData = yearData.data.find((item) => item.month === lactationMonthData.month);
+                      if (monthData) {
+                        monthData.value += lactationMonthData.value;
+                      } else {
+                        yearData.data.push({ month: lactationMonthData.month, value: lactationMonthData.value });
+                      }
+                    });
+                });
+
+                let yearData = payload.yearlyData.find((item) => item.year === year);
+                if (!yearData) {
+                    yearData = { year, data: [] };
+                    payload.yearlyData.push(yearData);
+                }
+
+                let monthData = yearData.data.find((item) => item.month === month);
+                if (monthData) {
+                    monthData.value += value;
+                } else {
+                    yearData.data.push({ month, value });
+                }
+
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/milkData/${livestock?.milkData.id}`, {
                     method: "PUT",
                     body: JSON.stringify(payload),
                     headers: {
@@ -204,14 +256,23 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
                                     Laktasi
                                 </h1>
                                 <div className='fieldFormVertical'>
-                                    <PrimaryTextField 
+                                    {/* <PrimaryTextField 
                                     width={350} 
                                     placeholder="SPW-018" 
                                     label="ID Pasangan *" 
                                     disabled={true} 
-                                    />
+                                    /> */}
+                                    <div>
+                                        <Label title="Tanggal *" />
+                                        <Input
+                                            disabled={false}
+                                            type="date"
+                                            value={date}
+                                            onChange={(e) => setDate(e.target.value)}
+                                        />
+                                    </div>
 
-                                    <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Tanggal Lahir *'/>
+                                    {/* <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Tanggal Lahir *'/> */}
                                     {/* <h1>Date of Birth *</h1>
                                     <Input disabled={false} type="text" placeholder="DD/MM/YYY" className="styledInput" /> */}
 
@@ -219,22 +280,25 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
                                     <Input disabled={false} type="number" placeholder="Laktasi" className="styledInput" /> */}
 
                                     <div className="row-lactation">
-                                    <PrimaryTextField 
+                                    {/* <PrimaryTextField 
                                     width={76} 
                                     placeholder="Ke-1" 
                                     label="Laktasi *" 
                                     disabled={true} 
-                                    />
+                                    /> */}
 
-                                    <PrimaryTextField 
-                                    width={102} 
-                                    placeholder='2'
-                                    label='Jumlah Anak *'/>    
+                                        <div>
+                                            <Label title="Jumlah anak" />
+                                            <div className="input-group-addTernak">
+                                                <Input disabled={false} type="number" placeholder="liter" value={value}   onChange={(e) => setValue(Number(e.target.value))}/>
+                                            </div>
+                                        </div>   
+
                                     </div>
 
 
-                                    <div className='row-lactation'>
-                                        {/* <PrimaryTextField width={250} placeholder='Jenis Kelamin'label='Jenis Kelamin (pilihan) *'/> */}
+                                    {/* <div className='row-lactation'>
+                                        <PrimaryTextField width={250} placeholder='Jenis Kelamin'label='Jenis Kelamin (pilihan) *'/>
                                         <div className="textField">
                                             <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
                                             <DropdownFase
@@ -253,7 +317,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
                                             />
                                         </div>
                                       
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>

@@ -28,6 +28,23 @@ interface LivestockDetailPageProps {
     }>;
   }
 
+interface LactationDetail {
+    title: string;
+    description: string;
+    livestock?: Livestock;
+}
+
+interface DetailLactationCardProps {
+    lactationData: {
+    animalId: number;
+    yearlyData: {
+        year: number;
+        data: { month: string; value: number }[];
+    }[];
+    };
+    livestock?: Livestock;
+}
+
 const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: paramsPromise }) => {
     const params = use(paramsPromise);
     const id = params.id;
@@ -56,21 +73,40 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
         `${process.env.NEXT_PUBLIC_API_HOST}/animals/${id}`,
     );
     useEffect(() => {
-        if (livestock) {
-            console.log(livestock)
+        if (livestock?.lactationData) {
+            const { currentLactation, history } = generateLactationData(livestock);
+            setCurrentLactation(currentLactation);
+            setHistory(history);
         }
     }, [livestock]);
-    
 
-    const currentLactation = {
-        title: 'Laktasi ke-4',
-        description: '1 Jantan - Des 2024',
-        livestock: livestock == null ? undefined : livestock,
-      };
-    const history = [
-        { title: 'Laktasi ke-3', description: '2 Betina - Okt 2024', livestock: livestock == null ? undefined : livestock },
-        { title: 'Laktasi ke-2', description: '1 Jantan - Aug 2024', livestock: livestock == null ? undefined : livestock },
-    ];
+    const [currentLactation, setCurrentLactation] = useState<LactationDetail>();
+    const [history, setHistory] = useState<LactationDetail[]>([]);
+
+    const generateLactationData = (livestock: Livestock) => {
+        const yearlyData = livestock.lactationData.yearlyDatas;
+        
+        const currentYearData = yearlyData[yearlyData.length - 1];
+        const currentLactationNumber = yearlyData.length; // Number of years = current lactation number
+    
+        // Generate current lactation title and description
+        const currentLactation = {
+        title: `Laktasi ke-${currentLactationNumber}`,
+        description: `${currentYearData.monthlyDatas[0].value} Jantan - ${currentYearData.year} ${currentYearData.monthlyDatas[0].month} ${currentYearData.monthlyDatas[currentYearData.monthlyDatas.length - 1].month}`,
+        livestock: livestock || undefined,
+        };
+    
+        // Generate history by iterating through previous years
+        const history = yearlyData.slice(0, -1).map((yearData: any, index: number) => {
+            const lactationNumber = index + 1;
+            return {
+                title: `Laktasi ke-${lactationNumber}`,
+                description: `${yearData.data[0].value} Betina - ${yearData.year} ${yearData.data[0].month} ${yearData.data[yearData.data.length - 1].month}`,
+                livestock: livestock || undefined,
+            };
+        });
+        return { currentLactation, history };
+    };
 
     const handleDownloadQR = async () => {
         try {
@@ -237,7 +273,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
                                 <StatisticsMilkUpdate filterBy="year" filterValue={livestock == null ? "" : livestock.milkData == null ? "" : livestock.milkData.yearlyDatas[0].year} milkData={livestock == null ? undefined : livestock.milkData} livestock={livestock == null ? undefined : livestock} />
                                 <div className="lactationSection">
                                     <StatisticsLactation filterBy="year" filterValue={livestock == null ? "" : livestock.lactationData == null ? "" : livestock.lactationData.yearlyDatas[0].year} lactationData={livestock == null ? undefined : livestock.lactationData}/>
-                                    <DetailLactationCard livestock={livestock == null ? undefined : livestock} />;
+                                    <DetailLactationCard currentLactation={currentLactation} history={history} livestock={livestock == null ? undefined : livestock} />;
                                 </div>
                                 
                                 {/* <StatisticWeight filterBy="year" filterValue={2019} weightData={livestock == null ? "" : livestock.weightData}/> */}
