@@ -55,7 +55,7 @@ const app: React.FC = () => {
       try {
         const payload = {
           name_id: idTernak, 
-          gender: jenisKelamin,
+          gender: jenisKelamin === "Jantan" ? "MALE" : "FEMALE",
           dob: dob,
           weight: berat,
           phase: fase,

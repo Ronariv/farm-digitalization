@@ -1,32 +1,29 @@
 'use client';
 
 import React, { useState } from 'react';
-import styles from '@/components/ui/YearAndMonthPicker/YearAndMonthPicker.module.css'; // Buat style file ini nanti
+import styles from '@/components/ui/YearAndMonthPicker/YearAndMonthPicker.module.css';
 
-// const months = [
-//   "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
-//   "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-// ];
+interface YearAndMonthPickerProps {
+  selectedYear: number | null;
+  setSelectedYear: React.Dispatch<React.SetStateAction<number | null>>;
+}
 
-const YearAndMonthPicker: React.FC = () => {
+const YearAndMonthPicker: React.FC<YearAndMonthPickerProps> = ({ selectedYear, setSelectedYear }) => {
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 10 }, (_, i) => currentYear - 5 + i);
 
-  const [selectedValue, setSelectedValue] = useState<number | null>(null);
   const [activeDropdown, setActiveDropdown] = useState<"tab2" | null>(null);
 
   const handleYearSelect = (year: number) => {
-    setSelectedValue(year);
-    setActiveDropdown(null); // Tutup dropdown setelah memilih tahun
+    setSelectedYear(year); 
+    setActiveDropdown(null);
   };
 
   return (
     <div className={styles.container}>
       {/* Tab Pertama */}
       <div className={styles.tabContainer}>
-        <div className={`${styles.tab} ${styles.leftTab}`}>
-          Tahun
-        </div>
+        <div className={`${styles.tab} ${styles.leftTab}`}>Tahun</div>
       </div>
 
       {/* Tab Kedua */}
@@ -35,7 +32,7 @@ const YearAndMonthPicker: React.FC = () => {
           className={`${styles.tab} ${styles.rightTab}`}
           onClick={() => setActiveDropdown(activeDropdown === "tab2" ? null : "tab2")}
         >
-          {selectedValue || "Pilih"}
+          {selectedYear || "Pilih"}
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +61,7 @@ const YearAndMonthPicker: React.FC = () => {
                 onClick={() => handleYearSelect(year)}
               >
                 {year}
-                {selectedValue === year && (
+                {selectedYear === year && (
                   <span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -101,5 +98,4 @@ const YearAndMonthPicker: React.FC = () => {
   );
 };
 
-  
-  export default YearAndMonthPicker;
+export default YearAndMonthPicker;

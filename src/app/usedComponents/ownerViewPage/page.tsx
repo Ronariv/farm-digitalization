@@ -116,7 +116,7 @@ const OwnerViewPage: React.FC<OwnerViewPageProps> = ({
           <div className="menuHeader">
             <h1 className="menuTittle">Statistik</h1>
             <div className="yearAndMonthPicker">
-              <YearAndMonthPicker/>
+              {/* <YearAndMonthPicker/> */}
             </div>
           </div>
           <div className="animalCategoriesCard">
@@ -136,9 +136,9 @@ const OwnerViewPage: React.FC<OwnerViewPageProps> = ({
                     key={category.type}
                     icon={category.icon}
                     title={category.title}
-                    total={statistics == null ? 0 : statistics.total}
-                    maleCount={statistics == null ? 0 : statistics.totalMale}
-                    femaleCount={statistics == null ? 0 : statistics.totalFemale}
+                    total={statistics == null ? 0 : statistics.summary.total}
+                    maleCount={statistics == null ? 0 : statistics.summary.totalMale}
+                    femaleCount={statistics == null ? 0 : statistics.summary.totalFemale}
                     href={category.href}
                     />
                 );

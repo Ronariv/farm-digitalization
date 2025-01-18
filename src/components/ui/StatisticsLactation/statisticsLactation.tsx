@@ -57,7 +57,7 @@ const StatisticsLactation: React.FC<StatisticMilkProps> = ({
               {/* Bar hijau */}
               <div
                 className={styles.greenBar}
-                style={{ height: '70px', width: '41px' }}
+                style={{ height: `${(data.value / 20000) * 100}%`, width: '41px' }}
               ></div>
               {/* Batang grafik */}
               <div

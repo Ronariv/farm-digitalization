@@ -58,54 +58,11 @@ const App: React.FC = () => {
     console.log(farmName)
   };
 
-  const [breadcrumb, setBreadcrumb] = useState('Statistik');
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
 
-    const handleUpdate = () => {
-        alert("Tombol Invite Ternak diklik!");
-    };
-
-    const handlePrint = () => {
-        alert("Tombol print sudah diklik!");
-    };
-
-    const handleFilter = () => {
-      alert("Tombol filter di klik");
-    };
-
-    const handleSortBy = () => {
-      alert("Tombol sort di klik");
-    };
-
-    const filteredFemaleCategories = animalCategories.filter(
-        (category) => category.type === 'kambing' 
-    );
-
-    const filteredMaleCategories = detailAnimalMaleCategories.filter(
-        (category) => category.type === 'kambing' 
-    );
-
-    const filteredDiagnosedCategories = animalDiagnosedCategories.filter(
-        (category) => category.type === 'kambing' 
-    );
-
-    function getMenuLabel(pathname: string): string {
-      switch (pathname) {
-        case '/OwnerViewPage':
-          return 'Statistik';
-        case '/livestockOwnerPage':
-          return 'Ternak Anda';
-        case '/activityOwnerPage':
-          return 'Aktivitas';
-        case '/settingsOwnerPage':
-          return 'Pengaturan';
-        default:
-          return 'Halaman Tidak Ditemukan';
-      }
-    }
-
-    const { data: goatStatistics, loading: loadingGoatStatistics, error: errorGoatStatistics } = useFetch<StatisticsModel>(
-        `${process.env.NEXT_PUBLIC_API_HOST}/statistics/goat-statistics?farmId=${selectedFarmId}`
-    );
+  const { data: goatStatistics, loading: loadingGoatStatistics, error: errorGoatStatistics } = useFetch<StatisticsModel>(
+      `${process.env.NEXT_PUBLIC_API_HOST}/statistics/goat-statistics?farmId=${selectedFarmId}`
+  );
 
     return (
     <div className="layout">
@@ -154,7 +111,7 @@ const App: React.FC = () => {
             </div>
             <h1 className="menuTittle">Kambing</h1>
             <div className="yearAndMonthPicker">
-              <YearAndMonthPicker/>
+              <YearAndMonthPicker selectedYear={selectedYear} setSelectedYear={setSelectedYear} />
             </div>
           </div>
 
@@ -162,41 +119,41 @@ const App: React.FC = () => {
             <div className="kambingFemaleCardStatisticsCard">
                   <DetailAnimalFemaleCard
                   title="Sapi Betina"
-                  total={goatStatistics?.totalFemale ?? 0}
-                  pedet={goatStatistics?.femalePhaseStats?.["Pedet"] ?? 0}
-                  dara={goatStatistics?.femalePhaseStats?.["Dara"] ?? 0}
-                  siapKawin={goatStatistics?.femalePhaseStats?.["Siap Kawin"] ?? 0}
-                  hamil={goatStatistics?.femalePhaseStats?.["Hamil"] ?? 0}
-                  menyusui={goatStatistics?.femalePhaseStats?.["Menyusui"] ?? 0}
+                  total={goatStatistics?.summary.totalFemale ?? 0}
+                  pedet={goatStatistics?.summary.femalePhaseStats?.["Pedet"] ?? 0}
+                  dara={goatStatistics?.summary.femalePhaseStats?.["Dara"] ?? 0}
+                  siapKawin={goatStatistics?.summary.femalePhaseStats?.["Siap Kawin"] ?? 0}
+                  hamil={goatStatistics?.summary.femalePhaseStats?.["Hamil"] ?? 0}
+                  menyusui={goatStatistics?.summary.femalePhaseStats?.["Menyusui"] ?? 0}
                   />
             </div>
 
             <div className="kambingMaleCardStatisticsCard">
                   <DetailAnimalMaleCard 
                   title="Sapi Jantan" 
-                  total={goatStatistics?.totalMale ?? 0}
-                  pedet={goatStatistics?.malePhaseStats?.["Pedet"] ?? 0}
-                  siapKawin={goatStatistics?.femalePhaseStats?.["Siap Kawin"] ?? 0}           
+                  total={goatStatistics?.summary.totalMale ?? 0}
+                  pedet={goatStatistics?.summary.malePhaseStats?.["Pedet"] ?? 0}
+                  siapKawin={goatStatistics?.summary.femalePhaseStats?.["Siap Kawin"] ?? 0}           
                   />
             </div>
 
             <div className="kambingMaleCardStatisticsCard">
                 <DetailAnimalDiagnosedCard
                 title="Status dan Kondisi Ternak"
-                sehat={goatStatistics?.livestockConditionStats?.["Sehat"] ?? 0}
-                tersedia={goatStatistics?.livestockConditionStats?.["Tersedia"] ?? 0}
-                sakit={goatStatistics?.livestockConditionStats?.["Sakit"] ?? 0}
-                hilang={goatStatistics?.livestockConditionStats?.["Hilang"] ?? 0}
-                mati={goatStatistics?.livestockConditionStats?.["Mati"] ?? 0}
+                sehat={goatStatistics?.summary.livestockConditionStats?.["Sehat"] ?? 0}
+                tersedia={goatStatistics?.summary.livestockConditionStats?.["Tersedia"] ?? 0}
+                sakit={goatStatistics?.summary.livestockConditionStats?.["Sakit"] ?? 0}
+                hilang={goatStatistics?.summary.livestockConditionStats?.["Hilang"] ?? 0}
+                mati={goatStatistics?.summary.livestockConditionStats?.["Mati"] ?? 0}
                 />
             </div>
 
           </div>
 
           <div className="statisticsCard">
-          {/* <StatisticsMilk filterBy="year" filterValue={2019} />
+          <StatisticsMilk milkData={goatStatistics?.milkData} filterBy="year" filterValue={selectedYear ?? 0} />
 
-          <StatisticsLactation filterBy="year" filterValue={2019} /> */}
+          <StatisticsLactation lactationData={goatStatistics?.lactationData} filterBy="year" filterValue={selectedYear ?? 0} />
 
           {/* <StatisticsLivestockSold filterBy="year" filterValue={2019}/> */}
           </div>

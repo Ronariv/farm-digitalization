@@ -84,7 +84,7 @@ export default function OnBoarding() {
               onSelect={handleFaseSelect}
       /> */}
 
-{/* <SidebarDisabled setBreadcrumb={setBreadcrumb} setFarm={function (farmName: string, farmId: number): void {
+{/* <SidebarDisabled setBreadcrumb={setBreadcrumb} setFarm={function (farmName: string): void {
             throw new Error('Function not implemented.');
           } } /> */}
 

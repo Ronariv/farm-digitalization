@@ -36,6 +36,7 @@ import useFetch from '@/hooks/useFetch';
 import { FarmModel } from '@/models/FarmModel';
 import { getCookie } from '@/lib/cookies';
 import { StatisticsModel } from '@/models/FarmStatsModel';
+import StatisticsMilkUpdate from '@/components/ui/StatisticsMilkUpdate/StatisticsMilkUpdate';
 
 const App: React.FC = () => {
 
@@ -61,52 +62,11 @@ const App: React.FC = () => {
       console.log(farmName)
   };
 
-    const handleUpdate = () => {
-        alert("Tombol Invite Ternak diklik!");
-    };
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
 
-    const handlePrint = () => {
-        alert("Tombol print sudah diklik!");
-    };
-
-    const handleFilter = () => {
-      alert("Tombol filter di klik");
-    };
-
-    const handleSortBy = () => {
-      alert("Tombol sort di klik");
-    };
-
-    const filteredFemaleCategories = animalCategories.filter(
-        (category) => category.type === 'sapi' 
-    );
-
-    const filteredMaleCategories = detailAnimalMaleCategories.filter(
-        (category) => category.type === 'sapi' 
-    );
-
-    const filteredDiagnosedCategories = animalDiagnosedCategories.filter(
-        (category) => category.type === 'sapi' 
-    );
-
-    function getMenuLabel(pathname: string): string {
-      switch (pathname) {
-        case '/OwnerViewPage':
-          return 'Statistik';
-        case '/livestockOwnerPage':
-          return 'Ternak Anda';
-        case '/activityOwnerPage':
-          return 'Aktivitas';
-        case '/settingsOwnerPage':
-          return 'Pengaturan';
-        default:
-          return 'Halaman Tidak Ditemukan';
-      }
-    }
-
-    const { data: cowStatistics, loading: loadingCowStatistics, error: errorCowStatistics } = useFetch<StatisticsModel>(
-        `${process.env.NEXT_PUBLIC_API_HOST}/statistics/cow-statistics?farmId=${selectedFarmId}`
-    );
+  const { data: cowStatistics, loading: loadingCowStatistics, error: errorCowStatistics } = useFetch<StatisticsModel>(
+      `${process.env.NEXT_PUBLIC_API_HOST}/statistics/cow-statistics?farmId=${selectedFarmId}`
+  );
 
     return (
     <div className="layout">
@@ -154,7 +114,7 @@ const App: React.FC = () => {
             </div>
             <h1 className="menuTittle">Sapi</h1>
             <div className="yearAndMonthPicker">
-              <YearAndMonthPicker/>
+              <YearAndMonthPicker selectedYear={selectedYear} setSelectedYear={setSelectedYear} />
             </div>
           </div>
 
@@ -162,43 +122,43 @@ const App: React.FC = () => {
             <div className="sapiFemaleCardStatisticsCard">
                   <DetailAnimalFemaleCard
                   title="Sapi Betina"
-                  total={cowStatistics?.totalFemale ?? 0}
-                  pedet={cowStatistics?.femalePhaseStats?.["Pedet"] ?? 0}
-                  dara={cowStatistics?.femalePhaseStats?.["Dara"] ?? 0}
-                  siapKawin={cowStatistics?.femalePhaseStats?.["Siap Kawin"] ?? 0}
-                  hamil={cowStatistics?.femalePhaseStats?.["Hamil"] ?? 0}
-                  menyusui={cowStatistics?.femalePhaseStats?.["Menyusui"] ?? 0}
+                  total={cowStatistics?.summary.totalFemale ?? 0}
+                  pedet={cowStatistics?.summary.femalePhaseStats?.["Pedet"] ?? 0}
+                  dara={cowStatistics?.summary.femalePhaseStats?.["Dara"] ?? 0}
+                  siapKawin={cowStatistics?.summary.femalePhaseStats?.["Siap Kawin"] ?? 0}
+                  hamil={cowStatistics?.summary.femalePhaseStats?.["Hamil"] ?? 0}
+                  menyusui={cowStatistics?.summary.femalePhaseStats?.["Menyusui"] ?? 0}
                   />
             </div>
 
             <div className="sapiMaleCardStatisticsCard">
                   <DetailAnimalMaleCard 
                   title="Sapi Jantan" 
-                  total={cowStatistics?.totalMale ?? 0}
-                  pedet={cowStatistics?.malePhaseStats?.["Pedet"] ?? 0}
-                  siapKawin={cowStatistics?.femalePhaseStats?.["Siap Kawin"] ?? 0}           
+                  total={cowStatistics?.summary.totalMale ?? 0}
+                  pedet={cowStatistics?.summary.malePhaseStats?.["Pedet"] ?? 0}
+                  siapKawin={cowStatistics?.summary.femalePhaseStats?.["Siap Kawin"] ?? 0}           
                   />
             </div>
 
             <div className="sapiMaleCardStatisticsCard">
                 <DetailAnimalDiagnosedCard
                 title="Status dan Kondisi Ternak"
-                sehat={cowStatistics?.livestockConditionStats?.["Sehat"] ?? 0}
-                tersedia={cowStatistics?.livestockConditionStats?.["Tersedia"] ?? 0}
-                sakit={cowStatistics?.livestockConditionStats?.["Sakit"] ?? 0}
-                hilang={cowStatistics?.livestockConditionStats?.["Hilang"] ?? 0}
-                mati={cowStatistics?.livestockConditionStats?.["Mati"] ?? 0}
+                sehat={cowStatistics?.summary.livestockConditionStats?.["Sehat"] ?? 0}
+                tersedia={cowStatistics?.summary.livestockConditionStats?.["Tersedia"] ?? 0}
+                sakit={cowStatistics?.summary.livestockConditionStats?.["Sakit"] ?? 0}
+                hilang={cowStatistics?.summary.livestockConditionStats?.["Hilang"] ?? 0}
+                mati={cowStatistics?.summary.livestockConditionStats?.["Mati"] ?? 0}
                 />
             </div>
 
           </div>
 
           <div className="statisticsCard">
-          {/* <StatisticsMilk filterBy="year" filterValue={2019} />
+          <StatisticsMilkUpdate milkData={cowStatistics?.milkData} filterBy="year" filterValue={2019} />
 
-          <StatisticsLactation filterBy="year" filterValue={2019} />
+          <StatisticsLactation lactationData={cowStatistics?.lactationData} filterBy="year" filterValue={2019} />
 
-          <StatisticsLivestockSold filterBy="year" filterValue={2019}/> */}
+          {/* <StatisticsLivestockSold filterBy="year" filterValue={2019}/> */}
           </div>
           
 
