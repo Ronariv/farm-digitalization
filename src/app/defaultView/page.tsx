@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { getCookie } from "@/lib/cookies";
 import { useRouter, useSearchParams } from 'next/navigation'
 import OwnerViewPage from "../../components/ui/DefaultPage/ownerViewPage/page";
@@ -75,4 +75,10 @@ return (
 );
 };
 
-export default DefaultViewPage;
+export default function DefaultViewPageExport() {
+  return (
+    <Suspense>
+      <DefaultViewPage />
+    </Suspense>
+  )
+}

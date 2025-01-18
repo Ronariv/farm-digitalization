@@ -29,7 +29,7 @@ import DetailAnimalDiagnosedCard from '@/components/ui/DetailAnimalDiagnosedCard
 import animalDiagnosedCategories from '@/models/DetailAnimalDiagnosedCategories';
 import StatisticsMilk from '@/components/ui/StatisticsMilk/statisticsMilk';
 import StatisticsLactation from '@/components/ui/StatisticsLactation/statisticsLactation';
-import StatisticsLivestockSold from '@/components/ui/StatisticsLivestockSold/StatisticsLivestockSold';
+// import StatisticsLivestockSold from '@/components/ui/StatisticsLivestockSold/StatisticsLivestockSold';
 
 import TopBar from '@/components/ui/TopBar/topBar';
 import useFetch from '@/hooks/useFetch';

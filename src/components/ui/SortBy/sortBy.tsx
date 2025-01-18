@@ -23,14 +23,18 @@ const SortByButton: React.FC<SortByButtonProps> = ({ sortBys, onSortChange }) =>
     };
 
     useEffect(() => {
-        if (isOpen) {
-            document.addEventListener('mousedown', handleClickOutside);
-        } else {
-            document.removeEventListener('mousedown', handleClickOutside);
+        if (typeof document !== 'undefined') {
+            if (isOpen) {
+                document.addEventListener('mousedown', handleClickOutside);
+            } else {
+                document.removeEventListener('mousedown', handleClickOutside);
+            }
         }
 
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
+            if (typeof document !== 'undefined') {
+                document.removeEventListener('mousedown', handleClickOutside);
+            }
         };
     }, [isOpen]);
 

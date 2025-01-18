@@ -12,18 +12,22 @@
     if (options.sameSite) {
       cookieString += `; SameSite=${options.sameSite}`;
     }
-  
-    document.cookie = cookieString;
+
+    
+    if (typeof document !== 'undefined') {
+      document.cookie = cookieString;
+    }
     };
   
   export const getCookie = (name) => {
-    const cookies = document.cookie.split('; ').reduce((acc, cookie) => {
-      const [key, value] = cookie.split('=');
-      acc[key] = value;
-      return acc;
-    }, {});
-  
-    return cookies[name];
+    if (typeof document !== 'undefined') {
+      const cookies = document.cookie.split('; ').reduce((acc, cookie) => {
+        const [key, value] = cookie.split('=');
+        acc[key] = value;
+        return acc;
+      }, {});
+      return cookies[name];
+    }
   };
   
   export const deleteCookie = (name, options = {}) => {

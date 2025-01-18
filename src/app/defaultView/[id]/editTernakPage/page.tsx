@@ -123,7 +123,9 @@ const app: React.FC<EditLivestockPageProps> = ({ params: paramsPromise }) => {
 
 
   const handleDivClick = () => {
-    document.getElementById('file-input')?.click();
+    if (typeof document !== 'undefined') {
+      document.getElementById('file-input')?.click();
+    }
   };
 
   const uploadImageToFirebase = (imageFile: File) => {
