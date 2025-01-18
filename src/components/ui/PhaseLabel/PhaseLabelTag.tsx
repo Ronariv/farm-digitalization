@@ -10,22 +10,7 @@ interface PhaseLabelProps {
   height?: number;
 }
 const PhaseLabelTag: React.FC<PhaseLabelProps> = ({ phases, filterId, width, textSize, height }) => {
-    const filteredPhases = filterId ? phases.filter((phase) => phase.enum === filterId) : phases;
-
-    // return (
-    //     <div className={styles.container}>
-    //     {filteredPhases.map((phase) => (
-    //     <div
-    //       key={phase.id}
-    //       className={styles.tag} 
-    //       style={{ backgroundColor: phase.color, width: ${width}px 
-    //     }}
-    //     >
-    //       {phase.label}
-    //     </div>
-    //   ))}
-    //     </div>
-    // );
+    const filteredPhases = filterId ? phases.filter((phase) => phase.label === filterId) : phases;
     
     return (
       <div className={styles.container}>

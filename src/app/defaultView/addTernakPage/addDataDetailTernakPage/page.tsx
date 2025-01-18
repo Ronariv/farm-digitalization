@@ -55,7 +55,7 @@ const app: React.FC = () => {
       try {
         const payload = {
           name_id: idTernak, 
-          gender: jenisKelamin,
+          gender: jenisKelamin === "Jantan" ? "MALE" : "FEMALE",
           dob: dob,
           weight: berat,
           phase: fase,
@@ -84,6 +84,17 @@ const app: React.FC = () => {
         const data = await response.json();
         if (response.ok) {
           router.push("/defaultView?view=livestock");
+
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/livestock-custom-ids/increment`, {
+            method: "POST",
+            body: JSON.stringify({
+              farmId: farmId,
+              typeId: kategoriHewan
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
         } else {
           setApiError(data.error || "Something went wrong");
         }

@@ -35,7 +35,12 @@ export const defaultFilterCategories: FilterCategory[] = [
         title: "Kondisi",
         items: [
             "Sakit",
-            "Sehat",
+            "Sehat"
+        ]
+    },
+    {
+        title: "Status",
+        items: [
             "Tersedia",
             "Hilang",
             "Mati",
