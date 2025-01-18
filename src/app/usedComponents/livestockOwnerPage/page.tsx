@@ -46,18 +46,15 @@ const LivestockPage: React.FC = () => {
 
     const handleFarmChange = (farmName: string) => {
         setSelectedFarm(farmName);
-        console.log(farmName)
     };
 
     const { data: livestockData, loading: loadingLivestock, error: errorLivestock } = useFetch<Livestock[]>(
         `${process.env.NEXT_PUBLIC_API_HOST}/animals`,
     );
-    useEffect(() => {
-        if (livestockData && livestockData.length > 0) {
-            console.log(livestockData)
-        }
-    }, [livestockData]);
-
+    
+    const [appliedFilters, setAppliedFilters] = useState<{ [key: string]: string[] }>({});
+    const [selectedSortBy, setSelectedSortBy] = useState<string>();
+    
     return (
         <div>
             <div className="layout">
@@ -85,29 +82,74 @@ const LivestockPage: React.FC = () => {
                     </div>
                     <div className="menuHeader">
                         <div className="sortByAndFilter">
-                            <SortByButton></SortByButton>
+                            <SortByButton
+                                sortBys={[
+                                    "Paling terakhir ditambahkan",
+                                    "Paling awal ditambahkan",
+                                    "Paling terakhir diubah"
+                                ]}
+                                onSortChange={(newSelectedSort) => setSelectedSortBy(newSelectedSort ?? "")}
+                            />
+                            <FilterButton 
+                                filters={defaultFilterCategories}
+                                onFiltersChange={(newFilters) => setAppliedFilters(newFilters)}
+                            />
 
-                            <FilterButton filters={defaultFilterCategories}></FilterButton>
-                          
+                                                    
                         </div>
                     </div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-                        {
+                    {
                         livestockData != null 
-                        ? 
-                        livestockData
-                            .filter((livestock) => livestock.farm_name === selectedFarm)
-                            .map((livestock) => (
-                                <div 
-                                    key={livestock.id} 
-                                    onClick={() => router.push(`defaultView/${livestock.id}/`)}
-                                >
-                                    <AnimalCard livestock={livestock} />
-                                </div>
-                            ))
-                        : <div>Livestock is Empty</div>
+                            ? livestockData
+                                .filter((livestock) => {
+                                    const matchesFarm = livestock.farm_name === selectedFarm;
 
-                        }
+                                    const matchesFilters = Object.entries(appliedFilters).every(([category, selectedItems]) => {
+                                        if (selectedItems.length === 0) return true;
+
+                                        switch (category) {
+                                            case "Ternak":
+                                                return selectedItems.includes(livestock.category);
+                                            case "Fase":
+                                                return selectedItems.includes(livestock.phase);
+                                            case "Jenis Kelamin":
+                                                return selectedItems.includes(livestock.gender === "MALE" ? "Jantan" : "Betina");
+                                            case "Status":
+                                                return selectedItems.includes(livestock.status);
+                                            case "Kondisi":
+                                                return selectedItems.includes(livestock.condition === "sakit" ? "Sakit" : "Sehat");
+                                            default:
+                                                return true;
+                                        }
+                                    });
+
+                                    return matchesFarm && matchesFilters;
+                                })
+                                .sort((a, b) => {
+                                    switch (selectedSortBy) {
+                                        case "Paling terakhir ditambahkan":
+                                            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+                                        case "Paling awal ditambahkan":
+                                            return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+                                        case "Paling terakhir diubah":
+                                            return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+                                        default:
+                                            return 0;
+                                    }
+                                })
+                                .map((livestock) => (
+                                    <div 
+                                        key={livestock.id} 
+                                        onClick={() => router.push(`defaultView/${livestock.id}/`)}
+                                    >
+                                        <AnimalCard livestock={livestock} />
+                                    </div>
+                                ))
+                            : <div>No livestock data available.</div>
+                    }
+
+
                     </div>
                     </div>
                 </div>
