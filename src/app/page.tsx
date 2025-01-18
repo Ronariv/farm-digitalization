@@ -1,37 +1,42 @@
-import Image from "next/image";
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Inter } from "next/font/google";
-import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from 'next/navigation'
+import './globals.css';
+import Cookies from "js-cookie";
 
 export default function OnBoarding() {
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   router.push("/OwnerViewPage/loginPage");
+  // }, [router]);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    // Ambil role dari cookie
+    const userRole = Cookies.get("userRole");
+
+    if (userRole === "owner") {
+      router.replace("/defaultView"); // Arahkan ke halaman owner
+    } else if (userRole === "operator") {
+      router.replace("/defaultView"); // Arahkan ke halaman operator
+    } else {
+      router.replace("/auth/registerStep1Page"); // Jika role tidak ada, arahkan ke langkah pertama
+    }
+  }, [router]);
+
   return (
     <div className="flex h-screen">
-
       <div className="flex-1 bg-gray-200"></div>
 
       <div className="flex justify-end items-center flex-2 p-4 pr-20 mr-20 pl-20 ml-20">
         <div className="flex flex-col space-y-7 ">
 
-          <Link href="/loginPage">
-          <Button
-           className="w-[15.5625rem] h-[3.25rem] rounded-[10px] bg-[#248543] text-white hover:text-[#248543]"
-          >
-            Login
-          </Button>
-          </Link>
-
-          <Link href="/registerStep1Page">
-            <Button
-            className="w-[15.5625rem] h-[3.25rem] rounded-[10px] border border-[#248543] text-[#248543] hover:bg-[#248543]/10"
-          >
-            Register
-          </Button>
-          </Link>
 
         </div>
       </div>
     </div>
   );
 }
-
