@@ -138,17 +138,17 @@ const app: React.FC = () => {
                   </div>
                 </div>
 
-                <div>
+                {/* <div>
                   <Label title="ID Kakek *" />
                   <Input disabled={false} type="text" placeholder="ID Kakek" onChange={(e) => setIdKakek(e.target.value)}/>
-                </div>
+                </div> */}
   
-                <div>
+                {/* <div>
                   <Label title="ID Nenek *" />
                   <div className="input-group-addTernak">
                     <Input disabled={false} type="text" placeholder="ID Nenek" onChange={(e) => setIdNenek(e.target.value)}/>
                   </div>
-                </div>
+                </div> */}
               </div>
   
               <div className="grid-row-addTernak">

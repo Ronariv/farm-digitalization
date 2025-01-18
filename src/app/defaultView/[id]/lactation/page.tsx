@@ -248,21 +248,24 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
                                         <div className='generalInformationLivestockBoxTop'>
                                         <GeneralInfoBox title={'ID Ayah'} value={livestock == null ? "" : livestock.dad_name_id || "N/A"} ras={'Purebred'}  isLink={true} linkHref='' ></GeneralInfoBox>
                                             <GeneralInfoBox title={'ID Ibu'} value={livestock == null ? "" : livestock.mom_name_id || "N/A"} grade={'F1'} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Kakak'} value={livestock == null ? "" : livestock.grandpa_name_id || "N/A"} ras={'Purebred'} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Nenek'} value={livestock == null ? "" : livestock.grandma_name_id || "N/A"} grade={'F3'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            {/* <GeneralInfoBox title={'ID Kakak'} value={livestock == null ? "" : livestock.grandpa_name_id || "N/A"} ras={'Purebred'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Nenek'} value={livestock == null ? "" : livestock.grandma_name_id || "N/A"} grade={'F3'} isLink={true} linkHref='' ></GeneralInfoBox> */}
                                         </div>
                                     </div>
                                 </div>
-                                <h1 className='livestockHistoryTitle'>
+
+                                <div className="rowContent-lactation">
+                                
+                                <div className='fieldFormVertical-lactation'>
+                                    <h1 className='livestockHistoryTitle'>
                                     Laktasi
                                 </h1>
-                                <div className='fieldFormVertical'>
-                                    {/* <PrimaryTextField 
+                                    <PrimaryTextField 
                                     width={350} 
                                     placeholder="SPW-018" 
                                     label="ID Pasangan *" 
                                     disabled={true} 
-                                    /> */}
+                                    />
                                     <div>
                                         <Label title="Tanggal *" />
                                         <Input
@@ -272,8 +275,8 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
                                             onChange={(e) => setDate(e.target.value)}
                                         />
                                     </div>
-
-                                    {/* <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Tanggal Lahir *'/> */}
+{/* 
+                                    <PrimaryTextField width={350} placeholder='DD/MM/YYYY'label='Tanggal Lahir *'/> */}
                                     {/* <h1>Date of Birth *</h1>
                                     <Input disabled={false} type="text" placeholder="DD/MM/YYY" className="styledInput" /> */}
 
@@ -281,12 +284,12 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
                                     <Input disabled={false} type="number" placeholder="Laktasi" className="styledInput" /> */}
 
                                     <div className="row-lactation">
-                                    {/* <PrimaryTextField 
+                                    <PrimaryTextField 
                                     width={76} 
                                     placeholder="Ke-1" 
                                     label="Laktasi *" 
-                                    disabled={true} 
-                                    /> */}
+                                    disabled={false} 
+                                    />
 
                                         <div>
                                             <Label title="Jumlah anak" />
@@ -298,28 +301,60 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
                                     </div>
 
 
-                                    {/* <div className='row-lactation'>
-                                        <PrimaryTextField width={250} placeholder='Jenis Kelamin'label='Jenis Kelamin (pilihan) *'/>
+                                    <div className='row-lactation'>
+                                        {/* <PrimaryTextField width={250} placeholder='Jenis Kelamin'label='Jenis Kelamin (pilihan) *'/> */}
                                         <div className="textField">
-                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
+                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin Anak 1 (pilihan) *</h1>
                                             <DropdownFase
                                                 options={['Jantan', 'Betina']}
-                                                placeholder="Jenis Kelamin"
+                                                placeholder="Jenis Kelamin Anak"
                                                 onSelect={handleDropdownSelect}
                                             />
                                         </div>
 
                                         <div className="textField">
-                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin (pilihan) *</h1>
+                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin Anak 2 (pilihan) *</h1>
                                             <DropdownFase
                                                 options={['Jantan', 'Betina']}
                                                 placeholder="Jenis Kelamin"
                                                 onSelect={handleDropdownSelect}
                                             />
                                         </div>
-                                      
-                                    </div> */}
+                                    </div>
+                                 </div>
+
+                                 <div className="separator-lactation">
+
                                 </div>
+                                <div className="lactation-list">
+                                    <h1 className='livestockHistoryTitle'>
+                                        Riwayat Laktasi
+                                    </h1>
+
+                                    <div className="lactation-detailList">
+                                    <h2>Laktasi ke-1</h2>
+                                    <span>ID Pasangan: SPW-018</span>
+                                    <span>Tanggal Lahir: 12 September 2024</span>
+                                    <span>1 Betina, 1 Jantan</span> 
+                                    </div>
+                                    
+                                    <div className="lactation-detailList">
+                                    <h2>Laktasi ke-2</h2>
+                                    <span>ID Pasangan: SPW-018</span>
+                                    <span>Tanggal Lahir: 12 September 2024</span>
+                                    <span>1 Betina, 1 Jantan</span> 
+                                    </div>
+
+                                    <div className="lactation-detailList">
+                                    <h2>Laktasi ke-2</h2>
+                                    <span>ID Pasangan: SPW-018</span>
+                                    <span>Tanggal Lahir: 12 September 2024</span>
+                                    <span>1 Betina, 1 Jantan</span> 
+                                    </div>
+                                </div>
+
+                                </div>
+
                             </div>
                         </div>
                 </div>

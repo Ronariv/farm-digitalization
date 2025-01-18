@@ -1054,6 +1054,22 @@ margin-bottom: 60px;
   gap: 16px;
 }
 
+.fieldFormVertical-milk {
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 10%; */
+  /* margin-left: -55%; */
+  gap: 16px;
+}
+
+.fieldFormVertical-lactation {
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 20%; */
+  /* margin-left: -55%; */
+  gap: 16px;
+}
+
 .fieldFormHorizontal {
   display: flex;
   flex-direction: row;
@@ -1172,8 +1188,8 @@ margin-top: 5%;
   font-style: normal;
   font-weight: 500;
   line-height: 19.2px; /* 76.8% */
-  padding-bottom: 5%;
 }
+
 .livestockHistoryData {
   display: flex;
   flex-direction: column;
@@ -1263,8 +1279,13 @@ margin-top: 5%;
 
 .rowContent-lactation{
   display: flex;
+  justify-content: space-between;
 }
 
+.rowContent-weight{
+  display: flex;
+  justify-content: space-between;
+}
 .lactation-list{
   margin-right: -40%;
 }
@@ -1322,7 +1343,6 @@ line-height: 20px;
   width: 1px; /* Lebar garis */
   height: 466.01px; /* Tinggi garis */
   background-color: #ccc; /* Warna garis, ubah sesuai kebutuhan */
-  margin: 0 16px; 
 }
 
 .image-addTernak {
@@ -1345,4 +1365,44 @@ line-height: 20px;
 
 .uploadButton-addTernak {
   margin-top: 20px;
+}
+
+.rowContent-milk{
+  display: flex;
+  justify-content: space-between;
+}
+
+.milk-list{
+  margin-right: -40%;
+}
+
+.milk-detailList{
+  display: flex; /* Aktifkan Flexbox */
+  flex-direction: column; /* Elemen akan sejajar secara vertikal */
+  gap: 8px; /* Jarak antara elemen (opsional) */
+  padding: 12px; /* Padding di dalam container (opsional) */
+ 
+}
+
+.milk-detailList span{
+  color: var(--Text-Text-Secondary, #808080);
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px;
+}
+
+.separator-milk {
+  width: 1px; /* Lebar garis */
+  height: 466.01px; /* Tinggi garis */
+  background-color: #ccc; /* Warna garis, ubah sesuai kebutuhan */
+  margin: 0 16px; 
+}
+
+.separator-weight {
+  width: 1px; /* Lebar garis */
+  height: 466.01px; /* Tinggi garis */
+  background-color: #ccc; /* Warna garis, ubah sesuai kebutuhan */
+  margin: 0 16px; 
 }

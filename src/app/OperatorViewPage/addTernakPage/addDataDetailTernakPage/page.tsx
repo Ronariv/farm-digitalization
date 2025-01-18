@@ -73,17 +73,17 @@ const app: React.FC = () => {
                   </div>
                 </div>
 
-                <div>
+                {/* <div>
                   <Label title="ID Kakek *" />
                   <Input disabled={false} type="text" placeholder="ID Kakek" />
-                </div>
+                </div> */}
   
-                <div>
+                {/* <div>
                   <Label title="ID Nenek *" />
                   <div className="input-group-addTernak">
                     <Input disabled={false} type="number" placeholder="ID Nenek" />
                   </div>
-                </div>
+                </div> */}
               </div>
   
               <div className="grid-row-addTernak">

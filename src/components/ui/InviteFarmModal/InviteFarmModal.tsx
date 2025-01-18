@@ -18,19 +18,21 @@ interface InviteFarmModalProps {
 const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ farmList, users, onClose, setIsFarmInvited  }) => {
   const storedId = getCookie("id"); 
   const [farm, setFarm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState("");
+  // const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory] = useState("CowFarm");
   const router = useRouter()
 
-  const handleCategorySelect = (option: string) => {
-    setSelectedCategory(option);
-  };
+  // const handleCategorySelect = (option: string) => {
+  //   setSelectedCategory(option);
+  // };
 
   const handleAddFarm = async () => {
-    if (farm && selectedCategory) {
+    if (farm) {
       setIsFarmInvited(true);
       const farmsData = {
         name: farm,
-        category: selectedCategory == "Sapi" ? "CowFarm" : selectedCategory == "Kambing" ? "GoatFarm" : selectedCategory == "Domba" ? "SheepFarm" : "",
+        // category: selectedCategory == "Sapi" ? "CowFarm" : selectedCategory == "Kambing" ? "GoatFarm" : selectedCategory == "Domba" ? "SheepFarm" : "",
+        category: selectedCategory,
         ownerId: storedId,
       };
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/farms/`, {
@@ -89,11 +91,11 @@ const InviteFarmModal: React.FC<InviteFarmModalProps> = ({ farmList, users, onCl
 
         </div>
         <div className={styles.dropdown}>
-            <DropdownPhase
+            {/* <DropdownPhase
             options={['Sapi', 'Kambing', 'Domba']}
             placeholder="Kategori Peternakan"
             onSelect={handleCategorySelect}
-          />
+          /> */}
         </div>
         </div>
 

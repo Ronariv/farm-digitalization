@@ -235,15 +235,20 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                                         <div className='generalInformationLivestockBoxTop'>
                                         <GeneralInfoBox title={'ID Ayah'} value={livestock == null ? "" : livestock.dad_name_id || "N/A"} ras={'Purebred'}  isLink={true} linkHref='' ></GeneralInfoBox>
                                             <GeneralInfoBox title={'ID Ibu'} value={livestock == null ? "" : livestock.mom_name_id || "N/A"} grade={'F1'} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Kakak'} value={livestock == null ? "" : livestock.grandpa_name_id || "N/A"} ras={'Purebred'} isLink={true} linkHref='' ></GeneralInfoBox>
-                                            <GeneralInfoBox title={'ID Nenek'} value={livestock == null ? "" : livestock.grandma_name_id || "N/A"} grade={'F3'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            {/* <GeneralInfoBox title={'ID Kakak'} value={livestock == null ? "" : livestock.grandpa_name_id || "N/A"} ras={'Purebred'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                            <GeneralInfoBox title={'ID Nenek'} value={livestock == null ? "" : livestock.grandma_name_id || "N/A"} grade={'F3'} isLink={true} linkHref='' ></GeneralInfoBox> */}
                                         </div>
                                     </div>
                                 </div>
+
+                                <div className="rowContent-milk">
+
+                                <div className='fieldFormVertical-milk'>
+                                    
                                 <h1 className='livestockHistoryTitle'>
                                     Hasil Susu
                                 </h1>
-                                <div className='fieldFormVertical'>
+
                                     <Label title="Tanggal *" />
                                     <Input
                                         disabled={false}
@@ -258,6 +263,41 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                                         </div>
                                     </div>
                                 </div>
+
+                                <div className="separator-milk">
+
+                                </div>
+
+                                <div className="milk-list">
+
+                                <h1 className='livestockHistoryTitle'>
+                                            Riwayat Susu
+                                </h1>
+
+                                    <div className="milk-detailList">
+                                    <h1>12 Juni 2024</h1>
+                                    <span>12 Liter</span> 
+                                    </div>
+
+                                    <div className="milk-detailList">
+                                    <h1>12 Juli 2024</h1>
+                                    <span>12 Liter</span> 
+                                    </div>
+
+                                    <div className="milk-detailList">
+                                    <h1>12 Agustus 2024</h1>
+                                    <span>12 Liter</span> 
+                                    </div>
+
+                                    <div className="milk-detailList">
+                                    <h1>12 September 2024</h1>
+                                    <span>12 Liter</span> 
+                                    </div>
+
+                                </div>
+                                </div>
+
+
                             </div>
                         </div>
                 </div>

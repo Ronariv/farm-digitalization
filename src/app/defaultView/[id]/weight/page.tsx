@@ -234,29 +234,71 @@ const LivestockWeightPage: React.FC<LivestockWeightPageProps> = ({ params: param
                                     <div className='generalInformationLivestockBoxTop'>
                                     <GeneralInfoBox title={'ID Ayah'} value={livestock == null ? "" : livestock.dad_name_id || "N/A"} ras={'Purebred'}  isLink={true} linkHref='' ></GeneralInfoBox>
                                         <GeneralInfoBox title={'ID Ibu'} value={livestock == null ? "" : livestock.mom_name_id || "N/A"} grade={'F1'} isLink={true} linkHref='' ></GeneralInfoBox>
-                                        <GeneralInfoBox title={'ID Kakak'} value={livestock == null ? "" : livestock.grandpa_name_id || "N/A"} ras={'Purebred'} isLink={true} linkHref='' ></GeneralInfoBox>
-                                        <GeneralInfoBox title={'ID Nenek'} value={livestock == null ? "" : livestock.grandma_name_id || "N/A"} grade={'F3'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                        {/* <GeneralInfoBox title={'ID Kakak'} value={livestock == null ? "" : livestock.grandpa_name_id || "N/A"} ras={'Purebred'} isLink={true} linkHref='' ></GeneralInfoBox>
+                                        <GeneralInfoBox title={'ID Nenek'} value={livestock == null ? "" : livestock.grandma_name_id || "N/A"} grade={'F3'} isLink={true} linkHref='' ></GeneralInfoBox> */}
                                     </div>
                                 </div>
                             </div>
-                            <h1 className='livestockHistoryTitle'>
-                                Bobot
-                            </h1>
-                            <div className='fieldFormVertical'>
-                                    <Label title="Tanggal *" />
-                                    <Input
-                                        disabled={false}
-                                        type="date"
-                                        value={date}
-                                        onChange={(e) => setDate(e.target.value)}
-                                    />
-                                    <div>
-                                        <Label title="Berat" />
-                                        <div className="input-group-addTernak">
-                                            <Input disabled={false} type="number" placeholder="liter" value={value}   onChange={(e) => setValue(Number(e.target.value))}/>
+
+                            <div className="rowContent-weight">
+
+                            
+                                <div className='fieldFormVertical'>
+                                        <h1 className='livestockHistoryTitle'>
+                                            Bobot
+                                        </h1>
+                                
+                                        <Label title="Tanggal *" />
+                                        <Input
+                                            disabled={false}
+                                            type="date"
+                                            value={date}
+                                            onChange={(e) => setDate(e.target.value)}
+                                        />
+                                        <div>
+                                            <Label title="Berat" />
+                                            <div className="input-group-addTernak">
+                                                <Input disabled={false} type="number" placeholder="liter" value={value}   onChange={(e) => setValue(Number(e.target.value))}/>
+                                            </div>
                                         </div>
-                                    </div>
                                 </div>
+
+                                <div className="separator-weight">
+
+                                </div>
+
+                                <div className="milk-list">
+
+                                <h1 className='livestockHistoryTitle'>
+                                            Riwayat Bobot
+                                </h1>
+
+                                    <div className="milk-detailList">
+                                    <h1>12 Juni 2024</h1>
+                                    <span>12 Kg</span> 
+                                    </div>
+
+                                    <div className="milk-detailList">
+                                    <h1>12 Juli 2024</h1>
+                                    <span>12 Kg</span> 
+                                    </div>
+
+                                    <div className="milk-detailList">
+                                    <h1>12 Agustus 2024</h1>
+                                    <span>12 Kg</span> 
+                                    </div>
+
+                                    <div className="milk-detailList">
+                                    <h1>12 September 2024</h1>
+                                    <span>12 Kg</span> 
+                                    </div>
+
+                                </div>
+                                                            
+                            </div>
+
+
+
                         </div>
                     </div>
 

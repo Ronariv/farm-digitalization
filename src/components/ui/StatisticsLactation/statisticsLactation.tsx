@@ -19,9 +19,9 @@ const StatisticsLactation: React.FC<StatisticMilkProps> = ({
       if (filterBy === 'year' && item.year === filterValue) {
         return item.monthlyDatas;
       }
-      if (filterBy === 'month') {
-        return item.monthlyDatas.filter((data) => data.month === filterValue);
-      }
+      // if (filterBy === 'month') {
+      //   return item.monthlyDatas.filter((data) => data.month === filterValue);
+      // }
       return [];
     }) || [];
 
