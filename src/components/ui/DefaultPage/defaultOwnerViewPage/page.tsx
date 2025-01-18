@@ -7,7 +7,7 @@ import SidebarDisabled from '@/components/ui/SidebarDisabled/SidebarDisabled';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import InviteFarmModal from '@/components/ui/InviteFarmModal/InviteFarmModal';
 import { usersData } from '@/data/userData';
-import styles from "@/app/usedComponents/defaultOwnerViewPage/defaultOwnerViewPage.module.css"
+import styles from "./defaultOwnerViewPage.module.css"
 import useFetch from '@/hooks/useFetch';
 import { FarmModel } from '@/models/FarmModel';
 import { getCookie } from '@/lib/cookies';

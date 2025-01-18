@@ -104,9 +104,6 @@ const App: React.FC = () => {
     }, [customIdSapi]);
 
     useEffect(() => {
-      console.log("//////////");
-      console.log(sapiPrefix); // This will log the updated value
-      console.log("//////////");
     }, [sapiPrefix]);
     
     useEffect(() => {

@@ -104,9 +104,7 @@ const OwnerViewPage: React.FC<OwnerViewPageProps> = ({
             <InviteFarmModal
               users={usersData} // Gunakan data dari usersData
               onClose={() => setIsModalOpen(false)}
-              farmList={farmData == null ? [] : farmData } setIsFarmInvited={function (value: boolean): void {
-                throw new Error('Function not implemented.');
-              } }                      
+              farmList={farmData == null ? [] : farmData } setIsFarmInvited={function (value: boolean): void {return;} }                      
             />
       )}
           </div>
