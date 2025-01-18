@@ -111,7 +111,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
 
     const handleDownloadQR = async () => {
         try {
-            const qrCodeDataUrl = await QRCode.toDataURL(process.env.NEXT_PUBLIC_NEXT_HOST + "/OwnerViewPage/livestockOwnerPage/" + id); // Make sure "value" is valid
+            const qrCodeDataUrl = await QRCode.toDataURL(process.env.NEXT_PUBLIC_NEXT_HOST + "/defaultView/" + id);
             if (typeof document !== 'undefined') {
                 const link = document.createElement('a');
                 link.href = qrCodeDataUrl;
