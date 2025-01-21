@@ -49,7 +49,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
     const params = use(paramsPromise);
     const id = params.id;
 
-        const storedId = getCookie("id"); 
+    const storedId = getCookie("id"); 
     const role = getCookie("role"); 
 
     const { data: farmData, loading: loadingFarms, error: errorFarms } = useFetch<FarmModel[]>(
@@ -111,12 +111,13 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
 
     const handleDownloadQR = async () => {
         try {
-            console.log("testing")
-            const qrCodeDataUrl = await QRCode.toDataURL(process.env.NEXT_PUBLIC_NEXT_HOST + "/OwnerViewPage/livestockOwnerPage/" + id); // Make sure "value" is valid
-            const link = document.createElement('a');
-            link.href = qrCodeDataUrl;
-            link.download = 'qrcode.png';
-            link.click();
+            const qrCodeDataUrl = await QRCode.toDataURL(process.env.NEXT_PUBLIC_NEXT_HOST + "/defaultView/" + id);
+            if (typeof document !== 'undefined') {
+                const link = document.createElement('a');
+                link.href = qrCodeDataUrl;
+                link.download = 'qrcode.png';
+                link.click();
+            }
         } catch (err) {
             console.error('Error generating QR code:', err);
         }
@@ -185,9 +186,7 @@ const LivestockDetailPage: React.FC<LivestockDetailPageProps> = ({ params: param
                                     phases={phaseLabels} 
                                     filterId={livestock == null ? "" : livestock.phase}
                                     width={60}
-                                    textSize={10}
-                                    // padding="30px 20px"
-                                    
+                                    textSize={10}                                    
                                     >
                                     </PhaseLabelTag>
                                     </div>

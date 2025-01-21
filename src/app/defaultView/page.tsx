@@ -1,24 +1,17 @@
 'use client'
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { getCookie } from "@/lib/cookies";
 import { useRouter, useSearchParams } from 'next/navigation'
-import OperatorViewPage from "@/app/OperatorViewPage/page";
-import OwnerViewPage from "../usedComponents/ownerViewPage/page";
-import DefaultOwnerViewPage from "@/app/usedComponents/defaultOwnerViewPage/page"
-import DefaultOperatorViewpage from "@/app/OperatorViewPage/defaultOperatorViewPage/page"
-import CombinedViewPage from "@/app/combinedViewPage/page";
-import LivestockOwnerPage from "@/app/usedComponents/livestockOwnerPage/page";
-import LivestockOperatorPage from "@/app/OperatorViewPage/livestockOperatorPage/page";
-import ActivityOwnerPage from "@/app/usedComponents/activityOwnerPage/page"
-import SettingOwnerPage from "@/app/usedComponents/settingsOwnerPage/page"
-import ActivityOperatorPage from "@/app/OperatorViewPage/activityOperatorPage/page"
-import SettingsOperatorPage from "@/app/OperatorViewPage/settingsOperatorPage/page"
-import SapiDetailStatisticsPage from "@/app/usedComponents/sapiDetailStatisticsPage/page"
-import KambingDetailStaticsPage from "@/app/usedComponents/kambingDetailStatisticsPage/page"
-import DombaDetailStaticsPage from "@/app/usedComponents/dombaDetailStatisticsPage/page"
+import OwnerViewPage from "../../components/ui/DefaultPage/ownerViewPage/page";
+import DefaultOwnerViewPage from "@/components/ui/DefaultPage/defaultOwnerViewPage/page"
+import LivestockOwnerPage from "@/components/ui/DefaultPage/livestockOwnerPage/page";
+import ActivityOwnerPage from "@/components/ui/DefaultPage/activityOwnerPage/page"
+import SettingOwnerPage from "@/components/ui/DefaultPage/settingsOwnerPage/page"
+import SapiDetailStatisticsPage from "@/components/ui/DefaultPage/sapiDetailStatisticsPage/page"
+import KambingDetailStaticsPage from "@/components/ui/DefaultPage/kambingDetailStatisticsPage/page"
+import DombaDetailStaticsPage from "@/components/ui/DefaultPage/dombaDetailStatisticsPage/page"
 import useFetch from "@/hooks/useFetch";
-import { User } from "@/models/UserModel";
 import { FarmModel } from "@/models/FarmModel";
 
 
@@ -44,7 +37,7 @@ const DefaultViewPage: React.FC = () => {
 const view = searchParams.get("view");
 
 const renderViewBasedOnRole = () => {
-  if (role === "owner" || data == null) {
+  if (role != null) {
     if (data?.length == 0) {
       return <DefaultOwnerViewPage setIsFarmInvited={setIsFarmInvited} />;
     }
@@ -67,23 +60,6 @@ const renderViewBasedOnRole = () => {
     }
   }
 
-  if (role === "operator") {
-    if (data?.length == 0 || data == null) {
-      return <DefaultOwnerViewPage setIsFarmInvited={setIsFarmInvited} />;
-    }
-    switch (view){
-      case "livestock":
-        return <LivestockOwnerPage />;
-      case "activity":
-        return <ActivityOwnerPage />;
-      case "settings":
-          return <SettingOwnerPage />;
-      default:
-        return <OwnerViewPage breadcrumb={breadcrumb} setBreadcrumb={setBreadcrumb} />;
-    }
-    
-  }
-
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Role tidak valid</h1>
@@ -99,4 +75,10 @@ return (
 );
 };
 
-export default DefaultViewPage;
+export default function DefaultViewPageExport() {
+  return (
+    <Suspense>
+      <DefaultViewPage />
+    </Suspense>
+  )
+}

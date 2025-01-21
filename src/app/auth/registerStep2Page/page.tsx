@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { validateEmailOrPhone, validatePassword } from "@/controllers/validationLoginRegister";
@@ -15,7 +15,7 @@ interface RegistrationData {
   password: string;
 }
 
-export default function InputDemo() {
+function InputDemo() {
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -156,4 +156,12 @@ export default function InputDemo() {
       </div>
     </div>
   );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense>
+      <InputDemo />
+    </Suspense>
+  )
 }

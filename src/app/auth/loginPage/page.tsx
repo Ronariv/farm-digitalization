@@ -46,7 +46,7 @@ export default function InputDemo() {
 
         setloginData(loginData)
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/auth/login/`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/auth/login`, {
           method: "POST",
           body: JSON.stringify(loginData),
           headers: {

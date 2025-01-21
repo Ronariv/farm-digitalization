@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TabNavigation from "@/components/ui/TabNavigation/TabNavigation";
 import { Input } from "@/components/ui/input"
@@ -12,7 +12,7 @@ import useFetch from '@/hooks/useFetch';
 import { Livestock } from '@/models/LivestockModel';
 
 
-const app: React.FC = () => {
+function AddTernak () {
   const router = useRouter();
 
   // State hooks for all inputs
@@ -92,7 +92,9 @@ const app: React.FC = () => {
 
 
   const handleDivClick = () => {
-    document.getElementById('file-input')?.click();
+    if (typeof document !== 'undefined') {
+      document.getElementById('file-input')?.click();
+    }
   };
 
   const uploadImageToFirebase = (imageFile: File) => {
@@ -363,4 +365,10 @@ const Label: React.FC<{ title: string }> = ({ title }) => (
   <label className="label-addTernak">{title}</label>
 );
 
-export default app;
+  export default function AddTernakPage() {
+    return (
+      <Suspense>
+        <AddTernak />
+      </Suspense>
+    )
+  }

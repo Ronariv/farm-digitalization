@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import PrimaryButton from '@/components/ui/PrimaryButton/primaryButton';
 import TabNavigation from "@/components/ui/TabNavigation/TabNavigation";
 import { Input } from "@/components/ui/input"
@@ -11,7 +11,7 @@ import useFetch from '@/hooks/useFetch';
 import { FarmModel } from '@/models/FarmModel';
 // import { farmListData } from '@/data/farmData';
 
-const app: React.FC = () => {
+function AddTernak () {
     const router = useRouter()
 
     const searchParams = useSearchParams();
@@ -55,7 +55,7 @@ const app: React.FC = () => {
       try {
         const payload = {
           name_id: idTernak, 
-          gender: jenisKelamin,
+          gender: jenisKelamin === "Jantan" ? "MALE" : "FEMALE",
           dob: dob,
           weight: berat,
           phase: fase,
@@ -84,6 +84,17 @@ const app: React.FC = () => {
         const data = await response.json();
         if (response.ok) {
           router.push("/defaultView?view=livestock");
+
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/livestock-custom-ids/increment`, {
+            method: "POST",
+            body: JSON.stringify({
+              farmId: farmId,
+              typeId: kategoriHewan
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
         } else {
           setApiError(data.error || "Something went wrong");
         }
@@ -207,5 +218,10 @@ const app: React.FC = () => {
     <label className="label-addTernak">{title}</label>
   );
   
-  export default app;
-  
+  export default function AddTernakPage() {
+    return (
+      <Suspense>
+        <AddTernak />
+      </Suspense>
+    )
+  }

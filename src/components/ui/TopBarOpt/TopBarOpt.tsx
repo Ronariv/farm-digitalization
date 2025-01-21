@@ -30,14 +30,18 @@ const TopBarOpt: React.FC = () => {
   };
 
   React.useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+    if (typeof document !== 'undefined') {
+      if (isOpen) {
+        document.addEventListener('mousedown', handleClickOutside);
+      } else {
+        document.removeEventListener('mousedown', handleClickOutside);
+      }
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('mousedown', handleClickOutside);
+      }
     };
   }, [isOpen]);
 
@@ -79,7 +83,7 @@ const TopBarOpt: React.FC = () => {
 
       </div>
 
-      {isOpen &&
+      {isOpen && typeof document !== 'undefined' &&
         ReactDOM.createPortal(
           <div id="dropdown-container" className={styles.dropdown}>
             <h1>Notifikasi</h1>
