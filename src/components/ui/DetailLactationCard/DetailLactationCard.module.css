@@ -1,7 +1,7 @@
 .card {
     background-color: white; /* Hijau lembut */
     display: flex;
-    width: 232px;
+    width: 240px;
     height: 418px;
     flex-direction: column;
     align-items: center;
@@ -9,9 +9,11 @@
     flex-shrink: 0;
     border-radius: 30px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.30);
+    padding: auto;
   }
   
   .header h3 {
+    margin-left: 5%;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -20,14 +22,17 @@
   }
   
   .header h2 {
+    margin-left: 5%;
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
     line-height: 24px;
     margin: 0 0 8px;
+    padding: auto;
   }
   
   .description {
+    margin-left: 5%;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -37,6 +42,7 @@
   }
   
   .history h3 {
+    margin-left: 5%;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -45,10 +51,12 @@
   }
   
   .historyItem {
+    margin-left: 5%;
     margin-bottom: 8px;
   }
   
   .historyItem strong {
+    margin-left: 5%;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -57,6 +65,13 @@
     
   }
   
+  .title{
+    margin-left: 5%;
+  }
+
+  .description{
+    margin-left: 5%;
+  }
   .action {
     display: flex;
     /* width: 184px; */

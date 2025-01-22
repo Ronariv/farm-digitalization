@@ -15,7 +15,7 @@ const SetFasePerkembanganForm: React.FC = () => {
         <label htmlFor="menyusui" className={styles.fieldLabel}>
           Durasi Menyusui *bulan
         </label>
-        <input type="number" id="menyusui" className={styles.fieldInput} defaultValue="6" />
+        <input type="number" id="menyusui" className={styles.fieldInput} defaultValue="3" />
       </div>
     </div>
   );

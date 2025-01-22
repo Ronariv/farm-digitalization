@@ -38,9 +38,12 @@ const DetailLactationCard: React.FC<DetailLactationCardProps> = ({ currentLactat
       <div className={styles.header}>
         <h3>Laktasi Tahun ini</h3>
         {/* Render title and description only if currentLactation is provided */}
-        <h2>{currentLactation?.title ?? "No current lactation data"}</h2>
+        <div className={styles.title}>
+            <h2>{currentLactation?.title ?? "Tidak ada laktasi saat ini"}</h2> 
+        </div>
+     
         <p className={styles.description}>
-          {currentLactation?.description ?? "No description available"}
+          {currentLactation?.description ?? "Tidak ada deskripsi tersedia"}
         </p>
       </div>
 
@@ -55,7 +58,8 @@ const DetailLactationCard: React.FC<DetailLactationCardProps> = ({ currentLactat
             </div>
           ))
         ) : (
-          <p>No lactation history available.</p>
+
+          <p className={styles.description}>Tidak ada riwayat laktasi yang tersedia.</p>
         )}
       </div>
 
