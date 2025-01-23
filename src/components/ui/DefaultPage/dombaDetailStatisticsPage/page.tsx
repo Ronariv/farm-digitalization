@@ -18,6 +18,7 @@ import { getCookie } from '@/lib/cookies';
 import useFetch from '@/hooks/useFetch';
 import { FarmModel } from '@/models/FarmModel';
 import { StatisticsModel } from '@/models/FarmStatsModel';
+import StatisticsMilk from '../../StatisticsMilk/statisticsMilk';
 // import StatisticsLivestockSold from '@/components/ui/StatisticsLivestockSold/StatisticsLivestockSold';
 
 const App: React.FC = () => {
@@ -131,10 +132,12 @@ const App: React.FC = () => {
           </div>
 
           <div className="statisticsCard">
-          <StatisticsMilkUpdate milkData={sheepStatistics?.milkData} filterBy="year" filterValue={2019} />
-
           <StatisticsLactation lactationData={sheepStatistics?.lactationData} filterBy="year" filterValue={2019} />
-
+          
+          {/* <StatisticsMilkUpdate milkData={sheepStatistics?.milkData} filterBy="year" filterValue={2019} /> */}
+          
+          <StatisticsMilk milkData={sheepStatistics?.milkData} filterBy="year" filterValue={2019}/>
+          
           {/* <StatisticsLivestockSold filterBy="year" filterValue={2019}/> */}
           </div>
 

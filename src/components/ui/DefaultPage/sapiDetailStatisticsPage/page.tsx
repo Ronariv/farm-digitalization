@@ -37,6 +37,7 @@ import { FarmModel } from '@/models/FarmModel';
 import { getCookie } from '@/lib/cookies';
 import { StatisticsModel } from '@/models/FarmStatsModel';
 import StatisticsMilkUpdate from '@/components/ui/StatisticsMilkUpdate/StatisticsMilkUpdate';
+import StatisticsLivestockSold from '@/models/statisticsLivestockSold';
 
 const App: React.FC = () => {
 
@@ -154,9 +155,11 @@ const App: React.FC = () => {
           </div>
 
           <div className="statisticsCard">
-          <StatisticsMilkUpdate milkData={cowStatistics?.milkData} filterBy="year" filterValue={2019} />
-
+          
           <StatisticsLactation lactationData={cowStatistics?.lactationData} filterBy="year" filterValue={2019} />
+          {/* <StatisticsMilkUpdate milkData={cowStatistics?.milkData} filterBy="year" filterValue={2019} /> */}
+          <StatisticsMilk milkData={cowStatistics?.milkData} filterBy="year" filterValue={2019}/>
+         
 
           {/* <StatisticsLivestockSold filterBy="year" filterValue={2019}/> */}
           </div>

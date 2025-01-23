@@ -151,9 +151,10 @@ const App: React.FC = () => {
           </div>
 
           <div className="statisticsCard">
-          <StatisticsMilk milkData={goatStatistics?.milkData} filterBy="year" filterValue={selectedYear ?? 0} />
-
           <StatisticsLactation lactationData={goatStatistics?.lactationData} filterBy="year" filterValue={selectedYear ?? 0} />
+          {/* <StatisticsMilk milkData={goatStatistics?.milkData} filterBy="year" filterValue={selectedYear ?? 0} /> */}
+
+          <StatisticsMilk milkData={goatStatistics?.milkData} filterBy="year" filterValue={2019}/>
 
           {/* <StatisticsLivestockSold filterBy="year" filterValue={2019}/> */}
           </div>
