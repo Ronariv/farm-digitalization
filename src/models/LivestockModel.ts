@@ -139,6 +139,7 @@ export interface Livestock {
     mom_name_id: string;
     grandpa_name_id: string;
     grandma_name_id: string;
+    spouse_id: string;
     farmId: number;
     createdAt: string;
     updatedAt: string;

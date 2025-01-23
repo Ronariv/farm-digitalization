@@ -69,6 +69,10 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
         }
     }, [livestock]);
 
+    const { data: milkProduction, loading: loadingMilkProduction, error: errorMilkProduction } = useFetch<MilkProductionRecord[]>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/milkproductions/animal/${id}`,
+    );
+
     const router = useRouter()
 
     const [apiError, setApiError] = useState(null);
@@ -122,12 +126,10 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                     let yearData = payload.yearlyData.find((item) => item.year === milkEntry.year);
               
                     if (!yearData) {
-                      // If the year doesn't exist, create new yearly data
                       yearData = { year: milkEntry.year, data: [] };
                       payload.yearlyData.push(yearData);
                     }
               
-                    // Now populate month data
                     milkEntry.monthlyDatas.forEach((milkMonthData: MonthlyData) => {
                       let monthData = yearData.data.find((item) => item.month === milkMonthData.month);
                       if (monthData) {
@@ -166,6 +168,20 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                     setApiError(data.error || "Something went wrong");
                 }
             }
+
+            const payload = {
+                dateOfProduction: date,
+                quantity: value,
+                animalId: livestock?.id
+            }
+
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/milkproductions`, {
+                method: "POST",
+                body: JSON.stringify(payload),
+                headers: {
+                "Content-Type": "application/json",
+                },
+            });
         } catch (error) {
         } finally {
             // setLoading(false);
@@ -274,34 +290,23 @@ const LivestockMilkProductionPage: React.FC<LivestockMilkProductionPageProps> = 
                                             Riwayat Susu
                                 </h1>
 
-                                    <div className="milk-detailList">
-                                    <h1>12 Juni 2024</h1>
-                                    <span>12 Liter</span> 
-                                    </div>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 Juli 2024</h1>
-                                    <span>12 Liter</span> 
-                                    </div>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 Agustus 2024</h1>
-                                    <span>12 Liter</span> 
-                                    </div>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 September 2024</h1>
-                                    <span>12 Liter</span> 
-                                    </div>
-
+                                {
+                                    milkProduction?.map((milk) => (
+                                        <div className="milk-detailList">
+                                        <h1>{new Date(milk.dateOfProduction).toLocaleDateString('id-ID', {
+                                        day: '2-digit',
+                                        month: 'long',
+                                        year: 'numeric',
+                                        })}</h1>
+                                        <span>{milk.quantity} Liter</span> 
+                                        </div>
+                                    ))
+                                }
                                 </div>
-                                </div>
-
-
                             </div>
                         </div>
+                    </div>
                 </div>
-
             </div>
         </div>
     );

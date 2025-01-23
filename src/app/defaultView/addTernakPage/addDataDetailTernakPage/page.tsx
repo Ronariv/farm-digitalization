@@ -72,6 +72,7 @@ function AddTernak () {
           mom_name_id: idIbu,
           grandpa_name_id: idKakek,
           grandma_name_id: idNenek,
+          spouse_id: idPasangan
       };
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/animals`, {
           method: "POST",
