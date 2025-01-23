@@ -69,6 +69,10 @@ const LivestockWeightPage: React.FC<LivestockWeightPageProps> = ({ params: param
         }
     }, [livestock]);
 
+    const { data: weightRecords, loading: loadingWeightRecords, error: errorWeightRecords } = useFetch<WeightRecord[]>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/weights/animal/${id}`,
+    );
+
     const router = useRouter()
 
     const [apiError, setApiError] = useState(null);
@@ -166,6 +170,20 @@ const LivestockWeightPage: React.FC<LivestockWeightPageProps> = ({ params: param
                     setApiError(data.error || "Something went wrong");
                 }
             }
+
+            const payload = {
+                date: date,
+                mass: value,
+                animalId: livestock?.id
+            }
+
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/weights`, {
+                method: "POST",
+                body: JSON.stringify(payload),
+                headers: {
+                "Content-Type": "application/json",
+                },
+            });
         } catch (error) {
         } finally {
             // setLoading(false);
@@ -273,32 +291,20 @@ const LivestockWeightPage: React.FC<LivestockWeightPageProps> = ({ params: param
                                             Riwayat Bobot
                                 </h1>
 
-                                    <div className="milk-detailList">
-                                    <h1>12 Juni 2024</h1>
-                                    <span>12 Kg</span> 
-                                    </div>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 Juli 2024</h1>
-                                    <span>12 Kg</span> 
-                                    </div>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 Agustus 2024</h1>
-                                    <span>12 Kg</span> 
-                                    </div>
-
-                                    <div className="milk-detailList">
-                                    <h1>12 September 2024</h1>
-                                    <span>12 Kg</span> 
-                                    </div>
-
-                                </div>
-                                                            
+                                {
+                                    weightRecords?.map((weight) => (
+                                        <div className="milk-detailList">
+                                        <h1>{new Date(weight.createdAt).toLocaleDateString('id-ID', {
+                                        day: '2-digit',
+                                        month: 'long',
+                                        year: 'numeric',
+                                        })}</h1>
+                                        <span>{weight.mass} Kg</span> 
+                                        </div>
+                                    ))
+                                }
+                                </div>                          
                             </div>
-
-
-
                         </div>
                     </div>
 

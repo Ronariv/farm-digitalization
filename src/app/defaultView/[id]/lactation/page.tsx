@@ -74,6 +74,10 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
         }
     }, [livestock]);
 
+    const { data: lactation, loading: loadingLactation, error: errorLactation } = useFetch<LactationRecord[]>(
+        `${process.env.NEXT_PUBLIC_API_HOST}/lactations/animal/${id}`,
+    );
+
     const router = useRouter()
 
     const [apiError, setApiError] = useState(null);
@@ -83,6 +87,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
 
     const [date, setDate] = useState("2025-01-16");
     const [value, setValue] = useState(0);
+    const [lactationNumber, setLactationNumber] = useState(0);
 
     const handleDropdownSelect = (value: string) => {
         setDropdownData((prev) => {
@@ -179,6 +184,29 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
                     setApiError(data.error || "Something went wrong");
                 }
             }
+
+            const payload = {
+                lactationData: {
+                    animalId: id,
+                    spouseId: livestock?.spouse_id,
+                    lactation_number: (lactation?.at(0)?.lactation_number ?? 0) + 1,
+                    dob: date,
+                    total_child: value,
+                    total_male_child: dropdownData.filter(item => item === "Jantan").length,
+                    total_female_child: dropdownData.filter(item => item === "Betina").length,
+                },
+                lactationChildData: dropdownData.map((data) => ({
+                    gender: data === "Betina" ? "FEMALE" : "MALE"
+                }))
+            }
+
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/lactations`, {
+                method: "POST",
+                body: JSON.stringify(payload),
+                headers: {
+                "Content-Type": "application/json",
+                },
+            });
         } catch (error) {
         } finally {
             // setLoading(false);
@@ -262,7 +290,7 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
                                 </h1>
                                     <PrimaryTextField 
                                     width={350} 
-                                    placeholder="SPW-018" 
+                                    placeholder={livestock?.spouse_id} 
                                     label="ID Pasangan *" 
                                     disabled={true} 
                                     />
@@ -303,23 +331,24 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
 
                                     <div className='row-lactation'>
                                         {/* <PrimaryTextField width={250} placeholder='Jenis Kelamin'label='Jenis Kelamin (pilihan) *'/> */}
-                                        <div className="textField">
-                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin Anak 1 (pilihan) *</h1>
-                                            <DropdownFase
-                                                options={['Jantan', 'Betina']}
-                                                placeholder="Jenis Kelamin Anak"
-                                                onSelect={handleDropdownSelect}
-                                            />
-                                        </div>
-
-                                        <div className="textField">
-                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin Anak 2 (pilihan) *</h1>
-                                            <DropdownFase
-                                                options={['Jantan', 'Betina']}
-                                                placeholder="Jenis Kelamin"
-                                                onSelect={handleDropdownSelect}
-                                            />
-                                        </div>
+                                        {value != 0 && 
+                                            (() => {
+                                                const elements = [];
+                                                for (let i = 0; i < value; i++) {
+                                                    elements.push(
+                                                        <div className="textField">
+                                                            <h1 className="jenisKelaminLactationForm">Jenis Kelamin Anak {i + 1} *</h1>
+                                                            <DropdownFase
+                                                                options={['Jantan', 'Betina']}
+                                                                placeholder="Jenis Kelamin"
+                                                                onSelect={handleDropdownSelect}
+                                                            />
+                                                        </div>
+                                                    );
+                                                }
+                                                return elements;
+                                            })()
+                                        }
                                     </div>
                                  </div>
 
@@ -331,26 +360,16 @@ const LivestockLactationPage: React.FC<LivestockLactationPageProps> = ({ params:
                                         Riwayat Laktasi
                                     </h1>
 
-                                    <div className="lactation-detailList">
-                                    <h2>Laktasi ke-1</h2>
-                                    <span>ID Pasangan: SPW-018</span>
-                                    <span>Tanggal Lahir: 12 September 2024</span>
-                                    <span>1 Betina, 1 Jantan</span> 
-                                    </div>
-                                    
-                                    <div className="lactation-detailList">
-                                    <h2>Laktasi ke-2</h2>
-                                    <span>ID Pasangan: SPW-018</span>
-                                    <span>Tanggal Lahir: 12 September 2024</span>
-                                    <span>1 Betina, 1 Jantan</span> 
-                                    </div>
-
-                                    <div className="lactation-detailList">
-                                    <h2>Laktasi ke-2</h2>
-                                    <span>ID Pasangan: SPW-018</span>
-                                    <span>Tanggal Lahir: 12 September 2024</span>
-                                    <span>1 Betina, 1 Jantan</span> 
-                                    </div>
+                                    {
+                                        lactation?.map((lactation) => (
+                                            <div className="lactation-detailList">
+                                            <h2>Laktasi ke-{lactation.lactation_number}</h2>
+                                            <span>ID Pasangan: {lactation.spouseId}</span>
+                                            <span>Tanggal Lahir: {lactation.dob}</span>
+                                            <span>{lactation.total_female_child} Betina, {lactation.total_male_child} Jantan</span> 
+                                            </div>
+                                        ))
+                                    }
                                 </div>
 
                                 </div>
