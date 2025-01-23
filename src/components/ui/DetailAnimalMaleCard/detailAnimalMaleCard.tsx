@@ -6,7 +6,8 @@ import styles from './DetailAnimalMaleCard.module.css';
 interface DetailAnimalFemaleCardProps {
   title: string;
   total: number;
-  pedet: number;
+  pedet?: number;
+  cempe?: number;
   siapKawin: number;
 }
 
@@ -14,6 +15,7 @@ const DetailAnimalMaleCard: React.FC<DetailAnimalFemaleCardProps> = ({
   title,
   total,
   pedet,
+  cempe,
   siapKawin
 }) => {
   return (
@@ -25,11 +27,20 @@ const DetailAnimalMaleCard: React.FC<DetailAnimalFemaleCardProps> = ({
       <p className={styles.ekor}>Ekor</p>
 
       <div className={styles.details}>
-        <p>
+      {cempe !== undefined && ( 
+          <p>
+            <span className={styles.pedet}>{cempe}</span>
+            <br />
+            <span>Cempe</span>
+          </p>
+        )}
+      {pedet !== undefined && ( 
+          <p>
             <span className={styles.pedet}>{pedet}</span>
-            <br/>
+            <br />
             <span>Pedet</span>
-        </p>
+          </p>
+        )}
 
         <p>
             <span className={styles.siapKawin}>{siapKawin}</span>

@@ -35,7 +35,7 @@ const DetailAnimalFemaleCard: React.FC<DetailAnimalFemaleCardProps> = ({
       <div className={styles.details}>
                 {cempe !== undefined && ( 
           <p>
-            <span className={styles.cempe}>{cempe}</span>
+            <span className={styles.pedet}>{cempe}</span>
             <br />
             <span>Cempe</span>
           </p>

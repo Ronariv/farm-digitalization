@@ -99,9 +99,9 @@ const App: React.FC = () => {
           <div className="dombaDetailStatisticsCard">
             <div className="dombaFemaleCardStatisticsCard">
                   <DetailAnimalFemaleCard
-                  title="Sapi Betina"
+                  title="Domba Betina"
                   total={sheepStatistics?.summary.totalFemale ?? 0}
-                  pedet={sheepStatistics?.summary.femalePhaseStats?.["Pedet"] ?? 0}
+                  cempe={sheepStatistics?.summary.femalePhaseStats?.["Cempe"] ?? 0}
                   dara={sheepStatistics?.summary.femalePhaseStats?.["Dara"] ?? 0}
                   siapKawin={sheepStatistics?.summary.femalePhaseStats?.["Siap Kawin"] ?? 0}
                   hamil={sheepStatistics?.summary.femalePhaseStats?.["Hamil"] ?? 0}
@@ -111,9 +111,9 @@ const App: React.FC = () => {
 
             <div className="dombaMaleCardStatisticsCard">
                   <DetailAnimalMaleCard 
-                  title="Sapi Jantan" 
+                  title="Domba Jantan" 
                   total={sheepStatistics?.summary.totalMale ?? 0}
-                  pedet={sheepStatistics?.summary.malePhaseStats?.["Pedet"] ?? 0}
+                  cempe={sheepStatistics?.summary.malePhaseStats?.["Cempe"] ?? 0}
                   siapKawin={sheepStatistics?.summary.femalePhaseStats?.["Siap Kawin"] ?? 0}           
                   />
             </div>
