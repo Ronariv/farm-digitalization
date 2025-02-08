@@ -1,17 +1,21 @@
 import React from 'react';
-import styles from '@/components/ui/StatisticsLactation/StatisticsLactation.module.css';
+import styles from '@/components/ui/StatisticsLactationMobile/StatisticsLactation.module.css';
 import { LactationData } from '@/models/LivestockModel';
+import { Livestock } from '@/models/LivestockModel';
+import { useRouter } from 'next/navigation'
 
-type StatisticMilkProps = {
+type StatisticLactationMobileProps = {
   filterBy: 'year' | 'month';
   filterValue: number | string;
   lactationData?: LactationData;
+  livestock?: Livestock;
 };
 
-const StatisticsLactation: React.FC<StatisticMilkProps> = ({
+const StatisticsLactationMobile: React.FC<StatisticLactationMobileProps> = ({
   filterBy,
   filterValue,
   lactationData,
+  livestock
 }) => {
   // Ensure lactationData exists before accessing its properties
   const filteredData =
@@ -27,6 +31,24 @@ const StatisticsLactation: React.FC<StatisticMilkProps> = ({
   const average =
     filteredData.reduce((acc, cur) => acc + cur.value, 0) / filteredData.length || 0;
 
+      const router = useRouter();
+    
+      const getPageUrl = () => {
+        const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
+        return "/defaultView/[id]/lactation";
+      };
+    
+      const handleNavigate = () => {
+        console.log('testnavigate')
+        if (livestock?.name_id) {
+          const pageUrl = getPageUrl(); // Call getPageUrl
+          const dynamicUrl = pageUrl.replace('[id]', `${livestock.id}`);
+          console.log(dynamicUrl)
+          router.push(dynamicUrl);
+          
+        }
+      };
+
   return (
     <div className={styles.container}>
       <div className={styles.tittle}>
@@ -38,11 +60,15 @@ const StatisticsLactation: React.FC<StatisticMilkProps> = ({
           <h1>{average} Pedet</h1>
           <p>Rata-rata/bulan</p>
         </div>
+
+        <div className={styles.action}>
+        <img className='editIcon' src="/edit.svg" alt="Edit" width={29} height={29} onClick={handleNavigate} />
+        </div>
       </div>
 
       <div className={styles.chartContainer}>
         <div className={styles.yAxis}>
-          {[20000, 10000, 5000, 2500, 0].map((value, index) => (
+          {[1000,750, 500, 250, 100, 0].map((value, index) => (
             <p key={index} className={styles.yAxisLabel}>
               {value}
             </p>
@@ -73,4 +99,4 @@ const StatisticsLactation: React.FC<StatisticMilkProps> = ({
   );
 };
 
-export default StatisticsLactation;
+export default StatisticsLactationMobile;
